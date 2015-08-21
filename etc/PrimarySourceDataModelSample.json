@@ -2,17 +2,18 @@
   "@context": [
     "http://schema.org/",
     {
-      "ore": "http://www.openarchives.org/ore/terms/"
+      "ore": "http://www.openarchives.org/ore/terms/",
+      "dct": "http://purl.org/dc/terms/"
     }
   ],
   "@id": "http://dp.la/primarysourceset/frenchindianwar/source/87037c8c0dc514bfd19bddbce9ff2ce7",
   "@type": "MediaObject",
-  "isPartOf": "http://dp.la/primarysourceset/frenchindinanwar",
+  "isPartOf": "http://dp.la/primarysourceset/frenchindianwar",
   "name": "Diary of Major George Washington, 1753",
   "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
   "endcodingFormat": "pdf",
   "contentUrl": "http://path-to-file.pdf",
-  "dplaer:aggregation": {
+  "dct:references": {
     "@id": "http://dp.la/item/87037c8c0dc514bfd19bddbce9ff2ce7",
     "@type": "ore:Aggregation"
   },
