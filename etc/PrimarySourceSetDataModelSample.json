@@ -138,7 +138,7 @@
   ],
   "inLanguage": [
     {
-      "@id": "http://www.lexvo.org/page/term/eng/English",
+      "@id": "http://lexvo.org/id/term/eng/English",
       "@type": "Language",
       "name": "English"
     }
