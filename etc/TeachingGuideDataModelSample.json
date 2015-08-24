@@ -9,9 +9,9 @@
       }
     }
   ],
-  "@id": "http://dp.la/primarysourceset/frenchindianwar/item/87037c8c0dc514bfd19bddbce9ff2ce7",
+  "@id": "http://dp.la/sets/french-and-indinan-war/guide/23",
   "@type": "CreativeWork",
-  "isPartOf": "http://dp.la/primarysourceset/frenchindinanwar",
+  "isPartOf": "http://dp.la/sets/french-and-indian-war",
   "name": "Perspectives of the French and Indian War",
   "author": {
     "@type": "Person",
