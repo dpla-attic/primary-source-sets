@@ -3,13 +3,13 @@
     "http://schema.org/",
     {
       "ccss": "http://www.corestandards.org/",
-      "dc": "http://purl.org/dc/elements/1.1/",
+      "dct": "http://purl.org/dc/terms/",
       "dcmitype": "http://purl.org/dc/dcmitype/",
     }
   ],
-  "@id": "http://dp.la/primarysourceset/frenchindinanwar",
+  "@id": "http://dp.la/primarysourceset/frenchindianwar",
   "@type": "CreativeWork",
-  "dc:type": "dcmitype:InteractiveResource",
+  "dct:type": "dcmitype:InteractiveResource",
   "name": "The French and Indian War",
   "image": "http://path-to-image.jpg",
   "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
@@ -37,7 +37,7 @@
       "name": "Thirteen Colonies"
     }
   ],
-  "dplaer:timePeriod": [
+  "dct:temporal": [
     { "name": "Colonial America" }
   ],
   "description": "This collection uses primary sources to explore the French and Indian War.",
@@ -77,43 +77,43 @@
   "hasPart": [
     { 
       "@id": "http://dp.la/primarysourceset/frenchindianwar/teaching-guide",
-      "dplaer:type": "TeachingGuide"
+      "@type": "CreativeWork"
     },
     {   
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/87037c8c0dc514bfd19bddbce9ff2ce7",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     { 
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/732c1d33eb211983e532f0ccc808c3f5",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     { 
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/14e1f06f68b9f954a1936424d29673ea",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     {
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/38af90d3a1a85936681a7d8bd156f6a3",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     { 
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/ee4949c9e4647ecf1a2358f616f96a52",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     {
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/684ba704a6cafcab5203490eac01aaa1",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     { 
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/5ddde164906d8eb172e4f3e8e1acef81",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     {
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/54d4bb2c2364cd32096e713d83696d8f",
-      "dplaer:type": "PrimarySource"
+      "@type": "MediaObject"
     },
     {
       "@id": "http://dp.la/primarysourceset/frenchindianwar/source/318dfdb4c12448304693d02384447b07",
-      "dpler:type": "PriamrySource"
+      "@type": "MediaObject"
     }
   ],
   "relatedLink": [
@@ -138,7 +138,7 @@
   ],
   "inLanguage": [
     {
-      "@id": "http://www.lexvo.org/page/term/eng/English",
+      "@id": "http://lexvo.org/id/term/eng/English",
       "@type": "Language",
       "name": "English"
     }
