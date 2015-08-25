@@ -11,10 +11,6 @@ group :assets do
   gem 'jquery-rails'
 end
 
-group :development do
-  gem 'spring'
-end
-
 group :test, :development do
   gem 'rspec-core', '~>3.1'
   gem 'rspec-rails', '~>3.1'
