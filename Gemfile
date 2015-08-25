@@ -23,7 +23,6 @@ group :test, :development do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'awesome_print'
-  gem 'debugger'
   gem 'codeclimate-test-reporter', require: false
 end
 
