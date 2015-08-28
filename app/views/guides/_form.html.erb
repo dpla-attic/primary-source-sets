@@ -1,40 +1,34 @@
-<%= form_for @source_set do |f| %>
- 
-  <% if @source_set.errors.any? %>
+<%= form_for [@source_set, @guide] do |f| %>
+
+  <% if @guide.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize(@source_set.errors.count, "error") %> prohibited
+        <%= pluralize(@guide.errors.count, "error") %> prohibited
         this set from being saved:
       </h2>
       <ul>
-        <% @source_set.errors.full_messages.each do |msg| %>
+        <% @guide.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
- 
+
   <p>
     <strong><%= f.label "Name (required)" %></strong><br/>
     <%= f.text_field :name %>
   </p>
- 
+
   <p>
-    <strong><%= f.label :description %></strong><br/>
-    <em>Example: "This collection uses primary sources to explore the French and Indian War."</em><br/>
-    <%= f.text_area :description %>
+    <strong><%= f.label :questions %></strong><br/>
+    <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
+    <%= f.text_area :questions %>
   </p>
 
   <p>
-    <strong><%= f.label :overview %></strong><br/>
+    <strong><%= f.label :activity %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
-    <%= f.text_area :overview %>
-  </p>
-
-  <p>
-    <strong><%= f.label :resources_for_research %></strong><br/>
-    <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
-    <%= f.text_area :resources %>
+    <%= f.text_area :activity %>
   </p>
 
   <p>
@@ -43,9 +37,9 @@
       <%= b.label { b.check_box + b.text } %><br />
     <% end %>
   </p>
- 
+
   <p>
     <%= f.submit %>
   </p>
- 
+
 <% end %>

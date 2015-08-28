@@ -1,0 +1,34 @@
+<h1>Teaching guide: <%= @guide.name %></h1>
+
+<p>
+  <%= link_to "Edit", edit_source_set_guide_path(@source_set, @guide) %>
+  |
+  <%= link_to "Delete", 
+               source_set_guide_path(@source_set, @guide), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@guide.name}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>Set </strong></td>
+    <td><%= link_to @source_set.name, source_set_path(@source_set)%></td>
+  </tr>
+  <tr>
+    <td><strong>Name </strong></td>
+    <td><%= @guide.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Questions </strong></td>
+    <td><%= markdown(@guide.questions) %></td>
+  </tr>
+  <tr>
+    <td><strong>Activity </strong></td>
+    <td><%= markdown(@guide.activity) %></td>
+  </tr>
+  <% @guide.authors.each do |author| %>
+    <tr>
+      <td><strong>Author </strong></td>
+      <td><%= author.name %></td>
+    </tr>
+  <% end %>
+</table>

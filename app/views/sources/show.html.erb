@@ -1,0 +1,33 @@
+<% source_name = @source.name.present? ? @source.name : @source.aggregation %>
+<h1>Source: <%= source_name %></h1>
+
+<p>
+  <%= link_to "Edit", edit_source_set_source_path(@source_set, @source) %>
+  |
+  <%= link_to "Delete", 
+               source_set_source_path(@source_set, @source), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@source_name}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>Set </strong></td>
+    <td><%= link_to @source_set.name, source_set_path(@source_set)%></td>
+  </tr>
+  <tr>
+    <td><strong>DPLA item URI </strong></td>
+    <td><%= link_to @source.aggregation_uri, @source.aggregation_uri %></td>
+  </tr>
+  <tr>
+    <td><strong>Name </strong></td>
+    <td><%= @source.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Media type </strong></td>
+    <td><%= @source.media_type %></td>
+  </tr>
+  <tr>
+    <td><strong>Textual content </strong></td>
+    <td><%= markdown(@source.textual_content) %></td>
+  </tr>
+</table>

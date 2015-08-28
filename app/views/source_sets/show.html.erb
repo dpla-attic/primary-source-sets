@@ -1,8 +1,11 @@
-<p><%= link_to "Back to sets", source_sets_path %></p>
-<p><%= link_to "Edit this set", edit_source_set_path(@source_set) %></p>
-<p><%= link_to "Delete this set", source_set_path(@source_set),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete #{@source_set.name}?" } %></p>
+<h1>Set: <%= @source_set.name %></h1>
+
+<p>
+  <%= link_to "Edit", edit_source_set_path(@source_set) %>
+  |
+  <%= link_to "Delete", source_set_path(@source_set), method: :delete,
+                 data: { confirm: "Are you sure you want to delete #{@source_set.name}?" } %>
+</p>
 
 <table>
   <tr>
@@ -15,22 +18,54 @@
   </tr>
   <tr>
     <td><strong>Overview </strong></td>
-    <td><%= @source_set.overview %></td>
+    <td><%= markdown(@source_set.overview) %></td>
   </tr>
   <tr>
     <td><strong>Resources </strong></td>
-    <td><%= @source_set.resources %></td>
+    <td><%= markdown(@source_set.resources) %></td>
   </tr>
   <tr>
     <td><strong>Published </strong></td>
     <td><%= @source_set.published %></td>
   </tr>
+  <% @source_set.authors.each do |author| %>
+    <tr>
+      <td><strong>Author </strong></td>
+      <td><%= link_to author.name, author_path(author) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Sources</h2>
+
+<p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
+
+<table>
+<% @source_set.sources.each do |source| %>
   <tr>
-    <td><strong>Created date </strong></td>
-    <td><%= @source_set.created_at %></td>
+    <td><%= source_name = source.name.present? ? source.name : source.aggregation %></td>
+    <td><%= link_to "View", source_set_source_path(@source_set, source) %></td>
+    <td><%= link_to "Edit", edit_source_set_source_path(@source_set, source) %></td>
+    <td><%= link_to "Delete", source_set_source_path(@source_set, source),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to delete #{source_name}?" } %></td>
   </tr>
+<% end %>
+</table>
+
+<h2>Teaching guides</h2>
+
+<p><%= link_to "Add new teaching guide", new_source_set_guide_path(@source_set.id) %></p>
+
+<table>
+<% @source_set.guides.each do |guide| %>
   <tr>
-    <td><strong>Modified date </strong></td>
-    <td><%= @source_set.updated_at %></td>
+    <td><%= guide.name %></td>
+    <td><%= link_to "View", source_set_guide_path(@source_set, guide) %></td>
+    <td><%= link_to "Edit", edit_source_set_guide_path(@source_set, guide) %></td>
+    <td><%= link_to "Delete", source_set_guide_path(@source_set, guide),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to delete #{guide.name}?" } %></td>
   </tr>
+<% end %>
 </table>
