@@ -1,0 +1,36 @@
+<p><%= link_to "Back to sets", source_sets_path %></p>
+<p><%= link_to "Edit this set", edit_source_set_path(@source_set) %></p>
+<p><%= link_to "Delete this set", source_set_path(@source_set),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete #{@source_set.name}?" } %></p>
+
+<table>
+  <tr>
+    <td><strong>Name </strong></td>
+    <td><%= @source_set.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Description </strong></td>
+    <td><%= @source_set.description %></td>
+  </tr>
+  <tr>
+    <td><strong>Overview </strong></td>
+    <td><%= @source_set.overview %></td>
+  </tr>
+  <tr>
+    <td><strong>Resources </strong></td>
+    <td><%= @source_set.resources %></td>
+  </tr>
+  <tr>
+    <td><strong>Published </strong></td>
+    <td><%= @source_set.published %></td>
+  </tr>
+  <tr>
+    <td><strong>Created date </strong></td>
+    <td><%= @source_set.created_at %></td>
+  </tr>
+  <tr>
+    <td><strong>Modified date </strong></td>
+    <td><%= @source_set.updated_at %></td>
+  </tr>
+</table>

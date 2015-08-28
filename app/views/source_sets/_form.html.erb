@@ -1,0 +1,41 @@
+<%= form_for @source_set do |f| %>
+ 
+  <% if @source_set.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@source_set.errors.count, "error") %> prohibited
+        this source_set from being saved:
+      </h2>
+      <ul>
+        <% @source_set.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <strong><%= f.label :name %></strong><br/>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <strong><%= f.label :description %></strong><br/>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <strong><%= f.label :overview %></strong><br/>
+    <%= f.text_area :overview %>
+  </p>
+
+  <p>
+    <strong><%= f.label :resources %></strong><br/>
+    <%= f.text_area :resources %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

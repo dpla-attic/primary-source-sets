@@ -1,0 +1,15 @@
+<h1>Sets</h1>
+
+<p><%= link_to "Create new set", new_source_set_path %></p>
+
+<table>
+<% @source_sets.each do |set| %>
+  <tr>
+    <td><%= link_to set.name, source_set_path(set) %></td>
+    <td><%= link_to "Edit", edit_source_set_path(set) %></td>
+    <td><%= link_to "Delete", source_set_path(set),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to delete #{set.name}?" } %></td>
+  </tr>
+<% end %>
+</table>
