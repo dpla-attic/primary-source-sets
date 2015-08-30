@@ -21,11 +21,7 @@
         "name": "Ella Howard",
         "affiliation": {
           "@type": "Organization",
-          "name": "Armstrong State University",
-          "location": {
-            "@type": "Place",
-            "name": "Savannah, Georgia"
-          }
+          "name": "Armstrong State University, Savannah, Georgia"
         }
       },
       {
@@ -33,11 +29,7 @@
         "name": "James Walsh",
         "affiliation": {
           "@type": "Organization",
-          "name": "Scott County High School",
-          "location": {
-            "@type": "Place",
-            "name": "Kentucky"
-          }
+          "name": "Scott County High School, Kentucky"
         }
       }
     ],
