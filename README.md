@@ -23,7 +23,7 @@ For installation:
     bundle exec rake db:migrate
     bundle exec rails s
 
-Then access the application at http://localhost:3000/
+Then access the application at http://localhost:3000/primary-source-sets/
 
 You may re-run the provisioning with `vagrant provision`.  This will upgrade
 operating system packages.
