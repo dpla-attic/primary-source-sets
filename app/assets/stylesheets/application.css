@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+/* This is just "canary" css until the app has been styled to allow us to
+ensure that the app's assets are loading correctly. */
+body { font-family: Arial, Helvetica, sans-serif; }
+h1 { color: red; }
+textarea { background-color: cadetblue; }

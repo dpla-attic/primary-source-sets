@@ -1,0 +1,4 @@
+#Use this file to define settings related to application configuration
+#Use this file to define settings that are ENVIRONMENT SPECIFIC and/or PRIVATE
+#This file will be ignored by git
+#Declarations in this file override declarations in config/settings.yml
