@@ -15,6 +15,9 @@
         - g++
         - sqlite3
         - libsqlite3-dev
+        - postgresql-common
+        - libpq-dev
+        - build-essential
 
 - hosts: all
   # do as "vagrant" user
