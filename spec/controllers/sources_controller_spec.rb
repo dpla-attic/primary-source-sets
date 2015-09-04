@@ -117,7 +117,7 @@ describe SourcesController, type: :controller do
     it 'redirects to :index view' do
       source
       delete :destroy, id: source.id, source_set_id: source_set.id
-      expect(response).to redirect_to source_set_url
+      expect(response).to redirect_to source_set_path(source_set)
     end
   end
 end

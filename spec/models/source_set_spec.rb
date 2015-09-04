@@ -20,4 +20,8 @@ describe SourceSet, type: :model do
   it 'is invalid without name' do
     expect(SourceSet.new(name: nil)).not_to be_valid
   end
+
+  it 'has a slug' do
+    expect(SourceSet.create(name: 'Little My').slug).to eq 'little-my'
+  end
 end

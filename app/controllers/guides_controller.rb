@@ -54,6 +54,6 @@ class GuidesController < ApplicationController
   end
 
   def load_source_set
-    @source_set = SourceSet.find(params[:source_set_id])
+    @source_set = SourceSet.friendly.find(params[:source_set_id])
   end
 end
