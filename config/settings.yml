@@ -3,7 +3,13 @@
 # Information in this file will be PUBLIC (this file is tracked in git)
 # Declarations in config/settings.local.yml override declarations in this file
 
+devise: 
+  mailer_sender: email@example.org
+
 frontend:
   # With trailing slash
-  url: http://dp.la/
+  url: http://example.com
+
+host: 'localhost'
+
 relative_url_root: /primary-source-sets
