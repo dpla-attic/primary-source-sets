@@ -117,7 +117,7 @@ describe GuidesController, type: :controller do
     it 'redirects to :index view' do
       guide
       delete :destroy, id: guide.id, source_set_id: source_set.id
-      expect(response).to redirect_to source_set_url
+      expect(response).to redirect_to source_set_path(source_set)
     end
   end
 end

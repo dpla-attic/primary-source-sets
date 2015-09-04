@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'config', '~> 1.0.0'
 gem 'redcarpet', '~> 3.3'
+gem 'friendly_id', '~> 5.1.0'
 
 group :test, :development do
   gem 'rspec-core', '~>3.1'

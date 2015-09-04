@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829151317) do
+ActiveRecord::Schema.define(version: 20150904191008) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20150829151317) do
   add_index "authors_source_sets", ["author_id"], name: "index_authors_source_sets_on_author_id"
   add_index "authors_source_sets", ["source_set_id"], name: "index_authors_source_sets_on_source_set_id"
 
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
   create_table "guides", force: true do |t|
     t.integer  "source_set_id"
     t.string   "name"
@@ -55,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150829151317) do
     t.text     "resources",   limit: 65535
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.string   "slug"
   end
 
   create_table "sources", force: true do |t|
