@@ -49,7 +49,10 @@ class SourceSetsController < ApplicationController
   private
 
   def source_set_params
-    params.require(:source_set).permit(:name, :description, :overview,
-                                       :resources)
+    params.require(:source_set).permit(:name,
+                                       :description,
+                                       :overview,
+                                       :resources,
+                                       author_ids: [])
   end
 end

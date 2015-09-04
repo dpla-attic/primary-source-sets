@@ -1,8 +1,11 @@
 <h1>Edit set</h1>
 
-<p><%= link_to "Back to sets", source_sets_path %></p>
-<p><%= link_to "Delete this set", source_set_path(@source_set),
+<p>
+  <%= link_to "View", source_set_path(@source_set) %>
+  |
+  <%= link_to "Delete", source_set_path(@source_set),
             method: :delete,
-            data: { confirm: "Are you sure you want to delete #{@source_set.name}?" } %></p>
+            data: { confirm: "Are you sure you want to delete #{@source_set.name}?" } %>
+</p>
  
 <%= render "form" %>

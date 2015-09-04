@@ -1,0 +1,33 @@
+<h1>Author: <%= @author.name %></h1>
+
+<p>
+  <%= link_to "Edit", edit_author_path(@author) %>
+  |
+  <%= link_to "Delete", author_path(@author), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@author.name}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>Name </strong></td>
+    <td><%= @author.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Affiliation </strong></td>
+    <td><%= @author.affiliation %></td>
+  </tr>
+</table>
+
+<h2>Sets</h2>
+<ul>
+<% @author.source_sets.each do |source_set| %>
+  <li><%= link_to source_set.name, source_set_path(source_set) %></li>
+<% end %>
+</ul>
+
+<h2>Teaching guides</h2>
+<ul>
+  <% @author.guides.each do |guide| %>
+    <li><%= link_to guide.name, source_set_guide_path(guide.source_set, guide) %></li>
+  <% end %>
+</ul>
