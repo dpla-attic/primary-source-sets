@@ -43,7 +43,13 @@
     }
   ],
   "dct:temporal": [
-    { "name": "Colonial America" }
+    { 
+      "@id": "ushist:united-states-era-2",
+      "@type": "dct:PeriodOfTime",
+      "name": "Colonization & Settlement (1585-1763)",
+      "start": "1585",
+      "end": "1763",
+    }
   ],
   "description": "This collection uses primary sources to explore the French and Indian War.",
   "author": [
