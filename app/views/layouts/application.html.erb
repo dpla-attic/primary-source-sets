@@ -8,12 +8,16 @@
 </head>
 <body>
 
-  <div id="admin-menu">
-    <%= link_to "Sets", source_sets_path %>
-    |
-    <%= link_to "Authors", authors_path %>
-    </ul>
-  </div>
+  <% if admin_signed_in? %>
+    <div id="admin-menu">
+      <%= link_to "Sets", source_sets_path %>
+      |
+      <%= link_to "Authors", authors_path %>
+      |
+      <%= link_to "Log out", destroy_admin_session_path, method: :delete %>
+      </ul>
+    </div>
+  <% end %>
 
 <%= yield %>
 

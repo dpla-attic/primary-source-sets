@@ -3,6 +3,7 @@
 #
 # @see Author
 class AuthorsController < ApplicationController
+
   def index
     @authors = Author.all
   end
