@@ -21,13 +21,13 @@
 <h2>Sets</h2>
 <ul>
 <% @author.source_sets.each do |source_set| %>
-  <li><%= link_to source_set.name, source_set_path(source_set) %></li>
+  <li><%= link_to inline_markdown(source_set.name), source_set_path(source_set) %></li>
 <% end %>
 </ul>
 
 <h2>Teaching guides</h2>
 <ul>
   <% @author.guides.each do |guide| %>
-    <li><%= link_to guide.name, guide_path(guide) %></li>
+    <li><%= link_to inline_markdown(guide.name), guide_path(guide) %></li>
   <% end %>
 </ul>
