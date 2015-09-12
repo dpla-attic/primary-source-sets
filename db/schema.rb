@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914012241) do
+ActiveRecord::Schema.define(version: 20150923195451) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20150914012241) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "audios", force: true do |t|
+    t.integer  "source_id"
+    t.string   "mime_type"
+    t.string   "file_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -53,6 +61,14 @@ ActiveRecord::Schema.define(version: 20150914012241) do
 
   add_index "authors_source_sets", ["author_id"], name: "index_authors_source_sets_on_author_id"
   add_index "authors_source_sets", ["source_set_id"], name: "index_authors_source_sets_on_source_set_id"
+
+  create_table "documents", force: true do |t|
+    t.integer  "source_id"
+    t.string   "mime_type"
+    t.string   "file_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -107,7 +123,6 @@ ActiveRecord::Schema.define(version: 20150914012241) do
     t.integer  "source_set_id"
     t.string   "name"
     t.string   "aggregation"
-    t.string   "media_type"
     t.text     "textual_content", limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -116,5 +131,13 @@ ActiveRecord::Schema.define(version: 20150914012241) do
   end
 
   add_index "sources", ["source_set_id"], name: "index_sources_on_source_set_id"
+
+  create_table "videos", force: true do |t|
+    t.integer  "source_id"
+    t.string   "mime_type"
+    t.string   "file_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

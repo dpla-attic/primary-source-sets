@@ -1,0 +1,54 @@
+<%= form_for [@attachable, @image] do |f| %>
+
+  <% if @image.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@image.errors.count, "error") %> prohibited
+        this image from being saved:
+      </h2>
+      <ul>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong><%= f.label :file_base %></strong><br/>
+    <%= f.text_field :file_base %>
+  </p>
+
+  <p>
+    <strong><%= f.label :mime_type %></strong><br/>
+    <%= radio_button("image", "mime_type", "image/jpeg", style: "display:inline") %>image/jpeg<br/>
+    <%= radio_button("image", "mime_type", "image/png", style: "display:inline") %>image/png<br/>
+    <%= radio_button("image", "mime_type", "image/gif", style: "display:inline") %>image/gif<br/>
+  </p>
+
+  <p>
+    <strong><%= f.label :height %></strong><br/>
+    <%= f.text_field :height %>
+  </p>
+
+  <p>
+    <strong><%= f.label :width %></strong><br/>
+    <%= f.text_field :width %>
+  </p>
+
+  <p>
+    <strong><%= f.label :size %></strong><br/>
+    <%= radio_button("image", "size", "large", style: "display:inline") %>large<br/>
+    <%= radio_button("image", "size", "thumbnail", style: "display:inline") %>thumbnail<br/>
+  </p>
+
+  <p>
+    <strong><%= f.label :alt_text %></strong><br/>
+    <%= f.text_field :alt_text %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

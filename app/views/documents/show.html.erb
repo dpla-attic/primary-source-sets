@@ -1,0 +1,20 @@
+<h1>Document: <%= @document.file_base %></h1>
+
+<p>
+  <%= link_to "Edit", edit_document_path(@document) %>
+  |
+  <%= link_to "Delete", 
+               document_path(@document), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@document.file_base}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>Document belongs to </strong></td>
+    <td><%= link_to inline_markdown(source_name(@document.source)), polymorphic_path(@document.source)%></td>
+  </tr>
+  <tr>
+    <td><strong>File base </strong></td>
+    <td><%= @document.file_base %></td>
+  </tr>
+</table>

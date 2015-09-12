@@ -2,7 +2,7 @@
 # Handles HTTP requests for guides
 #
 # @see Guide
-class GuidesController < ApplicationController 
+class GuidesController < ApplicationController
   before_filter :load_source_set, only: [:index, :new, :create]
 
   def index

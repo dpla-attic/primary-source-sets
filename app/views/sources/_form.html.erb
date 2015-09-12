@@ -27,15 +27,6 @@
   </p>
 
   <p>
-    <strong><%= f.label :media_type %></strong><br/>
-    <em>Media type refers to the file type of the digital object.  It is not a description of the original object.</em><br/>
-    <%= radio_button("source", "media_type", "image") %>image<br/>
-    <%= radio_button("source", "media_type", "document") %>document<br/>
-    <%= radio_button("source", "media_type", "audio") %>audio<br/>
-    <%= radio_button("source", "media_type", "video") %>video<br/>
-  </p>
-
-  <p>
     <strong><%= f.label :citation %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for formatting.</em><br/>
     <%= f.text_area :citation %>

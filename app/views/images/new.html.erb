@@ -1,0 +1,8 @@
+<% attachable_name = @attachable.name.present? ? @attachable.name :
+  @attachable.aggregation %>
+
+<h1>New image</h1>
+
+<p>This image will belong to <%= link_to inline_markdown(attachable_name), polymorphic_path(@attachable) %>
+
+<%= render "form" %>
