@@ -13,20 +13,23 @@ describe SourcesController, type: :controller do
   context 'admin logged in' do
     login_admin
 
+    describe '#index' do
+
+      it 'redirects to source_set#show' do
+        get :index, source_set_id: source_set.id
+        expect(response).to redirect_to(source_set)
+      end
+    end
+
     describe '#show' do
 
       it 'sets @source variable' do
-        get :show, id: source.id, source_set_id: source_set.id
+        get :show, id: source.id
         expect(assigns(:source)).to eq(source)
       end
 
-      it 'sets @source_set variable' do
-        get :show, id: source.id, source_set_id: source_set.id
-        expect(assigns(:source_set)).to eq(source_set)
-      end
-
       it 'renders the :show view' do
-        get :show, id: source.id, source_set_id: source_set.id
+        get :show, id: source.id
         expect(response).to render_template :show
       end
     end
@@ -47,7 +50,7 @@ describe SourcesController, type: :controller do
         post :create,
              source_set_id: source_set.id,
              source: attributes_for(:source_factory)
-        expect(response).to redirect_to [source_set, Source.last]
+        expect(response).to redirect_to Source.last
       end
 
       context 'with invalid attributes' do
@@ -76,7 +79,6 @@ describe SourcesController, type: :controller do
         source
         patch :update,
               id: source.id,
-              source_set_id: source_set.id,
               source: { name: 'New name' }
         source.reload
         expect(source.name).to eq('New name')
@@ -85,9 +87,8 @@ describe SourcesController, type: :controller do
       it 'redirects to the updated source' do
         patch :update,
               id: source.id,
-              source_set_id: source_set.id,
               source: { name: 'New name' }
-        expect(response).to redirect_to [source_set, source]
+        expect(response).to redirect_to source
       end
 
       context 'with invalid attributes' do
@@ -97,7 +98,6 @@ describe SourcesController, type: :controller do
           valid_aggregation = source.aggregation
           patch :update,
                 id: source.id,
-                source_set_id: source_set.id,
                 source: attributes_for(:invalid_source_factory)
           source.reload
           expect(source.aggregation).to eq(valid_aggregation)
@@ -106,7 +106,6 @@ describe SourcesController, type: :controller do
         it 're-renders :edit view' do
           patch :update,
                 id: source.id,
-                source_set_id: source_set.id,
                 source: attributes_for(:invalid_source_factory)
           expect(:response).to render_template :edit
         end
@@ -118,13 +117,13 @@ describe SourcesController, type: :controller do
       it 'deletes the source' do
         source
         expect do
-          delete :destroy, id: source.id, source_set_id: source_set.id
+          delete :destroy, id: source.id
         end.to change(source_set.sources, :count).by(-1)
       end
 
       it 'redirects to :index view' do
         source
-        delete :destroy, id: source.id, source_set_id: source_set.id
+        delete :destroy, id: source.id
         expect(response).to redirect_to source_set_path(source_set)
       end
     end

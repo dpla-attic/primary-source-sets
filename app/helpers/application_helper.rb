@@ -9,4 +9,8 @@ module ApplicationHelper
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, options).render(text)
       .html_safe
   end
+
+  def source_name(source)
+    source.name.present? ? source.name : source.aggregation
+  end
 end
