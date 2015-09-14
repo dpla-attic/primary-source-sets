@@ -43,12 +43,12 @@
 <table>
 <% @source_set.sources.each do |source| %>
   <tr>
-    <td><%= source_name = source.name.present? ? source.name : source.aggregation %></td>
-    <td><%= link_to "View", source_set_source_path(@source_set, source) %></td>
-    <td><%= link_to "Edit", edit_source_set_source_path(@source_set, source) %></td>
-    <td><%= link_to "Delete", source_set_source_path(@source_set, source),
+    <td><%= source_name(source) %></td>
+    <td><%= link_to "View", source_path(source) %></td>
+    <td><%= link_to "Edit", edit_source_path(source) %></td>
+    <td><%= link_to "Delete", source_path(source),
                     method: :delete,
-                    data: { confirm: "Are you sure you want to delete #{source_name}?" } %></td>
+                    data: { confirm: "Are you sure you want to delete #{source_name(source)}?" } %></td>
   </tr>
 <% end %>
 </table>
@@ -61,9 +61,9 @@
 <% @source_set.guides.each do |guide| %>
   <tr>
     <td><%= guide.name %></td>
-    <td><%= link_to "View", source_set_guide_path(@source_set, guide) %></td>
-    <td><%= link_to "Edit", edit_source_set_guide_path(@source_set, guide) %></td>
-    <td><%= link_to "Delete", source_set_guide_path(@source_set, guide),
+    <td><%= link_to "View", guide_path(guide) %></td>
+    <td><%= link_to "Edit", edit_guide_path(guide) %></td>
+    <td><%= link_to "Delete", guide_path(guide),
                     method: :delete,
                     data: { confirm: "Are you sure you want to delete #{guide.name}?" } %></td>
   </tr>

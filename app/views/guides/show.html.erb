@@ -1,17 +1,17 @@
 <h1>Teaching guide: <%= @guide.name %></h1>
 
 <p>
-  <%= link_to "Edit", edit_source_set_guide_path(@source_set, @guide) %>
+  <%= link_to "Edit", edit_guide_path(@guide) %>
   |
   <%= link_to "Delete", 
-               source_set_guide_path(@source_set, @guide), method: :delete,
+               guide_path(@guide), method: :delete,
                data: { confirm: "Are you sure you want to delete #{@guide.name}?" } %>
 </p>
 
 <table>
   <tr>
     <td><strong>Set </strong></td>
-    <td><%= link_to @source_set.name, source_set_path(@source_set)%></td>
+    <td><%= link_to @guide.source_set.name, source_set_path(@guide.source_set)%></td>
   </tr>
   <tr>
     <td><strong>Name </strong></td>

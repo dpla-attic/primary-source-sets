@@ -3,10 +3,14 @@
 #
 # @see Source
 class SourcesController < ApplicationController
-  before_filter :load_source_set
+  before_filter :load_source_set, only: [:index, :new, :create]
+
+  def index
+    redirect_to @source_set
+  end
 
   def show
-    @source = @source_set.sources.find(params[:id])
+    @source = Source.find(params[:id])
   end
 
   def new
@@ -14,34 +18,34 @@ class SourcesController < ApplicationController
   end
 
   def edit
-    @source = @source_set.sources.find(params[:id])
+    @source = Source.find(params[:id])
   end
 
   def create
     @source = @source_set.sources.new(source_params)
 
     if @source.save
-      redirect_to [@source_set, @source]
+      redirect_to @source
     else
       render 'new'
     end
   end
 
   def update
-    @source = @source_set.sources.find(params[:id])
+    @source = Source.find(params[:id])
 
     if @source.update(source_params)
-      redirect_to [@source_set, @source]
+      redirect_to @source
     else
       render 'edit'
     end
   end
 
   def destroy
-    @source = @source_set.sources.find(params[:id])
+    @source = Source.find(params[:id])
     @source.destroy
 
-    redirect_to @source_set
+    redirect_to @source.source_set
   end
 
   private

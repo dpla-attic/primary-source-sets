@@ -15,4 +15,8 @@ describe Guide, type: :model do
   it 'is invalid without name' do
     expect(Guide.new(name: nil)).not_to be_valid
   end
+
+  it 'has a slug' do
+    expect(Guide.create(name: 'Little My').slug).to eq 'little-my'
+  end
 end
