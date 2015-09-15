@@ -13,6 +13,11 @@ gem 'config', '~> 1.0.0'
 gem 'redcarpet', '~> 3.3'
 gem 'friendly_id', '~> 5.1.0'
 gem 'devise', '3.4.1'
+gem 'breadcrumbs_on_rails', '~> 2.3.0'
+gem 'meta-tags', '~> 2.0.0'
+gem 'httparty', '~> 0.11.0'
+gem 'unicorn', '4.8.3'
+gem 'rubocop', '~> 0.32.1', require: false
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
@@ -25,9 +30,3 @@ group :test, :development do
   gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
   gem 'database_cleaner', '~> 1.3.0', require: false
 end
-
-gem 'breadcrumbs_on_rails', '~> 2.3.0'
-gem 'meta-tags', '~> 2.0.0'
-gem 'httparty', '~> 0.11.0'
-gem 'devise', '3.4.1'
-gem 'unicorn', '4.8.3'
