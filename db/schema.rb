@@ -79,6 +79,19 @@ ActiveRecord::Schema.define(version: 20150914012241) do
 
   add_index "guides", ["source_set_id"], name: "index_guides_on_source_set_id"
 
+  create_table "images", force: true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "mime_type"
+    t.string   "file_base"
+    t.string   "size"
+    t.integer  "height"
+    t.integer  "width"
+    t.string   "alt_text"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "source_sets", force: true do |t|
     t.string   "name"
     t.boolean  "published",                 default: false
@@ -98,6 +111,8 @@ ActiveRecord::Schema.define(version: 20150914012241) do
     t.text     "textual_content", limit: 65535
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.text     "citation",        limit: 65535
+    t.text     "credits",         limit: 65535
   end
 
   add_index "sources", ["source_set_id"], name: "index_sources_on_source_set_id"

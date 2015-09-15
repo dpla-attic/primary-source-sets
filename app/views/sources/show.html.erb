@@ -26,6 +26,14 @@
     <td><%= @source.media_type %></td>
   </tr>
   <tr>
+    <td><strong>Citation </strong></td>
+    <td><%= markdown(@source.citation) %></td>
+  </tr>
+  <tr>
+    <td><strong>Credits </strong></td>
+    <td><%= markdown(@source.credits) %></td>
+  </tr>
+  <tr>
     <td><strong>Textual content </strong></td>
     <td><%= markdown(@source.textual_content) %></td>
   </tr>

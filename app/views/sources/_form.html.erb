@@ -36,6 +36,18 @@
   </p>
 
   <p>
+    <strong><%= f.label :citation %></strong><br/>
+    <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for formatting.</em><br/>
+    <%= f.text_area :citation %>
+  </p>
+
+  <p>
+    <strong><%= f.label :credits %></strong><br/>
+    <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for formatting.</em><br/>
+    <%= f.text_area :credits %>
+  </p>
+
+  <p>
     <strong><%= f.label :textual_content %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for formatting.</em><br/>
     <%= f.text_area :textual_content %>

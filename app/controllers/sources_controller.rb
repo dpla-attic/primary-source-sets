@@ -52,7 +52,7 @@ class SourcesController < ApplicationController
 
   def source_params
     params.require(:source).permit(:name, :aggregation, :media_type,
-                                   :textual_content)
+                                   :textual_content, :citation, :credits)
   end
 
   def load_source_set
