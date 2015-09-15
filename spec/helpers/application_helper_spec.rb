@@ -14,4 +14,18 @@ describe ApplicationHelper, type: :helper do
        expect{ helper.markdown(invalid_input) }.to raise_error(TypeError)
      end
    end
+
+   describe '#inline_markdown' do
+
+    it 'strips enclosing <p> tags' do
+      text = '**Moomin!**'
+      expect(helper.inline_markdown(text)).to eq("<strong>Moomin!</strong>")
+    end
+
+    it 'leaves enclosing <p> tags if there are internal <p> tags' do
+      text = '<p>Moomin!</p><p>Snorkmaiden</p>'
+      expect(helper.inline_markdown(text))
+        .to eq("<p>Moomin!</p><p>Snorkmaiden</p>\n")
+    end
+  end
 end

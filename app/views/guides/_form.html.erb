@@ -4,7 +4,7 @@
     <div id="error_explanation">
       <h2>
         <%= pluralize(@guide.errors.count, "error") %> prohibited
-        this set from being saved:
+        this guide from being saved:
       </h2>
       <ul>
         <% @guide.errors.full_messages.each do |msg| %>
@@ -16,6 +16,7 @@
 
   <p>
     <strong><%= f.label "Name (required)" %></strong><br/>
+    <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_field :name %>
   </p>
 

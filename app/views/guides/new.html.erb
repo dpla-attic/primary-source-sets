@@ -1,5 +1,5 @@
-<p><%= link_to "Back to #{@source_set.name}", source_set_path(@source_set) %></p>
+<p><%= link_to "Back to set", source_set_path(@source_set) %></p>
 
-<h1>New teaching guide for <%= @source_set.name %></h1>
+<h1>New teaching guide for <%= inline_markdown(@source_set.name) %></h1>
 
 <%= render "form" %>
