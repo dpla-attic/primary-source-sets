@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904204928) do
+ActiveRecord::Schema.define(version: 20150914012241) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150904204928) do
     t.text     "activity",      limit: 65535
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "slug"
   end
 
   add_index "guides", ["source_set_id"], name: "index_guides_on_source_set_id"
