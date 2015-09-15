@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'source_sets/show.html.erb', type: :view do
 

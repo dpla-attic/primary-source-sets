@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'authors/index.html.erb', type: :view do
 
   before do
     assign(:authors, [create(:author_factory, name: 'Moomin'),
-                          create(:author_factory, name: 'Snorkmaiden')])
+                      create(:author_factory, name: 'Snorkmaiden')])
   end
 
   it 'renders each author' do
