@@ -5,6 +5,7 @@
       "ccss": "http://www.corestandards.org/",
       "dct": "http://purl.org/dc/terms/",
       "dcmitype": "http://purl.org/dc/dcmitype/",
+      "edm": "http://www.europeana.eu/schemas/edm",
       "text":
       {
         "@id": "http://schema.org/text",
@@ -43,7 +44,13 @@
     }
   ],
   "dct:temporal": [
-    { "name": "Colonial America" }
+    { 
+      "@id": "ushist:united-states-era-2",
+      "@type": "edm:TimeSpan",
+      "name": "Colonization & Settlement (1585-1763)",
+      "edm:begin": "1585",
+      "edm:end": "1763"
+    }
   ],
   "description": "This collection uses primary sources to explore the French and Indian War.",
   "author": [
