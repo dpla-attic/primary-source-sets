@@ -1,0 +1,13 @@
+<h1>Edit teaching guide</h1>
+
+<p>
+  <%= link_to "View", guide_path(@guide) %>
+  |
+  <%= link_to "Delete", 
+               guide_path(@guide), method: :delete,
+               data: { confirm: "Are you sure you want to delete this guide?" } %>
+</p>
+
+<p>This guide belongs to <%= link_to inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set) %></p>
+
+<%= render "form" %>

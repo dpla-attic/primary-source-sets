@@ -1,0 +1,10 @@
+<h1>Edit author</h1>
+
+<p>
+  <%= link_to "View", author_path(@author) %>
+  |
+  <%= link_to "Delete", author_path(@author),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete this author?" } %></p>
+ 
+<%= render "form" %>

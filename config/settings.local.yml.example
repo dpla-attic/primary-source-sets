@@ -1,4 +1,8 @@
-#Use this file to define settings related to application configuration
-#Use this file to define settings that are ENVIRONMENT SPECIFIC and/or PRIVATE
-#This file will be ignored by git
-#Declarations in this file override declarations in config/settings.yml
+# Use this file to define settings related to application configuration
+# Use this file to define settings that are UNIVERSAL (not specific to any environment)
+# Information in this file is PRIVATE (this file will be ignored by git)
+# Declarations in this file override declarations in config/settings.yml
+
+frontend:
+  # With trailing slash
+  url: http://dp.la/

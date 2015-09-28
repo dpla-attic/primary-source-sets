@@ -5,7 +5,8 @@
 <table>
 <% @source_sets.each do |set| %>
   <tr>
-    <td><%= link_to set.name, source_set_path(set) %></td>
+    <td><%= inline_markdown(set.name) %></td>
+    <td><%= link_to "View", source_set_path(set) %></td>
     <td><%= link_to "Edit", edit_source_set_path(set) %></td>
     <td><%= link_to "Delete", source_set_path(set),
                     method: :delete,

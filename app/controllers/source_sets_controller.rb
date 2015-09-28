@@ -8,7 +8,7 @@ class SourceSetsController < ApplicationController
   end
 
   def show
-    @source_set = SourceSet.find(params[:id])
+    @source_set = SourceSet.friendly.find(params[:id])
   end
 
   def new
@@ -16,7 +16,7 @@ class SourceSetsController < ApplicationController
   end
 
   def edit
-    @source_set = SourceSet.find(params[:id])
+    @source_set = SourceSet.friendly.find(params[:id])
   end
 
   def create
@@ -30,7 +30,7 @@ class SourceSetsController < ApplicationController
   end
 
   def update
-    @source_set = SourceSet.find(params[:id])
+    @source_set = SourceSet.friendly.find(params[:id])
 
     if @source_set.update(source_set_params)
       redirect_to @source_set
@@ -40,7 +40,7 @@ class SourceSetsController < ApplicationController
   end
 
   def destroy
-    @source_set = SourceSet.find(params[:id])
+    @source_set = SourceSet.friendly.find(params[:id])
     @source_set.destroy
 
     redirect_to source_sets_path
@@ -49,7 +49,10 @@ class SourceSetsController < ApplicationController
   private
 
   def source_set_params
-    params.require(:source_set).permit(:name, :description, :overview,
-                                       :resources)
+    params.require(:source_set).permit(:name,
+                                       :description,
+                                       :overview,
+                                       :resources,
+                                       author_ids: [])
   end
 end

@@ -4,8 +4,7 @@
     {
       "ore": "http://www.openarchives.org/ore/terms/",
       "dct": "http://purl.org/dc/terms/",
-      "text":
-      {
+      "text": {
         "@id": "http://schema.org/text",
         "@type": "http://ns.ontowiki.net/SysOnt/Markdown"
       }
@@ -21,6 +20,11 @@
   "dct:references": {
     "@id": "http://dp.la/item/87037c8c0dc514bfd19bddbce9ff2ce7",
     "@type": "ore:Aggregation"
+  },
+  "dct:citation": "Washington, George. *The journal of Major George Washington.* Chicago: The Newberry Library, 1958. Page 53.",
+  "dct:provenance": {
+    "@type": "dct:ProvenanceStatement",
+    "name": "Courtesy of The Univeristy of Michigan via HathiTrust"
   },
   "text": "Excerpt from Wednesday, October 31st, 1753:\n\"I was comissioned and appointed by the Honourable Robert Dinwidde, Esq; Governor, etc. of Virginia to visit and deliver a Letter to the Commandant of the French Forces on the Hioin, and set out on the indended Journey the same day ; and proceeded with him to Alexandria, where we provided Necessaries ; from thence we went to Winchester, and got Baggage, Horses, etc., and from thence we pursued the new Road to Wills-Creek, where we arrive the 14th of November.\""
 }

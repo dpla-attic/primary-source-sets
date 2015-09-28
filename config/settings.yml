@@ -1,6 +1,15 @@
-#Use this file to define settings related to application configuration
-#Use this file to define settings that are UNIVERSAL (not specific to any environment)
-#Information in this file will be PUBLIC (this file is tracked in git)
-#Declarations in config/settings.local.yml override declarations in this file
+# Use this file to define settings related to application configuration
+# Use this file to define settings that are UNIVERSAL (not specific to any environment)
+# Information in this file will be PUBLIC (this file is tracked in git)
+# Declarations in config/settings.local.yml override declarations in this file
+
+devise: 
+  mailer_sender: email@example.org
+
+frontend:
+  # With trailing slash
+  url: http://example.com
+
+host: 'localhost'
 
 relative_url_root: /primary-source-sets
