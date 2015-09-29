@@ -47,3 +47,13 @@ copy, if you're using the local VM.  If you're using `automation`, and you want
 it to "use local source," in other words, use this working copy as the source of
 deployments, please be aware that the working copy's configuration files will be
 copied into the `automation` VM, by design.
+
+
+Sample data
+-----------
+
+To create a sample admin account for development and testing:
+
+    rake primary_source_sets:samples:create_admin
+
+This account will have username: 'sample@dp.la' and password: 'password'.
