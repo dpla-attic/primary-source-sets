@@ -1,0 +1,16 @@
+<h1>Edit image</h1>
+
+<p>
+  <%= link_to "View", image_path(@image) %>
+  |
+  <%= link_to "Delete", 
+               image_path(@image), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@image.file_base}?" } %>
+</p>
+
+<% attachable_name = @image.attachable.name.present? ? @image.attachable.name :
+  @image.attachable.aggregation %>
+
+<p>This image belongs to <%= link_to attachable_name, polymorphic_path(@image.attachable) %></p>
+
+<%= render "form" %>

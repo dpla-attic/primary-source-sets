@@ -22,10 +22,6 @@
     <td><%= inline_markdown(@source.name) %></td>
   </tr>
   <tr>
-    <td><strong>Media type </strong></td>
-    <td><%= @source.media_type %></td>
-  </tr>
-  <tr>
     <td><strong>Citation </strong></td>
     <td><%= markdown(@source.citation) %></td>
   </tr>
@@ -37,4 +33,43 @@
     <td><strong>Textual content </strong></td>
     <td><%= markdown(@source.textual_content) %></td>
   </tr>
+</table>
+
+<h2>Media asset</h2>
+
+<% unless @source.asset.present? && @source.thumbnail.present? %>
+  <p><%= link_to "Add new image", new_source_image_path(@source.id) %></p>
+<% end %>
+
+<% unless @source.asset.present? %>
+  <p><%= link_to "Add new document", new_source_document_path(@source.id) %></p>
+  <p><%= link_to "Add new audio", new_source_audio_path(@source.id) %></p>
+  <p><%= link_to "Add new video", new_source_video_path(@source.id) %></p>
+<% end %>
+
+<table>
+
+  <% if @source.asset.present? %>
+    <tr>
+      <td><strong>Asset </strong></td>
+      <td><%= @source.asset.file_base %></td>
+      <td><%= link_to "View", polymorphic_path(@source.asset) %></td>
+      <td><%= link_to "Edit", edit_polymorphic_path(@source.asset) %></td>
+      <td><%= link_to "Delete", polymorphic_path(@source.asset),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to delete #{@source.asset.file_base}?" } %></td>
+    </tr>
+  <% end %>
+
+  <% if @source.thumbnail.present? %>
+    <tr>
+      <td><strong>Thumbnail </strong></td>
+      <td><%= @source.thumbnail.file_base %></td>
+      <td><%= link_to "View", image_path(@source.thumbnail) %></td>
+      <td><%= link_to "Edit", edit_image_path(@source.thumbnail) %></td>
+      <td><%= link_to "Delete", image_path(@source.thumbnail),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to delete #{@source.thumbnail.file_base}?" } %></td>
+    </tr>
+  <% end %>
 </table>

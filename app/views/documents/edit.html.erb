@@ -1,0 +1,13 @@
+<h1>Edit document</h1>
+
+<p>
+  <%= link_to "View", document_path(@document) %>
+  |
+  <%= link_to "Delete", 
+               document_path(@document), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@document.file_base}?" } %>
+</p>
+
+<p>This document belongs to <%= link_to inline_markdown(source_name(@document.source)), source_path(@document.source) %></p>
+
+<%= render "form" %>
