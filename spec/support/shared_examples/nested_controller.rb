@@ -1,6 +1,6 @@
 ##
 # This has specs for controllers whose routes are nested under a parent route.
-# Available actions to test are :index, create, :destroy
+# Available actions to test are :index, :create, :destroy
 #
 # @param actions Symbol the actions for this examples to test.
 #

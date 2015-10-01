@@ -55,7 +55,13 @@ class SourcesController < ApplicationController
                                    :aggregation,
                                    :textual_content,
                                    :citation,
-                                   :credits)
+                                   :credits,
+                                   :featured,
+                                   asset_ids: [],
+                                   image_ids: [],
+                                   audio_ids: [],
+                                   video_ids: [],
+                                   document_ids: [])
   end
 
   def load_source_set

@@ -33,43 +33,49 @@
     <td><strong>Description / transcription </strong></td>
     <td><%= markdown(@source.textual_content) %></td>
   </tr>
+  <tr>
+    <td><strong>Featured? </strong></td>
+    <td><%= @source.featured %></td>
+  </tr>
 </table>
 
-<h2>Media asset</h2>
-
-<% unless @source.asset.present? && @source.thumbnail.present? %>
-  <p><%= link_to "Add new image", new_source_image_path(@source.id) %></p>
-<% end %>
-
-<% unless @source.asset.present? %>
-  <p><%= link_to "Add new document", new_source_document_path(@source.id) %></p>
-  <p><%= link_to "Add new audio", new_source_audio_path(@source.id) %></p>
-  <p><%= link_to "Add new video", new_source_video_path(@source.id) %></p>
-<% end %>
+<h2>Media assets</h2>
 
 <table>
 
-  <% if @source.asset.present? %>
+  <% if @source.main_asset.present? %>
     <tr>
-      <td><strong>Asset </strong></td>
-      <td><%= @source.asset.file_base %></td>
-      <td><%= link_to "View", polymorphic_path(@source.asset) %></td>
-      <td><%= link_to "Edit", edit_polymorphic_path(@source.asset) %></td>
-      <td><%= link_to "Delete", polymorphic_path(@source.asset),
+      <td><strong>Main media asset (<%= @source.main_asset.class.name %>)</strong></td>
+      <td><%= @source.main_asset.file_base %></td>
+      <td><%= link_to "View", polymorphic_path(@source.main_asset) %></td>
+      <td><%= link_to "Edit", edit_polymorphic_path(@source.main_asset) %></td>
+      <td><%= link_to "Delete", polymorphic_path(@source.main_asset),
                       method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source.asset.file_base}?" } %></td>
+                      data: { confirm: "Are you sure you want to delete #{@source.main_asset.file_base}?" } %></td>
     </tr>
   <% end %>
 
-  <% if @source.thumbnail.present? %>
+  <% if @source.thumbnails.present? %>
     <tr>
       <td><strong>Thumbnail </strong></td>
-      <td><%= @source.thumbnail.file_base %></td>
-      <td><%= link_to "View", image_path(@source.thumbnail) %></td>
-      <td><%= link_to "Edit", edit_image_path(@source.thumbnail) %></td>
-      <td><%= link_to "Delete", image_path(@source.thumbnail),
+      <td><%= @source.thumbnails.first.file_base %></td>
+      <td><%= link_to "View", image_path(@source.thumbnails.first) %></td>
+      <td><%= link_to "Edit", edit_image_path(@source.thumbnails.first) %></td>
+      <td><%= link_to "Delete", image_path(@source.thumbnails.first),
                       method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source.thumbnail.file_base}?" } %></td>
+                      data: { confirm: "Are you sure you want to delete #{@source.thumbnails.first.file_base}?" } %></td>
+    </tr>
+  <% end %>
+
+  <% if @source.small_images.present? %>
+    <tr>
+      <td><strong>Small image </strong></td>
+      <td><%= @source.small_images.first.file_base %></td>
+      <td><%= link_to "View", image_path(@source.small_images.first) %></td>
+      <td><%= link_to "Edit", edit_image_path(@source.small_images.first) %></td>
+      <td><%= link_to "Delete", image_path(@source.small_images.first),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to delete #{@source.small_images.first.file_base}?" } %></td>
     </tr>
   <% end %>
 </table>

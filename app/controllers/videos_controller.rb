@@ -3,10 +3,9 @@
 #
 # @see Video
 class VideosController < ApplicationController
-  before_filter :load_source, only: [:index, :new, :create]
 
   def index
-    redirect_to @source
+    @videos = Video.all
   end
 
   def show
@@ -25,7 +24,7 @@ class VideosController < ApplicationController
   # incoming bucket.
   #
   def new
-    @video = @source.build_video
+    @video = Video.new
     @formdef = PSSBrowserUploads.form_definition('video')
     @accepted_types = %w(.mov .m4v .mp4 .mpeg .mp1 .3gp .3g2 .avi .f4v .flv
                          .h261 .h263 .h264 .jpm .jpgv .asf .wm .wmv .mj2 .ogv
@@ -37,7 +36,8 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = @source.build_video(video_params)
+    @video = Video.new(video_params)
+
     if @video.save
       render json: { id: @video.id, resource: video_path(@video) },
              status: :created
@@ -63,19 +63,13 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     @video.destroy
 
-    redirect_to @video.source
+    redirect_to videos_path
   end
 
   private
 
   def video_params
-    params.require(:video).permit(:file_base)
-  end
-
-  ##
-  # Find the source through the HTTP route.
-  # This method is only for use those actions nested under source.
-  def load_source
-    @source = Source.find(params[:source_id])
+    params.require(:video).permit(:file_base,
+                                  source_ids: [])
   end
 end

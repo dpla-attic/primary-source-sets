@@ -45,6 +45,51 @@
   </p>
 
   <p>
+    <strong><%= f.label :featured %></strong><%= f.check_box :featured %><br />
+    <em>If checked, this source's small image will be the featured image for the set.</em><br/>
+  </p>
+
+  <h2>Main media asset</h2>
+
+  <p>
+    <strong><%= f.label :large_image %></strong><br />
+    <%= f.collection_check_boxes(:image_ids, Image.where(size: 'large'), :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :audio %></strong><br />
+    <%= f.collection_check_boxes(:audio_ids, Audio.all, :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :video %></strong><br />
+    <%= f.collection_check_boxes(:video_ids, Video.all, :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :document %></strong><br />
+    <%= f.collection_check_boxes(:document_ids, Document.all, :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <h2><%= f.label :thumbnail %></h2>
+  <%= f.collection_check_boxes(:image_ids, Image.where(size: 'thumbnail'), :id, :file_base) do |b| %>
+    <%= b.label { b.check_box(class: "thumbnail_check_box") + b.text } %><br />
+  <% end %>
+
+  <h2><%= f.label :small_image %></h2>
+  <%= f.collection_check_boxes(:image_ids, Image.where(size: 'small'), :id, :file_base) do |b| %>
+    <%= b.label { b.check_box(class: "small_image_check_box") + b.text } %><br />
+  <% end %>
+
+  <p>
     <%= f.submit %>
   </p>
 

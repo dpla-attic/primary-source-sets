@@ -3,10 +3,8 @@
 #
 # @see Audios
 class AudiosController < ApplicationController
-  before_filter :load_source, only: [:index, :new, :create]
-
   def index
-    redirect_to @source
+    @audios = Audio.all
   end
 
   def show
@@ -16,7 +14,7 @@ class AudiosController < ApplicationController
   ##
   # @see VideosController#new
   def new
-    @audio = @source.build_audio
+    @audio = Audio.new
     @formdef = PSSBrowserUploads.form_definition('audio')
     @accepted_types = %w(.mp3 .mp2 .mp4a .wav .flac .aif .aiff .wma .mpga .oga
                          .ogg .au .adp .aac .weba).join(',')
@@ -29,7 +27,8 @@ class AudiosController < ApplicationController
   ##
   # @see VideosController#create
   def create
-    @audio = @source.build_audio(audio_params)
+    @audio = Audio.new(audio_params)
+
     if @audio.save
       render json: { id: @audio.id, resource: audio_path(@audio) },
              status: :created
@@ -53,19 +52,13 @@ class AudiosController < ApplicationController
     @audio = Audio.find(params[:id])
     @audio.destroy
 
-    redirect_to @audio.source
+    redirect_to audios_path
   end
 
   private
 
   def audio_params
-    params.require(:audio).permit(:file_base)
-  end
-
-  ##
-  # Find the source through the HTTP route.
-  # This method is only for use those actions nested under source.
-  def load_source
-    @source = Source.find(params[:source_id])
+    params.require(:audio).permit(:file_base,
+                                  source_ids: [])
   end
 end

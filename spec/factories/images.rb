@@ -6,7 +6,6 @@ FactoryGirl.define do
     height '150'
     width '150'
     alt_text 'picture of Little My'
-    association :attachable, factory: :source_set_factory
   end
 
   factory :invalid_image_factory, class: Image do

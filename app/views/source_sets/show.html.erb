@@ -34,6 +34,14 @@
       <td><%= link_to author.name, author_path(author) %></td>
     </tr>
   <% end %>
+  <tr>
+    <td><strong>Featured image </strong></td>
+    <td>
+      <% if @source_set.featured_image.present? %>
+        <%= link_to @source_set.featured_image.file_base, image_path(@source_set.featured_image) %>
+      <% end %>
+    </td>
+  </tr>
 </table>
 
 <h2>Sources</h2>
@@ -68,35 +76,4 @@
                     data: { confirm: "Are you sure you want to delete #{guide.name}?" } %></td>
   </tr>
 <% end %>
-</table>
-
-<h2>Images</h2>
-
-<p><%= link_to "Add new image", new_source_set_image_path(@source_set.id) %></p>
-
-<table>
-
-  <% if @source_set.large_image.present? %>
-    <tr>
-      <td><strong>Large image </strong></td>
-      <td><%= @source_set.large_image.file_base %></td>
-      <td><%= link_to "View", image_path(@source_set.large_image) %></td>
-      <td><%= link_to "Edit", edit_image_path(@source_set.large_image) %></td>
-      <td><%= link_to "Delete", image_path(@source_set.large_image),
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source_set.large_image.file_base}?" } %></td>
-    </tr>
-  <% end %>
-
-  <% if @source_set.thumbnail.present? %>
-    <tr>
-      <td><strong>Thumbnail </strong></td>
-      <td><%= @source_set.thumbnail.file_base %></td>
-      <td><%= link_to "View", image_path(@source_set.thumbnail) %></td>
-      <td><%= link_to "Edit", edit_image_path(@source_set.thumbnail) %></td>
-      <td><%= link_to "Delete", image_path(@source_set.thumbnail),
-                      method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source_set.thumbnail.file_base}?" } %></td>
-    </tr>
-  <% end %>
 </table>
