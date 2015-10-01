@@ -1,0 +1,9 @@
+<%= s3_form @formdef do %>
+
+  <%= file_field_tag :file,
+                     accept: @accepted_types %>
+  <%= submit_tag 'Upload' %>
+
+<% end %>
+
+<div id="upload-progress" style="display: none;"></div>

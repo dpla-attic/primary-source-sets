@@ -13,21 +13,29 @@ class AudiosController < ApplicationController
     @audio = Audio.find(params[:id])
   end
 
+  ##
+  # @see VideosController#new
   def new
     @audio = @source.build_audio
+    @formdef = PSSBrowserUploads.form_definition('audio')
+    @accepted_types = %w(.mp3 .mp2 .mp4a .wav .flac .aif .aiff .wma .mpga .oga
+                         .ogg .au .adp .aac .weba).join(',')
   end
 
   def edit
     @audio = Audio.find(params[:id])
   end
 
+  ##
+  # @see VideosController#create
   def create
     @audio = @source.build_audio(audio_params)
-
     if @audio.save
-      redirect_to @audio
+      render json: { id: @audio.id, resource: audio_path(@audio) },
+             status: :created
     else
-      render 'new'
+      render json: { message: 'Internal Server Error' },
+             status: :internal_server_error
     end
   end
 
@@ -51,9 +59,7 @@ class AudiosController < ApplicationController
   private
 
   def audio_params
-    params.require(:audio).permit(:source_id,
-                                  :mime_type,
-                                  :file_base)
+    params.require(:audio).permit(:file_base)
   end
 
   ##

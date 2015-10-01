@@ -42,12 +42,6 @@ shared_examples 'nested controller' do |*actions|
         end.to change(resource.class, :count).by(1)
       end
 
-      it 'redirects to the new resource' do
-        post :create, parent_id_sym => parent.id,
-                      resource_sym => attributes
-        expect(response).to redirect_to resource.class.last
-      end
-
       context 'with invalid attributes' do
 
         it 'does not save new resource' do
@@ -55,12 +49,6 @@ shared_examples 'nested controller' do |*actions|
             post :create, parent_id_sym => parent.id,
                           resource_sym => invalid_attributes
           end.to change(resource.class, :count).by(0)
-        end
-
-        it 're-renders :new view' do
-          post :create, parent_id_sym => parent.id,
-                        resource_sym => invalid_attributes
-          expect(response).to render_template :new
         end
       end
     end

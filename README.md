@@ -31,6 +31,39 @@ operating system packages.
 Subsequent development:
 * Run `bundle update` as necessary
 
+### Amazon S3 setup
+
+_Please note that this information is incomplete and is due to be updated as
+we flesh out our media functionality:_
+
+This project requires an Amazon Web Services account, and uses the S3 cloud
+container service for media file storage.
+
+The relevant parameters must be defined in `settings.local.yml`.  See
+`app/config/settings.yml`.
+
+The application makes use of one bucket for incoming media files that need to be
+transcoded, and another for the transcoded derivatives.  You should have an IAM
+account with the necessary permissions on these buckets.  The incoming bucket
+must have the following CORS configuration:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>POST</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>Content-Type</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+```
+
+The incoming S3 bucket must also have a "policy" that allows the following
+actions on `arn:aws:s3:::<the bucket name>/*`: `s3:GetObject`, `s3:PutObject`,
+and `s3:DeleteObject`.
+
+
 ### When to use this and other DPLA project VMs
 
 Note the existence of
