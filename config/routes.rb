@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :documents
   resources :audios
   resources :videos
+  resources :video_notifications, only: [:create]
+  resources :audio_notifications, only: [:create]
 
   root 'source_sets#index'
 end
