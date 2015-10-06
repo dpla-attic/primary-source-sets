@@ -13,3 +13,10 @@ frontend:
 host: 'localhost'
 
 relative_url_root: /primary-source-sets
+
+aws:
+  region: 'CHANGEME'
+  access_key_id: 'CHANGEME'
+  secret_access_key: 'CHANGEME'
+  s3_upload_bucket: 'CHANGEME'
+  s3_destination_bucket: 'CHANGEME'

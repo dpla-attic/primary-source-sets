@@ -13,12 +13,14 @@ describe ImagesController, type: :controller do
 
     it_behaves_like 'basic controller', :show, :update
     it_behaves_like 'nested controller', :index, :create, :destroy
+    it_behaves_like 'redirecting controller', :create
 
     context 'attached to source' do
       let(:parent) { create(:source_factory) }
       let(:resource) { create(:image_factory, attachable: parent) }
 
       it_behaves_like 'nested controller', :index, :create, :destroy
+      it_behaves_like 'redirecting controller', :create
     end
   end
 end

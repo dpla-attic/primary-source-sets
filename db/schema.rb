@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929184236) do
+ActiveRecord::Schema.define(version: 20151001162810) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150929184236) do
 
   create_table "audios", force: true do |t|
     t.integer  "source_id"
-    t.string   "mime_type"
     t.string   "file_base"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -134,7 +133,6 @@ ActiveRecord::Schema.define(version: 20150929184236) do
 
   create_table "videos", force: true do |t|
     t.integer  "source_id"
-    t.string   "mime_type"
     t.string   "file_base"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

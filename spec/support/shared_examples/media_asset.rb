@@ -7,11 +7,6 @@ shared_examples 'media asset' do
     expect(described_class.new(attributes)).not_to be_valid
   end
 
-  it 'is invalid without mime_type' do
-    attributes[:mime_type] = nil
-    expect(described_class.new(attributes)).not_to be_valid
-  end
-
   it 'has an source' do
     expect(asset.source).to be_a Source
   end

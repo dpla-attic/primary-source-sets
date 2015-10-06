@@ -14,5 +14,6 @@ describe DocumentsController, type: :controller do
 
     it_behaves_like 'basic controller', :show, :update
     it_behaves_like 'nested controller', :index, :create, :destroy
+    it_behaves_like 'redirecting controller', :create
   end
 end
