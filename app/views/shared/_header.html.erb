@@ -1,0 +1,19 @@
+<header role='banner'>
+  <%= link_to image_tag('dpla-logo.png',
+                        alt: 'DPLA: Digital Public Library of America'),
+              frontend_path,
+              class: 'logo' %>
+  <%= link_to '', class: 'menu-btn' do %>
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+    <span class='visuallyhidden'>Navigation</span>
+  <% end %>
+  <nav class='topNav' id='top-nav'>
+    <ul>
+      <%= render partial: 'shared/top_nav' %>
+    </ul>
+  </nav>
+  <nav class='MainNav' id='main-nav' role='navigation'>
+    <%= render partial: 'shared/main_nav' %>
+  </nav>
+</header>
+<div class='clear'></div>
