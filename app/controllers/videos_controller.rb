@@ -48,7 +48,9 @@ class VideosController < ApplicationController
   ##
   # @see ApplicationController#transcoding_notifications
   def notifications_url
-    Settings.app_base_url + video_notifications_path
+    Settings.app_scheme + Settings.zencoder.notification_user + ':' \
+      + Settings.zencoder.notification_pass + '@' \
+      + Settings.app_host + video_notifications_path
   end
 
   ##
