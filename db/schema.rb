@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001162810) do
+ActiveRecord::Schema.define(version: 20151008142719) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -31,8 +31,16 @@ ActiveRecord::Schema.define(version: 20151001162810) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
+  create_table "attachments", force: true do |t|
+    t.integer "source_id"
+    t.integer "asset_id"
+    t.string  "asset_type"
+  end
+
+  add_index "attachments", ["source_id", "asset_type", "asset_id"], name: "index_attachments_on_source_id_and_asset_type_and_asset_id"
+  add_index "attachments", ["source_id"], name: "index_attachments_on_source_id"
+
   create_table "audios", force: true do |t|
-    t.integer  "source_id"
     t.string   "file_base"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,7 +70,6 @@ ActiveRecord::Schema.define(version: 20151001162810) do
   add_index "authors_source_sets", ["source_set_id"], name: "index_authors_source_sets_on_source_set_id"
 
   create_table "documents", force: true do |t|
-    t.integer  "source_id"
     t.string   "mime_type"
     t.string   "file_base"
     t.datetime "created_at", null: false
@@ -95,16 +102,14 @@ ActiveRecord::Schema.define(version: 20151001162810) do
   add_index "guides", ["source_set_id"], name: "index_guides_on_source_set_id"
 
   create_table "images", force: true do |t|
-    t.integer  "attachable_id"
-    t.string   "attachable_type"
     t.string   "mime_type"
     t.string   "file_base"
     t.string   "size"
     t.integer  "height"
     t.integer  "width"
     t.string   "alt_text"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "source_sets", force: true do |t|
@@ -123,16 +128,16 @@ ActiveRecord::Schema.define(version: 20151001162810) do
     t.string   "name"
     t.string   "aggregation"
     t.text     "textual_content", limit: 16777215
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.text     "citation",        limit: 65535
     t.text     "credits",         limit: 65535
+    t.boolean  "featured",                         default: false
   end
 
   add_index "sources", ["source_set_id"], name: "index_sources_on_source_set_id"
 
   create_table "videos", force: true do |t|
-    t.integer  "source_id"
     t.string   "file_base"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

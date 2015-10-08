@@ -13,5 +13,6 @@ describe SourceSetsController, type: :controller do
 
     it_behaves_like 'basic controller', :index, :show, :create, :update,
                                         :destroy
+    it_behaves_like 'redirecting controller', :create
   end
 end

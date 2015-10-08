@@ -3,10 +3,9 @@
 #
 # @see Document
 class DocumentsController < ApplicationController
-  before_filter :load_source, only: [:index, :new, :create]
 
   def index
-    redirect_to @source
+    @documents = Document.all
   end
 
   def show
@@ -14,7 +13,7 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    @document = @source.build_document
+    @document = Document.new
   end
 
   def edit
@@ -22,7 +21,7 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = @source.build_document(document_params)
+    @document = Document.new(document_params)
 
     if @document.save
       redirect_to @document
@@ -45,21 +44,14 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @document.destroy
 
-    redirect_to @document.source
+    redirect_to documents_path
   end
 
   private
 
   def document_params
-    params.require(:document).permit(:source_id,
-                                     :mime_type,
-                                     :file_base)
-  end
-
-  ##
-  # Find the source through the HTTP route.
-  # This method is only for use those actions nested under source.
-  def load_source
-    @source = Source.find(params[:source_id])
+    params.require(:document).permit(:mime_type,
+                                     :file_base,
+                                     source_ids: [])
   end
 end

@@ -8,6 +8,4 @@
                data: { confirm: "Are you sure you want to delete #{@document.file_base}?" } %>
 </p>
 
-<p>This document belongs to <%= link_to inline_markdown(source_name(@document.source)), source_path(@document.source) %></p>
-
 <%= render "form" %>

@@ -5,6 +5,7 @@ FactoryGirl.define do
     textual_content 'The birthday button is a beautiful artifact.'
     citation 'By Tove Jansson'
     credits 'Courtesy of Finland'
+    featured false
     association :source_set, factory: :source_set_factory
   end
 

@@ -1,4 +1,4 @@
-<%= form_for [@attachable, @image] do |f| %>
+<%= form_for @image do |f| %>
 
   <% if @image.errors.any? %>
     <div id="error_explanation">
@@ -39,12 +39,20 @@
   <p>
     <strong><%= f.label :size %></strong><br/>
     <%= radio_button("image", "size", "large", style: "display:inline") %>large<br/>
+    <%= radio_button("image", "size", "small", style: "display:inline") %>small<br/>
     <%= radio_button("image", "size", "thumbnail", style: "display:inline") %>thumbnail<br/>
   </p>
 
   <p>
     <strong><%= f.label :alt_text %></strong><br/>
     <%= f.text_field :alt_text %>
+  </p>
+
+  <p>
+    <strong><%= f.label :sources %></strong><br />
+    <%= f.collection_check_boxes(:source_ids, Source.all, :id, :aggregation) do |b| %>
+      <%= b.label { b.check_box + b.text } %><br />
+    <% end %>
   </p>
 
   <p>

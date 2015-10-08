@@ -10,11 +10,15 @@
 
 <table>
   <tr>
-    <td><strong>Video belongs to </strong></td>
-    <td><%= link_to inline_markdown(source_name(@video.source)), source_path(@video.source)%></td>
-  </tr>
-  <tr>
     <td><strong>File base </strong></td>
     <td><%= @video.file_base %></td>
   </tr>
 </table>
+
+<h2>Sources</h2>
+<ul>
+<% @video.sources.each do |source| %>
+  <li><%= link_to inline_markdown(source_name(source)), source_path(source) %>, <%= link_to inline_markdown(source.source_set.name), source_set_path(source.source_set) %></li>
+<% end %>
+</ul>
+

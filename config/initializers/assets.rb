@@ -5,3 +5,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 Rails.application.config.assets.precompile += %w( upload.js )
+Rails.application.config.assets.precompile += %w( form.js )

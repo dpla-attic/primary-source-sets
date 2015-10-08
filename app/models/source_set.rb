@@ -2,15 +2,9 @@ class SourceSet < ActiveRecord::Base
   extend FriendlyId
   has_many :sources, dependent: :destroy
   has_many :guides, dependent: :destroy
+  has_one :featured_source, -> { where featured: true }, class_name: 'Source'
+  has_many :small_images, through: :featured_source
   has_and_belongs_to_many :authors
-  has_many :images, as: :attachable, dependent: :destroy
-
-  has_one :large_image, -> { where size: 'large' }, as: :attachable,
-                        class_name: 'Image'
-
-  has_one :thumbnail, -> { where size: 'thumbnail' }, as: :attachable,
-                      class_name: 'Image'
-
   validates :name, presence: true
 
   ##
@@ -22,4 +16,8 @@ class SourceSet < ActiveRecord::Base
   #   URL:  http://example.com/primary-source-sets/sets/little-my
   #   To find this object: SourceSet.friendly.find("little-my")
   friendly_id :name, use: :slugged
+
+  def featured_image
+    small_images.first
+  end
 end

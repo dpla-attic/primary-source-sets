@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
-  belongs_to :source
+  has_many :attachments, as: :asset
+  has_many :sources, through: :attachments
   validates :mime_type, presence: :true
   validates :file_base, presence: :true
-  validates :source_id, single_asset: :true
 end
