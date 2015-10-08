@@ -51,8 +51,4 @@ class Source < ActiveRecord::Base
       true if a.class.name == 'Image' && a.size != 'large'
     end.first
   end
-
-  def aggregation_uri
-    Settings.frontend.url + 'item/' + aggregation
-  end
 end
