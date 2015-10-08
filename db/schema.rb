@@ -42,9 +42,13 @@ ActiveRecord::Schema.define(version: 20151008142719) do
 
   create_table "audios", force: true do |t|
     t.string   "file_base"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "meta"
+    t.string   "transcoding_job"
   end
+
+  add_index "audios", ["transcoding_job"], name: "index_audios_on_transcoding_job", unique: true
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -139,8 +143,12 @@ ActiveRecord::Schema.define(version: 20151008142719) do
 
   create_table "videos", force: true do |t|
     t.string   "file_base"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "meta"
+    t.string   "transcoding_job"
   end
+
+  add_index "videos", ["transcoding_job"], name: "index_videos_on_transcoding_job", unique: true
 
 end

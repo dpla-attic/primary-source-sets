@@ -21,6 +21,7 @@ gem 'rubocop', '~> 0.32.1', require: false
 # came out in December, 2013, and I'm cautious about a change after this long
 # a time being disruptive. --MB
 gem 's3_browser_uploads', '0.1.2'
+gem 'zencoder', '~>2.5'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
@@ -34,4 +35,8 @@ group :test, :development do
   gem 'database_cleaner', '~> 1.3.0', require: false
 
   gem 'json-ld', '~>1.1.9'
+end
+
+group :development do
+  gem 'zencoder-fetcher'
 end

@@ -20,32 +20,11 @@ class AudiosController < ApplicationController
                          .ogg .au .adp .aac .weba).join(',')
   end
 
-  def edit
-    @audio = Audio.find(params[:id])
-  end
-
   ##
-  # @see VideosController#create
+  # @see ApplicationController#create_media
   def create
     @audio = Audio.new(audio_params)
-
-    if @audio.save
-      render json: { id: @audio.id, resource: audio_path(@audio) },
-             status: :created
-    else
-      render json: { message: 'Internal Server Error' },
-             status: :internal_server_error
-    end
-  end
-
-  def update
-    @audio = Audio.find(params[:id])
-
-    if @audio.update(audio_params)
-      redirect_to @audio
-    else
-      render 'edit'
-    end
+    create_media(@audio, 'audio')
   end
 
   def destroy
@@ -53,6 +32,20 @@ class AudiosController < ApplicationController
     @audio.destroy
 
     redirect_to audios_path
+  end
+
+  ##
+  # @see ApplicationController#transcoding_notifications
+  def notifications_url
+    Settings.app_scheme + Settings.zencoder.notification_user + ':' \
+      + Settings.zencoder.notification_pass + '@' \
+      + Settings.app_host + audio_notifications_path
+  end
+
+  ##
+  # @see ApplicationController#media_outputs
+  def media_outputs
+    Settings.audio_outputs.map { |o| o.to_h }
   end
 
   private

@@ -31,32 +31,11 @@ class VideosController < ApplicationController
                          .webm .qt .movie .dv).join(',')
   end
 
-  def edit
-    @video = Video.find(params[:id])
-  end
-
+  ##
+  # @see ApplicationController#create_media
   def create
     @video = Video.new(video_params)
-
-    if @video.save
-      render json: { id: @video.id, resource: video_path(@video) },
-             status: :created
-    else
-      # TODO: confirm that this is the right status to return.  Under what
-      # conditions should this be reached?
-      render json: { message: 'Internal Server Error' },
-             status: :internal_server_error
-    end
-  end
-
-  def update
-    @video = Video.find(params[:id])
-
-    if @video.update(video_params)
-      redirect_to @video
-    else
-      render 'edit'
-    end
+    create_media(@video, 'video')
   end
 
   def destroy
@@ -64,6 +43,18 @@ class VideosController < ApplicationController
     @video.destroy
 
     redirect_to videos_path
+  end
+
+  ##
+  # @see ApplicationController#transcoding_notifications
+  def notifications_url
+    Settings.app_base_url + video_notifications_path
+  end
+
+  ##
+  # @see ApplicationController#media_outputs
+  def media_outputs
+    Settings.video_outputs.map { |o| o.to_h }
   end
 
   private

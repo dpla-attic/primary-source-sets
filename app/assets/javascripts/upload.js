@@ -47,11 +47,6 @@
         if (xhr.readyState == 4) {
             if (xhr.status == '201') {
                 key = $('Key', xhr.responseXML).text();
-
-                // TODO: This is probably the place to start the encoding job.
-                // We could get a job ID and pass that to createAssetRecord
-                // along with `key'.
-
                 createAssetRecord(key);
             } else {
                 alert('Got an unexpected response: ' + xhr.statusText);
@@ -67,12 +62,10 @@
 
         // For file basename, get rid of "video/" or "audio/" path part and
         // file extension.
-        file_base = key.replace(/^[a-z]+\/(.*)\.[a-z]+$/i, "$1");
+        file_base = key.replace(/^[a-z]+\/(.*)\.[a-z0-9]+$/i, "$1");
 
         postdata = {};
-        // TODO: add encoding job ID?
-        // pss_asset_type defined in the HTML
-        postdata[pss_asset_type] = {file_base: file_base}
+        postdata[pss_asset_type] = {file_base: file_base, key: key}
 
         $.ajax({
             method: 'POST',

@@ -63,6 +63,31 @@ The incoming S3 bucket must also have a "policy" that allows the following
 actions on `arn:aws:s3:::<the bucket name>/*`: `s3:GetObject`, `s3:PutObject`,
 and `s3:DeleteObject`.
 
+### Zencoder development setup
+
+The zencoder-fetcher gem can be used during development to complete each
+upload-and-transcoding operation.  It's necessary when your development
+environment is behind a NAT firewall (the usual case) and Zencoder can't access
+your notification endpoint.
+
+In the shell that you'll be using during development that has access to the
+application (e.g. http://localhost:3000/primary-source-sets/), do this:
+
+The `zencoder-fetcher` gem should be installed with the `:development` group in
+the `Gemfile`.  This will allow its `zencoder-fetcher` command to be run like
+one of your `rake` or `rails` commands.  You could also install it somewhere
+else that has access to your app by running `gem install zencoder-fetcher`.
+
+Then you'll be able to run the command as follows:
+
+```
+zencoder_fetcher -u http://USER:PASSWORD@localhost:3000/primary-source-sets/video_notifications <API KEY>
+```
+
+... Where USER is zencoder.notification_user and PASSWORD is
+zencoder.notification_pass in your `settings.yml`.
+
+Substitute `video_notifications` for `audio_notifications` as necessary.
 
 ### When to use this and other DPLA project VMs
 

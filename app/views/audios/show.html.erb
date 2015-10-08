@@ -21,3 +21,7 @@
   <li><%= link_to inline_markdown(source_name(source)), source_path(source) %>, <%= link_to inline_markdown(source.source_set.name), source_set_path(source.source_set) %></li>
 <% end %>
 </ul>
+
+<%= raw audio_player(@audio) %>
+
+<%= raw transcoding_status(@audio) %>
