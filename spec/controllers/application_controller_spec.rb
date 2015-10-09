@@ -13,16 +13,45 @@ describe ApplicationController, type: :controller do
     before do
       allow(Zencoder::Job).to receive(:create).and_return(response)
       allow(response).to receive(:body).and_return(response_body)
+      allow(Settings).to receive_message_chain(:zencoder, :s3_credentials_name)
+                     .and_return(false)
+      allow(Settings).to receive_message_chain(:zencoder, :api_key)
+                     .and_return('a')
     end
 
-    it 'calls Zencoder::Job with the correct options' do
-      allow(subject).to receive(:input_location).and_return('loc')
-      allow(subject).to receive(:transcoding_outputs).and_return(['o'])
-      allow(subject).to receive(:transcoding_notifications).and_return(['n'])
-      allow(response).to receive(:code).and_return('201')
-      opts = { input: 'loc', outputs: ['o'], notifications: ['n'] }
-      expect(Zencoder::Job).to receive(:create).with(opts).and_return(response)
-      subject.create_transcoding_job('a', 'b', {})
+    context 'with job options' do
+      before do
+        allow(subject).to receive(:input_location).and_return('loc')
+        allow(subject).to receive(:transcoding_outputs).and_return(['o'])
+        allow(subject).to receive(:transcoding_notifications).and_return(['n'])
+        allow(response).to receive(:code).and_return('201')
+      end
+
+      context 'without Zencoder named credentials' do
+        it 'calls Zencoder::Job with the correct options' do
+          opts = { input: 'loc', outputs: ['o'], notifications: ['n'] }
+          expect(Zencoder::Job).to receive(:create)
+                               .with(opts)
+                               .and_return(response)
+          subject.create_transcoding_job('a', 'b', {})
+        end
+      end
+
+      context 'with Zencoder named credentials' do
+        before do
+          allow(Settings).to receive_message_chain(:zencoder,
+                                                   :s3_credentials_name)
+                         .and_return('production')
+        end
+        it 'calls Zencoder::Job with the correct options' do
+          opts = { input: 'loc', outputs: ['o'], notifications: ['n'],
+                   credentials: 'production' }
+          expect(Zencoder::Job).to receive(:create)
+                               .with(opts)
+                               .and_return(response)
+          subject.create_transcoding_job('a', 'b', {})
+        end
+      end
     end
 
     it 'logs the job creation' do
