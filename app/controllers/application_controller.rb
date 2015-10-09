@@ -12,12 +12,11 @@ class ApplicationController < ActionController::Base
   # @raise [Zencoder::HTTPError] if no TCP/IP connection to Zencoder
   # @raise [RuntimeError]        if HTTP request is unsuccessful
   def create_transcoding_job(s3_key, file_base, outputs_settings)
-    credentials = Settings.zencoder.s3_credentials_name || nil
     job_opts = {
       input: input_location(s3_key),
       outputs: transcoding_outputs(file_base, outputs_settings),
       notifications: transcoding_notifications,
-      credentials: credentials
+      credentials: zc_credentials
     }.compact
     Zencoder.api_key = Settings.zencoder.api_key
     logger.info "Creating job with: #{job_opts}"
@@ -43,6 +42,10 @@ class ApplicationController < ActionController::Base
 
   def input_location(s3_key)
     "s3://#{Settings.aws.s3_upload_bucket}/#{s3_key}"
+  end
+
+  def zc_credentials
+    Settings.zencoder.s3_credentials_name || nil
   end
 
   ##
@@ -143,6 +146,7 @@ class ApplicationController < ActionController::Base
                    "#{basename}#{settings.suffix}.#{settings.extension}"
       file[:size] = settings.size
       file[:h264_profile] = settings.h264_profile
+      file[:credentials] = zc_credentials
       out << file.compact
     end
     out
