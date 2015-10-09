@@ -21,7 +21,7 @@ module PSSBrowserUploads
   #
   # This will be used as an argument to `s3_form` in views/shared/_s3form.erb.
   #
-  def form_definition(type)
+  def av_form_definition(type)
     @formdef = PSSBrowserUploads::FormDefinition.new({
       region:                Settings.aws.region,
       aws_access_key_id:     Settings.aws.access_key_id,
@@ -31,6 +31,20 @@ module PSSBrowserUploads
     })
     @formdef.add_field('key', "#{type}/${filename}")
     @formdef.add_condition('key', 'starts-with' => "#{type}/")
+    @formdef.add_field('success_action_status', '201')
+    @formdef
+  end
+
+  def nonav_form_definition(type)
+    @formdef = PSSBrowserUploads::FormDefinition.new({
+      region:                Settings.aws.region,
+      aws_access_key_id:     Settings.aws.access_key_id,
+      aws_secret_access_key: Settings.aws.secret_access_key,
+      bucket:                Settings.aws.s3_destination_bucket,
+      expires:               Time.now + 1800
+    })
+    @formdef.add_field('key', "${filename}")
+    @formdef.add_condition('key', 'starts-with' => "")
     @formdef.add_field('success_action_status', '201')
     @formdef
   end

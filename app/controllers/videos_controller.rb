@@ -25,7 +25,7 @@ class VideosController < ApplicationController
   #
   def new
     @video = Video.new
-    @formdef = PSSBrowserUploads.form_definition('video')
+    @formdef = PSSBrowserUploads.av_form_definition('video')
     @accepted_types = %w(.mov .m4v .mp4 .mpeg .mp1 .3gp .3g2 .avi .f4v .flv
                          .h261 .h263 .h264 .jpm .jpgv .asf .wm .wmv .mj2 .ogv
                          .webm .qt .movie .dv).join(',')

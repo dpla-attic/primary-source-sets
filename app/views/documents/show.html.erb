@@ -1,17 +1,17 @@
-<h1>Document: <%= @document.file_base %></h1>
+<h1>Document: <%= @document.file_name %></h1>
 
 <p>
-  <%= link_to "Edit", edit_document_path(@document) %>
-  |
   <%= link_to "Delete", 
                document_path(@document), method: :delete,
-               data: { confirm: "Are you sure you want to delete #{@document.file_base}?" } %>
+               data: { confirm: "Are you sure you want to delete #{@document.file_name}?" } %>
 </p>
 
 <table>
   <tr>
-    <td><strong>File base </strong></td>
-    <td><%= @document.file_base %></td>
+    <td><strong>File</strong></td>
+    <td>
+      <a href="<%= @base_src + @document.file_name %>"><%= @document.file_name %></a>
+    </td>
   </tr>
 </table>
 

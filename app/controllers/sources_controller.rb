@@ -11,6 +11,9 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
+    ma = @source.main_asset
+    @file_base_or_name =
+      ma.respond_to?(:file_base) ? ma.file_base : ma.file_name
   end
 
   def new
