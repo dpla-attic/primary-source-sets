@@ -13,6 +13,7 @@ describe ApplicationController, type: :controller do
     before do
       allow(Zencoder::Job).to receive(:create).and_return(response)
       allow(response).to receive(:body).and_return(response_body)
+      # TODO: shared contexts for the Zencoder credentials
       allow(Settings).to receive_message_chain(:zencoder, :s3_credentials_name)
                      .and_return(false)
       allow(Settings).to receive_message_chain(:zencoder, :api_key)
@@ -198,6 +199,8 @@ describe ApplicationController, type: :controller do
                           .and_return(nil)
       allow(config_option).to receive(:suffix)
                           .and_return(nil)
+      allow(Settings).to receive_message_chain(:zencoder, :s3_credentials_name)
+                     .and_return(false)
     end
 
     context 'with a file suffix' do
@@ -224,6 +227,18 @@ describe ApplicationController, type: :controller do
       it 'returns the correct array' do
         expect(subject.transcoding_outputs('name', outputs_settings))
           .to eq([{url: 's3://bucket/name.mp4', h264_profile: 'high'}])
+      end
+    end
+
+    context 'with Zencoder named credentials' do
+      before do
+        allow(Settings).to receive_message_chain(:zencoder,
+                                                 :s3_credentials_name)
+                       .and_return('production')
+      end
+      it 'returns the correct array' do
+        expect(subject.transcoding_outputs('name', outputs_settings))
+          .to eq([{url: 's3://bucket/name.mp4', credentials: 'production'}])
       end
     end
   end
