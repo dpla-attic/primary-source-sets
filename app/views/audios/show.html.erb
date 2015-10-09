@@ -1,8 +1,6 @@
 <h1>Audio: <%= @audio.file_base %></h1>
 
 <p>
-  <%= link_to "Edit", edit_audio_path(@audio) %>
-  |
   <%= link_to "Delete", 
                audio_path(@audio), method: :delete,
                data: { confirm: "Are you sure you want to delete #{@audio.file_base}?" } %>

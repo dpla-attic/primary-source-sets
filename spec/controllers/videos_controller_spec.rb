@@ -6,7 +6,7 @@ describe VideosController, type: :controller do
   let(:attributes) { attributes_for(:video_factory) }
   let(:invalid_attributes) { attributes_for(:invalid_video_factory) }
 
-  it_behaves_like 'admin-only route', :index, :show, :new, :edit, :create
+  it_behaves_like 'admin-only route', :index, :show, :new, :create
 
   context 'admin logged in' do
     login_admin
