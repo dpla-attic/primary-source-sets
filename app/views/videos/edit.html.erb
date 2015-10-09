@@ -1,9 +1,0 @@
-<h1>Edit video</h1>
-
-<p>
-  <%= link_to "View", video_path(@video) %>
-  |
-  <%= link_to "Delete", 
-               video_path(@video), method: :delete,
-               data: { confirm: "Are you sure you want to delete #{@video.file_base}?" } %>
-</p>

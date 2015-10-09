@@ -48,7 +48,6 @@
       <td><strong>Main media asset (<%= @source.main_asset.class.name %>)</strong></td>
       <td><%= @source.main_asset.file_base %></td>
       <td><%= link_to "View", polymorphic_path(@source.main_asset) %></td>
-      <td><%= link_to "Edit", edit_polymorphic_path(@source.main_asset) %></td>
       <td><%= link_to "Delete", polymorphic_path(@source.main_asset),
                       method: :delete,
                       data: { confirm: "Are you sure you want to delete #{@source.main_asset.file_base}?" } %></td>
