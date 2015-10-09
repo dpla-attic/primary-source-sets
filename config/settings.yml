@@ -28,6 +28,11 @@ zencoder:
   api_key: CHANGEME
   notification_pass: CHANGEME
   notification_user: CHANGEME
+  # `false` for s3_credentials_name means to use the Zencoder account's default
+  # credentials, as opposed to specifying a saved set of credentials by name.
+  # Named credentials are useful for having different S3 policies for different
+  # development, staging, and production buckets.
+  s3_credentials_name: false
 
 video_outputs:
   - {extension: "mp4"}
