@@ -10,33 +10,27 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
+    @base_src = Settings.app_scheme + Settings.aws.cloudfront_domain + '/'
   end
 
   def new
     @image = Image.new
-  end
-
-  def edit
-    @image = Image.find(params[:id])
+    @formdef = PSSBrowserUploads.nonav_form_definition('image')
+    @accepted_types = %w(.jpg .jpeg .png .gif).join(',')
   end
 
   def create
     @image = Image.new(image_params)
+    @image.meta = {
+      cloudfront_domain: Settings.aws.cloudfront_domain
+    }.to_json
 
     if @image.save
-      redirect_to @image
+      render json: { id: @image.id, resource: image_path(@image) },
+             status: :created
     else
-      render 'new'
-    end
-  end
-
-  def update
-    @image = Image.find(params[:id])
-
-    if @image.update(image_params)
-      redirect_to @image
-    else
-      render 'edit'
+      render json: { message: "Could not save Image record" },
+             status: :internal_server_error
     end
   end
 
@@ -50,8 +44,7 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:mime_type,
-                                  :file_base,
+    params.require(:image).permit(:file_name,
                                   :size,
                                   :height,
                                   :width,

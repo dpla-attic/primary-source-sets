@@ -1,3 +1,34 @@
-<h1>New image</h1>
+<% content_for :head_script do %>
 
-<%= render "form" %>
+  <script>
+      var pss_create_asset_path = '<%= images_path() %>';
+      var pss_asset_type = 'image';
+  </script>
+
+<% end %>
+
+<h1>New Image</h1>
+
+<fieldset>
+    <div>
+        <input type="radio" name="image[size]" value="large" checked>large</input>
+        <input type="radio" name="image[size]" value="small">small</input>
+        <input type="radio" name="image[size]" value="thumbnail">thumbnail</input>
+    </div>
+    <div>
+        <label for="image_width">width</label>
+        <input id="image_width" type="text" name="image[width]"></input>
+    </div>
+    <div>
+        <label for="image_height">height</label>
+        <input id="image_height" type="text" name="image[height]"></input>
+    </div>
+    <div>
+        <label for="image_alt_text">alt text</label>
+        <input id="image_alt_text" type="text" name="image[alt_text]"></input>
+    </div>
+</fieldset>
+
+<%= render "shared/s3form" %>
+
+<%= javascript_include_tag 'imgupload' %>

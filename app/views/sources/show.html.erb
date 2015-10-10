@@ -46,35 +46,33 @@
   <% if @source.main_asset.present? %>
     <tr>
       <td><strong>Main media asset (<%= @source.main_asset.class.name %>)</strong></td>
-      <td><%= @source.main_asset.file_base %></td>
+      <td><%= @file_base_or_name %></td>
       <td><%= link_to "View", polymorphic_path(@source.main_asset) %></td>
       <td><%= link_to "Delete", polymorphic_path(@source.main_asset),
                       method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source.main_asset.file_base}?" } %></td>
+                      data: { confirm: "Are you sure you want to delete #{@file_base_or_name}?" } %></td>
     </tr>
   <% end %>
 
   <% if @source.thumbnails.present? %>
     <tr>
       <td><strong>Thumbnail </strong></td>
-      <td><%= @source.thumbnails.first.file_base %></td>
+      <td><%= @source.thumbnails.first.file_name %></td>
       <td><%= link_to "View", image_path(@source.thumbnails.first) %></td>
-      <td><%= link_to "Edit", edit_image_path(@source.thumbnails.first) %></td>
       <td><%= link_to "Delete", image_path(@source.thumbnails.first),
                       method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source.thumbnails.first.file_base}?" } %></td>
+                      data: { confirm: "Are you sure you want to delete #{@source.thumbnails.first.file_name}?" } %></td>
     </tr>
   <% end %>
 
   <% if @source.small_images.present? %>
     <tr>
       <td><strong>Small image </strong></td>
-      <td><%= @source.small_images.first.file_base %></td>
+      <td><%= @source.small_images.first.file_name %></td>
       <td><%= link_to "View", image_path(@source.small_images.first) %></td>
-      <td><%= link_to "Edit", edit_image_path(@source.small_images.first) %></td>
       <td><%= link_to "Delete", image_path(@source.small_images.first),
                       method: :delete,
-                      data: { confirm: "Are you sure you want to delete #{@source.small_images.first.file_base}?" } %></td>
+                      data: { confirm: "Are you sure you want to delete #{@source.small_images.first.file_name}?" } %></td>
     </tr>
   <% end %>
 </table>

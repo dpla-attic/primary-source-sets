@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :image_factory, class: Image do
-    file_base 'picture-of-little-my'
-    mime_type 'image/jpeg'
+    file_name 'picture-of-little-my'
     size 'thumbnail'
     height '150'
     width '150'

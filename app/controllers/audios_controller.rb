@@ -15,7 +15,7 @@ class AudiosController < ApplicationController
   # @see VideosController#new
   def new
     @audio = Audio.new
-    @formdef = PSSBrowserUploads.form_definition('audio')
+    @formdef = PSSBrowserUploads.av_form_definition('audio')
     @accepted_types = %w(.mp3 .mp2 .mp4a .wav .flac .aif .aiff .wma .mpga .oga
                          .ogg .au .adp .aac .weba).join(',')
   end

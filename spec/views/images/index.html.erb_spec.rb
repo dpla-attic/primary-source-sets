@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'images/index.html.erb', type: :view do
 
   before do
-    assign(:images, [create(:image_factory, file_base: 'file1'),
-                     create(:image_factory, file_base: 'file2')])
+    assign(:images, [create(:image_factory, file_name: 'file1'),
+                     create(:image_factory, file_name: 'file2')])
   end
 
   it 'renders each image' do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008142719) do
+ActiveRecord::Schema.define(version: 20151009203626) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 20151008142719) do
   add_index "authors_source_sets", ["source_set_id"], name: "index_authors_source_sets_on_source_set_id"
 
   create_table "documents", force: true do |t|
-    t.string   "mime_type"
-    t.string   "file_base"
+    t.string   "file_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "meta"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -106,14 +106,14 @@ ActiveRecord::Schema.define(version: 20151008142719) do
   add_index "guides", ["source_set_id"], name: "index_guides_on_source_set_id"
 
   create_table "images", force: true do |t|
-    t.string   "mime_type"
-    t.string   "file_base"
+    t.string   "file_name"
     t.string   "size"
     t.integer  "height"
     t.integer  "width"
     t.string   "alt_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "meta"
   end
 
   create_table "source_sets", force: true do |t|

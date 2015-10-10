@@ -1,13 +1,11 @@
 
 /*
- * Handle media file uploads directly to S3, and create new asset records.
- *
- * Manage the form submission, intercepting the submit event.
- * Provide upload status.  For successful uploads, create the new asset record
- * and send the user to the asset's page.
- *
+ * Handle PDF uploads directly to S3, and create new asset records.
  */
 
+/*
+ * FIXME:  get rid of redundancy between this file and upload.js
+ */
 (function() {
 
     $(document).ready(function() {
@@ -60,12 +58,14 @@
      */
     function createAssetRecord(key) {
 
-        // For file basename, get rid of "video/" or "audio/" path part and
-        // file extension.
-        file_base = key.replace(/^[a-z]+\/(.*)\.[a-z0-9]+$/i, "$1");
-
         postdata = {};
-        postdata[pss_asset_type] = {file_base: file_base, key: key};
+        postdata[pss_asset_type] = {
+            file_name: key,
+            size: $('input[name="image[size]"]:checked').val() || '',
+            width: $('input[name="image[width]"]').val(),
+            height: $('input[name="image[height]"]').val(),
+            alt_text: $('input[name="image[alt_text]"]').val()
+        };
 
         $.ajax({
             method: 'POST',
