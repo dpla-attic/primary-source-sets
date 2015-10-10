@@ -11,6 +11,9 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
+    ma = @source.main_asset
+    @file_base_or_name =
+      ma.respond_to?(:file_base) ? ma.file_base : ma.file_name
   end
 
   def new
@@ -51,8 +54,17 @@ class SourcesController < ApplicationController
   private
 
   def source_params
-    params.require(:source).permit(:name, :aggregation, :media_type,
-                                   :textual_content, :citation, :credits)
+    params.require(:source).permit(:name,
+                                   :aggregation,
+                                   :textual_content,
+                                   :citation,
+                                   :credits,
+                                   :featured,
+                                   asset_ids: [],
+                                   image_ids: [],
+                                   audio_ids: [],
+                                   video_ids: [],
+                                   document_ids: [])
   end
 
   def load_source_set

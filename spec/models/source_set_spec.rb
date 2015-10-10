@@ -2,19 +2,24 @@ require 'rails_helper'
 
 describe SourceSet, type: :model do
 
+  let(:source_set) { create(:source_set_factory) }
+
   it 'has many sources' do
-    expect(SourceSet.reflect_on_association(:sources).macro.should)
-      .to eq :has_many
+    expect(SourceSet.reflect_on_association(:sources).macro).to eq :has_many
   end
 
   it 'has many guides' do
-    expect(SourceSet.reflect_on_association(:guides).macro.should)
-      .to eq :has_many
+    expect(SourceSet.reflect_on_association(:guides).macro).to eq :has_many
   end
 
   it 'has and belongs to many authors' do
-    expect(SourceSet.reflect_on_association(:authors).macro.should)
+    expect(SourceSet.reflect_on_association(:authors).macro)
       .to eq :has_and_belongs_to_many
+  end
+
+  it 'has one featured source' do
+    expect(SourceSet.reflect_on_association(:featured_source).macro)
+      .to eq :has_one
   end
 
   it 'is invalid without name' do
@@ -23,5 +28,27 @@ describe SourceSet, type: :model do
 
   it 'has a slug' do
     expect(SourceSet.create(name: 'Little My').slug).to eq 'little-my'
+  end
+
+  context 'with featured source' do
+
+    let(:source) do
+      create(:source_factory, featured: true)
+    end
+
+    let(:small_image) { create(:image_factory, size: 'small') }
+
+    before(:each) do
+      source_set.sources << source
+      source.images << small_image
+    end
+
+    it 'recognizes featured source' do
+      expect(source_set.featured_source).to eq source
+    end
+
+    it 'recognizes a featured image' do
+      expect(source_set.featured_image).to eq small_image
+    end
   end
 end

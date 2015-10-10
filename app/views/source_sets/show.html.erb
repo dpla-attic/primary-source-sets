@@ -13,7 +13,7 @@
     <td><%= inline_markdown(@source_set.name) %></td>
   </tr>
   <tr>
-    <td><strong>Description </strong></td>
+    <td><strong>SEO description </strong></td>
     <td><%= @source_set.description %></td>
   </tr>
   <tr>
@@ -34,6 +34,14 @@
       <td><%= link_to author.name, author_path(author) %></td>
     </tr>
   <% end %>
+  <tr>
+    <td><strong>Featured image </strong></td>
+    <td>
+      <% if @source_set.featured_image.present? %>
+        <%= link_to @source_set.featured_image.file_base, image_path(@source_set.featured_image) %>
+      <% end %>
+    </td>
+  </tr>
 </table>
 
 <h2>Sources</h2>

@@ -1,0 +1,23 @@
+<h1>Document: <%= @document.file_name %></h1>
+
+<p>
+  <%= link_to "Delete", 
+               document_path(@document), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@document.file_name}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>File</strong></td>
+    <td>
+      <a href="<%= @base_src + @document.file_name %>"><%= @document.file_name %></a>
+    </td>
+  </tr>
+</table>
+
+<h2>Sources</h2>
+<ul>
+<% @document.sources.each do |source| %>
+  <li><%= link_to inline_markdown(source_name(source)), source_path(source) %>, <%= link_to inline_markdown(source.source_set.name), source_set_path(source.source_set) %></li>
+<% end %>
+</ul>

@@ -23,6 +23,14 @@ module ApplicationHelper
     source.name.present? ? source.name : source.aggregation
   end
 
+  ##
+  # Returns frontend path with correctly joining '/'
+  # @param path String (with or without leading slash)
+  # @return String
+  def frontend_path(path = '')
+    Settings.frontend.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
+  end
+
   private
 
   ##

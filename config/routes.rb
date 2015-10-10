@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     resources :guides, shallow: :true
   end
   resources :authors
+  resources :images
+  resources :documents
+  resources :audios
+  resources :videos
+  resources :video_notifications, only: [:create]
+  resources :audio_notifications, only: [:create]
 
   root 'source_sets#index'
 end

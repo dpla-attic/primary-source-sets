@@ -10,6 +10,49 @@ frontend:
   # With trailing slash
   url: http://example.com
 
-host: 'localhost'
+app_scheme: 'http://'
+# app_host may include port
+app_host: 'localhost:3000'
 
 relative_url_root: /primary-source-sets
+
+aws:
+  region: 'CHANGEME'
+  access_key_id: 'CHANGEME'
+  secret_access_key: 'CHANGEME'
+  s3_upload_bucket: 'CHANGEME'
+  s3_destination_bucket: 'CHANGEME'
+  cloudfront_domain: 'CHANGEME'
+
+zencoder:
+  api_key: CHANGEME
+  notification_pass: CHANGEME
+  notification_user: CHANGEME
+  # `false` for s3_credentials_name means to use the Zencoder account's default
+  # credentials, as opposed to specifying a saved set of credentials by name.
+  # Named credentials are useful for having different S3 policies for different
+  # development, staging, and production buckets.
+  s3_credentials_name: false
+
+video_outputs:
+  - {extension: "mp4"}
+  - {extension: "webm"}
+  - {extension: "ogg"}
+  # If we can figure out a good way to have multiple <source> elements for the
+  # same mime type, then it would be nice to serve a smaller mobile version and
+  # a high-quality mp4 version, too.
+  # - {extension: "mp4", h264_profile: "high"}
+  # - {extension: "mp4", suffix: "-mobile", size: "640x480"}
+audio_outputs:
+  - {extension: "mp3"}
+  - {extension: "m4a"}
+  - {extension: "ogg"}
+
+# When RAILS_ENV is 'development' or 'test', this determines whether to request
+# Zencoder to send notifications to an HTTP endpoint
+# (VideoNotificationsController or AudioNotificationsController) or to save it
+# so that we can use the zencoder_fetcher utility to pull the notifications from
+# their API and post them locally.  This is relevant if you're behind a
+# NAT firewall, the assumed situation in development.  The default is false,
+# meaning not to make "real" HTTP requests.
+dev_real_zc_notification: false

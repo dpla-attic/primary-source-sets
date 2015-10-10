@@ -1,0 +1,15 @@
+<h1>Videos</h1>
+
+<p><%= link_to "Create new video", new_video_path %></p>
+
+<table>
+<% @videos.each do |video| %>
+  <tr>
+    <td><%= video.file_base %></td>
+    <td><%= link_to "View", video_path(video) %></td>
+    <td><%= link_to "Delete", video_path(video),
+                    method: :delete,
+                    data: { confirm: "Are you sure you want to delete #{video.file_base}?" } %></td>
+  </tr>
+<% end %>
+</table>

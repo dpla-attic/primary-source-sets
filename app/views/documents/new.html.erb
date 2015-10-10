@@ -1,0 +1,14 @@
+<% content_for :head_script do %>
+
+  <script>
+      var pss_create_asset_path = '<%= documents_path() %>';
+      var pss_asset_type = 'document';
+  </script>
+
+<% end %>
+
+<h1>New PDF Document</h1>
+
+<%= render "shared/s3form" %>
+
+<%= javascript_include_tag 'docupload' %>

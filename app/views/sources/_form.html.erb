@@ -21,18 +21,9 @@
   </p>
 
   <p>
-    <strong><%= f.label :name %></strong><br/>
+    <strong><%= f.label :caption %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <strong><%= f.label :media_type %></strong><br/>
-    <em>Media type refers to the file type of the digital object.  It is not a description of the original object.</em><br/>
-    <%= radio_button("source", "media_type", "image") %>image<br/>
-    <%= radio_button("source", "media_type", "document") %>document<br/>
-    <%= radio_button("source", "media_type", "audio") %>audio<br/>
-    <%= radio_button("source", "media_type", "video") %>video<br/>
   </p>
 
   <p>
@@ -48,10 +39,55 @@
   </p>
 
   <p>
-    <strong><%= f.label :textual_content %></strong><br/>
+    <strong><%= f.label 'Description / transcription' %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for formatting.</em><br/>
     <%= f.text_area :textual_content %>
   </p>
+
+  <p>
+    <strong><%= f.label :featured %></strong><%= f.check_box :featured %><br />
+    <em>If checked, this source's small image will be the featured image for the set.</em><br/>
+  </p>
+
+  <h2>Main media asset</h2>
+
+  <p>
+    <strong><%= f.label :large_image %></strong><br />
+    <%= f.collection_check_boxes(:image_ids, Image.where(size: 'large'), :id, :file_name) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :audio %></strong><br />
+    <%= f.collection_check_boxes(:audio_ids, Audio.all, :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :video %></strong><br />
+    <%= f.collection_check_boxes(:video_ids, Video.all, :id, :file_base) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :document %></strong><br />
+    <%= f.collection_check_boxes(:document_ids, Document.all, :id, :file_name) do |b| %>
+      <%= b.label { b.check_box(class: "asset_check_box") + b.text } %><br />
+    <% end %>
+  </p>
+
+  <h2><%= f.label :thumbnail %></h2>
+  <%= f.collection_check_boxes(:image_ids, Image.where(size: 'thumbnail'), :id, :file_name) do |b| %>
+    <%= b.label { b.check_box(class: "thumbnail_check_box") + b.text } %><br />
+  <% end %>
+
+  <h2><%= f.label :small_image %></h2>
+  <%= f.collection_check_boxes(:image_ids, Image.where(size: 'small'), :id, :file_name) do |b| %>
+    <%= b.label { b.check_box(class: "small_image_check_box") + b.text } %><br />
+  <% end %>
 
   <p>
     <%= f.submit %>
