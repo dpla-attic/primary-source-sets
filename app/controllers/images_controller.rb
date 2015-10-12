@@ -16,6 +16,8 @@ class ImagesController < ApplicationController
   def new
     @image = Image.new
     @formdef = PSSBrowserUploads.nonav_form_definition('image')
+    @formdef.add_field('Content-Type', '')
+    @formdef.add_condition('Content-Type', 'starts-with' => '')
     @accepted_types = %w(.jpg .jpeg .png .gif).join(',')
   end
 
