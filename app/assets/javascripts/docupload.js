@@ -14,6 +14,16 @@
 
             e.preventDefault();
 
+            files = $('input[name=file]').prop('files');
+            if (! files.length) {
+                alert('Please choose a file.');
+                return false;
+            }
+
+            // Fill in Content-Type so S3 doesn't default to
+            // "application/octet-stream".
+            $('input[name=Content-Type]').val(files[0].type)
+
             var data = new FormData(this);
             var xhr = new XMLHttpRequest();
 

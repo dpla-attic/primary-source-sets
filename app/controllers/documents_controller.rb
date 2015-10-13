@@ -16,6 +16,8 @@ class DocumentsController < ApplicationController
   def new
     @document = Document.new
     @formdef = PSSBrowserUploads.nonav_form_definition('pdf')
+    @formdef.add_field('Content-Type', '')
+    @formdef.add_condition('Content-Type', 'starts-with' => '')
     @accepted_types = '.pdf'
   end
 
