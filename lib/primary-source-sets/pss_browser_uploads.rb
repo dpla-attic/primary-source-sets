@@ -1,5 +1,8 @@
 module PSSBrowserUploads
 
+  # FIXME:  refactor into a base class and child classes for different kinds
+  # of form definitions, to deduplicate code.
+  #
   class FormDefinition < S3BrowserUploads::FormDefinition
 
     ##
@@ -31,6 +34,8 @@ module PSSBrowserUploads
     })
     @formdef.add_field('key', "#{type}/${filename}")
     @formdef.add_condition('key', 'starts-with' => "#{type}/")
+    @formdef.add_field('Content-Type', '')
+    @formdef.add_condition('Content-Type', 'starts-with' => '')
     @formdef.add_field('success_action_status', '201')
     @formdef
   end
@@ -45,6 +50,8 @@ module PSSBrowserUploads
     })
     @formdef.add_field('key', "${filename}")
     @formdef.add_condition('key', 'starts-with' => "")
+    @formdef.add_field('Content-Type', '')
+    @formdef.add_condition('Content-Type', 'starts-with' => '')
     @formdef.add_field('success_action_status', '201')
     @formdef
   end
