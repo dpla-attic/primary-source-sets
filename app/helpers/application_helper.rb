@@ -31,6 +31,29 @@ module ApplicationHelper
     Settings.frontend.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
   end
 
+  ##
+  # Returns frontend path with correctly joining '/'
+  # @param path String (with or without leading slash)
+  # @return String
+  def exhibitions_path(path = '')
+    Settings.exhibitions.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
+  end
+
+  ##
+  # Returns frontend path with correctly joining '/'
+  # @param path String (with or without leading slash)
+  # @return String
+  def wordpress_path(path = '')
+    Settings.wordpress.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
+  end
+
+  ##
+  # Get stylesheets from dpla_frontend_assets gem
+  def branding_stylesheets
+    stylesheet_link_tag('dpla-colors') + stylesheet_link_tag('dpla-fonts') if
+      defined? DplaFrontendAssets
+  end
+
   private
 
   ##

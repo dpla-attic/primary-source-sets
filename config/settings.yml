@@ -7,8 +7,13 @@ devise:
   mailer_sender: email@example.org
 
 frontend:
-  # With trailing slash
-  url: http://example.com
+  url: http://example.com/
+
+wordpress:
+ url: http://example.com/
+
+exhibtions:
+  url: http://exmaple.com/
 
 app_scheme: 'http://'
 # app_host may include port
@@ -56,3 +61,11 @@ audio_outputs:
 # NAT firewall, the assumed situation in development.  The default is false,
 # meaning not to make "real" HTTP requests.
 dev_real_zc_notification: false
+
+widgets:
+  # Urls for social icons
+  social_icons:
+    facebook: https://www.facebook.com/example
+    twitter: https://twitter.com/example
+    tumblr: http://example.tumblr.com/
+    rss: http://example.org/info/feed

@@ -22,6 +22,7 @@ gem 'rubocop', '~> 0.32.1', require: false
 # a time being disruptive. --MB
 gem 's3_browser_uploads', '0.1.2'
 gem 'zencoder', '~>2.5'
+gem 'navigasmic', '~>1.0'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
@@ -39,4 +40,8 @@ end
 
 group :development do
   gem 'zencoder-fetcher'
+end
+
+group :dpla_branding do
+  gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
 end

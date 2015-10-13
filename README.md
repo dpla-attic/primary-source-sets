@@ -19,7 +19,17 @@ For installation:
     vagrant reload  # Because of o/s packages having been upgraded
     vagrant ssh
     cd /vagrant
+
+To install all gems:
+
     bundle install
+
+Or, to install only the necessary gems:
+
+    bundle install --deployment --without dpla_branding production
+
+Finish installation:
+
     bundle exec rake db:migrate
     bundle exec rails s
 

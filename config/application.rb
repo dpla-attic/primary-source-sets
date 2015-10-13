@@ -5,6 +5,7 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+Bundler.require(:dpla_branding) if Bundler.settings.without.exclude? :dpla_branding
 
 module PrimarySourceSets
   class Application < Rails::Application
