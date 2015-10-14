@@ -12,4 +12,5 @@ Rails.application.config.assets.precompile += %w( form.js )
 # Precompile assets from gems
 Rails.application.config.assets.precompile += %w( dpla-colors.css dpla-fonts.css )
 Rails.application.config.assets.precompile += %w( *.png *.jpg *.jpeg *.gif *.ico )
+Rails.application.config.assets.precompile += %w( *.png *.jpg *.jpeg *.gif *.ico )
 Rails.application.config.assets.precompile += %w( *.eot *.svg *.ttf *.woff )
