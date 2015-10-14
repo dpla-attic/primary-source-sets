@@ -18,6 +18,7 @@
         - postgresql-common
         - libpq-dev
         - build-essential
+        - libfontconfig1-dev
 
 - hosts: all
   # do as "vagrant" user

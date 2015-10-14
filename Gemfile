@@ -34,8 +34,9 @@ group :test, :development do
   gem 'awesome_print', '~> 1.2.0'
   gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
   gem 'database_cleaner', '~> 1.3.0', require: false
-
   gem 'json-ld', '~>1.1.9'
+  gem 'jasmine', '~> 2.0'
+  gem 'jasmine-jquery-rails', '~> 2.0'
 end
 
 group :development do
