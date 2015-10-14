@@ -38,7 +38,7 @@
     <td><strong>Featured image </strong></td>
     <td>
       <% if @source_set.featured_image.present? %>
-        <%= link_to @source_set.featured_image.file_base, image_path(@source_set.featured_image) %>
+        <%= link_to @source_set.featured_image.file_name, image_path(@source_set.featured_image) %>
       <% end %>
     </td>
   </tr>
