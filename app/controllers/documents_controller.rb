@@ -10,7 +10,6 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
-    @base_src = Settings.app_scheme + Settings.aws.cloudfront_domain + '/'
   end
 
   def new
