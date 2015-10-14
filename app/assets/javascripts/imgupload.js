@@ -10,7 +10,7 @@
 
     $(document).ready(function() {
 
-        $('form').on('submit', function(e) {
+        $('form.upload').on('submit', function(e) {
 
             e.preventDefault();
 
@@ -39,7 +39,7 @@
                 handleResponseIfDone(xhr);
             };
 
-            xhr.open('POST', $('form').attr('action'), true);
+            xhr.open('POST', $('form.upload').attr('action'), true);
             xhr.send(data);
 
             return false;
