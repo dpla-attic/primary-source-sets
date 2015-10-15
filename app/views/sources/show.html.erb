@@ -1,4 +1,4 @@
-<h1>Source: <%= inline_markdown(source_name(@source)) %></h1>
+<h1><%= inline_markdown(source_name(@source)) %></h1>
 
 <p>
   <%= link_to "Edit", edit_source_path(@source) %>
@@ -7,6 +7,30 @@
                source_path(@source), method: :delete,
                data: { confirm: "Are you sure you want to delete this source?" } %>
 </p>
+
+<div class='source'>
+
+  <%= render_media_asset %>
+
+  <aside>
+    <div class='module blue line'>
+      <div class='moduleSection wrap'>
+        <h2>Citation information</h2>
+        <%= markdown(@source.citation) %>
+        <h2>Credits</h2>
+        <%= markdown(@source.credits) %>
+        <h2>Need more information?</h2>
+        <%= link_to 'View the description of this item in DPLA',
+                    frontend_path(@source.aggregation) %>
+      </div>
+    </div>
+  </aside>
+
+  <div class='textual-content'>
+    <%= markdown(@source.textual_content) %>
+  </div>
+
+<h2>Admin info</h2>
 
 <table>
   <tr>
@@ -18,28 +42,13 @@
     <td><%= link_to frontend_path('item/' + @source.aggregation), frontend_path(@source.aggregation) %></td>
   </tr>
   <tr>
-    <td><strong>Caption </strong></td>
-    <td><%= inline_markdown(@source.name) %></td>
-  </tr>
-  <tr>
-    <td><strong>Citation </strong></td>
-    <td><%= markdown(@source.citation) %></td>
-  </tr>
-  <tr>
-    <td><strong>Credits </strong></td>
-    <td><%= markdown(@source.credits) %></td>
-  </tr>
-  <tr>
-    <td><strong>Description / transcription </strong></td>
-    <td><%= markdown(@source.textual_content) %></td>
-  </tr>
-  <tr>
     <td><strong>Featured? </strong></td>
     <td><%= @source.featured %></td>
   </tr>
 </table>
 
-<h2>Media assets</h2>
+
+<h3>Media assets</h2>
 
 <table>
 

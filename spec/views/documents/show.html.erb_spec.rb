@@ -8,8 +8,7 @@ describe 'documents/show.html.erb', type: :view do
     assign(:document, document)
   end
 
-  # FIXME:  view relies on @base_src variable set in controller
-  xit 'renders the document' do
+  it 'renders the document' do
     render
     expect(rendered).to include(document.file_name)
   end

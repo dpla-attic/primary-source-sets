@@ -47,6 +47,10 @@ module ApplicationHelper
     Settings.wordpress.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
   end
 
+  def base_src
+    Settings.app_scheme + Settings.aws.cloudfront_domain + '/'
+  end
+
   ##
   # Get stylesheets from dpla_frontend_assets gem
   def branding_stylesheets

@@ -3,6 +3,8 @@
 #
 # @see Source
 class SourcesController < ApplicationController
+  include VideoPlayerHelper
+  include AudioPlayerHelper
   before_filter :load_source_set, only: [:index, :new, :create]
 
   def index
