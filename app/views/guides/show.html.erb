@@ -1,3 +1,7 @@
+<% content_for :foot_script do %>
+<%= render partial: 'shared/analytics' %>
+<% end %>
+
 <h1>Teaching guide: <%= inline_markdown(@guide.name) %></h1>
 
 <p>
