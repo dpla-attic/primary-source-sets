@@ -1,3 +1,7 @@
+<% content_for :foot_script do %>
+<%= render partial: 'shared/analytics' %>
+<% end %>
+
 <h1>Sets</h1>
 
 <p><%= link_to "Create new set", new_source_set_path %></p>

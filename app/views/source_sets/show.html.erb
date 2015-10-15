@@ -1,3 +1,7 @@
+<% content_for :foot_script do %>
+<%= render partial: 'shared/analytics' %>
+<% end %>
+
 <h1>Set: <%= inline_markdown(@source_set.name) %></h1>
 
 <p>
