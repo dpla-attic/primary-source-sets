@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>PrimarySourceSets</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <%= yield :head_script %>
-</head>
-<body>
-
-  <% if admin_signed_in? %>
-    <div id="admin-menu">
-      <%= link_to "Sets", source_sets_path %>
-      |
-      <%= link_to "Authors", authors_path %>
-      |
-      <%= link_to "Images", images_path %>
-      |
-      <%= link_to "Audios", audios_path %>
-      |
-      <%= link_to "Videos", videos_path %>
-      |
-      <%= link_to "Documents", documents_path %>
-      |
-      <%= link_to "Log out", destroy_admin_session_path, method: :delete %>
-      </ul>
+  <head>
+    <title>PrimarySourceSets</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= branding_stylesheets %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= yield :head_script %>
+  </head>
+  <body>
+    <%= render partial: 'shared/jump_links' %>
+    <div class='container'>
+      <%= render partial: 'shared/header' %>
+      <div class='layout fullWidth'>
+        <%= render partial: 'shared/search_panel' %>
+        <%= render partial: 'shared/admin_menu' if admin_signed_in? %>
+        <%= yield %>
+      </div>
+      <%= render partial: 'shared/footer' %>
     </div>
-  <% end %>
-
-<%= yield %>
-
-</body>
+    <%= render partial: 'shared/jump_links' %>
+  </body>
 </html>

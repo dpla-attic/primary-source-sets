@@ -1,0 +1,13 @@
+/* 
+ * This overrides urls with Rails 3-style paths.
+ * Overrides are necessary because in Rails 4, url paths are articulated without 
+ * the prepended directory name '/assets/'.
+ */
+
+body {
+  background: url('background.jpg') repeat-x left top #fff;
+}
+
+input[type='submit'] {
+  background: url('mag-glass.png') no-repeat scroll center right transparent;
+}

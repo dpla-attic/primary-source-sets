@@ -36,4 +36,30 @@ describe ApplicationHelper, type: :helper do
       expect(helper.frontend_path('/path')).to eq 'http://example.com/path'
     end
   end
+
+  describe '#exhibitions_path' do
+    it 'constructs a URI with correct /s' do
+      allow(Settings).to receive_message_chain(:exhibitions, :url)
+        .and_return 'http://example.com'
+      expect(helper.exhibitions_path('path')).to eq 'http://example.com/path'
+    end
+  end
+
+  describe '#wordpress_path' do
+    it 'constructs a URI with correct /s' do
+      allow(Settings).to receive_message_chain(:wordpress, :url)
+        .and_return 'http://example.com/'
+      expect(helper.wordpress_path('path/')).to eq 'http://example.com/path/'
+    end
+  end
+
+  describe '#branding_stylesheets' do
+    it 'returns dpla-colors stylesheet' do
+      expect(helper.branding_stylesheets).to match(/dpla-colors.css/)
+    end
+
+    it 'returns dpla-fonts stylesheet' do
+      expect(helper.branding_stylesheets).to match(/dpla-fonts.css/)
+    end
+  end
 end

@@ -38,7 +38,7 @@
     <td><strong>Featured image </strong></td>
     <td>
       <% if @source_set.featured_image.present? %>
-        <%= link_to @source_set.featured_image.file_base, image_path(@source_set.featured_image) %>
+        <%= link_to @source_set.featured_image.file_name, image_path(@source_set.featured_image) %>
       <% end %>
     </td>
   </tr>
@@ -49,7 +49,7 @@
 <p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
 
 <table>
-<% @source_set.sources.each do |source| %>
+<% @source_set.sources.order('created_at ASC').each do |source| %>
   <tr>
     <td><%= inline_markdown(source_name(source)) %></td>
     <td><%= link_to "View", source_path(source) %></td>

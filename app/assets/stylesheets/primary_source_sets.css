@@ -1,0 +1,20 @@
+video {
+    background-color: #333;
+}
+
+/* Admin interfaces */
+
+input.form-submit {
+  position: relative;
+  background: none;
+  border: 2px outset;
+  height: auto;
+  width: auto;
+  text-indent: 0;
+  text-transform: none;
+  margin: 0;
+  display: inline-block;
+  color: #222;
+  font-size: 100%;
+  padding: 2px;
+}

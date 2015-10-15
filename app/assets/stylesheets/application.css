@@ -10,16 +10,14 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ * Exact copies of the stylesheets in /vendor /frontend directories both appear
+ * in the DPLA frontend app.  
+ * Sylesheets in /frontend may override those in /vendor.
+ *
+ *= require_directory ./vendor
+ *= require_directory ./frontend
+ *= require font_overrides.css
+ *= require frontend_overrides.css
+ *= require primary_source_sets.css
  *= require_self
  */
-
-/* This is just "canary" css until the app has been styled to allow us to
-ensure that the app's assets are loading correctly. */
-body { font-family: Arial, Helvetica, sans-serif; }
-h1 { color: red; }
-textarea { background-color: cadetblue; }
-
-video {
-    background-color: #333;
-}

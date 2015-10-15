@@ -22,6 +22,7 @@ gem 'rubocop', '~> 0.32.1', require: false
 # a time being disruptive. --MB
 gem 's3_browser_uploads', '0.1.2'
 gem 'zencoder', '~>2.5'
+gem 'navigasmic', '~>1.0'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
@@ -33,10 +34,15 @@ group :test, :development do
   gem 'awesome_print', '~> 1.2.0'
   gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
   gem 'database_cleaner', '~> 1.3.0', require: false
-
   gem 'json-ld', '~>1.1.9'
+  gem 'jasmine', '~> 2.0'
+  gem 'jasmine-jquery-rails', '~> 2.0'
 end
 
 group :development do
   gem 'zencoder-fetcher'
+end
+
+group :dpla_branding do
+  gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
 end

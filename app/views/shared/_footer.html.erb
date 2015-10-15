@@ -1,0 +1,12 @@
+<footer role='contentInfo'>
+  <nav>
+    <%= render partial: 'shared/footer_nav' %>
+  </nav>
+  <div class='footerBottom'>
+    <%= render partial: 'shared/social_icons' %>
+    <%= link_to image_tag('dpla-footer-logo.png', 
+                          alt: 'DPLA: Digital Public Library of America'),
+                frontend_path,
+                class: 'logo' %>
+  </div>
+</footer>

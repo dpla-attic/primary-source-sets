@@ -1,0 +1,89 @@
+<li class='aboutMenu'>
+  <%= link_to wordpress_path do %>
+    About
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+      <li><%= link_to 'Staff', wordpress_path('/about/staff') %></li>
+      <li><%= link_to "Board", wordpress_path('/about/board/') %></li>
+      <li><%= link_to "Funding", wordpress_path('/about/funding/') %></li>
+      <li><%= link_to "History", wordpress_path('/about/history/') %></li>
+      <li><%= link_to "Policies", wordpress_path('/about/policies/') %></li>
+      <li><%= link_to "Projects", wordpress_path('/about/projects/') %></li>
+      <li><%= link_to "Awards", wordpress_path('/about/awards/') %></li>
+      <li><%=  %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'hubs/' do %>
+    Hubs
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "Become a Hub", wordpress_path('/hubs/become-a-hub/') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'developers/' do %>
+    For Developers
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "API Codex", wordpress_path('/developers/codex/') %></li>
+    <li><%= link_to "Ideas & Projects", wordpress_path('/developers/ideas-and-projects/') %></li>
+    <li><%= link_to "Bulk Download", wordpress_path('/developers/download/') %></li>
+    <li><%= link_to "Sample Code & Libraries", wordpress_path('/developers/sample-code-and-libraries') %></li>
+    <li><%= link_to "Metadata Application Profile", wordpress_path('/developers/map') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'get-involved/' do %>
+    Get Involved
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "Community Reps", wordpress_path('/get-involved/reps/') %></li>
+    <li><%= link_to "Curation Corps", wordpress_path('/get-involved/dpla-ebooks/dpla-collection-curation-corps/') %></li>
+    <li><%= link_to "GIF IT UP", wordpress_path('/gif-it-up/gif-it-up-2015/') %></li>
+    <li><%= link_to "Groups", wordpress_path('/get-involved/groups/') %></li>
+    <li><%= link_to "Workshops", wordpress_path('/get-involved/workshops/') %></li>
+    <li><%= link_to "Events", wordpress_path('/get-involved/events/') %></li>
+    <li><%= link_to "DPLAfest", wordpress_path('/get-involved/dplafest/') %></li>
+    <li><%= link_to "Follow Us", wordpress_path('/get-involved/follow/') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'help/' do %>
+    Help
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "FAQ", wordpress_path('/help/faq/') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'news/' do %>
+    News
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "Press", wordpress_path('/news/press/') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
+  <%= link_to wordpress_path 'contact/' do %>
+    Contact
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "Jobs", wordpress_path('/contact/jobs/') %></li>
+  </ul>
+</li>
+
+<li class='hilight'><%= link_to 'Donate', wordpress_path('donate/') %></li>

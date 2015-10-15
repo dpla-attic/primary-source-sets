@@ -1,8 +1,8 @@
-<%= s3_form @formdef do %>
+<%= s3_form @formdef, id: 'upload-form' do %>
 
   <%= file_field_tag :file,
                      accept: @accepted_types %>
-  <%= submit_tag 'Upload' %>
+  <%= submit_tag 'Upload', class: 'form-submit' %>
 
 <% end %>
 

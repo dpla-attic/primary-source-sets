@@ -3,7 +3,7 @@
 <p><%= link_to "Create new set", new_source_set_path %></p>
 
 <table>
-<% @source_sets.each do |set| %>
+<% @source_sets.order('created_at ASC').each do |set| %>
   <tr>
     <td><%= inline_markdown(set.name) %></td>
     <td><%= link_to "View", source_set_path(set) %></td>

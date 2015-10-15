@@ -1,6 +1,6 @@
 class Source < ActiveRecord::Base
   belongs_to :source_set
-  has_many :attachments
+  has_many :attachments, dependent: :destroy
 
   has_many :videos, through: :attachments,
                     source: :asset,
