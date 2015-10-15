@@ -51,4 +51,12 @@ class Source < ActiveRecord::Base
       true if a.class.name == 'Image' && a.size != 'large'
     end.first
   end
+
+  def thumbnail
+    thumbnails.first
+  end
+
+  def small_image
+    small_images.first
+  end
 end
