@@ -72,3 +72,5 @@ widgets:
 
 googleanalytics:
   tracker: false
+
+contact_email: email@example.com
