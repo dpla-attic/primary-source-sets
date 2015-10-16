@@ -23,6 +23,7 @@ gem 'rubocop', '~> 0.32.1', require: false
 gem 's3_browser_uploads', '0.1.2'
 gem 'zencoder', '~>2.5'
 gem 'navigasmic', '~>1.0'
+gem 'lightbox2-rails', '~>2.0'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
