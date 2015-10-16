@@ -9,7 +9,7 @@ module VideoPlayerHelper
 
     meta = JSON.parse(video.meta)
     outputs = meta['output_settings']
-    rv = "<video preload=\"none\" width=\"640\" height=\"480\" controls>\n"
+    rv = "<video preload=\"none\" controls>\n"
     outputs.each do |out|
       extension = out['extension']
       suffix = out.fetch('suffix', '')

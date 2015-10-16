@@ -1,0 +1,26 @@
+<% if @source_set.sources.present? %>
+  <div class='source-list-container'>
+    <% @source_set.sources.order('created_at ASC').each_slice(3) do |sources_row| %>
+      <div class='moduleContainer threeCol'>
+        <% sources_row.each_with_index do |source, i| %>
+          <section class='module'>
+            <div class='source-container'>
+              <div class='thumbnail-container'>
+                <% if source.thumbnail.present? %>
+                  <span class='align-helper'></span>
+                  <%= image_tag base_src + source.thumbnail.file_name,
+                                alt: source.thumbnail.alt_text.present? ? 
+                                       source.thumbnail.alt_text : source.name %>
+                <% end %>
+              </div>
+              <div class='source-name-container'>
+                <%= link_to inline_markdown(source_name(source)),
+                            source_path(source) %>
+              </div>
+            </div>
+          </section>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

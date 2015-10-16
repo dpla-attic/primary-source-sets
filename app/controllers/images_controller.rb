@@ -10,7 +10,6 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
-    @base_src = Settings.app_scheme + Settings.aws.cloudfront_domain + '/'
   end
 
   def new

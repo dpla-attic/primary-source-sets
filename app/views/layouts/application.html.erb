@@ -12,13 +12,19 @@
     <%= render partial: 'shared/jump_links' %>
     <div class='container'>
       <%= render partial: 'shared/header' %>
-      <div class='layout fullWidth'>
+      <div class='layout primary-source-sets'>
         <%= render partial: 'shared/search_panel' %>
+        <div class="breadcrumbs">
+          <%= render_breadcrumbs separator: ' / ' %>
+        </div>
         <%= render partial: 'shared/admin_menu' if admin_signed_in? %>
         <%= yield %>
       </div>
       <%= render partial: 'shared/footer' %>
     </div>
     <%= render partial: 'shared/jump_links' %>
+
+    <%= yield :foot_script %>
   </body>
+  <%= javascript_include_tag 'style' %>
 </html>

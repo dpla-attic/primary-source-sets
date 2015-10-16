@@ -47,11 +47,27 @@ module ApplicationHelper
     Settings.wordpress.url.chomp('/') + '/' + path.sub(/^\/+/) { $1 }
   end
 
+  def base_src
+    Settings.app_scheme + Settings.aws.cloudfront_domain + '/'
+  end
+
   ##
   # Get stylesheets from dpla_frontend_assets gem
   def branding_stylesheets
     stylesheet_link_tag('dpla-colors') + stylesheet_link_tag('dpla-fonts') if
       defined? DplaFrontendAssets
+  end
+
+  ##
+  # Get all the authors for an object with related authors
+  # @param Guide or SourceSet
+  # @return Array
+  def authors(authored)
+    return unless authored.present?
+    authored.authors.map do |author|
+      author.affiliation.present? ? author.name + ', ' + author.affiliation :
+        author.name
+    end
   end
 
   private

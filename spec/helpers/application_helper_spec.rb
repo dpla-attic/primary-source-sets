@@ -62,4 +62,22 @@ describe ApplicationHelper, type: :helper do
       expect(helper.branding_stylesheets).to match(/dpla-fonts.css/)
     end
   end
+
+  describe '#base_src' do
+    it 'returns base URI with trailing backslash' do
+      allow(Settings).to receive(:app_scheme).and_return('something-')
+      allow(Settings).to receive_message_chain(:aws, :cloudfront_domain)
+        .and_return('example.com')
+      expect(helper.base_src).to eq 'something-example.com/'
+    end
+  end
+
+  describe '#authors' do
+    it 'returns Array of authors with affilations' do
+      guide = create(:guide_factory)
+      guide.authors << [create(:author_factory, name: 'x', affiliation: 'y'),
+                        create(:author_factory, name: 'z', affiliation: nil)]
+      expect(helper.authors(guide)).to include('x, y', 'z')
+    end
+  end
 end

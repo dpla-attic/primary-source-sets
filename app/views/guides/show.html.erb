@@ -1,34 +1,92 @@
-<h1>Teaching guide: <%= inline_markdown(@guide.name) %></h1>
+<% content_for :foot_script do %>
+<%= render partial: 'shared/analytics' %>
+<% end %>
 
-<p>
-  <%= link_to "Edit", edit_guide_path(@guide) %>
-  |
-  <%= link_to "Delete", 
-               guide_path(@guide), method: :delete,
-               data: { confirm: "Are you sure you want to delete this guide?" } %>
-</p>
+<div class='guide'>
 
-<table>
-  <tr>
-    <td><strong>Set </strong></td>
-    <td><%= link_to inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set)%></td>
-  </tr>
-  <tr>
-    <td><strong>Name </strong></td>
-    <td><%= inline_markdown(@guide.name) %></td>
-  </tr>
-  <tr>
-    <td><strong>Questions </strong></td>
-    <td><%= markdown(@guide.questions) %></td>
-  </tr>
-  <tr>
-    <td><strong>Activity </strong></td>
-    <td><%= markdown(@guide.activity) %></td>
-  </tr>
-  <% @guide.authors.each do |author| %>
-    <tr>
-      <td><strong>Author </strong></td>
-      <td><%= link_to author.name, author_path(author) %></td>
-    </tr>
-  <% end %>
-</table>
+  <article>
+    <div class='title-outer-container'>
+      <div class='title-inner-container'>
+        <h1>Teaching Guide: <%= inline_markdown(@guide.name) %></h1>
+        <% if @guide.authors.present? %>
+          <span>By <%= authors(@guide).join(' and ') %>.</span>
+        <% end %>
+      </div>
+    </div>
+
+    <p>
+      <%= link_to "Edit", edit_guide_path(@guide) %>
+      |
+      <%= link_to "Delete", 
+                   guide_path(@guide), method: :delete,
+                   data: { confirm: "Are you sure you want to delete this guide?" } %>
+    </p>
+
+    <div class='textual_content'>
+      <div class='overview'>
+        <p>This teaching guide helps instructors use a specific primary source set, <%= link_to @guide.source_set.name, source_set_path(@guide.source_set) %>, in the classroom.  It offers discussion questions, classroom activities, and primary source analysis tools. It is intended to spark pedagogical creativity by giving a sample approach to the material. Please feel free to share, reuse, and adapt the resources in this guide for your teaching purposes.</p>
+      </div>
+
+      <% if @guide.questions.present? %>
+        <h2>Discussion questions</h2>
+        <%= markdown(@guide.questions) %>
+      <% end %>
+
+      <% if @guide.activity.present? %>
+        <h2>Classroom activities</h2>
+        <%= markdown(@guide.activity) %>
+      <% end %>
+    </div>
+  </article>
+
+  <aside>
+    <div class='module yellow line'>
+      <div class='moduleSection'>
+        <h2>Primary source set</h2>
+        <p><span>This teaching guide is a companion to </span>
+          <%= link_to inline_markdown(@guide.source_set.name),
+                      source_set_path(@guide.source_set) %> by 
+          <%= authors(@guide).join(' and ') %>.
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <aside>
+    <div class='module blue line'>
+      <div class='moduleSection'>
+        <h2>Primary source analysis</h2>
+        <p>For each source, ask students to indicate:
+          <ul>
+            <li>the author's point of view</li>
+            <li>the author's purpose</li>
+            <li>historical context</li>
+            <li>audience</li>
+          </ul>
+        </p>
+        <p>For inquiry-base learning, ask students to:
+          <ul>
+            <li>explain how a source tells its story and/or makes its argument</li>
+            <li>explain the relationships between sources</li>
+            <li>compare and contrast sources in terms of point of view and method</li>
+            <li>support conclusions and interpretations with evidence</li>
+            <li>identify questions for further investigation</li>
+          </ul>
+        </p>
+        <h3>Additional tools</h3>
+        <ul>
+          <li>
+            <%= link_to 'Document Analysis Worksheets', 'https://www.archives.gov/education/lessons/worksheets/' %> from the National Archives
+          </li>
+          <li>
+            <%= link_to 'Using Primary Sources', 'http://www.loc.gov/teachers/usingprimarysources/' %> from the Library of Congress
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  
+  <div class='contact-outer-container'>
+    <p>Send feedback about this teaching guide or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
+  </div>
+</div>

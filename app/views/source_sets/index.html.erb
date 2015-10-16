@@ -1,4 +1,40 @@
-<h1>Sets</h1>
+<% content_for :foot_script do %>
+<%= render partial: 'shared/analytics' %>
+<% end %>
+
+<div class='all-sets'>
+
+  <h1>Primary Source Sets</h1>
+
+  <p>DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources. Each set includes an overview, ten to fifteen primary sources, links to related resources, and a teaching guide. 
+  These sets were created, and reviewed by the teachers on the DPLA's <%= link_to 'Education Advisory Committee', wordpress_path('education/education-advisory-committee') %>. We will be adding new sets and features through Spring 2016. Read about our <%= link_to 'education projects', wordpress_path('education') %> and contact us with feedback at <%= link_to Settings.contact_email, Settings.contect_email %> .</p>
+
+  <div class='set-list'>
+    <%= @source_sets.order('created_at ASC').each_slice(3) do |sets_row| %>
+      <div class='moduleContainer threeCol'>
+        <% sets_row.each_with_index do |set, i| %>
+          <section class='module'>
+            <% if set.featured_image.present? %>
+              <%= image_tag base_src + set.featured_image.file_name,
+                           alt: set.featured_image.alt_text.present? ? 
+                           set.featured_image.alt_text : set.name %>
+            <% end %>
+            <div class='set-name-container'>
+              <%= link_to set.name, source_set_path(set) %>
+            </div>
+          </section>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='contact-outer-container'>
+    <p>Send feedback about these primary source sets or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
+  </div>
+
+</div>
+
+<h2>Admin Info</h2>
 
 <p><%= link_to "Create new set", new_source_set_path %></p>
 

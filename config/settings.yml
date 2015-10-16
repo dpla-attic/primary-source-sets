@@ -69,3 +69,8 @@ widgets:
     twitter: https://twitter.com/example
     tumblr: http://example.tumblr.com/
     rss: http://example.org/info/feed
+
+googleanalytics:
+  tracker: false
+
+contact_email: email@example.com

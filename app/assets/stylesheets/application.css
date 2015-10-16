@@ -19,5 +19,6 @@
  *= require font_overrides.css
  *= require frontend_overrides.css
  *= require primary_source_sets.css
+ *= require lightbox
  *= require_self
  */
