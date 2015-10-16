@@ -40,6 +40,28 @@
   font-weight: bold;
 }
 
+/* SourceSets index styles */
+
+.all-sets .set-list {
+  padding-bottom: 2em;
+}
+
+.all-sets .module {
+  border-color: #6592A6;
+  padding: 0;
+  background-color: #6592A6;
+}
+
+.all-sets .set-name-container {
+  margin: 0.5em 1em;
+}
+
+.all-sets .set-name-container a {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 /* SourceSet styles */
 
 .set .overview {
