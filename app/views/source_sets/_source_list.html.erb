@@ -1,6 +1,6 @@
 <% if @source_set.sources.present? %>
   <div class='source-list-container'>
-    <% @source_set.sources.each_slice(3) do |sources_row| %>
+    <% @source_set.sources.order('created_at ASC').each_slice(3) do |sources_row| %>
       <div class='moduleContainer threeCol'>
         <% sources_row.each_with_index do |source, i| %>
           <section class='module'>
