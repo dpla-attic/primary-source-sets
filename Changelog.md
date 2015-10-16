@@ -1,3 +1,11 @@
+0.3.3 (16 October 2015)
+---
+* Additional styling for public-facing pages
+* Breadcrumbs
+* Image and PDF viewers
+* Google analytics tracking
+* Fix database dependencies
+
 0.3.2 (15 October 2015)
 ---
 * Jasmine for JavaScript specs
