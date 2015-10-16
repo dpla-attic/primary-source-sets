@@ -100,5 +100,17 @@ describe Source, type: :model do
         expect(source.main_asset).to eq large_image
       end
     end
+
+    describe '#thumbnail' do
+      it 'returns the first attached thumbnail' do
+        expect(source.thumbnail).to eq thumbnail
+      end
+    end
+
+    describe '#small_image' do
+      it 'returns the first attached small image' do
+        expect(source.small_image).to eq small_image
+      end
+    end
   end
 end

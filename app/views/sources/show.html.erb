@@ -6,17 +6,16 @@
 <%= render partial: 'shared/analytics' %>
 <% end %>
 
-<h1><%= inline_markdown(source_name(@source)) %></h1>
-
-<p>
-  <%= link_to "Edit", edit_source_path(@source) %>
-  |
-  <%= link_to "Delete", 
-               source_path(@source), method: :delete,
-               data: { confirm: "Are you sure you want to delete this source?" } %>
-</p>
-
 <div class='source'>
+  <h1><%= inline_markdown(source_name(@source)) %></h1>
+
+  <p>
+    <%= link_to "Edit", edit_source_path(@source) %>
+    |
+    <%= link_to "Delete", 
+                 source_path(@source), method: :delete,
+                 data: { confirm: "Are you sure you want to delete this source?" } %>
+  </p>
 
   <%= render_media_asset %>
 
@@ -37,6 +36,7 @@
   <div class='textual-content'>
     <%= markdown(@source.textual_content) %>
   </div>
+</div>
 
 <h2>Admin info</h2>
 
