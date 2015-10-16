@@ -4,6 +4,7 @@
 # @see Guide
 class GuidesController < ApplicationController
   before_filter :load_source_set, only: [:index, :new, :create]
+  add_breadcrumb 'Primary Source Sets', :root_path
 
   def index
     redirect_to @source_set
@@ -11,6 +12,8 @@ class GuidesController < ApplicationController
 
   def show
     @guide = Guide.friendly.find(params[:id])
+    add_breadcrumb @guide.source_set.name, source_set_path(@guide.source_set)
+    add_breadcrumb 'Guide', guide_path(@guide)
   end
 
   def new
