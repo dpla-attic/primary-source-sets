@@ -3,12 +3,15 @@
 #
 # @see SourceSet
 class SourceSetsController < ApplicationController
+  add_breadcrumb 'Primary Source Sets', :root_path
+
   def index
     @source_sets = SourceSet.all
   end
 
   def show
     @source_set = SourceSet.friendly.find(params[:id])
+    add_breadcrumb @source_set.name, source_set_path(@source_set)
   end
 
   def new

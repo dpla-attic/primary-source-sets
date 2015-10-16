@@ -6,6 +6,7 @@ class SourcesController < ApplicationController
   include VideoPlayerHelper
   include AudioPlayerHelper
   before_filter :load_source_set, only: [:index, :new, :create]
+  add_breadcrumb 'Primary Source Sets', :root_path
 
   def index
     redirect_to @source_set
@@ -13,6 +14,8 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
+    add_breadcrumb @source.source_set.name, source_set_path(@source.source_set)
+    add_breadcrumb 'Source', source_path(@source)
     ma = @source.main_asset
     @file_base_or_name = nil
     
