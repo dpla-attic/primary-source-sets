@@ -1,3 +1,7 @@
+<% content_for :head_script do %>
+<%= javascript_include_tag 'lightbox' %>
+<% end %>
+
 <h1>Image: <%= @image.file_name %></h1>
 
 <p>
@@ -29,9 +33,11 @@
   </tr>
 </table>
 
-<div>
-  <img src="<%= base_src + @image.file_name %>" alt="<%= @image.alt_text %>"/>
-</div>
+<a data-lightbox="image-1" data-title="<%= @image.alt_text %>"
+   href="<%= base_src + @image.file_name %>">
+   <img src="<%= base_src + @image.file_name %>" alt="<%= @image.alt_text %>"
+        style="max-width: 600px; max-height: 600px;" />
+</a>
 
 <h2>Sources</h2>
 <ul>

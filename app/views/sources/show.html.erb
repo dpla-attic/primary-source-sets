@@ -1,3 +1,7 @@
+<% content_for :head_script do %>
+<%= javascript_include_tag 'lightbox' %>
+<% end %>
+
 <% content_for :foot_script do %>
 <%= render partial: 'shared/analytics' %>
 <% end %>

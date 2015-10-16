@@ -1,7 +1,20 @@
 <article class='image'>
   <div class='media-outer-container image'>
     <div class='media-inner-container'>
-      <!-- render image here -->
+
+      <a data-lightbox="image-1"
+         data-title="<%= @source.main_asset.alt_text %>"
+         href="<%= base_src + @source.main_asset.file_name %>">
+
+        <div style="position: relative;">
+            <div style="position: absolute; top: 0; left: 0; width: 700px; height: 485px; z-index: 2;"></div>
+            <img src="<%= base_src + @source.main_asset.file_name %>"
+                 alt="<%= @source.main_asset.alt_text %>"
+                 style="position: absolute; top: 0; left: 0; z-index: 1; max-width: 700px; max-height: 485px;" />
+        </div>
+
+      </a>
+
     </div>
   </div>
 </article>
