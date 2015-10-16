@@ -1,3 +1,5 @@
+/* Shared styles */
+
 .wrap {
   word-wrap: break-word;
 }
@@ -11,26 +13,34 @@
   margin-bottom: 2em;
 }
 
-/* SourceSet */
+.contact-outer-container {
+  clear: both;
+}
 
-.set .title-outer-container {
+/* SourceSet and Guide shared styles */
+
+.set .title-outer-container,
+.guide .title-outer-container {
   background-color: #6592A6;
 }
 
-.set .title-inner-container {
+.set .title-inner-container,
+.guide .title-inner-container {
   color: white;
   padding: 1.5em;
 }
 
-.set h1 {
+.set h1, .guide h1 {
   color: white;
   margin: 0;
 }
 
-.set .subheading {
+.set .subheading, .guide .subheading {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+/* SourceSet styles */
 
 .set .overview {
   clear: left;
