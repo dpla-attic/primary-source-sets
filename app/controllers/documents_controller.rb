@@ -3,6 +3,7 @@
 #
 # @see Document
 class DocumentsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @documents = Document.all

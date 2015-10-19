@@ -6,7 +6,7 @@ describe SourceSetsController, type: :controller do
   let(:attributes) { attributes_for(:source_set_factory) }
   let(:invalid_attributes) { attributes_for(:invalid_source_set_factory) }
 
-  it_behaves_like 'admin-only route', :index, :show, :edit, :new
+  it_behaves_like 'admin-only route', :edit, :new
 
   context 'admin logged in' do
     login_admin

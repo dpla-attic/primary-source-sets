@@ -34,19 +34,10 @@
 
 </div>
 
-<h2>Admin Info</h2>
+<% if admin_signed_in? %>
 
-<p><%= link_to "Create new set", new_source_set_path %></p>
+  <h2>Admin Info</h2>
 
-<table>
-<% @source_sets.order('created_at ASC').each do |set| %>
-  <tr>
-    <td><%= inline_markdown(set.name) %></td>
-    <td><%= link_to "View", source_set_path(set) %></td>
-    <td><%= link_to "Edit", edit_source_set_path(set) %></td>
-    <td><%= link_to "Delete", source_set_path(set),
-                    method: :delete,
-                    data: { confirm: "Are you sure you want to delete #{set.name}?" } %></td>
-  </tr>
+  <p><%= link_to "Create new set", new_source_set_path %></p>
+
 <% end %>
-</table>
