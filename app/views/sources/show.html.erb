@@ -20,7 +20,7 @@
         <%= markdown(@source.credits) %>
         <h2>Need more information?</h2>
         <%= link_to 'View the description of this item in DPLA',
-                    frontend_path(@source.aggregation) %>
+                    frontend_path('item/' + @source.aggregation) %>
       </div>
     </div>
   </aside>
@@ -29,10 +29,6 @@
     <%= markdown(@source.textual_content) %>
   </div>
 </div>
-
-  <div class='contact-outer-container'>
-    <p>Send feedback about this primary source or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
-  </div>
 
 <% if admin_signed_in? %>
   <h2>Admin info</h2>

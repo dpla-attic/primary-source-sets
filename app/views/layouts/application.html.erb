@@ -14,9 +14,15 @@
       <%= render partial: 'shared/header' %>
       <div class='layout primary-source-sets'>
         <%= render partial: 'shared/search_panel' %>
-        <div class="breadcrumbs">
-          <%= render_breadcrumbs separator: ' / ' %>
-        </div>
+
+        <% unless current_page?(url_for(controller: 'source_sets',
+                                        action: 'index')) ||
+                  current_page?(root_url) %>
+          <div class="breadcrumbs">
+            <%= render_breadcrumbs separator: ' / ' %>
+          </div>
+        <% end %>
+
         <%= render partial: 'shared/admin_menu' if admin_signed_in? %>
         <%= yield %>
       </div>
