@@ -4,6 +4,7 @@
 # @see SourceSet
 class SourceSetsController < ApplicationController
   add_breadcrumb 'Primary Source Sets', :root_path
+  before_action :authenticate_admin!, only: [:new, :edit]
 
   def index
     @source_sets = SourceSet.all

@@ -7,7 +7,7 @@ describe SourcesController, type: :controller do
   let(:invalid_attributes) { attributes_for(:invalid_source_factory) }
   let(:parent) { resource.source_set }
 
-  it_behaves_like 'admin-only route', :index, :show, :new, :edit
+  it_behaves_like 'admin-only route', :new, :edit
 
   context 'admin logged in' do
     login_admin
