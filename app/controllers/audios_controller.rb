@@ -3,6 +3,8 @@
 #
 # @see Audios
 class AudiosController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @audios = Audio.all
   end

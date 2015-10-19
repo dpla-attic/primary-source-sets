@@ -3,6 +3,7 @@
 #
 # @see Video
 class VideosController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @videos = Video.all

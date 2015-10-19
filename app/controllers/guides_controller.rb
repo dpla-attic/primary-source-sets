@@ -4,6 +4,8 @@
 # @see Guide
 class GuidesController < ApplicationController
   before_filter :load_source_set, only: [:index, :new, :create]
+  before_action :authenticate_admin!, only: [:new, :edit, :create, :update,
+                                             :destroy]
   add_breadcrumb 'Primary Source Sets', :root_path
 
   def index

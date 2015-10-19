@@ -6,6 +6,7 @@ class SourcesController < ApplicationController
   include VideoPlayerHelper
   include AudioPlayerHelper
   before_filter :load_source_set, only: [:index, :new, :create]
+  before_action :authenticate_admin!, only: [:new, :edit]
   add_breadcrumb 'Primary Source Sets', :root_path
 
   def index
