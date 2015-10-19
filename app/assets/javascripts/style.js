@@ -22,4 +22,14 @@ function setAsideHeight() {
   if (minHeight > height) {
     $('.source aside .module').outerHeight(minHeight);
   }
+
+  var moduleHeight = $('.set aside .module').outerHeight();
+  var titleHeight = $('.set .title-outer-container').outerHeight();
+
+  if (moduleHeight < titleHeight) {
+    $('.set aside .module').outerHeight(titleHeight);
+  }
+  if (titleHeight < moduleHeight) {
+    $('.set .title-outer-container').outerHeight(moduleHeight);
+  }
 }

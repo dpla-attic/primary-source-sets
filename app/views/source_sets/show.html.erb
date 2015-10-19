@@ -9,6 +9,9 @@
       <div class='title-inner-container'>
         <h1><%= inline_markdown(@source_set.name) %></h1>
         <span class='subheading'>Primary Source Set</span>
+        <% if @source_set.authors.present? %>
+          <span class='byline'>By <%= authors(@source_set).join(' and ') %>.</span>
+        <% end %>
       </div>
     </div>
   </article>
@@ -20,8 +23,7 @@
         <p>
           <% if @source_set.guides.present? %>
             <%= link_to inline_markdown(@source_set.guides.first.name),
-                        guide_path(@source_set.guides.first) %> by 
-            <%= authors(@source_set.guides.first).join(' and ') %>.
+                        guide_path(@source_set.guides.first) %>
           <% end %>
         </p>
       </div>
@@ -29,9 +31,6 @@
   </aside>
 
   <div class='overview'>
-    <% if @source_set.authors.present? %>
-      <p>By <%= authors(@source_set).join(' and ') %>.</p>
-    <% end %>
     <%= markdown(@source_set.overview) %>
   </div>
 

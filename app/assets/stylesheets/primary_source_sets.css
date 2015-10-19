@@ -13,8 +13,9 @@
   margin-bottom: 2em;
 }
 
-.contact-outer-container {
+.primary-source-sets .contact-outer-container {
   clear: both;
+  margin-top: 2em;
 }
 
 /* SourceSet and Guide shared styles */
@@ -22,6 +23,7 @@
 .set .title-outer-container,
 .guide .title-outer-container {
   background-color: #6592A6;
+  margin-bottom: 2em;
 }
 
 .set .title-inner-container,
@@ -38,13 +40,15 @@
 .set .subheading, .guide .subheading {
   font-size: 1.2em;
   font-weight: bold;
+  display: block;
+}
+
+.set .byline, .guide .byline {
+  display: block;
+  margin-top: 1em;
 }
 
 /* SourceSets index styles */
-
-.all-sets .set-list {
-  padding-bottom: 2em;
-}
 
 .all-sets .module {
   border-color: #6592A6;
@@ -79,7 +83,7 @@
 }
 
 .set .source-list-container .module {
-  background-color: #DBE5E9;
+  background-color: #f0f3f4;
   border: none;
 }
 
@@ -105,11 +109,10 @@
   vertical-align: middle;
   max-height: 160px;
   max-width: 160px;
-  /*max-width: 160px;*/
 }
 
 .set .source-name-container {
-  text-align: center;
+  text-align: left;
 }
 
 

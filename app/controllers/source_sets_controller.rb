@@ -3,6 +3,7 @@
 #
 # @see SourceSet
 class SourceSetsController < ApplicationController
+  include MarkdownHelper
   add_breadcrumb 'Primary Source Sets', :root_path
   before_action :authenticate_admin!, only: [:new, :edit]
 
@@ -12,7 +13,7 @@ class SourceSetsController < ApplicationController
 
   def show
     @source_set = SourceSet.friendly.find(params[:id])
-    add_breadcrumb @source_set.name, source_set_path(@source_set)
+    add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
   end
 
   def new
