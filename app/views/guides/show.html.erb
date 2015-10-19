@@ -7,16 +7,16 @@
   <article>
     <div class='title-outer-container'>
       <div class='title-inner-container'>
-        <h1>Teaching Guide: <%= inline_markdown(@guide.name) %></h1>
+        <h1><%= inline_markdown(@guide.name) %></h1>
         <% if @guide.authors.present? %>
-          <span>By <%= authors(@guide).join(' and ') %>.</span>
+          <span class='byline'>By <%= authors(@guide).join(' and ') %>.</span>
         <% end %>
       </div>
     </div>
 
     <div class='textual_content'>
       <div class='overview'>
-        <p>This teaching guide helps instructors use a specific primary source set, <%= link_to @guide.source_set.name, source_set_path(@guide.source_set) %>, in the classroom.  It offers discussion questions, classroom activities, and primary source analysis tools. It is intended to spark pedagogical creativity by giving a sample approach to the material. Please feel free to share, reuse, and adapt the resources in this guide for your teaching purposes.</p>
+        <p>This teaching guide helps instructors use a specific primary source set, <%= link_to inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set) %>, in the classroom.  It offers discussion questions, classroom activities, and primary source analysis tools. It is intended to spark pedagogical creativity by giving a sample approach to the material. Please feel free to share, reuse, and adapt the resources in this guide for your teaching purposes.</p>
       </div>
 
       <% if @guide.questions.present? %>
@@ -37,8 +37,7 @@
         <h2>Primary source set</h2>
         <p><span>This teaching guide is a companion to </span>
           <%= link_to inline_markdown(@guide.source_set.name),
-                      source_set_path(@guide.source_set) %> by 
-          <%= authors(@guide).join(' and ') %>.
+                      source_set_path(@guide.source_set) %>
         </p>
       </div>
     </div>

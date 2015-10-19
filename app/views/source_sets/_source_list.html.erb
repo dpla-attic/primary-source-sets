@@ -8,9 +8,10 @@
               <div class='thumbnail-container'>
                 <% if source.thumbnail.present? %>
                   <span class='align-helper'></span>
-                  <%= image_tag base_src + source.thumbnail.file_name,
-                                alt: source.thumbnail.alt_text.present? ? 
-                                       source.thumbnail.alt_text : source.name %>
+                  <%= link_to((image_tag base_src + source.thumbnail.file_name,
+                                         alt: source.thumbnail.alt_text.present? ? 
+                                           source.thumbnail.alt_text : source.name),
+                               source_path(source)) %>
                 <% end %>
               </div>
               <div class='source-name-container'>
