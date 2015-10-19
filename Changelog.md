@@ -1,3 +1,8 @@
+1.0.0 (19 October 2015)
+---
+* Allow public access
+* Disable context menu on lightbox links
+
 0.3.3 (16 October 2015)
 ---
 * Additional styling for public-facing pages
