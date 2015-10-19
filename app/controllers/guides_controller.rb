@@ -3,6 +3,7 @@
 #
 # @see Guide
 class GuidesController < ApplicationController
+  include MarkdownHelper
   before_filter :load_source_set, only: [:index, :new, :create]
   before_action :authenticate_admin!, only: [:new, :edit, :create, :update,
                                              :destroy]
@@ -14,7 +15,7 @@ class GuidesController < ApplicationController
 
   def show
     @guide = Guide.friendly.find(params[:id])
-    add_breadcrumb @guide.source_set.name, source_set_path(@guide.source_set)
+    add_breadcrumb inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set)
     add_breadcrumb 'Guide', guide_path(@guide)
   end
 

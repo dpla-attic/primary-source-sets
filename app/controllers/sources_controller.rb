@@ -5,6 +5,7 @@
 class SourcesController < ApplicationController
   include VideoPlayerHelper
   include AudioPlayerHelper
+  include MarkdownHelper
   before_filter :load_source_set, only: [:index, :new, :create]
   before_action :authenticate_admin!, only: [:new, :edit]
   add_breadcrumb 'Primary Source Sets', :root_path
@@ -15,7 +16,7 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
-    add_breadcrumb @source.source_set.name, source_set_path(@source.source_set)
+    add_breadcrumb inline_markdown(@source.source_set.name), source_set_path(@source.source_set)
     add_breadcrumb 'Source', source_path(@source)
     ma = @source.main_asset
     @file_base_or_name = nil
