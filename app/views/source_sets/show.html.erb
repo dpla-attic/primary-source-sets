@@ -14,13 +14,13 @@
         <h1><%= inline_markdown(@source_set.name) %></h1>
         <span class='subheading'>Primary Source Set</span>
         <% if @source_set.authors.present? %>
-          <span class='byline'>By <%= authors(@source_set).join(' and ') %>.</span>
+          <span class='byline'>By <%= authors(@source_set).join(' and ') %></span>
         <% end %>
       </div>
     </div>
   </article>
 
-  <aside>
+  <aside class='guide-link'>
     <div class='module yellow line'>
       <div class='moduleSection'>
         <h2>Teaching guide</h2>
