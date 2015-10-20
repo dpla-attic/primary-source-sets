@@ -1,3 +1,7 @@
+1.0.2 (20 October 2015)
+---
+* Fix sign-in page server error
+
 1.0.1 (19 October 2015)
 ---
 * Small presentational changes to UI and static content

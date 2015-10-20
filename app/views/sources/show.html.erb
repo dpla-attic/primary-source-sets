@@ -6,6 +6,10 @@
 <%= render partial: 'shared/analytics' %>
 <% end %>
 
+<div class="breadcrumbs">
+  <%= render_breadcrumbs separator: ' / ' %>
+</div>
+
 <div class='source'>
   <h1><%= inline_markdown(source_name(@source)) %></h1>
 
