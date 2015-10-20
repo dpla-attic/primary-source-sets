@@ -1,3 +1,5 @@
+require 'turnout/rake_tasks'
+
 namespace :primary_source_sets do
   namespace :samples do
 
