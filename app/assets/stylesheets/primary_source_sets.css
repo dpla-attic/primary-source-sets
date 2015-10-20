@@ -48,12 +48,18 @@
   margin-top: 1em;
 }
 
+.set .guide-link .moduleSection,
+.guide  .set-link .moduleSection {
+  margin-bottom: 1em;
+}
+
 /* SourceSets index styles */
 
 .all-sets .module {
   border-color: #6592A6;
   padding: 0;
   background-color: #6592A6;
+  max-width: 440px;
 }
 
 .all-sets .set-name-container {
@@ -69,7 +75,7 @@
 /* SourceSet styles */
 
 .set .overview {
-  clear: left;
+  clear: both;
 }
 
 .set .resources-outer-container {
