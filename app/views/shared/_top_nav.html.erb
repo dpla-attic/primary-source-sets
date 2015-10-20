@@ -40,6 +40,20 @@
 </li>
 
 <li class='aboutMenu'>
+  <%= link_to wordpress_path 'education/' do %>
+    Education
+    <span class='icon-arrow-thin-down' aria-hidden='true'></span>
+  <% end %>
+  <ul>
+    <li><%= link_to "Primary Source Sets", root_path %></li>
+    <li><%= link_to "Education Advisory Committee", wordpress_path('/education/education-advisory-committee/') %></li>
+    <li><%= link_to "National History Day", wordpress_path('/education/national-history-day/') %></li>
+    <li><%= link_to "Education Collaborations", wordpress_path('/education/education-collaborations/') %></li>
+    <li><%= link_to "Outreach Materials", wordpress_path('/education/outreach-materials/') %></li>
+  </ul>
+</li>
+
+<li class='aboutMenu'>
   <%= link_to wordpress_path 'get-involved/' do %>
     Get Involved
     <span class='icon-arrow-thin-down' aria-hidden='true'></span>
