@@ -1,3 +1,8 @@
+1.0.3 (20 October 2015)
+---
+* Add education to top-level menu
+* Small presentational changes to UI
+
 1.0.2 (20 October 2015)
 ---
 * Fix sign-in page server error
