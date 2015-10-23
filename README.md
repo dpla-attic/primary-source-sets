@@ -54,8 +54,10 @@ The relevant parameters must be defined in `settings.local.yml`.  See
 
 The application makes use of one bucket for incoming media files that need to be
 transcoded, and another for the transcoded derivatives.  You should have an IAM
-account with the necessary permissions on these buckets.  The incoming bucket
-must have the following CORS configuration:
+account with the necessary permissions on these buckets.
+
+The incoming bucket must have the following CORS configuration, which is managed
+in Amazon's S3 Management Console.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -69,9 +71,78 @@ must have the following CORS configuration:
 </CORSConfiguration>
 ```
 
-The incoming S3 bucket must also have a "policy" that allows the following
-actions on `arn:aws:s3:::<the bucket name>/*`: `s3:GetObject`, `s3:PutObject`,
-and `s3:DeleteObject`.
+The destination bucket (for transcoded derivatives and PDFs and images, too)
+needs the following CORS configuration.
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>POST</AllowedMethod>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>HEAD</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>Content-Type</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+```
+
+The IAM account should have a Policy Document that makes the following
+allowances.  Policy Documents are managed in Amazon's IAM Management Console.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:GetBucketCORS"
+            ],
+            "Resource": [
+                "arn:aws:s3:::incoming-bucket-name/*"
+            ]
+        },
+        {
+            "Sid": "2",
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:GetBucketCORS"
+            ],
+            "Resource": [
+                "arn:aws:s3:::destination-bucket-name/*"
+            ]
+        },
+        {
+            "Sid": "3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::incoming-bucket-name"
+        }
+    ]
+}
+```
+
+Note that the "Sid" values can be whatever you want them to be, as long as they
+are unique within the Policy Document.  The strings `incoming-bucket-name` and
+`destination-bucket-name` need to be replaced with the actual names of your
+buckets.
+
+Your destination bucket should have a CloudFront Distribution, i.e. should be
+served up with Amazon's content delivery network. The Domain Name property of
+that CloudFront Distribution is what goes into your `settings.local.yml` as
+`aws`.`s3_cloudfront_domain`.
 
 ### Zencoder development setup
 
