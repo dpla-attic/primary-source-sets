@@ -193,3 +193,8 @@ input.form-submit {
   font-size: 100%;
   padding: 2px;
 }
+
+textarea {
+  height: 300px;
+  width: 99%;
+}
