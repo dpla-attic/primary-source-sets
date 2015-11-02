@@ -63,6 +63,16 @@ describe ApplicationHelper, type: :helper do
     end
   end
 
+  describe '#branding_img' do
+    it 'returns dpla logo' do
+      expect(helper.branding_img('logo.png')).to eq 'dpla-logo.png'
+    end
+
+    it 'returns dpla footer logo' do
+      expect(helper.branding_img('footer-logo.png')).to eq 'dpla-footer-logo.png'
+    end
+  end
+
   describe '#base_src' do
     it 'returns base URI with trailing backslash' do
       allow(Settings).to receive(:app_scheme).and_return('something-')
