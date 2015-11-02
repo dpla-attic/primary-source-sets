@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
-   
+  before do
+    # TODO:  Move this to a context and test both with and without the assets
+    # gem. See https://issues.dp.la/issues/8140
+    class DplaFrontendAssets; end
+  end
+
   describe '#markdown' do
 
     it 'renders HTML from a markdown String' do
