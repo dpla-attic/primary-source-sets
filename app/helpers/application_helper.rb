@@ -40,6 +40,26 @@ module ApplicationHelper
   end
 
   ##
+  # Returns DPLA branding images if the frontend-assets gem is available;
+  # otherwise returns a placeholder image.
+  #
+  # @return String name of an image file
+  def branding_img(image_name)
+    if defined? DplaFrontendAssets
+      case image_name
+      when 'logo.png'
+        'dpla-logo.png'
+      when 'footer-logo.png'
+        'dpla-footer-logo.png'
+      else
+        image_name
+      end
+    else
+      image_name
+    end
+  end
+
+  ##
   # Get all the authors for an object with related authors
   # @param Guide or SourceSet
   # @return Array

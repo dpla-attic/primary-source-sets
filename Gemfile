@@ -45,6 +45,3 @@ group :development do
   gem 'zencoder-fetcher'
 end
 
-group :dpla_branding do
-  gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
-end
