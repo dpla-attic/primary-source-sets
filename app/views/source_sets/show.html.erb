@@ -1,3 +1,13 @@
+<% content_for :head_script do %>
+  <title><%= strip_tags(inline_markdown(@source_set.name)) %></title>
+  <meta name='description' content="<%= @source_set.description %>" />
+  <link rel='canonical' href='<%= url_for(controller: 'source_sets',
+                                          action: 'show',
+                                          id: @source_set.slug,
+                                          only_path: false,
+                                          trailing_slash: true) %>' /> 
+<% end %>
+
 <% content_for :foot_script do %>
 <%= render partial: 'shared/analytics' %>
 <% end %>

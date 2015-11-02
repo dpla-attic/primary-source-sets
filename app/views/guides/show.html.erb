@@ -1,3 +1,13 @@
+<% content_for :head_script do %>
+  <title><%= strip_tags(inline_markdown(@guide.name)) %></title>
+  <meta name='description' content="This teaching guide helps instructors use a specific primary source set, '<%= strip_tags(inline_markdown(@guide.source_set.name)) %>', in the classroom." />
+  <link rel='canonical' href='<%= url_for(controller: 'guides',
+                                          action: 'show',
+                                          id: @guide.slug,
+                                          only_path: false,
+                                          trailing_slash: true) %>' /> 
+<% end %>
+
 <% content_for :foot_script do %>
 <%= render partial: 'shared/analytics' %>
 <% end %>
