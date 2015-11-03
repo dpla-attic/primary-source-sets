@@ -1,3 +1,7 @@
+1.0.5 (20 October 2015)
+---
+* Add turnout gem
+
 1.0.4 (20 October 2015)
 ---
 * Fix education outreach link
