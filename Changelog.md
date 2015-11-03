@@ -1,3 +1,10 @@
+1.1.0 (3 November 2015)
+---
+* Add S3 documentation
+* Set height and width for textareas
+* Add title, description, and canonical link tags
+* Remove dpla_frontend_assets gem
+
 1.0.5 (20 October 2015)
 ---
 * Add turnout gem
