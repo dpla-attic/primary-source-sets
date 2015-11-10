@@ -20,23 +20,6 @@
 
 /* SourceSet and Guide shared styles */
 
-.set .title-outer-container,
-.guide .title-outer-container {
-  background-color: #6592A6;
-  margin-bottom: 2em;
-}
-
-.set .title-inner-container,
-.guide .title-inner-container {
-  color: white;
-  padding: 1.5em;
-}
-
-.set h1, .guide h1 {
-  color: white;
-  margin: 0;
-}
-
 .set .subheading, .guide .subheading {
   font-size: 1.2em;
   font-weight: bold;
@@ -54,6 +37,21 @@
 }
 
 /* SourceSets index styles */
+
+.set .title-outer-container {
+  background-color: #6592A6;
+  margin-bottom: 2em;
+}
+
+.set .title-inner-container {
+  color: white;
+  padding: 1.5em;
+}
+
+.set h1 {
+  color: white;
+  margin: 0;
+}
 
 .all-sets .module {
   border-color: #6592A6;
@@ -121,6 +119,15 @@
   text-align: left;
 }
 
+/* Guide styles */
+
+.guide .textual-content, .guide .questions, .guide .activity {
+  margin-top: 3em;
+}
+
+.guide .byline {
+  color: #818285;
+}
 
 /* Source */
 

@@ -28,19 +28,23 @@
       </div>
     </div>
 
-    <div class='textual_content'>
+    <div class='textual-content'>
       <div class='overview'>
         <p>This teaching guide helps instructors use a specific primary source set, <%= link_to inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set) %>, in the classroom.  It offers discussion questions, classroom activities, and primary source analysis tools. It is intended to spark pedagogical creativity by giving a sample approach to the material. Please feel free to share, reuse, and adapt the resources in this guide for your teaching purposes.</p>
       </div>
 
       <% if @guide.questions.present? %>
-        <h2>Discussion questions</h2>
-        <%= markdown(@guide.questions) %>
+        <div class='questions'>
+          <h2>Discussion questions</h2>
+          <%= markdown(@guide.questions) %>
+        </div>
       <% end %>
 
       <% if @guide.activity.present? %>
-        <h2>Classroom activities</h2>
-        <%= markdown(@guide.activity) %>
+        <div class='activity'>
+          <h2>Classroom activities</h2>
+          <%= markdown(@guide.activity) %>
+        </div>
       <% end %>
     </div>
   </article>
