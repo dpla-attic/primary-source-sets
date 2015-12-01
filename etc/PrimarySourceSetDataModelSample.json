@@ -1,23 +1,20 @@
 {
-  "@context": [
-    "http://schema.org/",
-    {
-      "ccss": "http://www.corestandards.org/",
-      "dct": "http://purl.org/dc/terms/",
-      "dcmitype": "http://purl.org/dc/dcmitype/",
-      "edm": "http://www.europeana.eu/schemas/edm",
-      "text":
-      {
-        "@id": "http://schema.org/text",
-        "@type": "http://ns.ontowiki.net/SysOnt/Markdown"
-      }
+  "@context": {
+    "@vocab": "http://schema.org/",
+    "ccss": "http://www.corestandards.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "dcmitype": "http://purl.org/dc/dcmitype/",
+    "edm": "http://www.europeana.eu/schemas/edm",
+    "ore": "http://www.openarchives.org/ore/terms/",
+    "text": {
+      "@id": "http://schema.org/text",
+      "@type": "http://ns.ontowiki.net/SysOnt/Markdown"
     }
-  ],
+  },
   "@id": "http://dp.la/sets/french-and-indian-war",
   "@type": "CreativeWork",
   "dct:type": "dcmitype:InteractiveResource",
   "name": "The French and Indian War",
-  "image": "http://path-to-image.jpg",
   "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
   "dateCreated": "2015-08-08",
   "dateModified": "2015-08-20",
@@ -80,44 +77,54 @@
   "text": "The French and Indian War helped set the stage for the American Revolution. Between the years 1754 and 1763, major powers engaged in a global struggle, the Seven Years war. In North America, the conflict between the French and British Empires included indigenous nations. This collection of documents, images, maps, and artifacts help provide the various perspectives on the war, both from the leadership, and the more marginalized groups. By analyzing, exploring, and interpreting these primary sources, inquirers will gain insight into the experience of 18th-century warfare, from the point of view of the \"winners\" and the \"losers.\"",
   "hasPart": [
     { 
-      "@id": "http://dp.la/sets/french-and-indian-war/guide",
-      "name": "Diary of Major George Washington, 1753"
+      "@id": "http://dp.la/sets/french-and-indinan-war/guide/23",
+      "@type": "CreativeWork",
+      "name": "Teaching Guide: Perspectives of the French and Indian War",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Ella Howard",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Armstrong State University, Savannah, Georgia"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "James Walsh",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "Scott County High School, Kentucky"
+          }
+        }
+      ],
+      "text": " ##Questions:\n * Choose five days from <a href='http://dp.la/primarysourceset/source/ee4949c9e4647ecf1a2358f616f96a52'>British soldier Luke Gridley's diary.</a> From his description, what do we learn about soldiers' experience of the war?\n * Use the <a href='http://dp.la/primarysourceset/source/5ddde164906d8eb172e4f3e8e1acef81'>letter to William Pitt</a> and the <a href='54d4bb2c2364cd32096e713d83696d8f'>British history of the war</a> to learn about the British perspective on the war. What do the sources tell us about England's reason for fighting. Are the sources biased?\n * Use the <a href='http://dp.la/primarysourceset/source/8af90d3a1a85936681a7d8bd156f6a3'>account of speeches and treaties</a> to learn about the Native American perspective on the war. Why did they fight? What did they hope to win?\n * Use the <a href='http://dp.la/primarysourceset/source/87037c8c0dc514bfd19bddbce9ff2ce7'>letter at the end of George Washington's diary</a> and the <a href='14e1f06f68b9f954a1936424d29673ea'>map</a> to learn about the French perspective on the war. Why did they fight? What did they hope to win?\n\n * Analyze the <a href='http://dp.la/priarysourceset/source/684ba704a6cafcab5203490eac01aaa1'>medal commemorating the capture of Montreal</a>. What symbols appear on the medal? What do they represent? Do we use similar symbols today?\n##Activity:\n Divide the class into three groups: Native Americans, French, and British. Have each group read the primary sources relevant to their assigned role, and discuss their perspective on the war. What did they stand to gain? Why did they fight? Moderate a debate between the three groups based on the positions they hold. Have the class vote on the winner of the debate. Then lead a discussion on the actual outcomes of the war. Did the \"correct\" side win?"
     },
-    {   
+    {
       "@id": "http://dp.la/sets/french-and-indian-war/source/123",
-      "name": "Sample title of a source 2"
-    },
-    { 
-      "@id": "http://dp.la/sets/french-and-indian-war/source/124",
-      "name": "Sample title of a source 3"
-    },
-    { 
-      "@id": "http://dp.la/sets/french-and-indian-war/source/125",
-      "name": "Sample title of a source 4"
-    },
-    {
-      "@id": "http://dp.la/sets/french-and-indian-war/source/126",
-      "name": "Sample title of a source 5"
-    },
-    { 
-      "@id": "http://dp.la/sets/french-and-indian-war/source/127",
-      "name": "Sample title of a source 6"
-    },
-    {
-      "@id": "http://dp.la/sets/french-and-indian-war/source/128",
-      "name": "Sample title of a source 7"
-    },
-    { 
-      "@id": "http://dp.la/sets/french-and-indian-war/source/129",
-      "name": "Sample title of a source 8"
-    },
-    {
-      "@id": "http://dp.la/sets/french-and-indian-war/source/130",
-      "name": "Sample title of a source 9"
-    },
-    {
-      "@id": "http://dp.la/sets/french-and-indian-war/source/131",
-      "name": "Sample title of a source 10"
+      "@type": "CreativeWork",
+      "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
+      "name": "Diary of Major George Washington, 1753",
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "associatedMedia": [
+          {
+            "@type": "MediaObject",
+            "fileFormat": "pdf",
+            "contentUrl": "http://path-to-file",
+            "dct:references": {
+              "@id": "http://dp.la/item/87037c8c0dc514bfd19bddbce9ff2ce7",
+              "@type": "ore:Aggregation"
+            },
+            "dct:citation": "Washington, George. *The journal of Major George Washington.* Chicago: The Newberry Library, 1958. Page 53.",
+            "dct:provenance": {
+              "@type": "dct:ProvenanceStatement",
+              "name": "Courtesy of The Univeristy of Michigan via HathiTrust"
+            }
+          }
+        ]
+      },
+      "text": "Excerpt from Wednesday, October 31st, 1753:\n\"I was comissioned and appointed by the Honourable Robert Dinwidde, Esq; Governor, etc. of Virginia to visit and deliver a Letter to the Commandant of the French Forces on the Hioin, and set out on the indended Journey the same day ; and proceeded with him to Alexandria, where we provided Necessaries ; from thence we went to Winchester, and got Baggage, Horses, etc., and from thence we pursued the new Road to Wills-Creek, where we arrive the 14th of November.\""
     }
   ],
   "inLanguage": [
@@ -150,77 +157,77 @@
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.6-8.7",
-      "tagetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.6-8.7",
-      "tagetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.6-8.9",
-      "tagetUrl": "ccss:ELA-Literacy/RH/6-8/9/"
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/9/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.9-10.9",
-      "tagetUrl": "ccss:ELA-Literacy/RH/9-10/9/"
+      "targetUrl": "ccss:ELA-Literacy/RH/9-10/9/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.11-12.7",
-      "tagetUrl": "ccss:ELA-Literacy/RH/11-12/7/"
+      "targetUrl": "ccss:ELA-Literacy/RH/11-12/7/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.RH.11-12.9",
-      "tagetUrl": "ccss:ELA-Literacy/RH/11-12/9/"
+      "targetUrl": "ccss:ELA-Literacy/RH/11-12/9/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.CCRA.R.7",
-      "tagetUrl": "ccss:ELA-Literacy/CCRA/R/7/"
+      "targetUrl": "ccss:ELA-Literacy/CCRA/R/7/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.CCRA.W.8",
-      "tagetUrl": "ccss:ELA-Literacy/CCRA/W/8/"
+      "targetUrl": "ccss:ELA-Literacy/CCRA/W/8/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.WHST.6-8.8",
-      "tagetUrl": "ccss:ELA-Literacy/WHST/6-8/8/"
+      "targetUrl": "ccss:ELA-Literacy/WHST/6-8/8/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.WHST.9-10.8",
-      "tagetUrl": "ccss:ELA-Literacy/WHST/9-10/8/"
+      "targetUrl": "ccss:ELA-Literacy/WHST/9-10/8/"
     },
     {
       "@type": "AlignmentObject",
       "alignmentType": "requires",
       "educationalFramework": "Common Core State Standards",
       "targetName": "CCSS.ELA-Literacy.WHST.11-12.8",
-      "tagetUrl": "ccss:ELA-Literacy/WHST/11-12/8/"
+      "targetUrl": "ccss:ELA-Literacy/WHST/11-12/8/"
     }
   ]
 }
