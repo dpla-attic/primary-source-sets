@@ -8,7 +8,8 @@ class SourceSetsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :edit]
 
   def index
-    @source_sets = SourceSet.all
+    @published_sets = SourceSet.published_sets
+    @unpublished_sets = SourceSet.unpublished_sets
   end
 
   def show
@@ -58,6 +59,7 @@ class SourceSetsController < ApplicationController
                                        :description,
                                        :overview,
                                        :resources,
+                                       :published,
                                        author_ids: [])
   end
 end
