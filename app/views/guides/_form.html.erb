@@ -14,6 +14,8 @@
     </div>
   <% end %>
 
+  <%= f.submit 'Submit', class: 'form-submit' %>
+
   <p>
     <strong><%= f.label "Name (required)" %></strong><br/>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
@@ -39,8 +41,6 @@
     <% end %>
   </p>
 
-  <p>
-    <%= f.submit 'Submit', class: 'form-submit' %>
-  </p>
+  <%= f.submit 'Submit', class: 'form-submit' %>
 
 <% end %>
