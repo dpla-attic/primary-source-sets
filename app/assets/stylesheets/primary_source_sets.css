@@ -121,7 +121,11 @@
 
 /* Guide styles */
 
-.guide .textual-content, .guide .questions, .guide .activity {
+.guide .textual-content {
+  margin-top: 1.5em;
+}
+
+.guide .questions, .guide .activity {
   margin-top: 3em;
 }
 
