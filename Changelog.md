@@ -1,3 +1,9 @@
+1.1.1 (7 December 2015)
+---
+* Update menu
+* Do not return nil assets in Source#asset
+* Fix title style and content spacing in UI
+
 1.1.0 (3 November 2015)
 ---
 * Add S3 documentation
