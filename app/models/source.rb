@@ -39,7 +39,7 @@ class Source < ActiveRecord::Base
   # Gets all assets associated with source through attachments table.
   # @return Array<ActiveRecord::Base>
   def assets
-    attachments.map(&:asset)
+    attachments.map(&:asset).reject{ |a| a.nil? }
   end
 
   ##

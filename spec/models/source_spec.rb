@@ -68,6 +68,26 @@ describe Source, type: :model do
       it 'returns all attached assets' do
         expect(source.assets).to contain_exactly(video, audio, document, image)
       end
+
+      context 'with nil asset' do
+        let(:attachment) do
+          create(:attachment, source_id: source.id,
+                              asset_id: video.id,
+                              asset_type: "Video")
+        end
+
+        let(:nil_attachment) do
+          create(:attachment, source_id: source.id,
+                              asset_id: 'invalid_id',
+                              asset_type: "Video")
+        end
+
+        it 'does not return nil asset' do
+          allow(source).to receive(:attachments)
+            .and_return([attachment, nil_attachment])
+          expect(source.assets).to contain_exactly(video)
+        end
+      end
     end
   end
 

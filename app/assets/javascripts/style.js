@@ -33,15 +33,4 @@ function setAsideHeight() {
   if (titleHeight < moduleHeight) {
     $('.set .title-outer-container').outerHeight(moduleHeight);
   }
-
-  // resize header on guide page
-  var moduleHeight = $('.guide .set-link .module').outerHeight();
-  var titleHeight = $('.guide .title-outer-container').outerHeight();
-
-  if (moduleHeight < titleHeight) {
-    $('.guide .set-link .module').outerHeight(titleHeight);
-  }
-  if (titleHeight < moduleHeight) {
-    $('.guide .title-outer-container').outerHeight(moduleHeight);
-  }
 }
