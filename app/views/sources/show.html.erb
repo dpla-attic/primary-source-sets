@@ -73,6 +73,16 @@
 
   <h3>Media assets</h2>
 
+  <p>
+    <%= link_to "Add new image", new_image_path(source_id: @source.id) %>
+    |
+    <%= link_to "Add new document", new_document_path(source_id: @source.id) %>
+    |
+    <%= link_to "Add new audio", new_audio_path(source_id: @source.id) %>
+    |
+    <%= link_to "Add new video", new_video_path(source_id: @source.id) %>
+  </p>
+
   <table>
 
     <% if @source.main_asset.present? %>

@@ -14,12 +14,11 @@ describe("DocUploadHandler", function() {
         delete pss_asset_type; //clean up
     });
 
-    it("Generates AJAX POST data with the file name",
+    it("Generates AJAX POST data with the given data",
         function() {
-            var good_data = {document: {file_name: 'a.pdf'}};
-            duh.createAssetRecord('a.pdf');
+            good_data = {document: {file_name: 'x', source_ids: '4'}};
+            duh.createAssetRecord(good_data);
             expect(duh.postAssetRecord).toHaveBeenCalledWith(good_data);
         }
-    );
-
+    ); 
 });

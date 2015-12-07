@@ -20,6 +20,7 @@ class AudiosController < ApplicationController
     @formdef = PSSBrowserUploads.av_form_definition('audio')
     @accepted_types = %w(.mp3 .mp2 .mp4a .wav .flac .aif .aiff .wma .mpga .oga
                          .ogg .au .adp .aac .weba).join(',')
+    @source = Source.find_by_id(params[:source_id])
   end
 
   ##
@@ -53,7 +54,11 @@ class AudiosController < ApplicationController
   private
 
   def audio_params
-    params.require(:audio).permit(:file_base,
-                                  source_ids: [])
+    ##
+    # Note that :source_ids is expressed as single hash, rather than
+    # "source_ids: []", as seen in other controllers.
+    # The single hash notation is required to work with the JavaScript code
+    # @see: app/javascripts/avupload.js
+    params.require(:audio).permit(:file_base, :source_ids)
   end
 end

@@ -3,11 +3,19 @@
   <script>
       var pss_create_asset_path = '<%= audios_path() %>';
       var pss_asset_type = 'audio';
+      var source_id = '<%= @source.present? ? @source.id : nil %>';
   </script>
 
 <% end %>
 
 <h1>New audio</h1>
+
+<% if @source.present? %>
+  <p>
+    <strong>This audio will be associated with: </strong>
+    <%= inline_markdown(source_name(@source)) %>
+  </p>
+<% end %>
 
 <%= render "shared/s3form" %>
 

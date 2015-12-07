@@ -19,6 +19,7 @@ class DocumentsController < ApplicationController
     @formdef.add_field('Content-Type', '')
     @formdef.add_condition('Content-Type', 'starts-with' => '')
     @accepted_types = '.pdf'
+    @source = Source.find_by_id(params[:source_id])
   end
 
   def create
@@ -45,7 +46,11 @@ class DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:file_name,
-                                     source_ids: [])
+    ##
+    # Note that :source_ids is expressed as single hash, rather than
+    # "source_ids: []", as seen in other controllers.
+    # The single hash notation is required to work with the JavaScript code
+    # @see: app/javascripts/avupload.js
+    params.require(:document).permit(:file_name, :source_ids)
   end
 end
