@@ -1,3 +1,8 @@
+1.1.2 (8 December 2016)
+---
+* Reduce whitespace on guide UI
+* Add save buttons to tops of forms
+
 1.1.1 (7 December 2015)
 ---
 * Update menu
