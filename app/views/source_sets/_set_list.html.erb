@@ -1,0 +1,19 @@
+<div class='set-list'>
+  <%= sets.order('created_at ASC').each_slice(3) do |sets_row| %>
+    <div class='moduleContainer threeCol'>
+      <% sets_row.each_with_index do |set, i| %>
+        <section class='module'>
+          <% if set.featured_image.present? %>
+            <%= link_to((image_tag base_src + set.featured_image.file_name,
+                                   alt: set.featured_image.alt_text.present? ? 
+                                     set.featured_image.alt_text : set.name),
+                        source_set_path(set)) %>
+          <% end %>
+          <div class='set-name-container'>
+            <%= link_to inline_markdown(set.name), source_set_path(set) %>
+          </div>
+        </section>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -21,6 +21,11 @@
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_field :name %>
   </p>
+
+  <p>
+    <strong><%= f.label :published, style: 'display:inline' %></strong>
+    <%= f.check_box :published %><br />
+  </p>
  
   <p>
     <strong><%= f.label 'SEO description' %></strong><br/>

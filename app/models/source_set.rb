@@ -20,4 +20,12 @@ class SourceSet < ActiveRecord::Base
   def featured_image
     small_images.first
   end
+
+  def self.published_sets
+    self.where(published: true)
+  end
+
+  def self.unpublished_sets
+    self.where(published: false)
+  end
 end

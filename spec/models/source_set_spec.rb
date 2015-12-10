@@ -3,6 +3,7 @@ require 'rails_helper'
 describe SourceSet, type: :model do
 
   let(:source_set) { create(:source_set_factory) }
+  let(:published_set) { create(:source_set_factory, published: true) }
 
   it 'has many sources' do
     expect(SourceSet.reflect_on_association(:sources).macro).to eq :has_many
@@ -49,6 +50,18 @@ describe SourceSet, type: :model do
 
     it 'recognizes a featured image' do
       expect(source_set.featured_image).to eq small_image
+    end
+  end
+
+  describe '#published_sets' do
+    it 'returns published sets' do
+      expect(SourceSet.published_sets).to contain_exactly(published_set)
+    end
+  end
+
+  describe '#unpublished_sets' do
+    it 'returns unpublished sets' do
+      expect(SourceSet.unpublished_sets).to contain_exactly(source_set)
     end
   end
 end
