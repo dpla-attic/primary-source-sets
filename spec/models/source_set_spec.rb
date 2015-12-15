@@ -18,6 +18,11 @@ describe SourceSet, type: :model do
       .to eq :has_and_belongs_to_many
   end
 
+  it 'has and belongs to many tags' do
+    expect(SourceSet.reflect_on_association(:tags).macro)
+      .to eq :has_and_belongs_to_many
+  end
+
   it 'has one featured source' do
     expect(SourceSet.reflect_on_association(:featured_source).macro)
       .to eq :has_one

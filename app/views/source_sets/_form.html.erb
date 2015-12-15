@@ -51,6 +51,13 @@
       <%= b.label { b.check_box + b.text } %><br />
     <% end %>
   </p>
+
+  <p>
+    <strong><%= f.label :tag %></strong><br />
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
+      <%= b.label { b.check_box + b.text } %><br />
+    <% end %>
+  </p>
  
   <%= f.submit 'Submit', class: 'form-submit' %>
  

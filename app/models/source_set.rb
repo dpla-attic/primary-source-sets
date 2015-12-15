@@ -5,6 +5,7 @@ class SourceSet < ActiveRecord::Base
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
   has_and_belongs_to_many :authors
+  has_and_belongs_to_many :tags
   validates :name, presence: true
 
   ##
