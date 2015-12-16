@@ -1,5 +1,6 @@
 
 describe("UploadHandler", function() {
+    var u;
 
     it("Initializes with #upload-form", function() {
         var html = '<form id="upload-form"></form>';
