@@ -1,0 +1,10 @@
+<h1>Edit vocabulary</h1>
+
+<p>
+  <%= link_to "View", vocabulary_path(@vocabulary) %>
+  |
+  <%= link_to "Delete", vocabulary_path(@vocabulary),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete this vocabulary?" } %></p>
+ 
+<%= render "form" %>

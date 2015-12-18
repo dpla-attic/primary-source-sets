@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009203626) do
+ActiveRecord::Schema.define(version: 20151216150330) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -127,6 +127,14 @@ ActiveRecord::Schema.define(version: 20151009203626) do
     t.string   "slug"
   end
 
+  create_table "source_sets_tags", force: true do |t|
+    t.integer "source_set_id"
+    t.integer "tag_id"
+  end
+
+  add_index "source_sets_tags", ["source_set_id"], name: "index_source_sets_tags_on_source_set_id"
+  add_index "source_sets_tags", ["tag_id"], name: "index_source_sets_tags_on_tag_id"
+
   create_table "sources", force: true do |t|
     t.integer  "source_set_id"
     t.string   "name"
@@ -141,6 +149,22 @@ ActiveRecord::Schema.define(version: 20151009203626) do
 
   add_index "sources", ["source_set_id"], name: "index_sources_on_source_set_id"
 
+  create_table "tags", force: true do |t|
+    t.string   "label"
+    t.string   "uri"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
+
+  create_table "tags_vocabularies", force: true do |t|
+    t.integer "vocabulary_id"
+    t.integer "tag_id"
+  end
+
+  add_index "tags_vocabularies", ["tag_id"], name: "index_tags_vocabularies_on_tag_id"
+  add_index "tags_vocabularies", ["vocabulary_id"], name: "index_tags_vocabularies_on_vocabulary_id"
+
   create_table "videos", force: true do |t|
     t.string   "file_base"
     t.datetime "created_at",      null: false
@@ -150,5 +174,12 @@ ActiveRecord::Schema.define(version: 20151009203626) do
   end
 
   add_index "videos", ["transcoding_job"], name: "index_videos_on_transcoding_job", unique: true
+
+  create_table "vocabularies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+  end
 
 end

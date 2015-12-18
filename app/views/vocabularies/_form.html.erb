@@ -1,0 +1,33 @@
+<%= form_for @vocabulary do |f| %>
+ 
+  <% if @vocabulary.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@vocabulary.errors.count, "error") %> prohibited
+        this vocabulary from being saved:
+      </h2>
+      <ul>
+        <% @vocabulary.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <strong><%= f.label "Name (required)" %></strong><br/>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <strong><%= f.label :tags %></strong><br />
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
+      <%= b.label { b.check_box + b.text } %><br />
+    <% end %>
+  </p>
+  
+  <p>
+    <%= f.submit 'Submit', class: 'form-submit' %>
+  </p>
+ 
+<% end %>

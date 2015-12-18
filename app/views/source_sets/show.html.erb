@@ -91,9 +91,20 @@
         <% end %>
       </td>
     </tr>
+    <tr>
+      <td><strong>Tags</strong></td>
+      <td>
+        <% @source_set.tags.each do |tag| %>
+          <%= link_to tag.label, tag_path(tag) %><br/>
+        <% end %>
+      </td>
+    </tr>
   </table>
+
+  <p><%= link_to "Add new tag", new_tag_path(source_set_id: @source_set.id) %></p>
 
   <p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
 
   <p><%= link_to "Add new teaching guide", new_source_set_guide_path(@source_set.id) %></p>
+
 <% end %>
