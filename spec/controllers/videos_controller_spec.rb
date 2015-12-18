@@ -12,5 +12,6 @@ describe VideosController, type: :controller do
     login_admin
 
     it_behaves_like 'basic controller', :show
+    it_behaves_like 'media controller', :new, :create
   end
 end

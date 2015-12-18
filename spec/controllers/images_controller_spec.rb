@@ -11,5 +11,6 @@ describe ImagesController, type: :controller do
     login_admin
 
     it_behaves_like 'basic controller', :index, :show, :create, :destroy
+    it_behaves_like 'media controller', :new, :create
   end
 end

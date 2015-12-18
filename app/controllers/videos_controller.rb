@@ -30,6 +30,7 @@ class VideosController < ApplicationController
     @accepted_types = %w(.mov .m4v .mp4 .mpeg .mp1 .3gp .3g2 .avi .f4v .flv
                          .h261 .h263 .h264 .jpm .jpgv .asf .wm .wmv .mj2 .ogv
                          .webm .qt .movie .dv).join(',')
+    @source = Source.find_by_id(params[:source_id])
   end
 
   ##
@@ -63,7 +64,11 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:file_base,
-                                  source_ids: [])
+    ##
+    # Note that :source_ids is expressed as single hash, rather than
+    # "source_ids: []", as seen in other controllers.
+    # The single hash notation is required to work with the JavaScript code
+    # @see: app/javascripts/avupload.js
+    params.require(:video).permit(:file_base, :source_ids)
   end
 end

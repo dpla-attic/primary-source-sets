@@ -72,12 +72,31 @@ UploadHandler.prototype.updateProgress = function(e) {
 UploadHandler.prototype.handleResponseIfDone = function(xhr) {
     if (xhr.readyState == 4) {
         if (xhr.status == '201') {
-            key = $('Key', xhr.responseXML).text();
-            this.createAssetRecord(key);
+            var key = $('Key', xhr.responseXML).text();
+            var postdata = this.initializePostdata(key);
+            this.createAssetRecord(postdata);
         } else {
             alert('Got an unexpected response: ' + xhr.statusText);
         }
     }
+};
+
+
+UploadHandler.prototype.initializePostdata = function(key) {
+    var postdata = {};
+    postdata[pss_asset_type] = {file_name: key};
+
+    if (typeof source_id !== 'undefined' && source_id !== null) {
+        /* 
+         * source_id is defined in the view.
+         *
+         * Note plural key name with singular value; this is necessary to work
+         * with the Rails model and its associations 'magic'.
+         */
+        postdata[pss_asset_type].source_ids = source_id;
+    }
+
+    return postdata;
 };
 
 
