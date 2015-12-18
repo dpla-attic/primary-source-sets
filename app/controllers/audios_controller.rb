@@ -3,6 +3,7 @@
 #
 # @see Audios
 class AudiosController < ApplicationController
+  include Encoder
   before_action :authenticate_admin!
 
   def index
@@ -24,7 +25,7 @@ class AudiosController < ApplicationController
   end
 
   ##
-  # @see ApplicationController#create_media
+  # @see Encoder#create_media
   def create
     @audio = Audio.new(audio_params)
     create_media(@audio, 'audio')
@@ -38,7 +39,7 @@ class AudiosController < ApplicationController
   end
 
   ##
-  # @see ApplicationController#transcoding_notifications
+  # @see Encoder#transcoding_notifications
   def notifications_url
     Settings.app_scheme + Settings.zencoder.notification_user + ':' \
       + Settings.zencoder.notification_pass + '@' \
@@ -46,7 +47,7 @@ class AudiosController < ApplicationController
   end
 
   ##
-  # @see ApplicationController#media_outputs
+  # @see Encoder#media_outputs
   def media_outputs
     Settings.audio_outputs.map { |o| o.to_h }
   end

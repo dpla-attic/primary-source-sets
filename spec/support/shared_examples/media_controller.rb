@@ -16,10 +16,8 @@ shared_examples 'media controller' do |*actions|
   if actions.include? :create
     describe '#create' do
       it 'creates a new resource' do
-        # stub encoding job
-        allow_any_instance_of(ApplicationController)
-          .to receive(:create_transcoding_job)
-
+        allow(subject).to receive(:create_transcoding_job)
+                      .and_return('the_id')
         expect do
           post :create, resource_sym => attributes
         end.to change(resource.class, :count).by(1)
@@ -28,10 +26,8 @@ shared_examples 'media controller' do |*actions|
       context 'with source' do
         it 'creates a new Attachment association' do
           attributes[:source_ids] = source.id
-
-          # stub encoding job
-          allow_any_instance_of(ApplicationController)
-            .to receive(:create_transcoding_job)
+          allow(subject).to receive(:create_transcoding_job)
+                        .and_return('the_id')
 
           expect do
             post :create, resource_sym => attributes

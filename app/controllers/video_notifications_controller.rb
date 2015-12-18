@@ -4,7 +4,7 @@
 #
 class VideoNotificationsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  include ZencoderAuthentication
+  include NotificationEndpoint
 
   ##
   # Accept posted JSON data from Zencoder representing a job. Look up the Video
