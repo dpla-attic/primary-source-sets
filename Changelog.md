@@ -1,3 +1,7 @@
+1.1.4 (21 December 2015)
+---
+* Publish all existing sets
+
 1.1.3 (21 December 2015)
 ---
 * Add unpublished attribute to source_sets
