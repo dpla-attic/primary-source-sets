@@ -23,7 +23,7 @@
       <div class='title-inner-container'>
         <h1><%= inline_markdown(@guide.name) %></h1>
         <% if @guide.authors.present? %>
-          <span class='byline'>By <%= authors(@guide).join(' and ') %></span>
+          <span class='byline'>By <%= @guide.author_list.to_sentence %></span>
         <% end %>
       </div>
     </div>
