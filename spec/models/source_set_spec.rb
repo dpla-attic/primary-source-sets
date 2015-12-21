@@ -36,6 +36,20 @@ describe SourceSet, type: :model do
     expect(SourceSet.create(name: 'Little My').slug).to eq 'little-my'
   end
 
+  it 'validates numericality of year' do
+    expect(SourceSet.create(name: 'Little My', year: 'abc')).not_to be_valid
+  end
+
+  it 'allows year to be nil' do
+    expect(SourceSet.create(name: 'Little My', year: nil)).to be_valid
+  end
+
+  it 'validates year is less than or equal to current year' do
+    next_year = Date.today.year + 1
+    expect(SourceSet.create(name: 'Little My', year: next_year))
+      .not_to be_valid
+  end
+
   context 'with featured source' do
 
     let(:source) do

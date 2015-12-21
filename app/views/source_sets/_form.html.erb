@@ -26,6 +26,13 @@
     <strong><%= f.label :published, style: 'display:inline' %></strong>
     <%= f.check_box :published %><br />
   </p>
+
+  <p>
+    <strong><%= f.label :year %></strong>
+    <em>The year will be used for sorting; it will not be displayed to the user.<br/> 
+    Enter a numerical value representing a single year, for example '1924'. Use negative numbers to represent BCE, for example '-331'.</em><br/>
+    <%= f.text_field :year %>
+  </p>
  
   <p>
     <strong><%= f.label 'SEO description' %></strong><br/>

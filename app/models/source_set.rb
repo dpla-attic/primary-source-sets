@@ -7,6 +7,8 @@ class SourceSet < ActiveRecord::Base
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :tags
   validates :name, presence: true
+  validates_numericality_of :year, only_integer: true, allow_nil: true,
+                                   less_than_or_equal_to: Date.today.year
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
