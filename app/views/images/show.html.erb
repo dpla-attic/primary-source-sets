@@ -1,5 +1,5 @@
 <% content_for :head_script do %>
-  <%= javascript_include_tag 'lightbox' %>
+  <% javascript_include_tag 'openseadragon', defer: 'defer' %>
 <% end %>
 
 <h1>Image: <%= @image.file_name %></h1>
@@ -20,24 +20,14 @@
     <td><%= @image.size %></td>
   </tr>
   <tr>
-    <td><strong>Height </strong></td>
-    <td><%= @image.height %></td>
-  </tr>
-  <tr>
-    <td><strong>Width </strong></td>
-    <td><%= @image.width %></td>
-  </tr>
-  <tr>
     <td><strong>Alt text </strong></td>
     <td><%= @image.alt_text %></td>
   </tr>
 </table>
 
-<a data-lightbox="image-1" data-title="<%= @image.alt_text %>"
-   href="<%= base_src + @image.file_name %>">
-   <img src="<%= base_src + @image.file_name %>" alt="<%= @image.alt_text %>"
-        style="max-width: 600px; max-height: 600px;" />
-</a>
+<div id="osd-viewer"></div>
+
+<%= raw image_viewer(base_src + @image.file_name) %>
 
 <h2>Sources</h2>
 <ul>

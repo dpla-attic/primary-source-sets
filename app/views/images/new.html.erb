@@ -21,19 +21,19 @@
 
 <fieldset class='pss-admin-form'>
     <div>
-        <input type="radio" name="image[size]" value="large" checked>large</input>
-        <input type="radio" name="image[size]" value="small">small</input>
-        <input type="radio" name="image[size]" value="thumbnail">thumbnail</input>
+
+        <input id="img_large" type="radio" name="image[size]"
+               value="large" checked />
+        <label for="img_large" class="imgsize_label">large</label>
+
+        <input id="img_small" type="radio" name="image[size]" value="small" />
+        <label for="img_small" class="imgsize_label">small</label>
+
+        <input id="img_thumbnail" type="radio" name="image[size]"
+               value="thumbnail" />
+        <label for="img_thumbnail" class="imgsize_label">thumbnail</label>
+
     </div>
-    <div>
-        <label for="image_width">width</label>
-        <input id="image_width" type="text" name="image[width]"></input>
-    </div>
-    <div>
-        <label for="image_height">height</label>
-        <input id="image_height" type="text" name="image[height]"></input>
-    </div>
-    <div>
         <label for="image_alt_text">alt text</label>
         <input id="image_alt_text" type="text" name="image[alt_text]"></input>
     </div>

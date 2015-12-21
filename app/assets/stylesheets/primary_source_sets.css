@@ -18,6 +18,12 @@
   margin-top: 2em;
 }
 
+#osd-viewer {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
 /* SourceSet and Guide shared styles */
 
 .set .subheading, .guide .subheading {
@@ -215,6 +221,10 @@ input.form-submit {
   background-color: #E6A425;
 }
 
+.pss-admin-form input[type=radio] {
+  margin-right: .25em;
+}
+
 .pss-admin-form textarea {
   height: 100px;
   width: 99%;
@@ -226,4 +236,9 @@ input.form-submit {
 
 #source_set_year {
   width: 4em;
+}
+
+.imgsize_label {
+  display: inline;
+  margin-right: .5em;
 }

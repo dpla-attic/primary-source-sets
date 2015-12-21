@@ -54,8 +54,6 @@ class ImagesController < ApplicationController
     # @see: app/javascripts/avupload.js
     params.require(:image).permit(:file_name,
                                   :size,
-                                  :height,
-                                  :width,
                                   :alt_text,
                                   :source_ids)
   end
