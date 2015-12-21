@@ -6,6 +6,13 @@ FactoryGirl.define do
          '{"extension":"ogg"}]}'
   end
 
+  factory :audio_with_nil_meta_factory, class: Audio do
+    id 2
+    file_base 'f'
+    meta nil
+    transcoding_job '2'
+  end
+
   factory :invalid_audio_factory, class: Audio do
     file_base nil
   end

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :videos
   resources :video_notifications, only: [:create]
   resources :audio_notifications, only: [:create]
+  resources :tags
+  resources :vocabularies
 
   root 'source_sets#index'
 end

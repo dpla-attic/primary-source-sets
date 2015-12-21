@@ -21,6 +21,18 @@
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_field :name %>
   </p>
+
+  <p>
+    <strong><%= f.label :published, style: 'display:inline' %></strong>
+    <%= f.check_box :published %><br />
+  </p>
+
+  <p>
+    <strong><%= f.label :year %></strong>
+    <em>The year will be used for sorting; it will not be displayed to the user.<br/> 
+    Enter a numerical value representing a single year, for example '1924'. Use negative numbers to represent BCE, for example '-331'.</em><br/>
+    <%= f.text_field :year %>
+  </p>
  
   <p>
     <strong><%= f.label 'SEO description' %></strong><br/>
@@ -43,6 +55,13 @@
   <p>
     <strong><%= f.label :author %></strong><br />
     <%= f.collection_check_boxes(:author_ids, Author.all, :id, :name) do |b| %>
+      <%= b.label { b.check_box + b.text } %><br />
+    <% end %>
+  </p>
+
+  <p>
+    <strong><%= f.label :tag %></strong><br />
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
       <%= b.label { b.check_box + b.text } %><br />
     <% end %>
   </p>

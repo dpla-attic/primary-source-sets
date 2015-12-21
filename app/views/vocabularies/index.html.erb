@@ -1,0 +1,16 @@
+<h1>Vocabularies</h1>
+
+<p><%= link_to "Create new vocabulary", new_vocabulary_path %></p>
+
+<table>
+<% @vocabularies.each do |vocabulary| %>
+  <tr>
+    <td><%= vocabulary.name %></td>
+    <td><%= link_to "View", vocabulary_path(vocabulary) %></td>
+    <td><%= link_to "Edit", edit_vocabulary_path(vocabulary) %></td>
+    <td><%= link_to "Delete", vocabulary_path(vocabulary),
+                              method: :delete,
+                              data: { confirm: "Are you sure you want to delete #{vocabulary.name}?" } %> </td>
+  </tr>
+<% end %>
+</table>

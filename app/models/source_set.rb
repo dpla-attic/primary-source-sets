@@ -5,7 +5,10 @@ class SourceSet < ActiveRecord::Base
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
   has_and_belongs_to_many :authors
+  has_and_belongs_to_many :tags
   validates :name, presence: true
+  validates_numericality_of :year, only_integer: true, allow_nil: true,
+                                   less_than_or_equal_to: Date.today.year
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -19,5 +22,13 @@ class SourceSet < ActiveRecord::Base
 
   def featured_image
     small_images.first
+  end
+
+  def self.published_sets
+    self.where(published: true)
+  end
+
+  def self.unpublished_sets
+    self.where(published: false)
   end
 end

@@ -1,0 +1,24 @@
+<h1>Vocabulary: <%= @vocabulary.name %></h1>
+
+<p>
+  <%= link_to "Edit", edit_vocabulary_path(@vocabulary) %>
+  |
+  <%= link_to "Delete", vocabulary_path(@vocabulary), method: :delete,
+               data: { confirm: "Are you sure you want to delete #{@vocabulary.name}?" } %>
+</p>
+
+<table>
+  <tr>
+    <td><strong>Name: </strong></td>
+    <td><%= @vocabulary.name %></td>
+  </tr>
+</table>
+
+<h2>Tags</h2>
+<ul>
+<% @vocabulary.tags.each do |tag| %>
+  <li><%= link_to tag.label, tag_path(tag) %></li>
+<% end %>
+</ul>
+
+<p><%= link_to "Add new tag", new_tag_path(vocabulary_id: @vocabulary.id) %></p>

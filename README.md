@@ -188,6 +188,24 @@ deployments, please be aware that the working copy's configuration files will be
 copied into the `automation` VM, by design.
 
 
+Testing
+-------
+
+To run rspec tests in your console:
+
+    rake ci
+
+To run jasmine tests in your console:
+
+    rake jasmine:ci
+
+To run a jasmine Webrick server on port 3001, from the console do:
+
+    rake jasmine
+
+and then go to `http://localhost:3001/` in your browser.  Whenever you reload the page, the tests are run again.
+
+
 Sample data
 -----------
 

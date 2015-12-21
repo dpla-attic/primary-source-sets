@@ -1,0 +1,16 @@
+<h1>Tags</h1>
+
+<p><%= link_to "Create new tag", new_tag_path %></p>
+
+<table>
+<% @tags.each do |tag| %>
+  <tr>
+    <td><%= tag.label %></td>
+    <td><%= link_to "View", tag_path(tag) %></td>
+    <td><%= link_to "Edit", edit_tag_path(tag) %></td>
+    <td><%= link_to "Delete", tag_path(tag),
+                              method: :delete,
+                              data: { confirm: "Are you sure you want to delete #{tag.label}?" } %> </td>
+  </tr>
+<% end %>
+</table>
