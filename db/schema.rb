@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216150330) do
+ActiveRecord::Schema.define(version: 20151221141547) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20151216150330) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.string   "slug"
+    t.integer  "year"
   end
 
   create_table "source_sets_tags", force: true do |t|

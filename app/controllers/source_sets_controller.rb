@@ -60,6 +60,7 @@ class SourceSetsController < ApplicationController
                                        :overview,
                                        :resources,
                                        :published,
+                                       :year,
                                        author_ids: [],
                                        tag_ids: [])
   end
