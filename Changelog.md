@@ -1,4 +1,14 @@
-1.1.2 (8 December 2016)
+1.1.3 (21 December 2015)
+---
+* Add unpublished attribute to source_sets
+* Add date attribute to source_sets
+* Update README with testing instructions
+* Improve use of global vars in Jasmine tests
+* Add tag and vocabulary tables
+* Allow creation of media assets with specified sources
+* Refactor methods out of ApplicaitonController
+
+1.1.2 (8 December 2015)
 ---
 * Reduce whitespace on guide UI
 * Add save buttons to tops of forms
