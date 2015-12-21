@@ -132,5 +132,18 @@ describe Source, type: :model do
         expect(source.small_image).to eq small_image
       end
     end
+
+    describe '#display_name' do
+      it 'returns name' do
+        expect(source.display_name).to eq source.name
+      end
+
+      context 'no name' do
+        it 'returns aggregation' do
+          nameless_source = create(:source_factory, name: nil)
+          expect(nameless_source.display_name).to eq nameless_source.aggregation
+        end
+      end
+    end
   end
 end

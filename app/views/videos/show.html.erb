@@ -16,7 +16,7 @@
 <h2>Sources</h2>
 <ul>
 <% @video.sources.each do |source| %>
-  <li><%= link_to inline_markdown(source_name(source)), source_path(source) %>, <%= link_to inline_markdown(source.source_set.name), source_set_path(source.source_set) %></li>
+  <li><%= link_to inline_markdown(source.display_name), source_path(source) %>, <%= link_to inline_markdown(source.source_set.name), source_set_path(source.source_set) %></li>
 <% end %>
 </ul>
 
