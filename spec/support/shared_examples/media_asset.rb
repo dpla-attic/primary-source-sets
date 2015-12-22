@@ -18,10 +18,4 @@ shared_examples 'media asset' do
     asset.sources << source
     expect(asset.sources).to eq [source]
   end
-
-  # Fixme: depends on type
-  xit 'is invalid without file_base' do
-    attributes[:file_base] = nil
-    expect(described_class.new(attributes)).not_to be_valid
-  end
 end
