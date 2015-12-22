@@ -1,3 +1,8 @@
+1.1.5 (22 December 201)
+---
+* Style admin forms
+* Add copyright license
+
 1.1.4 (21 December 2015)
 ---
 * Publish all existing sets
