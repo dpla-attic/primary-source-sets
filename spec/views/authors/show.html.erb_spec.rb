@@ -5,6 +5,8 @@ describe 'authors/show.html.erb', type: :view do
 
   before { assign(:author, author) }
 
+  it_behaves_like 'renderable view'
+
   it 'renders the author' do
     render
     expect(rendered).to include(author.name)

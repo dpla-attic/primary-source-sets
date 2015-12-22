@@ -9,6 +9,8 @@ describe 'source_sets/index.html.erb', type: :view do
     assign(:unpublished_sets, SourceSet.unpublished_sets)
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each published source set' do
     render
     expect(rendered).to include('Snorkmaiden')

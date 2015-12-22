@@ -8,6 +8,8 @@ describe 'videos/show.html.erb', type: :view do
     assign(:video, video)
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders the video' do
     render
     expect(rendered).to include(video.file_base)

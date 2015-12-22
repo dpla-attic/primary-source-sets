@@ -8,6 +8,8 @@ describe 'source_sets/show.html.erb', type: :view do
 
   before { assign(:source_set, source_set) }
 
+  it_behaves_like 'renderable view'
+
   it 'renders the source set' do
     render
     expect(rendered).to include(source_set.name)

@@ -8,6 +8,8 @@ describe 'documents/show.html.erb', type: :view do
     assign(:document, document)
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders the document' do
     render
     expect(rendered).to include(document.file_name)

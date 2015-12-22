@@ -7,6 +7,8 @@ describe 'tags/index.html.erb', type: :view do
                    create(:tag_factory, label: 'Snorkmaiden')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each tag' do
     render
     expect(rendered).to include('Moomin')
