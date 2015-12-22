@@ -214,3 +214,9 @@ To create a sample admin account for development and testing:
     rake primary_source_sets:samples:create_admin
 
 This account will have username: 'sample@dp.la' and password: 'password'.
+
+Copyright & License
+-------------------
+
+* Copyright Digital Public Library of America, 2015
+* License: MIT

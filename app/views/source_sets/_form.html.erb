@@ -1,4 +1,4 @@
-<%= form_for @source_set do |f| %>
+<%= form_for @source_set, html: { class: 'pss-admin-form' } do |f| %>
 
   <% if @source_set.errors.any? %>
     <div id="error_explanation">
