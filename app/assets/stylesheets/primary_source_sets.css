@@ -205,7 +205,25 @@ input.form-submit {
   padding: 2px;
 }
 
-textarea {
-  height: 300px;
+.pss-admin-form input, #upload-form input.form-submit {
+  border: 1px solid grey;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.pss-admin-form input.form-submit, #upload-form input.form-submit {
+  background-color: #E6A425;
+}
+
+.pss-admin-form textarea {
+  height: 100px;
   width: 99%;
+}
+
+.primary-source-sets fieldset {
+  border: none;
+}
+
+#source_set_year {
+  width: 4em;
 }
