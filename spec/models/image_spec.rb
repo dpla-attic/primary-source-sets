@@ -20,4 +20,9 @@ describe Image, type: :model do
     attributes[:width] = 'abc'
     expect(described_class.new(attributes)).not_to be_valid
   end
+
+  it 'is invalid without file_name' do
+    attributes[:file_name] = nil
+    expect(described_class.new(attributes)).not_to be_valid
+  end
 end
