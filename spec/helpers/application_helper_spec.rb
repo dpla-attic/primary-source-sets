@@ -86,13 +86,4 @@ describe ApplicationHelper, type: :helper do
       expect(helper.base_src).to eq 'something-example.com/'
     end
   end
-
-  describe '#authors' do
-    it 'returns Array of authors with affilations' do
-      guide = create(:guide_factory)
-      guide.authors << [create(:author_factory, name: 'x', affiliation: 'y'),
-                        create(:author_factory, name: 'z', affiliation: nil)]
-      expect(helper.authors(guide)).to include('x, y', 'z')
-    end
-  end
 end

@@ -1,10 +1,10 @@
 class SourceSet < ActiveRecord::Base
   extend FriendlyId
+  include Authored
   has_many :sources, dependent: :destroy
   has_many :guides, dependent: :destroy
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
-  has_and_belongs_to_many :authors
   has_and_belongs_to_many :tags
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,

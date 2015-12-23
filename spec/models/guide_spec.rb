@@ -2,13 +2,12 @@ require 'rails_helper'
 
 describe Guide, type: :model do
 
-  it 'belong to a source set' do
-    expect(Guide.reflect_on_association(:source_set).macro).to eq :belongs_to
+  it_behaves_like 'authored' do
+    let(:resource) { create(:guide_factory) }
   end
 
-  it 'has and belongs to many authors' do
-    expect(Guide.reflect_on_association(:authors).macro)
-      .to eq :has_and_belongs_to_many
+  it 'belong to a source set' do
+    expect(Guide.reflect_on_association(:source_set).macro).to eq :belongs_to
   end
 
   it 'is invalid without name' do

@@ -54,16 +54,4 @@ module ApplicationHelper
       image_name
     end
   end
-
-  ##
-  # Get all the authors for an object with related authors
-  # @param Guide or SourceSet
-  # @return Array
-  def authors(authored)
-    return unless authored.present?
-    authored.authors.map do |author|
-      author.affiliation.present? ? author.name + ', ' + author.affiliation :
-        author.name
-    end
-  end
 end
