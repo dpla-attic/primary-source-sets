@@ -1,10 +1,12 @@
-<% content_for :head_script do %>
+<% content_for :foot_script do %>
 
   <script>
       var pss_create_asset_path = '<%= videos_path() %>';
       var pss_asset_type = 'video';
       var source_id = '<%= @source.present? ? @source.id : nil %>';
   </script>
+
+  <%= javascript_include_tag 'avupload' %>
 
 <% end %>
 
@@ -18,5 +20,3 @@
 <% end %>
 
 <%= render "shared/s3form" %>
-
-<%= javascript_include_tag 'avupload' %>

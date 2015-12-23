@@ -1,10 +1,12 @@
-<% content_for :head_script do %>
+<% content_for :foot_script do %>
 
   <script>
       var pss_create_asset_path = '<%= images_path() %>';
       var pss_asset_type = 'image';
       var source_id = '<%= @source.present? ? @source.id : nil %>';
   </script>
+
+  <%= javascript_include_tag 'imgupload' %>
 
 <% end %>
 
@@ -38,5 +40,3 @@
 </fieldset>
 
 <%= render "shared/s3form" %>
-
-<%= javascript_include_tag 'imgupload' %>
