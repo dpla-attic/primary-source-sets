@@ -59,4 +59,8 @@ class Source < ActiveRecord::Base
   def small_image
     small_images.first
   end
+
+  def display_name
+    name.present? ? name : aggregation
+  end
 end

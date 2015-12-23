@@ -1,9 +1,5 @@
 module ApplicationHelper
 
-  def source_name(source)
-    source.name.present? ? source.name : source.aggregation
-  end
-
   ##
   # Returns frontend path with correctly joining '/'
   # @param path String (with or without leading slash)

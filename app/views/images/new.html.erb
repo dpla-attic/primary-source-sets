@@ -13,7 +13,7 @@
 <% if @source.present? %>
   <p>
     <strong>This image will be associated with: </strong>
-    <%= inline_markdown(source_name(@source)) %>
+    <%= inline_markdown(@source.display_name) %>
   </p>
 <% end %>
 
