@@ -10,7 +10,7 @@ services:
 - redis-server
 addons:
   code_climate:
-    repo_token: 62a83766ff231b1463ac35e2d2fe856dc36d9dba30441ed1f82eaeaf05bc0854
+    repo_token: d5bdc6bb6c51d8a75b74099ee5fc6f084ecf4b53f849baeb3a425a6aad5f2d54
 before_install:
 - openssl aes-256-cbc -K $encrypted_559d56905e8d_key -iv $encrypted_559d56905e8d_iv
   -in deploy-key.enc -out deploy-key -d
