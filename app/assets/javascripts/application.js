@@ -12,10 +12,3 @@
 //
 //= require jquery
 //= require jquery_ujs
-
-// Disable context menu (right-click) on lightbox links to big images
-$(function() {
-    $('.lightboxlink').bind("contextmenu", function(e) {
-        return false;
-    });
-});

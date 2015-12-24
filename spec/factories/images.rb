@@ -1,9 +1,7 @@
 FactoryGirl.define do
   factory :image_factory, class: Image do
     file_name 'picture-of-little-my'
-    size 'thumbnail'
-    height '150'
-    width '150'
+    size 'large'
     alt_text 'picture of Little My'
   end
 
