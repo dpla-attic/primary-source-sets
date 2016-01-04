@@ -9,7 +9,7 @@
 <% end %>
 
 <% content_for :foot_script do %>
-<%= render partial: 'shared/analytics' %>
+  <%= render partial: 'shared/analytics' %>
 <% end %>
 
 <div class="breadcrumbs">
@@ -24,7 +24,7 @@
         <h1><%= inline_markdown(@source_set.name) %></h1>
         <span class='subheading'>Primary Source Set</span>
         <% if @source_set.authors.present? %>
-          <span class='byline'>By <%= authors(@source_set).join(' and ') %></span>
+          <span class='byline'>By <%= @source_set.author_list.to_sentence %></span>
         <% end %>
       </div>
     </div>

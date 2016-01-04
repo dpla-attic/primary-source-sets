@@ -5,17 +5,16 @@ describe SourceSet, type: :model do
   let(:source_set) { create(:source_set_factory) }
   let(:published_set) { create(:source_set_factory, published: true) }
 
+  it_behaves_like 'authored' do
+    let(:resource) { source_set }
+  end
+
   it 'has many sources' do
     expect(SourceSet.reflect_on_association(:sources).macro).to eq :has_many
   end
 
   it 'has many guides' do
     expect(SourceSet.reflect_on_association(:guides).macro).to eq :has_many
-  end
-
-  it 'has and belongs to many authors' do
-    expect(SourceSet.reflect_on_association(:authors).macro)
-      .to eq :has_and_belongs_to_many
   end
 
   it 'has and belongs to many tags' do

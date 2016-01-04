@@ -11,13 +11,8 @@ describe Image, type: :model do
     expect(described_class.new(attributes)).not_to be_valid
   end
 
-  it 'is invalid if height is not an integer (and non-nil)' do
-    attributes[:height] = 'abc'
-    expect(described_class.new(attributes)).not_to be_valid
-  end
-
-  it 'is invalid if width is not an integer (and non-nil)' do
-    attributes[:width] = 'abc'
+  it 'is invalid without file_name' do
+    attributes[:file_name] = nil
     expect(described_class.new(attributes)).not_to be_valid
   end
 end

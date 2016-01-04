@@ -7,6 +7,8 @@ describe 'vocabularies/index.html.erb', type: :view do
                            create(:vocabulary_factory, name: 'Snorkmaiden')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each vocabulary' do
     render
     expect(rendered).to include('Moomin')

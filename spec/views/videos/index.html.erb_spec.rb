@@ -9,6 +9,8 @@ describe 'videos/index.html.erb', type: :view do
                             transcoding_job: '2')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each video' do
     render
     expect(rendered).to include('file1')

@@ -1,7 +1,9 @@
+<% content_for :foot_script do %>
+  <%= javascript_include_tag 'form' %>
+<% end %>
+
 <p><%= link_to "Back to set", source_set_path(@source_set) %></p>
 
 <h1>New source for <%= inline_markdown(@source_set.name) %></h1>
 
 <%= render "form" %>
-
-<%= javascript_include_tag 'form' %>

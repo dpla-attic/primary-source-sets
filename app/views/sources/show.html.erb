@@ -8,12 +8,9 @@
                                           trailing_slash: true) %>' /> 
 <% end %>
 
-<% content_for :head_script do %>
-<%= javascript_include_tag 'lightbox' %>
-<% end %>
-
 <% content_for :foot_script do %>
-<%= render partial: 'shared/analytics' %>
+  <%= javascript_include_tag 'lightbox' %>
+  <%= render partial: 'shared/analytics' %>
 <% end %>
 
 <div class="breadcrumbs">
@@ -21,7 +18,7 @@
 </div>
 
 <div class='source'>
-  <h1><%= inline_markdown(source_name(@source)) %></h1>
+  <h1><%= inline_markdown(@source.display_name) %></h1>
 
   <%= render_media_asset %>
 

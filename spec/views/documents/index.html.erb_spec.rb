@@ -7,6 +7,8 @@ describe 'documents/index.html.erb', type: :view do
                         create(:document_factory, file_name: 'file2')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each document' do
     render
     expect(rendered).to include('file1')

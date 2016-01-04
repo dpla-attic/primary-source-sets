@@ -1,4 +1,15 @@
-1.1.5 (22 December 201)
+1.2.0 (4 January 2016)
+---
+* Replace lightbox2-rails with OpenSeadragon
+* Move author list from helper to model concern
+* Move source_name helper to source model
+* Move javascripts to bottom of rendered HTML pages
+* Add specs that test if views render
+* Set up and run CodeClimate to check code coverage
+* Correct json-ld examples
+* Fix validation specs for media assets
+
+1.1.5 (22 December 2015)
 ---
 * Style admin forms
 * Add copyright license

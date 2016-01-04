@@ -1,3 +1,7 @@
+<% content_for :foot_script do %>
+  <%= javascript_include_tag 'form' %>
+<% end %>
+
 <h1>Edit source</h1>
 
 <p>
@@ -11,5 +15,3 @@
 <p>This source belongs to <%= link_to inline_markdown(@source.source_set.name), source_set_path(@source.source_set) %></p>
 
 <%= render "form" %>
-
-<%= javascript_include_tag 'form' %>

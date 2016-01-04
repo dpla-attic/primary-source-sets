@@ -1,7 +1,7 @@
 class Guide < ActiveRecord::Base
   extend FriendlyId
+  include Authored
   belongs_to :source_set
-  has_and_belongs_to_many :authors
   validates :name, presence: true
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place

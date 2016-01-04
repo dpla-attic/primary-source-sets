@@ -7,6 +7,8 @@ describe 'images/index.html.erb', type: :view do
                      create(:image_factory, file_name: 'file2')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each image' do
     render
     expect(rendered).to include('file1')

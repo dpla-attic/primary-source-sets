@@ -7,6 +7,8 @@ describe 'authors/index.html.erb', type: :view do
                       create(:author_factory, name: 'Snorkmaiden')])
   end
 
+  it_behaves_like 'renderable view'
+
   it 'renders each author' do
     render
     expect(rendered).to include('Moomin')
