@@ -49,6 +49,10 @@ describe SourceSet, type: :model do
       .not_to be_valid
   end
 
+  it 'orders by created date' do
+    expect(SourceSet.all).to eq([source_set, published_set])
+  end
+
   context 'with featured source' do
 
     let(:source) do
@@ -80,6 +84,33 @@ describe SourceSet, type: :model do
   describe '#unpublished_sets' do
     it 'returns unpublished sets' do
       expect(SourceSet.unpublished_sets).to contain_exactly(source_set)
+    end
+  end
+
+  context 'with tags' do
+
+    let(:a_tag) { create(:tag_factory, label: 'a') }
+    let(:b_tag) { create(:tag_factory, label: 'b') }
+
+    before(:each) do
+      source_set.tags << a_tag
+      published_set.tags << [a_tag, b_tag]
+    end
+
+    describe '#with_tags' do
+      it 'returns source sets with all specified tags' do
+        expect(SourceSet.with_tags(['a', 'b']))
+          .to contain_exactly(published_set)
+      end
+
+      it 'works in conjuction with published_sets' do
+        expect(SourceSet.published_sets.with_tags(['a']))
+          .to contain_exactly(published_set)
+      end
+
+      it 'returns all SourceSets if no tags specified' do
+        expect(SourceSet.with_tags([])).to include(source_set, published_set)
+      end
     end
   end
 end

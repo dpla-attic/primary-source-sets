@@ -9,6 +9,7 @@ class SourceSet < ActiveRecord::Base
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
                                    less_than_or_equal_to: Date.today.year
+  default_scope { order(created_at: :asc) }
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -31,4 +32,24 @@ class SourceSet < ActiveRecord::Base
   def self.unpublished_sets
     self.where(published: false)
   end
+
+  ##
+  # Get SourceSets associated with all of the specified tags.
+  # EACH returned SourceSet will have ALL of the tags.
+  # If no tags are specified, return all SourceSets.
+  # @param tags [Array<String>]
+  # @return [Array<SourceSet>]
+  def self.with_tags(tags)
+    return all unless tags.present?
+    tags.map { |tag| with_tag(tag) }.inject(:&)
+  end
+
+  ##
+  # Get SourceSets associated with the specified tag.
+  # @param tag [String]
+  # @return [SourceSet]
+  def self.with_tag(tag)
+    joins(:tags).where('tags.label = ?', tag)
+  end
+  private_class_method :with_tag
 end
