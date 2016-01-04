@@ -1,6 +1,7 @@
 <% content_for :head_script do %>
   <title>Primary Source Sets</title>
   <meta name='description' content="DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources." />
+  <%= javascript_include_tag 'results-bar', defer: 'defer' %>
 <% end %>
 
 <% content_for :foot_script do %>
@@ -24,6 +25,14 @@
       <% end %>
     </ul>
   <% end %>
+
+  <div class='resultsBar'>
+    <%= form_tag(source_sets_path, method: :get) do %>
+      <%= label_tag(:order, 'Sort by:') %>
+      <%= select_tag(:order, options_for_select(sort_options, @order)) %>
+      <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+    <% end %>
+  </div>
 
   <%= render partial: 'source_sets/set_list',
              locals: { sets: @published_sets } %>

@@ -18,6 +18,7 @@ src_files:
   - assets/avupload.js
   - assets/docupload.js
   - assets/imgupload.js
+  - assets/results-bar.js
 
 # stylesheets
 #

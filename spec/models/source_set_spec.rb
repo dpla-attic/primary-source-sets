@@ -49,10 +49,6 @@ describe SourceSet, type: :model do
       .not_to be_valid
   end
 
-  it 'orders by created date' do
-    expect(SourceSet.all).to eq([source_set, published_set])
-  end
-
   context 'with featured source' do
 
     let(:source) do
@@ -111,6 +107,39 @@ describe SourceSet, type: :model do
       it 'returns all SourceSets if no tags specified' do
         expect(SourceSet.with_tags([])).to include(source_set, published_set)
       end
+    end
+  end
+
+  describe '#order_by' do
+
+    let(:set_a) { create(:source_set_factory, year: 1920) }
+    let(:set_b) { create(:source_set_factory, year: 1930) }
+
+    before(:each) do
+      set_a
+      set_b
+    end
+
+    it 'orders by most recently created' do
+      expect(SourceSet.order_by('recently_added')).to eq([set_b, set_a])
+    end
+
+    it 'orders by time period ascending' do
+      expect(SourceSet.order_by('chronology_asc'))
+        .to eq([set_a, set_b])
+    end
+
+    it 'orders by time period descending' do
+      expect(SourceSet.order_by('chronology_desc'))
+        .to eq([set_b, set_a])
+    end
+
+    it 'defaults to ordering by most recently created' do
+      expect(SourceSet.order_by(nil)).to eq([set_b, set_a])
+    end
+
+    it 'ignores unexpected params' do
+      expect(SourceSet.order_by('*****')).to eq([set_b, set_a])
     end
   end
 end

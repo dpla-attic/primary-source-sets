@@ -36,6 +36,19 @@ describe SourceSetsController, type: :controller do
         get :index, tags: ['a']
       end
 
+      it 'sets @order variable' do
+        get :index, order: 'recently_added'
+        expect(assigns(:order)).to eq 'recently_added'
+      end
+
+      it 'requests SourceSets with specified order' do
+        relation = double('ActiveRecord::Relation')
+        allow(relation).to receive(:with_tags)
+        expect(SourceSet).to receive(:order_by).with('recently_added').twice
+          .and_return(relation)
+        get :index, order: 'recently_added'
+      end
+
       it 'renders the :index view' do
         get :index
         expect(response).to render_template :index

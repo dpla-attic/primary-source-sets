@@ -9,8 +9,10 @@ class SourceSetsController < ApplicationController
 
   def index
     @tags = params[:tags]
-    @published_sets = SourceSet.published_sets.with_tags(@tags)
-    @unpublished_sets = SourceSet.unpublished_sets.with_tags(@tags)
+    @order = params[:order]
+    @published_sets = SourceSet.published_sets.order_by(@order).with_tags(@tags)
+    @unpublished_sets = SourceSet.unpublished_sets.order_by(@order)
+                                 .with_tags(@tags)
   end
 
   def show

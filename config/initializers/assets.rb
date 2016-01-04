@@ -10,6 +10,7 @@ Rails.application.config.assets.precompile += %w( imgupload.js )
 Rails.application.config.assets.precompile += %w( form.js )
 Rails.application.config.assets.precompile += %w( style.js )
 Rails.application.config.assets.precompile += %w( openseadragon.js )
+Rails.application.config.assets.precompile += %w( results-bar.js )
 
 # Precompile assets from gems
 Rails.application.config.assets.precompile += %w( dpla-colors.css dpla-fonts.css )
