@@ -1,5 +1,5 @@
 <% content_for :head_script do %>
-  <title><%= strip_tags(inline_markdown(@source.name)) %></title>
+  <title><%= plaintext_from_md(@source.name) %></title>
   <meta name='description' content="This <%= @source.main_asset.class.name.downcase %> is part of '<%= strip_tags(inline_markdown(@source.source_set.name)) %>', a primary source set for educational use." />
   <link rel='canonical' href='<%= url_for(controller: 'sources',
                                           action: 'show',

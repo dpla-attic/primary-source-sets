@@ -1,3 +1,5 @@
+require 'redcarpet/render_strip'
+
 module MarkdownHelper
   ##
   # @param String text A markdown formatted String
@@ -16,6 +18,10 @@ module MarkdownHelper
   # @raise TypeError if @param is not a String
   def inline_markdown(text)
     strip_p_tags(markdown(text))
+  end
+
+  def plaintext_from_md(text)
+    Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(text)
   end
 
   private

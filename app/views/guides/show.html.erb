@@ -1,5 +1,5 @@
 <% content_for :head_script do %>
-  <title><%= strip_tags(inline_markdown(@guide.name)) %></title>
+  <title><%= plaintext_from_md(@guide.name) %></title>
   <meta name='description' content="This teaching guide helps instructors use a specific primary source set, '<%= strip_tags(inline_markdown(@guide.source_set.name)) %>', in the classroom." />
   <link rel='canonical' href='<%= url_for(controller: 'guides',
                                           action: 'show',
