@@ -16,7 +16,6 @@
  *
  *= require_directory ./vendor
  *= require_directory ./frontend
- *= require font_overrides.css
  *= require frontend_overrides.css
  *= require primary_source_sets.css
  *= require_self
