@@ -1,3 +1,9 @@
+1.2.1 (11 January 2016)
+---
+* Fix double-encoding of characters in titles
+* Remove obsolete data-turbolinks-track attributes
+* Fix "404 Not Found" errors for assets
+
 1.2.0 (4 January 2016)
 ---
 * Replace lightbox2-rails with OpenSeadragon

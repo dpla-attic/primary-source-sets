@@ -9,7 +9,6 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-@import url('/assets/fonts.css');
 html,
 button,
 input,
@@ -165,7 +164,11 @@ aside .module p a,
 select { float: left; width: 30.43478%; }
 select.day { width: 20.735786%; margin: 0 3% 0 3.6789298%; }
 
-label { font: 1em/1.200em 'source_sans_proregular', arial, sans-serif; display: block; }
+label {
+    font: 1em/1.200em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    display: block;
+}
     .collection-detail form.search-form {overflow: visible;}
     .search-within {
         color: #fff;
@@ -182,7 +185,7 @@ label { font: 1em/1.200em 'source_sans_proregular', arial, sans-serif; display: 
     .ie8 .search-within input[type='checkbox'] {vertical-align: text-bottom;}
 
 input[type="submit"] {
-    background: url("/assets/mag-glass.png") no-repeat scroll center right transparent;
+    background: url('<%= image_path("mag-glass.png") %>') no-repeat scroll center right transparent;
     border: medium none;
     display: inline-block;
     height: 41px;
@@ -241,7 +244,8 @@ a { color: #2795b6; text-decoration: none; }
 li { margin: 10px 0; }
 
 h1 {
-    font: 1.867em/1.2em 'source_sans_proregular', arial, sans-serif;
+    font: 1.867em/1.2em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     color: #222;
     margin: 0 0 0.2em;
 }
@@ -252,38 +256,47 @@ h1.border {
 }
 
 h2 {
-    font: 1.6em/1.2em 'source_sans_proregular',arial,sans-serif;
+    font: 1.6em/1.2em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     margin: 0 0 10px;
 }
 h2.border {
     border-bottom: 1px solid #CCCCCC;
     padding: 0 0 4px;
-  margin: 0.7em 0;
-  font: 1.867em/1.2em 'source_sans_proregular',arial,sans-serif;
+    margin: 0.7em 0;
+    font: 1.867em/1.2em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
 
 .upper-left h2 { color: #2b2b2b; }
 
 h3 {
-    font: 1.400em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; /* font 24px/24px */
+    font: 1.400em/1.200em 'Source Sans Pro', sans-serif; /* font 24px/24px */
+    font-weight: 600;
     margin: 0 0 5px;
 }
 
 h4 {
-    font: 1.400em/1.250em 'source_sans_proregular', arial, sans-serif; /* font-size: 18px; */
+    font: 1.400em/1.250em 'Source Sans Pro', sans-serif; /* font-size: 18px; */
+    font-weight: 400;
     margin: 10px 0;
-  color: #818285;
+    color: #818285;
 }
 h5 {
-    font: 1.200em/1em 'source_sans_pro_semiboldRg', arial, sans-serif; /* font-size: 18px; */
+    font: 1.200em/1em 'Source Sans Pro', sans-serif; /* font-size: 18px; */
+    font-weight: 600;
     margin: 2.5% 0;
 }
 h6 {
-    font: 1.000em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif;
+    font: 1.000em/1.200em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     margin: 0 0 1em;
 }
 
-h4 span { font-family: 'source_sans_pro_semiboldRg', arial, sans-serif; }
+h4 span {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
 
 .app h4, .fullWidth h4, .home h4 {
   color: #2b2b2b;
@@ -366,10 +379,12 @@ a:hover { text-decoration: underline; color: #2b2b2b; }
        (min-resolution: 120dpi) {
 
     input[type="submit"], .search-module input[type="submit"] {
+        /* FIXME: image does not exist */;
         background: url('/assets/mag-glass-2x.png') no-repeat center center transparent;
         background-size: 67% 67%;
     }
     .alert .spinner {
+        /* FIXME: image does not exist */;
         background: url('/assets/spinner-2x.png') center center no-repeat;
         background-size: 67% 67%;
     }
@@ -380,8 +395,9 @@ a:hover { text-decoration: underline; color: #2b2b2b; }
    LAYOUT
    ========================================================================== */
 body {
-    background: url('/assets/background.jpg') repeat-x left top #fff;
-    font: 0.938em/1.4em 'source_sans_proregular', arial, sans-serif;
+    background: url('<%= image_path("background.jpg") %>') repeat-x left top #fff;
+    font: 0.938em/1.4em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
 
 .container {
@@ -1195,7 +1211,10 @@ h6.open span {
 }
 
 .search-page aside { /*margin: 43px 0 0;*/  margin-top: 3.3%; }
-.Viewmore { font-family: 'source_sans_pro_semiboldRg', arial, sans-serif; }
+.Viewmore {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
 
 
 
@@ -1512,7 +1531,8 @@ aside .moduleSection p { margin: 0 0 10px; }
     color: #2b2b2b;
     position: relative;
     z-index: 2;
-    font-family: 'source_sans_pro_semiboldRg', arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
     border-bottom: 1px solid #fff;
     cursor: text;
 }
@@ -1607,7 +1627,11 @@ body .profile .tabs .active a:hover { color: inherit; }
 .itemList-top li.active a { color: #fff; }
 
 .itemList li.active, .tab-content .itemList li.active { background: #8b8b8b; padding: 2% 0 1.5% 6.04027%; }
-.tab-content ul:first-child { font-family: 'source_sans_pro_semiboldRg', arial, sans-serif; padding: 0 0 1%; }
+.tab-content ul:first-child {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    padding: 0 0 1%;
+}
 .tab-content ul li:first-child { font-size: 1.200em; }
 .tab-content ul:first-child li { font-size: 1em; padding: 0; }
 .tab-content .saved-rows ul:first-child li:first-child { padding: 0 1% 0 0; }
@@ -1738,7 +1762,8 @@ input[type="checkbox"] {
 .account h6 {
     margin: -1% 0 1.5%;
     font-size: 0.800em;
-    font-family: 'source_sans_proregular', arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     font-style: italic;
 }
 
@@ -1894,7 +1919,8 @@ input[type="checkbox"] {
 }
 .savedList h6 {
     color: #818285;
-    font: 0.8em/1em 'source_sans_proregular',arial,sans-serif;
+    font: 0.8em/1em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     text-transform: uppercase;
 }
 .savedList h5 {
@@ -2212,7 +2238,8 @@ aside h5 { margin: 5px 0 1em; }
 .year h3 {
     background: url("/assets/yearBar.jpg") no-repeat scroll center bottom #8b8b8b;
     color: #FFFFFF;
-    font: 1.86em/0.79em 'source_sans_pro_semiboldRg', arial, sans-serif;
+    font: 1.86em/0.79em 'Source Sans Pro', sans-serif;
+    font-weight: 600;
     padding: 0 0 10px;
     text-align: center;
 }
@@ -2320,7 +2347,8 @@ aside h5 { margin: 5px 0 1em; }
     .row .image { float: right; width: 63.7%; }
 
     .row h2 {
-        font: normal 1.867em/1.100em 'source_sans_proregular', arial, sans-serif;
+        font: normal 1.867em/1.100em 'Source Sans Pro', sans-serif;
+        font-weight: 400;
         margin: 0;
         border: none;
         padding: 0;
@@ -2357,7 +2385,12 @@ aside h5 { margin: 5px 0 1em; }
     }
     .blue .box { border-color: #8b8b8b; float: right; }
     .yellow .box { border-color: #b1b1b1; }
-    .box h6 { position: absolute; bottom: 2%; font-family: 'source_sans_proregular',arial,sans-serif; }
+    .box h6 {
+        position: absolute;
+        bottom: 2%;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+    }
 
     .blue .image { float: left; }
 
@@ -2375,13 +2408,15 @@ aside h5 { margin: 5px 0 1em; }
     .searchForm h2 {
         border: medium none;
         color: #ccc;
-        font: 2.4em/1.2em 'source_sans_proregular',arial,sans-serif;
+        font: 2.4em/1.2em 'Source Sans Pro', sans-serif;
+        font-weight: 400;
         margin: -0.2em 0 0;
         padding: 0;
     }
     .searchForm p {
         color: #FFFFFF;
-        font: 1.2em/1.1em 'source_sans_proregular', arial, sans-serif;
+        font: 1.2em/1.1em 'Source Sans Pro', sans-serif;
+        font-weight: 400;
         margin: 0 0 0.5em;
     }
     .searchForm p span {
@@ -2406,7 +2441,8 @@ aside h5 { margin: 5px 0 1em; }
 }
 
 .search h6 {
-    font: 0.800em/1.000em 'source_sans_proregular', arial, sans-serif;
+    font: 0.800em/1.000em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     color: #818285;
     text-transform: uppercase;
 }
@@ -2417,7 +2453,8 @@ aside h5 { margin: 5px 0 1em; }
 .search h4 { color: #2795b6; margin: 0; font-size: 1.200em; }
 
 .ViewObject {
-    font: 0.800em/1em 'source_sans_pro_semiboldRg', arial, sans-serif;
+    font: 0.800em/1em 'Source Sans Pro', sans-serif;
+    font-weight: 600;
     display: block;
 }
 .ViewObject:hover {
@@ -2468,7 +2505,8 @@ aside h5 { margin: 5px 0 1em; }
 }
 
 .right span {
-    font-family: 'source_sans_pro_semiboldRg', arial, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
 }
 
 .right .social {
@@ -2585,7 +2623,8 @@ aside h5 { margin: 5px 0 1em; }
     color: #fff;
     position: relative;
     z-index: 2;
-    font: 1.200em/1.200em 'source_sans_proregular', arial, sans-serif;
+    font: 1.200em/1.200em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     position: absolute;
     top: 0;
     padding: 3% 5% 0;
@@ -2788,7 +2827,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 
 .popBar .breadCrumbs { width: 82%; margin: 5px 0 0; padding: 0; }
 .popBar .breadCrumbs li {
-    font: 1em/1.2em 'source_sans_pro_semiboldRg',arial,sans-serif;
+    font: 1em/1.2em 'Source Sans Pro', sans-serif;
+    font-weight: 600;
     margin: 0;
   background: none;
 }
@@ -2955,7 +2995,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
     padding: 7px 12px;
     border: none;
     margin: 0;
-  font: 0.938em/1.4em 'source_sans_proregular', arial, sans-serif;
+    font: 0.938em/1.4em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -2983,7 +3024,9 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 #colorbox .itemDetails h5 { margin-top: 0; margin-right: 32px; }
 
 #colorbox form h6 {
-    font-family: 'source_sans_proitalic';
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: italic;
+    font-weight: 400;
     font-size: 0.8em;
     margin: -13px 0 20px;
 }
@@ -3084,7 +3127,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
     float: left;
 }
 .upper-left h3 {
-    font-family: 'source_sans_proregular',arial,sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
 .upper-section .sideNav {
     border-color: #808080;
@@ -3527,7 +3571,8 @@ div.timeline-year {
     background: none repeat scroll 0 0 #808080;
     border: medium none;
     color: #FFFFFF;
-    font: 0.938em/1.4em 'source_sans_proregular',arial,sans-serif;
+    font: 0.938em/1.4em 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     height: auto;
     margin: 0;
     padding: 7px 12px;

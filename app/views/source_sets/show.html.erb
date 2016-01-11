@@ -1,5 +1,5 @@
 <% content_for :head_script do %>
-  <title><%= strip_tags(inline_markdown(@source_set.name)) %></title>
+  <title><%= plaintext_from_md(@source_set.name) %></title>
   <meta name='description' content="<%= @source_set.description %>" />
   <link rel='canonical' href='<%= url_for(controller: 'source_sets',
                                           action: 'show',
