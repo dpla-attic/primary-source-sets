@@ -3,7 +3,7 @@ require 'rails_helper'
 describe SourceSetsController, type: :controller do
 
   let(:resource) { create(:source_set_factory) }
-  let(:published) { create(:source_set_factory, published: true)}
+  let(:published) { create(:source_set_factory, published: true) }
   let(:attributes) { attributes_for(:source_set_factory) }
   let(:invalid_attributes) { attributes_for(:invalid_source_set_factory) }
 
@@ -24,6 +24,16 @@ describe SourceSetsController, type: :controller do
       it 'sets @unpublished_sets variable' do
         get :index
         expect(assigns(:unpublished_sets)).to eq([resource])
+      end
+
+      it 'sets @tags variable' do
+        get :index, tags: ['a']
+        expect(assigns(:tags)).to eq(['a'])
+      end
+
+      it 'requests SourceSets with specified tags' do
+        expect(SourceSet).to receive(:with_tags).with(['a']).twice
+        get :index, tags: ['a']
       end
 
       it 'renders the :index view' do

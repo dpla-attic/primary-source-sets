@@ -8,8 +8,9 @@ class SourceSetsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :edit]
 
   def index
-    @published_sets = SourceSet.published_sets
-    @unpublished_sets = SourceSet.unpublished_sets
+    @tags = params[:tags]
+    @published_sets = SourceSet.published_sets.with_tags(@tags)
+    @unpublished_sets = SourceSet.unpublished_sets.with_tags(@tags)
   end
 
   def show

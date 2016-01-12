@@ -1,5 +1,5 @@
 <div class='set-list'>
-  <%= sets.order('created_at ASC').each_slice(3) do |sets_row| %>
+  <%= sets.each_slice(3) do |sets_row| %>
     <div class='moduleContainer threeCol'>
       <% sets_row.each_with_index do |set, i| %>
         <section class='module'>
@@ -12,6 +12,18 @@
           <div class='set-name-container'>
             <%= link_to inline_markdown(set.name), source_set_path(set) %>
           </div>
+
+          <% if Settings.display_tags_on_public_ui == true %>
+            <ul class='tag-list'>
+              <% set.tags.each do |tag| %>
+                <li class='tag'>
+                  <% link_tags = ([@tags].flatten.compact + [tag.label]).uniq %>
+                  <%= link_to tag.label, source_sets_path(tags: link_tags) %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
         </section>
       <% end %>
     </div>
