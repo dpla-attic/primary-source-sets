@@ -18,7 +18,8 @@
               <% set.tags.each do |tag| %>
                 <li class='tag'>
                   <% link_tags = ([@tags].flatten.compact + [tag.label]).uniq %>
-                  <%= link_to tag.label, source_sets_path(tags: link_tags) %>
+                  <% new_params = params.merge(tags: link_tags) %>
+                  <%= link_to tag.label, source_sets_path(new_params) %>
                 </li>
               <% end %>
             </ul>

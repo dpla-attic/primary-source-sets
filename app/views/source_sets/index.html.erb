@@ -20,7 +20,8 @@
       <% @tags.each do |tag| %>
         <li class='tag'>
           <% link_tags = [@tags].flatten.compact - [tag] %>
-          <%= tag %> <%= link_to '×', source_sets_path(tags: link_tags) %>
+          <% new_params = params.merge(tags: link_tags) %>
+          <%= tag %> <%= link_to '×', source_sets_path(new_params) %>
         </li>
       <% end %>
     </ul>
@@ -28,6 +29,11 @@
 
   <div class='resultsBar'>
     <%= form_tag(source_sets_path, method: :get) do %>
+      <% if params[:tags].present? %>
+        <% params[:tags].each do |tag| %>
+          <%= hidden_field_tag('tags[]', tag) %>
+        <% end %>
+      <% end %>
       <%= label_tag(:order, 'Sort by:') %>
       <%= select_tag(:order, options_for_select(sort_options, @order)) %>
       <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
