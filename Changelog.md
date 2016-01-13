@@ -1,3 +1,11 @@
+1.2.2 (13 January 2016)
+---
+* Render mobile layout
+* Fix menu button for small windows
+* Add meta elements to layout
+* Order sets by date_created or year
+* Show and filter by tags on public user interface
+
 1.2.1 (11 January 2016)
 ---
 * Fix double-encoding of characters in titles
