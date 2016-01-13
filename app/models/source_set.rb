@@ -9,7 +9,6 @@ class SourceSet < ActiveRecord::Base
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
                                    less_than_or_equal_to: Date.today.year
-  default_scope { order(created_at: :asc) }
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -34,14 +33,27 @@ class SourceSet < ActiveRecord::Base
   end
 
   ##
+  # Order SourceSets by a given parameter.
+  # If a parameter is not included in the sort_params hash, it will be ignored.
+  # By default, it will order by 'recently_added'.
+  # @param order String or nil
+  # @return ActiveRecord::Relation
+  def self.order_by(order)
+    sort_params = { 'recently_added' => { created_at: :desc },
+                    'chronology_desc' => { year: :desc },
+                    'chronology_asc' => { year: :asc } }
+    order(sort_params[order] || sort_params['recently_added'])
+  end
+
+  ##
   # Get SourceSets associated with all of the specified tags.
   # EACH returned SourceSet will have ALL of the tags.
   # If no tags are specified, return all SourceSets.
-  # @param tags [Array<String>]
+  # @param tags [Array<String>] or nil
   # @return [Array<SourceSet>]
   def self.with_tags(tags)
     return all unless tags.present?
-    tags.map { |tag| with_tag(tag) }.inject(:&)
+    tags.map { |tag| with_tag(tag) }.inject(:&).to_a
   end
 
   ##

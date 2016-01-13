@@ -49,8 +49,22 @@
 
 /* SourceSets index styles */
 
+.all-sets .resultsBar {
+  clear: both;
+}
+
 .all-sets .module {
   border-color: #6592A6;
+  padding: 0;
+  background-color: white;
+  max-width: 440px;
+}
+
+.all-sets img {
+  margin: 0;
+}
+
+.all-sets .set-tile {
   padding: 0;
   background-color: white;
   max-width: 440px;
@@ -111,6 +125,26 @@
 
 .all-sets .admin-info .set-name-container {
   background-color: #777;
+}
+
+/* Results bar */
+
+.all-sets .resultsBar select {
+  width: 210px;
+}
+
+.all-sets .resultsBar input[type='submit'] {
+  background: none;
+  background-color: #DD4E00;
+  text-indent: 0;
+  position: relative;
+  font-size: 1em;
+  text-transform: none;
+  color: white;
+  padding: 4px 8px;
+  margin-left: 8px;
+  height: auto;
+  width: auto;
 }
 
 /* SourceSet styles */
