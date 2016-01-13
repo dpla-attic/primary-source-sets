@@ -1,3 +1,8 @@
+1.2.3 (13 January 2016)
+---
+* Fix default settings
+* Fix bug causing order and tags params to override one another
+
 1.2.2 (13 January 2016)
 ---
 * Render mobile layout
