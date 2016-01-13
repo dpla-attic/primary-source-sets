@@ -82,4 +82,64 @@ describe SourceSet, type: :model do
       expect(SourceSet.unpublished_sets).to contain_exactly(source_set)
     end
   end
+
+  context 'with tags' do
+
+    let(:a_tag) { create(:tag_factory, label: 'a') }
+    let(:b_tag) { create(:tag_factory, label: 'b') }
+
+    before(:each) do
+      source_set.tags << a_tag
+      published_set.tags << [a_tag, b_tag]
+    end
+
+    describe '#with_tags' do
+      it 'returns source sets with all specified tags' do
+        expect(SourceSet.with_tags(['a', 'b']))
+          .to contain_exactly(published_set)
+      end
+
+      it 'works in conjuction with published_sets' do
+        expect(SourceSet.published_sets.with_tags(['a']))
+          .to contain_exactly(published_set)
+      end
+
+      it 'returns all SourceSets if no tags specified' do
+        expect(SourceSet.with_tags([])).to include(source_set, published_set)
+      end
+    end
+  end
+
+  describe '#order_by' do
+
+    let(:set_a) { create(:source_set_factory, year: 1920) }
+    let(:set_b) { create(:source_set_factory, year: 1930) }
+
+    before(:each) do
+      set_a
+      set_b
+    end
+
+    it 'orders by most recently created' do
+      expect(SourceSet.order_by('recently_added')).to eq([set_b, set_a])
+    end
+
+    it 'orders by time period ascending' do
+      expect(SourceSet.order_by('chronology_asc'))
+        .to eq([set_a, set_b])
+    end
+
+    it 'orders by time period descending' do
+      expect(SourceSet.order_by('chronology_desc'))
+        .to eq([set_b, set_a])
+    end
+
+    it 'defaults to ordering by most recently created' do
+      expect(SourceSet.order_by(nil)).to eq([set_b, set_a])
+    end
+
+    it 'ignores unexpected params' do
+      expect(SourceSet.order_by('*****')).to eq([set_b, set_a])
+    end
+  end
 end

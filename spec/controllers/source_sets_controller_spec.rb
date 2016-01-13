@@ -3,7 +3,7 @@ require 'rails_helper'
 describe SourceSetsController, type: :controller do
 
   let(:resource) { create(:source_set_factory) }
-  let(:published) { create(:source_set_factory, published: true)}
+  let(:published) { create(:source_set_factory, published: true) }
   let(:attributes) { attributes_for(:source_set_factory) }
   let(:invalid_attributes) { attributes_for(:invalid_source_set_factory) }
 
@@ -24,6 +24,29 @@ describe SourceSetsController, type: :controller do
       it 'sets @unpublished_sets variable' do
         get :index
         expect(assigns(:unpublished_sets)).to eq([resource])
+      end
+
+      it 'sets @tags variable' do
+        get :index, tags: ['a']
+        expect(assigns(:tags)).to eq(['a'])
+      end
+
+      it 'requests SourceSets with specified tags' do
+        expect(SourceSet).to receive(:with_tags).with(['a']).twice
+        get :index, tags: ['a']
+      end
+
+      it 'sets @order variable' do
+        get :index, order: 'recently_added'
+        expect(assigns(:order)).to eq 'recently_added'
+      end
+
+      it 'requests SourceSets with specified order' do
+        relation = double('ActiveRecord::Relation')
+        allow(relation).to receive(:with_tags)
+        expect(SourceSet).to receive(:order_by).with('recently_added').twice
+          .and_return(relation)
+        get :index, order: 'recently_added'
       end
 
       it 'renders the :index view' do

@@ -4,6 +4,11 @@
   word-wrap: break-word;
 }
 
+.inline-block {
+  display: inline-block;
+  float: left;
+}
+
 .primary-source-sets aside {
   margin-left: 1em;
   margin-bottom: 1em;
@@ -44,6 +49,106 @@
 
 /* SourceSets index styles */
 
+.all-sets .resultsBar {
+  clear: both;
+}
+
+.all-sets .module {
+  border-color: #6592A6;
+  padding: 0;
+  background-color: white;
+  max-width: 440px;
+}
+
+.all-sets img {
+  margin: 0;
+}
+
+.all-sets .set-tile {
+  padding: 0;
+  background-color: white;
+  max-width: 440px;
+}
+
+.all-sets img {
+  margin: 0;
+}
+
+.all-sets .set-tile {
+  border-color: #6592A6;
+  background-color: #6592A6;
+}
+
+.all-sets .set-name-container {
+  padding: 1em;
+  background-color: #6592A6;
+}
+
+.all-sets .set-name-container a {
+  color: white;
+  font-weight: normal;
+  font-size: 1.2em;
+}
+
+.all-sets .tag-label {
+  margin: 0.8em 1em 0.8em 0;
+}
+
+.all-sets .tag-list {
+  background-color: white;
+  margin: 0 -0.5em 1.5em 0;
+  padding: 0;
+}
+
+.all-sets .tag {
+  display: inline;
+  float: left;
+  background-color: #EDEDED;
+  border: 1px solid #D2D2D2;
+  padding: 0.2em 0.5em;
+  margin: 0.5em 0.5em 0 0;
+}
+
+.all-sets .set-list .tag a {
+  display: block;
+}
+
+.all-sets .tag a:hover {
+  text-decoration: none;
+}
+
+/* Unpublished SourceSets */
+
+.all-sets .admin-info .module {
+  border-color: #777;
+}
+
+.all-sets .admin-info .set-name-container {
+  background-color: #777;
+}
+
+/* Results bar */
+
+.all-sets .resultsBar select {
+  width: 210px;
+}
+
+.all-sets .resultsBar input[type='submit'] {
+  background: none;
+  background-color: #DD4E00;
+  text-indent: 0;
+  position: relative;
+  font-size: 1em;
+  text-transform: none;
+  color: white;
+  padding: 4px 8px;
+  margin-left: 8px;
+  height: auto;
+  width: auto;
+}
+
+/* SourceSet styles */
+
 .set .title-outer-container {
   background-color: #6592A6;
   margin-bottom: 2em;
@@ -58,25 +163,6 @@
   color: white;
   margin: 0;
 }
-
-.all-sets .module {
-  border-color: #6592A6;
-  padding: 0;
-  background-color: #6592A6;
-  max-width: 440px;
-}
-
-.all-sets .set-name-container {
-  margin: 0.5em 1em;
-}
-
-.all-sets .set-name-container a {
-  color: white;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-/* SourceSet styles */
 
 .set .overview {
   clear: both;

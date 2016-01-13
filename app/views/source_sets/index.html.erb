@@ -1,6 +1,7 @@
 <% content_for :head_script do %>
   <title>Primary Source Sets</title>
   <meta name='description' content="DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources." />
+  <%= javascript_include_tag 'results-bar', defer: 'defer' %>
 <% end %>
 
 <% content_for :foot_script do %>
@@ -13,6 +14,26 @@
 
   <p>DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources. Each set includes an overview, ten to fifteen primary sources, links to related resources, and a teaching guide. These sets were created and reviewed by the teachers on the DPLA's <%= link_to 'Education Advisory Committee', wordpress_path('education/education-advisory-committee') %>. We will be adding new sets and features through Spring 2016. Read about our <%= link_to 'education projects', wordpress_path('education') %> and contact us with feedback at <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
 
+  <% if @tags.present? && Settings.display_tags_on_public_ui == true %>
+    <span class='tag-label inline-block'>Refined by: </span>
+    <ul class='tag-list inline-block'>
+      <% @tags.each do |tag| %>
+        <li class='tag'>
+          <% link_tags = [@tags].flatten.compact - [tag] %>
+          <%= tag %> <%= link_to '×', source_sets_path(tags: link_tags) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class='resultsBar'>
+    <%= form_tag(source_sets_path, method: :get) do %>
+      <%= label_tag(:order, 'Sort by:') %>
+      <%= select_tag(:order, options_for_select(sort_options, @order)) %>
+      <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+    <% end %>
+  </div>
+
   <%= render partial: 'source_sets/set_list',
              locals: { sets: @published_sets } %>
 
@@ -20,17 +41,18 @@
     <p>Send feedback about these primary source sets or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
   </div>
 
+  <% if admin_signed_in? %>
+
+    <div class='admin-info'>
+
+      <h2>Admin Info</h2>
+
+      <p><%= link_to "Create new set", new_source_set_path %></p>
+
+      <h3>Unpublished sets</h3>
+
+      <%= render partial: 'source_sets/set_list',
+                 locals: { sets: @unpublished_sets } %>
+    </div>
+  <% end %>
 </div>
-
-<% if admin_signed_in? %>
-
-  <h2>Admin Info</h2>
-
-  <p><%= link_to "Create new set", new_source_set_path %></p>
-
-  <h3>Unpublished sets</h3>
-
-  <%= render partial: 'source_sets/set_list',
-             locals: { sets: @unpublished_sets } %>
-
-<% end %>
