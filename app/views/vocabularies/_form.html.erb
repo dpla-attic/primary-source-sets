@@ -24,6 +24,12 @@
   </p>
 
   <p>
+    <strong><%= f.label :filter, style: 'display:inline' %></strong>
+    <%= f.check_box :filter %><br />
+    <em>If Filter is checked, users will be able to filter sets using this vocabulary.</em>
+  </p>
+
+  <p>
     <strong><%= f.label :tags %></strong><br />
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
       <%= b.label { b.check_box + b.text } %><br />

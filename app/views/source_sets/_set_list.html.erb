@@ -13,16 +13,35 @@
             <%= link_to inline_markdown(set.name), source_set_path(set) %>
           </div>
 
-          <% if Settings.display_tags_on_public_ui == true %>
-            <ul class='tag-list'>
-              <% set.tags.each do |tag| %>
-                <li class='tag'>
-                  <% link_tags = ([@tags].flatten.compact + [tag.label]).uniq %>
-                  <% new_params = params.merge(tags: link_tags) %>
-                  <%= link_to tag.label, source_sets_path(new_params) %>
-                </li>
-              <% end %>
-            </ul>
+          <%# Setting this variable reduces calls to the database %>
+          <% set_tags = set.tags %>
+
+          <% filters.each do |vocab, tags| %>
+
+            <%# Get tags that are shared between this set and this vocab %>
+            <% display_tags = tags & set_tags %>
+
+            <% if display_tags.present? %>
+              <div>
+                <strong><%= "#{vocab.name}: " %></strong>
+
+                <%# for each tag shared between this vocab and this set %>
+                <% display_tags.each_with_index do |display_tag, index| %>
+
+                  <%# Configure new params.
+                      New params should include the display_tag and all other
+                      current, non-tag params. %>
+
+                  <% new_params = params.merge(tags: [display_tag.slug]) %>
+
+                  <%# Link to the source_sets path with the new params %>
+                  <%= link_to display_tag.label, source_sets_path(new_params) %>
+
+                  <%# Comma-separate the list of links %>
+                  <%= ", " unless index == (display_tags.count - 1) %>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
 
         </section>

@@ -53,6 +53,10 @@
   clear: both;
 }
 
+.all-sets select {
+  height: 100%;
+}
+
 .all-sets .module {
   border-color: #6592A6;
   padding: 0;
