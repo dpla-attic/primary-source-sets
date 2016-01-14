@@ -1,3 +1,7 @@
+1.2.4 (14 January 2016)
+---
+* Change working in sort by menu
+
 1.2.3 (13 January 2016)
 ---
 * Fix default settings
