@@ -1,0 +1,34 @@
+<h2>Edit Account</h2>
+
+<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <div>Currently awaiting confirmation for: <%= resource.unconfirmed_email %>
+  </div>
+<% end %>
+
+<%= devise_error_messages! %>
+
+<%# View for Devise method inherited by Registrations controller. %>
+<%# Uses `resource` for consistency with Devise::Registrations#new %>
+<%= form_for(resource,
+             as: resource_name,
+             url: registration_path(resource),
+             html: { class: 'pss-admin-form' }) do |f| %>
+
+  <%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, autocomplete: "off" %>
+  <div><i>(leave blank if you don't want to change it)</i></div>
+
+  <%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+  <div>
+    <%= f.submit "Update", class: 'form-submit' %>
+  </div>
+
+<% end %>
+
+
+<%= link_to "Back", :back %>
