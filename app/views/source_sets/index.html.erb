@@ -38,12 +38,23 @@
 
         <%= label_tag('tags[]', "#{vocab.name}:") %>
 
-        <% multiple = selected_slugs_in(tags).count > 1 %>
-
-        <%= select_tag('tags[]',
+        <% if selected_tags_in(tags).count == 0 %>
+          <%# render dropdown menu %>
+          <%= select_tag('tags[]',
                        options_for_select(tag_filter_options(tags),
-                                          selected_slugs_in(tags)),
-                       multiple: multiple) %>
+                                          selected_slugs_in(tags))) %>
+        <% else %>
+          <%# render pill tags %>
+          <ul class='tag-list inline-block'>
+            <% selected_tags_in(tags).each do |tag| %>
+              <li class='tag'>
+                <% link_tags = selected_slugs_in(@tags).flatten.compact - [tag.slug] %>
+                <% new_params = params.merge(tags: link_tags) %>
+                <%= tag.label %> <%= link_to '×', source_sets_path(new_params) %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
 
         <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
 

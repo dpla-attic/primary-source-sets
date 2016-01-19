@@ -60,6 +60,13 @@ describe SourceSetsHelper, type: :helper do
     end
   end
 
+  describe '#selected_tags_in' do
+    it 'returns those given tags that are in params' do
+      helper.stub(:params).and_return(tags: [tag_a.slug])
+      expect(helper.selected_tags_in([tag_a, tag_b])).to eq [tag_a]
+    end
+  end
+
   describe '#selected_slugs_not_in' do
     # FIXME: spec not passing, although testing on UI indicates that method is
     # working as expected

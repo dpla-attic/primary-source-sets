@@ -44,8 +44,16 @@ module SourceSetsHelper
   # @param [Array<Tag>]
   # @return [Array<String>]
   def selected_slugs_in(tags)
+    selected_tags_in(tags).map { |tag| tag.slug } 
+  end
+
+  ##
+  # Given a set of tags, return those that are represented in params[:tags].
+  #
+  # @param [Array<Tag>]
+  # @return [Array<Tag>]
+  def selected_tags_in(tags)
     tags.select { |tag| [params[:tags]].compact.flatten.include?(tag.slug) }
-        .map { |tag| tag.slug } 
   end
 
   ##
