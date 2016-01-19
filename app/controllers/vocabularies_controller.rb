@@ -51,6 +51,6 @@ class VocabulariesController < ApplicationController
   private
 
   def vocabulary_params
-    params.require(:vocabulary).permit(:name, tag_ids: [])
+    params.require(:vocabulary).permit(:name, :filter, tag_ids: [])
   end
 end

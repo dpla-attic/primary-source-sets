@@ -49,7 +49,7 @@ class SourceSet < ActiveRecord::Base
   # Get SourceSets associated with all of the specified tags.
   # EACH returned SourceSet will have ALL of the tags.
   # If no tags are specified, return all SourceSets.
-  # @param tags [Array<String>] or nil
+  # @param tags [Array<Tag>] or nil.
   # @return [Array<SourceSet>]
   def self.with_tags(tags)
     return all unless tags.present?
@@ -58,10 +58,10 @@ class SourceSet < ActiveRecord::Base
 
   ##
   # Get SourceSets associated with the specified tag.
-  # @param tag [String]
-  # @return [SourceSet]
+  # @param tag [Tag]
+  # @return [ActiveRecord::Relation<SourceSet>]
   def self.with_tag(tag)
-    joins(:tags).where('tags.label = ?', tag)
+    joins(:tags).where('tags.id = ?', tag.id)
   end
   private_class_method :with_tag
 end

@@ -8,7 +8,7 @@ class SourceSetsController < ApplicationController
   before_action :authenticate_admin!, only: [:new, :edit]
 
   def index
-    @tags = params[:tags]
+    @tags = get_tags_from_params
     @order = params[:order]
     @published_sets = SourceSet.published_sets.order_by(@order).with_tags(@tags)
     @unpublished_sets = SourceSet.unpublished_sets.order_by(@order)
@@ -66,5 +66,24 @@ class SourceSetsController < ApplicationController
                                        :year,
                                        author_ids: [],
                                        tag_ids: [])
+  end
+
+  ##
+  # @return [Array<Tag>]
+  def get_tags_from_params
+    return nil unless params[:tags].present?
+    Tag.where("slug IN (?)", valid_tags_params)
+  end
+
+  ##
+  # Get only those :tags params whose characters are solely comprised of
+  # letters, numbers or '-'.
+  #
+  # @return [Array<String>]
+  def valid_tags_params
+    return [] unless params[:tags].present?
+    params[:tags].select do |slug|
+      (slug =~ /[^a-zA-Z0-9-]/).nil?
+    end
   end
 end

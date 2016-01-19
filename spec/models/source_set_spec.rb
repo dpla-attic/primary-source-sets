@@ -95,12 +95,12 @@ describe SourceSet, type: :model do
 
     describe '#with_tags' do
       it 'returns source sets with all specified tags' do
-        expect(SourceSet.with_tags(['a', 'b']))
+        expect(SourceSet.with_tags([a_tag, b_tag]))
           .to contain_exactly(published_set)
       end
 
       it 'works in conjuction with published_sets' do
-        expect(SourceSet.published_sets.with_tags(['a']))
+        expect(SourceSet.published_sets.with_tags([a_tag]))
           .to contain_exactly(published_set)
       end
 

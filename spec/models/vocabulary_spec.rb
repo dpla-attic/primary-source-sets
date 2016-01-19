@@ -19,4 +19,27 @@ describe Vocabulary, type: :model do
   it 'has a slug' do
     expect(Vocabulary.create(name: 'Little My').slug).to eq 'little-my'
   end
+
+  context 'with filterable vocabs' do
+    let(:filterable) { create(:vocabulary_factory, filter: true) }
+
+    let(:unfilterable) do 
+      create(:vocabulary_factory,
+      filter: false,
+      name: 'another name')
+    end
+
+    let(:tag) { create(:tag_factory) }
+
+    before(:each) do
+      filterable.tags << tag
+      unfilterable
+    end
+
+    describe '#filterable' do
+      it 'returns vocubularies where filter is true' do
+        expect(Vocabulary.filterable).to contain_exactly(filterable)
+      end
+    end
+  end
 end

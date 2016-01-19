@@ -53,6 +53,10 @@
   clear: both;
 }
 
+.all-sets select {
+  height: 100%;
+}
+
 .all-sets .module {
   border-color: #6592A6;
   padding: 0;
@@ -101,12 +105,17 @@
 }
 
 .all-sets .tag {
-  display: inline;
+  display: inline-block;
   float: left;
-  background-color: #EDEDED;
   border: 1px solid #D2D2D2;
   padding: 0.2em 0.5em;
-  margin: 0.5em 0.5em 0 0;
+  margin: 0 0.5em 0 0;
+  font-size: 0.9em;
+}
+
+.all-sets .set-list .tag {
+  background-color: #EDEDED;
+  margin-top: 0.5em;
 }
 
 .all-sets .set-list .tag a {
