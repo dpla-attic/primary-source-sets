@@ -1,3 +1,7 @@
+1.2.5 (19 January 2015)
+---
+* Add filter feature to public UI
+
 1.2.4 (14 January 2016)
 ---
 * Change working in sort by menu
