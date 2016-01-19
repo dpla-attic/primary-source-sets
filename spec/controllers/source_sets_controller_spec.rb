@@ -26,14 +26,27 @@ describe SourceSetsController, type: :controller do
         expect(assigns(:unpublished_sets)).to eq([resource])
       end
 
-      it 'sets @tags variable' do
-        get :index, tags: ['a']
-        expect(assigns(:tags)).to eq(['a'])
+      context 'with tags' do
+        let(:tag) { create(:tag_factory, slug: 'a') }
+
+        before(:each) do
+          resource.tags << [tag]
+        end
+
+        it 'sets @tags variable' do
+          get :index, tags: ['a']
+          expect(assigns(:tags)).to eq([tag])
+        end
+
+        it 'requests SourceSets with specified tags' do
+          expect(SourceSet).to receive(:with_tags).with([tag]).twice
+          get :index, tags: ['a']
+        end
       end
 
-      it 'requests SourceSets with specified tags' do
-        expect(SourceSet).to receive(:with_tags).with(['a']).twice
-        get :index, tags: ['a']
+      it 'only accepts valid tag params' do
+        expect(Tag).to receive(:where).with("slug IN (?)", ['abc-DEF'])
+        get :index, tags: ['abc-DEF', 'invalid$%']
       end
 
       it 'sets @order variable' do

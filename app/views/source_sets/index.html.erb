@@ -8,40 +8,81 @@
   <%= render partial: 'shared/analytics' %>
 <% end %>
 
+<%# Get filterable vocabs and their associated tags for relevant sets. %>
+<%# Setting this variable for the view helps reduce calls to the database. %>
+<% if admin_signed_in? %>
+  <% filters = filters_for_sets(SourceSet.all) %>
+<% else %>
+  <% filters = filters_for_sets(SourceSet.published_sets) %>
+<% end %>
+
 <div class='all-sets'>
 
   <h1>Primary Source Sets</h1>
 
   <p>DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources. Each set includes an overview, ten to fifteen primary sources, links to related resources, and a teaching guide. These sets were created and reviewed by the teachers on the DPLA's <%= link_to 'Education Advisory Committee', wordpress_path('education/education-advisory-committee') %>. We will be adding new sets and features through Spring 2016. Read about our <%= link_to 'education projects', wordpress_path('education') %> and contact us with feedback at <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
 
-  <% if @tags.present? && Settings.display_tags_on_public_ui == true %>
-    <span class='tag-label inline-block'>Refined by: </span>
-    <ul class='tag-list inline-block'>
-      <% @tags.each do |tag| %>
-        <li class='tag'>
-          <% link_tags = [@tags].flatten.compact - [tag] %>
-          <% new_params = params.merge(tags: link_tags) %>
-          <%= tag %> <%= link_to '×', source_sets_path(new_params) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <div class='resultsBar'>
+    <% filters.each do |vocab, tags| %>
+      <%= form_tag(source_sets_path, method: :get) do %>
+
+        <% if params[:order].present? %>
+          <%= hidden_field_tag(:order, params[:order]) %>
+        <% end %>
+
+        <% if params[:tags].present? %>
+          <% if selected_slugs_not_in(tags).present? %>
+            <%= hidden_field_tag('tags[]', selected_slugs_not_in(tags)) %>
+          <% end %>
+        <% end %>
+
+        <%= label_tag('tags[]', "#{vocab.name}:") %>
+
+        <% if selected_tags_in(tags).count == 0 %>
+          <%# render dropdown menu %>
+          <%= select_tag('tags[]',
+                       options_for_select(tag_filter_options(tags),
+                                          selected_slugs_in(tags))) %>
+        <% else %>
+          <%# render pill tags %>
+          <ul class='tag-list inline-block'>
+            <% selected_tags_in(tags).each do |tag| %>
+              <li class='tag'>
+                <% link_tags = selected_slugs_in(@tags).flatten.compact - [tag.slug] %>
+                <% new_params = params.merge(tags: link_tags) %>
+                <%= tag.label %> <%= link_to '×', source_sets_path(new_params) %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+
+      <% end %>
+    <% end %>
+
     <%= form_tag(source_sets_path, method: :get) do %>
+
       <% if params[:tags].present? %>
         <% params[:tags].each do |tag| %>
           <%= hidden_field_tag('tags[]', tag) %>
         <% end %>
       <% end %>
+
       <%= label_tag(:order, 'Sort by:') %>
       <%= select_tag(:order, options_for_select(sort_options, @order)) %>
+
       <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+
     <% end %>
   </div>
 
-  <%= render partial: 'source_sets/set_list',
-             locals: { sets: @published_sets } %>
+  <% if @published_sets.count == 0 %>
+    <%= render partial: 'source_sets/no_results' %>
+  <% else %>
+    <%= render partial: 'source_sets/set_list',
+               locals: { sets: @published_sets, filters: filters } %>
+  <% end %>
 
   <div class='contact-outer-container'>
     <p>Send feedback about these primary source sets or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
@@ -58,7 +99,7 @@
       <h3>Unpublished sets</h3>
 
       <%= render partial: 'source_sets/set_list',
-                 locals: { sets: @unpublished_sets } %>
+                 locals: { sets: @unpublished_sets, filters: filters } %>
     </div>
   <% end %>
 </div>

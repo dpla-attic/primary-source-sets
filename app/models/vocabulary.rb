@@ -12,4 +12,8 @@ class Vocabulary < ActiveRecord::Base
   #   URL:  http://example.com/primary-source-sets/vocabularies/little-my
   #   To find this object: Vocabulary.friendly.find("little-my")
   friendly_id :name, use: :slugged
+
+  def self.filterable
+    where(filter: true)
+  end
 end
