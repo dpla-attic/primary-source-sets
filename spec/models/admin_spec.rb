@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Admin, type: :model do
 
   context 'with a saved, confirmed record' do
-    let(:existing_admin) { create(:existing_admin_factory) }
+    let(:existing_admin) { create(:admin_factory) }
 
     context 'where it IS NOT having password fields updated' do
       it 'determines that the password does not need to be validated' do

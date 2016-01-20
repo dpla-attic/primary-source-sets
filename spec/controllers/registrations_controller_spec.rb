@@ -37,6 +37,13 @@ describe RegistrationsController, type: :controller do
         # Devise's tests.
       end
 
+      it 'updates the status' do
+        patch :update, id: resource.id,
+              admin: { status: 'manager' }
+        resource.reload
+        expect(resource.status).to eq 'manager'
+      end
+
       context 'with an invalid email address' do
         it 'does not update the record' do
           patch :update, id: resource.id, admin: { email: 'x' }

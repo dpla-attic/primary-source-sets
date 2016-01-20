@@ -2,7 +2,7 @@
 module ControllerMacros
   def login_admin
     before(:each) do
-      admin = FactoryGirl.create(:admin)
+      admin = FactoryGirl.create(:admin_factory)
       sign_in admin
     end
   end

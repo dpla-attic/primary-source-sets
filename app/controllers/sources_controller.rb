@@ -7,7 +7,8 @@ class SourcesController < ApplicationController
   include AudioPlayerHelper
   include MarkdownHelper
   before_filter :load_source_set, only: [:index, :new, :create]
-  before_action :authenticate_admin!, only: [:new, :edit]
+  before_action :authenticate_admin!,
+                only: [:new, :edit, :create, :update, :destroy]
   add_breadcrumb 'Primary Source Sets', :root_path
 
   def index
@@ -16,6 +17,8 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
+    check_login_and_authorize(:read, Source) \
+      unless @source.source_set.published?
     add_breadcrumb inline_markdown(@source.source_set.name), source_set_path(@source.source_set)
     add_breadcrumb 'Source', source_path(@source)
     ma = @source.main_asset
@@ -29,14 +32,17 @@ class SourcesController < ApplicationController
 
   def new
     @source = @source_set.sources.new
+    authorize! :create, Source
   end
 
   def edit
     @source = Source.find(params[:id])
+    authorize! :update, Source
   end
 
   def create
     @source = @source_set.sources.new(source_params)
+    authorize! :create, Source
 
     if @source.save
       redirect_to @source
@@ -47,6 +53,7 @@ class SourcesController < ApplicationController
 
   def update
     @source = Source.find(params[:id])
+    authorize! :update, Source
 
     if @source.update(source_params)
       redirect_to @source
@@ -57,6 +64,7 @@ class SourcesController < ApplicationController
 
   def destroy
     @source = Source.find(params[:id])
+    authorize! :destroy, Source
     @source.destroy
 
     redirect_to @source.source_set

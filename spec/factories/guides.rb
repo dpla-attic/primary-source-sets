@@ -9,4 +9,11 @@ FactoryGirl.define do
   factory :invalid_guide_factory, class: Guide do
     name nil
   end
+
+  factory :published_guide_factory, class: Guide do
+    name 'Contemplating Guides'
+    questions 'What makes this guide such a joy to follow?'
+    activity 'Praise the author of this test guide.'
+    association :source_set, factory: :published_source_set_factory
+  end
 end
