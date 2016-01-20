@@ -1,3 +1,7 @@
+1.2.6 (20 January 2015)
+---
+* Tweak CSS for tags
+
 1.2.5 (19 January 2015)
 ---
 * Add filter feature to public UI
