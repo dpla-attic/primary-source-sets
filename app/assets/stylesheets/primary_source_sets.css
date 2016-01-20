@@ -109,13 +109,14 @@
   float: left;
   border: 1px solid #D2D2D2;
   padding: 0.2em 0.5em;
-  margin: 0 0.5em 0 0;
+  margin: 0 0.3em 0 0;
   font-size: 0.9em;
 }
 
 .all-sets .set-list .tag {
   background-color: #EDEDED;
-  margin-top: 0.5em;
+  margin-top: 0.3em;
+  border: none;
 }
 
 .all-sets .set-list .tag a {
