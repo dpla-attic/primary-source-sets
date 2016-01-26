@@ -187,6 +187,25 @@ it to "use local source," in other words, use this working copy as the source of
 deployments, please be aware that the working copy's configuration files will be
 copied into the `automation` VM, by design.
 
+### ActionMailer setup
+
+This project uses ActionMailer to send account-creation confirmation emails. We
+use the [mailcatcher](http://mailcatcher.me/) gem in development to simulate a
+mail server, rather than running a real one. Per [its
+documentation](http://mailcatcher.me/), we do not include it in our Gemfile, and
+you need to install it with `gem install mailcatcher`.
+
+The mail settings for production are ActionMailer `smtp_settings` key/value
+pairs.  There are defaults in `settings.yml` that can be overridden in
+`settings.local.yml`.
+
+If you're running in the development VM (with our Vagrantfile), you'll want to
+invoke `mailcatcher` this way:
+```
+mailcatcher --http-ip 0.0.0.0
+```
+This ensures that the HTTP interface will be listening on the network interface
+that is being forwarded to `localhost` on your host machine.
 
 Testing
 -------

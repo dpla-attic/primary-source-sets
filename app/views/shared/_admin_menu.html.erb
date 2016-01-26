@@ -1,4 +1,8 @@
 <div id='admin-menu'>
+  <%= link_to 'My Account', edit_registration_path(current_admin) %>
+  |
+  <%= link_to 'Administrators', registrations_path %>
+  |
   <%= link_to 'Sets', source_sets_path %>
   |
   <%= link_to 'Authors', authors_path %>

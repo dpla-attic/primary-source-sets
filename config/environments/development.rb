@@ -16,6 +16,16 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  config.action_mailer.default_url_options = {
+    host: Settings.app_host,
+    script_name: Settings.relative_url_root,
+    protocol: Settings.app_scheme.tr(':/', '')
+  }
+  config.action_mailer.delivery_method =
+    Settings.action_mailer.delivery_method.to_sym
+  config.action_mailer.smtp_settings =
+    Settings.action_mailer.smtp_settings.to_h
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

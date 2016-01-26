@@ -19,7 +19,7 @@ shared_examples 'basic controller' do |*actions|
       it 'sets resources variable' do
         get :index
         expect(assigns(resource.class.name.pluralize.underscore.to_sym))
-          .to eq([resource])
+          .to include(resource)
       end
 
       it 'renders the :index view' do
@@ -47,15 +47,15 @@ shared_examples 'basic controller' do |*actions|
 
   if actions.include? :create
     describe '#create' do
-
       it 'creates a new resource' do
-        expect do
-          post :create, resource_sym => attributes
-        end.to change(resource.class, :count).by(1)
+        # Can not use expect ... .to change(...).by(1) below.
+        # Might be related to using login_admin in some enclosing contexts.
+        count = resource.class.count
+        post :create, resource_sym => attributes
+        expect(resource.class.count).to eq(count + 1)
       end
 
       context 'with invalid attributes' do
-
         it 'does not save new resource' do
           expect do
             post :create, resource_sym => invalid_attributes
