@@ -49,7 +49,7 @@
 
 /* SourceSets index styles */
 
-.all-sets h1 a:link,
+.all-sets h1 a,
 .all-sets h1 a:hover {
   color: #4691b9;
 }
