@@ -11,6 +11,8 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable, :confirmable,
          :recoverable, :registerable
 
+  enum status: [:reviewer, :editor, :manager]
+
   ##
   # Determine whether to validate the presence of the password.
   #

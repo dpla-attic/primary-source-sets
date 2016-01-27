@@ -335,6 +335,26 @@ input.form-submit {
   width: 99%;
 }
 
+.pss-admin-form fieldset {
+  margin-bottom: 1em;
+}
+
+.pss-admin-form-comment {
+  margin: -.5em 0 .5em .5em;
+}
+.pss-admin-form-doc {
+  width: 50%;
+  margin-left: .5em;
+}
+
+.status-buttons label {
+  display: inline;
+  margin-right: .5em;
+}
+.status-buttons input {
+  margin-left: .2em;
+}
+
 .primary-source-sets fieldset {
   border: none;
 }

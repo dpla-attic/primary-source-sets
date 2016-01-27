@@ -9,7 +9,7 @@ describe SourceSetsController, type: :controller do
 
   it_behaves_like 'admin-only route', :edit, :new
 
-  context 'admin logged in' do
+  context 'with the user logged-in' do
     login_admin
 
     it_behaves_like 'basic controller', :show, :create, :update, :destroy
@@ -66,6 +66,32 @@ describe SourceSetsController, type: :controller do
         get :index
         expect(response).to render_template :index
       end
+    end
+  end
+
+  context 'with the user not logged-in' do
+
+    it_behaves_like 'anonymous user redirector',
+      :new, :edit, :create, :update, :destroy
+
+    describe '#show' do
+
+      context 'with an unpublished set' do
+        it 'redirects to the sign-in page' do
+          get :show, id: resource.id
+          expect(response).to redirect_to new_admin_session_path
+        end
+      end
+
+      context 'with a published set' do
+        let(:published_set) { create(:published_source_set_factory) }
+
+        it 'shows the set' do
+          get :show, id: published_set.id
+          expect(response).to render_template :show
+        end
+      end
+
     end
   end
 end
