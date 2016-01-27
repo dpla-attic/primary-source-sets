@@ -75,8 +75,6 @@ googleanalytics:
 
 contact_email: email@example.com
 
-display_tags_on_public_ui: false
-
 action_mailer:
   delivery_method: smtp
   smtp_settings:
