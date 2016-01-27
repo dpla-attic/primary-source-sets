@@ -6,6 +6,7 @@ Vagrant.configure(2) do |config|
     pss.vm.network :private_network, ip: '192.168.50.22'
     pss.vm.network "forwarded_port", guest: 3000, host: 3000  # Rails
     pss.vm.network "forwarded_port", guest: 3001, host: 3001  # Jasmine
+    pss.vm.network "forwarded_port", guest: 1080, host: 1080  # mailcatcher
     pss.vm.provider 'virtualbox' do |vb|
       vb.memory = 1024
     end

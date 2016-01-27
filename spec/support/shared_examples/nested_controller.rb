@@ -7,21 +7,21 @@
 # This assumes the following variable have been defined in the controller spec,
 # or are passed as a block to this example:
 #   :resource
-#   :parent
+#   :parent_model
 #   :attributes (:create only)
 #   :invalid_attributes (:create only)
 #
 shared_examples 'nested controller' do |*actions|
 
   let(:resource_sym) { resource.class.name.downcase.to_sym }
-  let(:parent_id_sym) { "#{parent.class.name.underscore}_id".to_sym }
+  let(:parent_id_sym) { "#{parent_model.class.name.underscore}_id".to_sym }
 
   if actions.include? :index
     describe '#index' do
 
       it 'redirects to parent' do
-        get :index, parent_id_sym => parent.id
-        expect(response).to redirect_to parent
+        get :index, parent_id_sym => parent_model.id
+        expect(response).to redirect_to parent_model
       end
     end
   end
@@ -30,14 +30,14 @@ shared_examples 'nested controller' do |*actions|
     describe '#create' do
 
       before(:each) do
-        parent
+        parent_model
         resource.class.destroy(resource.class.find(resource.id)) if
           resource.class.where(id: resource.id).present?
       end
 
       it 'creates a new resource' do
         expect do
-          post :create, parent_id_sym => parent.id,
+          post :create, parent_id_sym => parent_model.id,
                         resource_sym => attributes
         end.to change(resource.class, :count).by(1)
       end
@@ -46,7 +46,7 @@ shared_examples 'nested controller' do |*actions|
 
         it 'does not save new resource' do
           expect do
-            post :create, parent_id_sym => parent.id,
+            post :create, parent_id_sym => parent_model.id,
                           resource_sym => invalid_attributes
           end.to change(resource.class, :count).by(0)
         end
@@ -67,7 +67,7 @@ shared_examples 'nested controller' do |*actions|
       it 'redirects to parent' do
         resource
         delete :destroy, id: resource.id
-        expect(response).to redirect_to parent
+        expect(response).to redirect_to parent_model
       end
     end
   end

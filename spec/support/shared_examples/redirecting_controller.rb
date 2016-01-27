@@ -7,7 +7,7 @@
 # This assumes the following variable have been defined in the controller spec,
 # or are passed as a block to this example:
 #   :resource
-#   :parent (optional for nested controllers)
+#   :parent_model (optional for nested controllers)
 #   :attributes
 #   :invalid_attributes
 #
@@ -16,8 +16,8 @@ shared_examples 'redirecting controller' do |*actions|
 
   let(:params) do
     params = { resource_sym => attributes }
-    params["#{parent.class.name.underscore}_id".to_sym] = parent.id if
-      defined?(parent)
+    params["#{parent_model.class.name.underscore}_id".to_sym] =
+      parent_model.id if defined?(parent_model)
     params
   end
 

@@ -5,7 +5,8 @@
 class SourceSetsController < ApplicationController
   include MarkdownHelper
   add_breadcrumb 'Primary Source Sets', :root_path
-  before_action :authenticate_admin!, only: [:new, :edit]
+  before_action :authenticate_admin!,
+                only: [:new, :edit, :create, :update, :destroy]
 
   def index
     @tags = get_tags_from_params
@@ -17,19 +18,23 @@ class SourceSetsController < ApplicationController
 
   def show
     @source_set = SourceSet.friendly.find(params[:id])
+    check_login_and_authorize(:read, SourceSet) unless @source_set.published?
     add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
   end
 
   def new
     @source_set = SourceSet.new
+    authorize! :create, SourceSet
   end
 
   def edit
     @source_set = SourceSet.friendly.find(params[:id])
+    authorize! :update, SourceSet
   end
 
   def create
     @source_set = SourceSet.new(source_set_params)
+    authorize! :create, SourceSet
 
     if @source_set.save
       redirect_to @source_set
@@ -40,6 +45,7 @@ class SourceSetsController < ApplicationController
 
   def update
     @source_set = SourceSet.friendly.find(params[:id])
+    authorize! :update, SourceSet
 
     if @source_set.update(source_set_params)
       redirect_to @source_set
@@ -50,6 +56,7 @@ class SourceSetsController < ApplicationController
 
   def destroy
     @source_set = SourceSet.friendly.find(params[:id])
+    authorize! :destroy, SourceSet
     @source_set.destroy
 
     redirect_to source_sets_path

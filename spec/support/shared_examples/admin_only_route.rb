@@ -7,15 +7,15 @@
 # This assumes the following variable have been defined in the controller spec,
 # or are passed as a block to this example:
 #   :resource
-#   :parent (optional)
+#   :parent_model (optional)
 #
 shared_examples 'admin-only route' do |*actions|
 
   let(:params) do
     params = { id: resource.id }
-    if defined?(parent)
-      params.merge!({ "#{parent.class.name.underscore}_id".to_sym =>
-        parent.id })
+    if defined?(parent_model)
+      params.merge!({ "#{parent_model.class.name.underscore}_id".to_sym =>
+        parent_model.id })
     end
     params
   end

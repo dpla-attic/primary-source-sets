@@ -24,6 +24,7 @@ gem 's3_browser_uploads', '0.1.2'
 gem 'zencoder', '~>2.5'
 gem 'navigasmic', '~>1.0'
 gem 'turnout', '~>2.0'
+gem 'access-granted', '~> 1.0.0'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'

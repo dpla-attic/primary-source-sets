@@ -1,19 +1,51 @@
 <div id='admin-menu'>
+  <%= link_to 'My Account', edit_registration_path(current_admin) %>
+
+  <% if can? :read, Admin %>
+  |
+  <%= link_to 'Administrators', registrations_path %>
+  <% end %>
+
+  <% if can? :read, SourceSet %>
+  |
   <%= link_to 'Sets', source_sets_path %>
+  <% end %>
+
+  <% if can? :read, Author %>
   |
   <%= link_to 'Authors', authors_path %>
+  <% end %>
+
+  <% if can? :read, Image %>
   |
   <%= link_to 'Images', images_path %>
+  <% end %>
+
+  <% if can? :read, Audio %>
   |
   <%= link_to 'Audios', audios_path %>
+  <% end %>
+
+  <% if can? :read, Video %>
   |
   <%= link_to 'Videos', videos_path %>
+  <% end %>
+
+  <% if can? :read, Document %>
   |
   <%= link_to 'Documents', documents_path %>
+  <% end %>
+
+  <% if can? :read, Tag %>
   |
   <%= link_to 'Tags', tags_path %>
+  <% end %>
+
+  <% if can? :read, Vocabulary %>
   |
   <%= link_to 'Vocabularies', vocabularies_path %>
+  <% end %>
+
   |
   <%= link_to 'Log out', destroy_admin_session_path, method: :delete %>
   </ul>

@@ -76,3 +76,13 @@ googleanalytics:
 contact_email: email@example.com
 
 display_tags_on_public_ui: false
+
+action_mailer:
+  delivery_method: smtp
+  smtp_settings:
+    host: localhost
+    # Port 1025 is for mailcatcher, in development.  This should probably be
+    # overridden in production if you use a SMTP daemon rather than the
+    # `sendmail' executable.  (I.e. the :smtp option for ActionMailer's
+    # `delivery_method'.)
+    port: 1025
