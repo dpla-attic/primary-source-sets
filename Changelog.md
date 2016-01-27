@@ -1,4 +1,11 @@
-1.2.7 920 January 2015)
+1.3.0 (27 January 2015)
+---
+* Add account management
+* Add account permissions
+* Fix CSS for Primary Source Sets header
+
+1.2.7 (20 January 2015)
+---
 * Hyperlink Primary Source Sets header
 
 1.2.6 (20 January 2015)
