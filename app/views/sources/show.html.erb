@@ -71,6 +71,15 @@
   </noscript>
 </div>
 
+<div class='related-guides'>
+  <% guides = @source.guides %>
+  <h2>Teaching Guide<%= 's' if guides.count > 1 %></h2>
+  <p>
+    This source appears in 
+    <%= raw guides.collect { |guide| link_to guide.name, guide }.to_sentence %>.
+  </p>
+</div>
+
 <% if admin_signed_in? %>
   <h2>Admin info</h2>
 
