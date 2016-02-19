@@ -5,11 +5,16 @@
                                           action: 'show',
                                           id: @source.id,
                                           only_path: false,
-                                          trailing_slash: true) %>' /> 
+                                          trailing_slash: true) %>' />
+  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
+  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
 <% end %>
 
 <% content_for :foot_script do %>
   <%= javascript_include_tag 'lightbox' %>
+  <%= javascript_include_tag 'carousel' %>
+  <script type="text/javascript"
+          src="http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
   <%= render partial: 'shared/analytics' %>
 <% end %>
 
@@ -39,6 +44,31 @@
   <div class='textual-content'>
     <%= markdown(@source.textual_content) %>
   </div>
+</div>
+
+<div class='related-sources'>
+  <h2>More sources from this set:</h1>
+  
+  <div class='carousel-container js-off'>
+    <div class='multiple-items slider carousel'>
+      <% @source.related_sources.each do |source| %>
+        <div class='carousel-item'>
+          <%= render partial: 'sources/source_tile',
+                     locals: { source: source } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <noscript>
+    <ul>
+      <% @source.related_sources.each do |source| %>
+        <li> 
+          <%= link_to inline_markdown(source.display_name), source_path(source) %>
+        </li>
+      <% end %>
+    </ul>
+  </noscript>
 </div>
 
 <% if admin_signed_in? %>

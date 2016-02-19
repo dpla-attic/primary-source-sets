@@ -35,6 +35,8 @@ class Source < ActiveRecord::Base
 
   validates :aggregation, presence: true
 
+  default_scope { order('created_at ASC') }
+
   ##
   # Gets all assets associated with source through attachments table.
   # @return Array<ActiveRecord::Base>
@@ -62,5 +64,19 @@ class Source < ActiveRecord::Base
 
   def display_name
     name.present? ? name : aggregation
+  end
+
+  ##
+  # Get all other sources associated with this source's source_set.
+  # The source that would appear after the current source in a default database
+  # query is first in the return array.
+  #
+  # @example:
+  #   <Source id: 3>.related_sources =>
+  #      [<Source id: 4>, <Source id: 1>, <Source id: 2>]
+  #
+  # @return [Array<Source>]
+  def related_sources
+    source_set.sources.split { |s| s.id == id }.reverse.flatten
   end
 end

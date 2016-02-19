@@ -3,6 +3,14 @@
  */
 (function() {
 
+  /*
+   * Remove 'js-off' classes from DOM elements.  The 'js-off' class is used to
+   * hide DOM elements when javascript is disabled.
+   */
+   $(document).ready(function() {
+    $('.js-off').removeClass('js-off');
+   });
+
   $(document).ready(function() {
     setAsideHeight();
     setNameContainerHeight();

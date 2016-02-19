@@ -32,6 +32,12 @@ describe Source, type: :model do
     expect(Source.new(aggregation: nil)).not_to be_valid
   end
 
+  it 'orders by created date' do
+    source_1 = source
+    source_2 = create(:source_factory, name: 'source 2')
+    expect(Source.all).to eq [source_1, source_2]
+  end
+
   context 'with related assets' do
 
     let(:source) do
@@ -144,6 +150,17 @@ describe Source, type: :model do
           expect(nameless_source.display_name).to eq nameless_source.aggregation
         end
       end
+    end
+  end
+
+  describe '#related_sources' do
+    it 'returns related sources in correct order' do
+      source_1 = source
+      source_2 = create(:source_factory, name: 'source 2')
+      source_3 = create(:source_factory, name: 'source 2')
+      source_set = create(:source_set_factory)
+      source_set.sources << [source_1, source_2, source_3]
+      expect(source_2.related_sources).to eq [source_3, source_1]
     end
   end
 end
