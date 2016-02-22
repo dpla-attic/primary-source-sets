@@ -13,7 +13,7 @@
 <% if admin_signed_in? %>
   <% filters = filters_for_sets(SourceSet.all) %>
 <% else %>
-  <% filters = filters_for_sets(SourceSet.published_sets) %>
+  <% filters = filters_for_sets(@published_sets) %>
 <% end %>
 
 <div class='all-sets'>

@@ -71,15 +71,15 @@ describe SourceSet, type: :model do
     end
   end
 
-  describe '#published_sets' do
+  describe '#published' do
     it 'returns published sets' do
-      expect(SourceSet.published_sets).to contain_exactly(published_set)
+      expect(SourceSet.published).to contain_exactly(published_set)
     end
   end
 
-  describe '#unpublished_sets' do
+  describe '#unpublished' do
     it 'returns unpublished sets' do
-      expect(SourceSet.unpublished_sets).to contain_exactly(source_set)
+      expect(SourceSet.unpublished).to contain_exactly(source_set)
     end
   end
 
@@ -99,8 +99,8 @@ describe SourceSet, type: :model do
           .to contain_exactly(published_set)
       end
 
-      it 'works in conjuction with published_sets' do
-        expect(SourceSet.published_sets.with_tags([a_tag]))
+      it 'works in conjuction with published' do
+        expect(SourceSet.published.with_tags([a_tag]))
           .to contain_exactly(published_set)
       end
 
