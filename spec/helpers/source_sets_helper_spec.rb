@@ -68,11 +68,9 @@ describe SourceSetsHelper, type: :helper do
   end
 
   describe '#selected_slugs_not_in' do
-    # FIXME: spec not passing, although testing on UI indicates that method is
-    # working as expected
-    xit 'returns slugs of given tags that are in params' do
-      assign(:tags, [tag_a])
-      expect(helper.selected_slugs_not_in([tag_a, tag_b])).to eq [tag_b.slug]
+    it 'returns slugs of given tags that are not in params' do
+      assign(:tags, [tag_a, tag_b])
+      expect(helper.selected_slugs_not_in([tag_a, tag_c])).to eq [tag_b.slug]
     end
   end
 
