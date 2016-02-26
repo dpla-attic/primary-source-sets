@@ -19,7 +19,7 @@
   </p>
  
   <p>
-    <strong><%= f.label "Name (required)" %></strong><br/>
+    <strong><%= f.label "Name (required)" %></strong>
     <%= f.text_field :name %>
   </p>
 
@@ -29,12 +29,20 @@
     <em>If Filter is checked, users will be able to filter sets using this vocabulary.</em>
   </p>
 
-  <p>
-    <strong><%= f.label :tags %></strong><br />
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br />
-    <% end %>
-  </p>
+  <div class='expansible'>
+    <h2><%= f.label :tags %></h2>
+    <a class='expand-control'>show</a>
+    <div class='expand-content'>
+      <% tags = Tag.all %>
+      <% if tags.present? %>
+        <%= f.collection_check_boxes(:tag_ids, tags, :id, :label) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br />
+        <% end %>
+      <% else %>
+        <p>There are currently no tags.</p>
+      <% end %>
+    </div>
+  </div>
   
   <p>
     <%= f.submit 'Submit', class: 'form-submit' %>
