@@ -24,7 +24,8 @@
   </p>
 
   <p>
-    <strong><%= f.label :uri %></strong>
+    <strong><%= f.label(:uri, 'URI') %></strong>
+    <em>If this tag correlates to a term from a controlled vocabulary with a permanent URI, you can add it here.</em><br/>
     <%= f.text_field :uri %>
   </p>
 
