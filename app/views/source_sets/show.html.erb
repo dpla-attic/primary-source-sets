@@ -67,28 +67,30 @@
 <% if admin_signed_in? %>
   <h2>Admin info</h2>
 
-  <p>
-    <%= link_to "Edit", edit_source_set_path(@source_set) %>
-    |
-    <%= link_to "Delete", source_set_path(@source_set), method: :delete,
-                   data: { confirm: "Are you sure you want to delete this set?" } %>
-  </p>
+  <% unless current_admin.reviewer? %>
+    <p>
+      <%= link_to "Edit", edit_source_set_path(@source_set) %>
+      |
+      <%= link_to "Delete", source_set_path(@source_set), method: :delete,
+                     data: { confirm: "Are you sure you want to delete this set?" } %>
+    </p>
+  <% end %>
 
   <table>
     <tr>
-      <td><strong>SEO description </strong></td>
+      <td><strong>SEO description: </strong></td>
       <td><%= @source_set.description %></td>
     </tr>
     <tr>
-      <td><strong>Published </strong></td>
+      <td><strong>Published: </strong></td>
       <td><%= @source_set.published %></td>
     </tr>
     <tr>
-      <td><strong>Year </strong></td>
+      <td><strong>Year: </strong></td>
       <td><%= @source_set.year %></td>
     </tr>
     <tr>
-      <td><strong>Featured image </strong></td>
+      <td><strong>Featured image: </strong></td>
       <td>
         <% if @source_set.featured_image.present? %>
           <%= link_to @source_set.featured_image.file_name, image_path(@source_set.featured_image) %>
@@ -96,7 +98,7 @@
       </td>
     </tr>
     <tr>
-      <td><strong>Tags</strong></td>
+      <td valign="top"><strong>Tags:</strong></td>
       <td>
         <% @source_set.tags.each do |tag| %>
           <%= link_to tag.label, tag_path(tag) %><br/>
@@ -105,10 +107,12 @@
     </tr>
   </table>
 
-  <p><%= link_to "Add new tag", new_tag_path(source_set_id: @source_set.id) %></p>
+  <% unless current_admin.reviewer? %>
+    <p><%= link_to "Add new tag", new_tag_path(source_set_id: @source_set.id) %></p>
 
-  <p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
+    <p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
 
-  <p><%= link_to "Add new teaching guide", new_source_set_guide_path(@source_set.id) %></p>
+    <p><%= link_to "Add new teaching guide", new_source_set_guide_path(@source_set.id) %></p>
+  <% end %>
 
 <% end %>
