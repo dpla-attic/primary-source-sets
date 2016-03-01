@@ -142,4 +142,34 @@ describe SourceSet, type: :model do
       expect(SourceSet.order_by('*****')).to eq([set_b, set_a])
     end
   end
+
+  describe '#related_sets' do
+    let(:a_tag) { create(:tag_factory, label: 'a') }
+    let(:b_tag) { create(:tag_factory, label: 'b') }
+    let(:c_tag) { create(:tag_factory, label: 'c') }
+
+    let(:set_1) { create(:source_set_factory) }
+    let(:set_2) { create(:source_set_factory) }
+    let(:set_3) { create(:source_set_factory) }
+    let(:set_4) { create(:source_set_factory) }
+
+    before do
+      set_1.tags << [a_tag, b_tag, c_tag]
+      set_2.tags << [a_tag, b_tag]
+      set_3.tags << [a_tag, b_tag, c_tag]
+      set_4.tags << [a_tag]
+    end
+
+    it 'returns an Array' do
+      expect(set_1.related_sets).to be_a(Array)
+    end
+
+    it 'returns sets with at least two matching tags' do
+      expect(set_1.related_sets).to contain_exactly(set_2, set_3)
+    end
+
+    it 'orders sets by number of matching tags' do
+      expect(set_1.related_sets.first).to eq(set_3)
+    end
+  end
 end
