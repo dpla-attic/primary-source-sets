@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :audio_notifications, only: [:create]
   resources :tags
   resources :vocabularies
+  resources :posters, only: [:index, :show]
 
   root 'source_sets#index'
 end

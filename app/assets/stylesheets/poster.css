@@ -1,0 +1,82 @@
+.poster {
+  width: 800px;
+  height: 450px;
+  background-color: #6792A5;
+  color: white;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #4D6E7C;
+  box-sizing: border-box;
+  visibility: hidden;
+  margin-top: 12px;
+}
+
+.poster .right {
+  width: 470px;
+  height: 450px;
+  position: absolute;
+  left: 240px;
+}
+
+.poster .title {
+  position: absolute;
+  bottom: 290px;
+}
+
+.poster h1 {
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+}
+
+.poster .main-image {
+  position: absolute;
+  bottom: 130px;
+  border: 3px solid #4D6E7C;
+}
+
+.poster .logo {
+  position: absolute;
+  bottom: 20px;
+  overflow: hidden;
+  height: 39px;
+  left: 5px;
+}
+
+.poster .logo img {
+  position: absolute;
+  left: 141px;
+  background-color: white;
+  border: 2px solid white;
+}
+
+.poster .left {
+  width: 116px;
+  position: absolute;
+  height: 1000px;
+  left: 70px;
+  top: -50px;
+  background-color: #4D6E7C;
+}
+
+.poster .left img {
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.poster .left p {
+  margin-top: 50px;
+}
+
+.poster .border {
+  position: absolute;
+  background-color: black;
+  height: 3px;
+  width: 120px;
+  z-index: 1000;
+  left: 90px;
+  right: 0;
+}

@@ -18,5 +18,6 @@
  *= require_directory ./frontend
  *= require frontend_overrides.css
  *= require primary_source_sets.css
+ #= require poster.css
  *= require_self
  */
