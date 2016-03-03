@@ -24,12 +24,12 @@ class SourceSet < ActiveRecord::Base
     small_images.first
   end
 
-  def self.published_sets
-    self.where(published: true)
+  def self.published
+    where(published: true)
   end
 
-  def self.unpublished_sets
-    self.where(published: false)
+  def self.unpublished
+    where(published: false)
   end
 
   ##
