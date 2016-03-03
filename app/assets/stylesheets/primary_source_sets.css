@@ -400,4 +400,35 @@ input.form-submit {
 
 .carousel-container .source-container {
   margin: 16px;
+
+/* Mobile layout */
+
+@media only screen and (max-width: 680px) and (min-width: 0px) {
+  .primary-source-sets {
+    margin-left: 2.6455%;
+    margin-right: 2.6455%;
+  }
+
+  body .container h1 {
+    padding-left: 0;
+  }
+
+  .layout article {
+    padding: 0;
+    width: 100%;
+  }
+
+  .layout .set article {
+    margin-bottom: 0;
+  }
+
+  .layout aside {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .all-sets .module {
+    width: 100%;
+  }
 }
