@@ -43,6 +43,9 @@
           <%= select_tag('tags[]',
                        options_for_select(tag_filter_options(tags),
                                           selected_slugs_in(tags))) %>
+
+          <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+
         <% else %>
           <%# render pill tags %>
           <ul class='tag-list inline-block'>
@@ -55,9 +58,6 @@
             <% end %>
           </ul>
         <% end %>
-
-        <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
-
       <% end %>
     <% end %>
 
