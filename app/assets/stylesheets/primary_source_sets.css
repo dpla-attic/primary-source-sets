@@ -339,6 +339,10 @@ input.form-submit {
   background-color: #E6A425;
 }
 
+.pss-admin-form input.form-submit {
+  margin-top: 1em;
+}
+
 .pss-admin-form input[type=radio] {
   margin-right: .25em;
 }
@@ -380,6 +384,30 @@ input.form-submit {
   display: inline;
   margin-right: .5em;
 }
+
+.pss-admin-form h2 {
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.pss-admin-form label {
+  font-weight: bold;
+}
+
+.pss-admin-form .expansible h2,
+.pss-admin-form .expansible label {
+  font-weight: normal;
+  display: inline;
+}
+
+.pss-admin-form .expansible .expand-control {
+  padding-left: .5em;
+  margin-bottom: 1em;
+  display: none;
+}
+
+.pss-admin-form .expansible .expand-content {
+  margin-bottom: 1em;
 
 /* Carousels */
 

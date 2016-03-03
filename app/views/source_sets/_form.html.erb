@@ -17,7 +17,7 @@
   <%= f.submit 'Submit', class: 'form-submit' %>
  
   <p>
-    <strong><%= f.label "Name (required)" %></strong><br/>
+    <strong><%= f.label "Name (required)" %></strong>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_field :name %>
   </p>
@@ -25,6 +25,7 @@
   <p>
     <strong><%= f.label :published, style: 'display:inline' %></strong>
     <%= f.check_box :published %><br />
+    <em>If published, set will be visible to the public.</em>
   </p>
 
   <p>
@@ -35,36 +36,52 @@
   </p>
  
   <p>
-    <strong><%= f.label 'SEO description' %></strong><br/>
+    <strong><%= f.label 'SEO description' %></strong>
     <em>Example: "This collection uses primary sources to explore the French and Indian War."</em><br/>
     <%= f.text_area :description %>
   </p>
 
   <p>
-    <strong><%= f.label :overview %></strong><br/>
+    <strong><%= f.label :overview %></strong>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_area :overview %>
   </p>
 
   <p>
-    <strong><%= f.label :resources_for_research %></strong><br/>
+    <strong><%= f.label :resources_for_research %></strong>
     <em>Use <a href=https://digitalpubliclibraryofamerica.atlassian.net/wiki/display/TECH/Markdown+guide>Markdown</a> for text formatting.</em><br/>
     <%= f.text_area :resources %>
   </p>
 
-  <p>
-    <strong><%= f.label :author %></strong><br />
-    <%= f.collection_check_boxes(:author_ids, Author.all, :id, :name) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br />
-    <% end %>
-  </p>
+  <div class='expansible'>
+    <h2><%= f.label :author %></h2>
+    <a class='expand-control'>show</a>
+    <div class='expand-content'>
+      <% authors = Author.all %>
+      <% if authors.present? %>
+        <%= f.collection_check_boxes(:author_ids, authors, :id, :name) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br />
+        <% end %>
+      <% else %>
+        <p>There are currently no authors.</p>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    <strong><%= f.label :tag %></strong><br />
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :label) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br />
-    <% end %>
-  </p>
+  <div class='expansible'>
+    <h2><%= f.label :tag %></h2>
+    <a class='expand-control'>show</a>
+    <div class='expand-content'>
+      <% tags = Tag.all %>
+      <% if tags.present? %>
+        <%= f.collection_check_boxes(:tag_ids, tags, :id, :label) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br />
+        <% end %>
+      <% else %>
+        <p>There are currently no tags.</p>
+      <% end %>
+    </div>
+  </div>
  
   <%= f.submit 'Submit', class: 'form-submit' %>
  
