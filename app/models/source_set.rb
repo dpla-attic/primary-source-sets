@@ -9,6 +9,7 @@ class SourceSet < ActiveRecord::Base
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
                                    less_than_or_equal_to: Date.today.year
+  before_save :check_publish_date
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -54,7 +55,7 @@ class SourceSet < ActiveRecord::Base
   # @param order String or nil
   # @return ActiveRecord::Relation
   def self.order_by(order)
-    sort_params = { 'recently_added' => { created_at: :desc },
+    sort_params = { 'recently_added' => { published_at: :desc },
                     'chronology_desc' => { year: :desc },
                     'chronology_asc' => { year: :asc } }
     order(sort_params[order] || sort_params['recently_added'])
@@ -79,4 +80,18 @@ class SourceSet < ActiveRecord::Base
     joins(:tags).where('tags.id = ?', tag.id)
   end
   private_class_method :with_tag
+
+  private
+
+  ##
+  # If the set is being published, save the current timestamp.
+  # If the set was already published, do not save the current timestamp.
+  # If the set is unpublished, clear the timestamp.
+  def check_publish_date
+    if self.published == true && self.published_at == nil
+      self.published_at = Time.now
+    elsif self.published == false
+      self.published_at = nil
+    end
+  end
 end
