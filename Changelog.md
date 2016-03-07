@@ -1,3 +1,15 @@
+1.3.1 (7 March 2015)
+---
+* Remove obsolete tag setting
+* Tailor views for reviewers
+* Update instructions to create admin account
+* Add carousel of related sources
+* Fix margins on mobile layout
+* Refactor source_set model methods
+* Add expansible menus on admin forms
+* Hide resort button when filter selected
+* Fix failing helper test
+
 1.3.0 (27 January 2015)
 ---
 * Add account management
