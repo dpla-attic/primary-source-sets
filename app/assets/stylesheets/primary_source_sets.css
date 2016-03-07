@@ -9,6 +9,14 @@
   float: left;
 }
 
+/*
+ * Use js-off to hide elements if javascript is disabled.
+ * @see assets/javascripts/style.js
+ */
+.js-off {
+  display: none;
+}
+
 .primary-source-sets aside {
   margin-left: 1em;
   margin-bottom: 1em;
@@ -197,28 +205,29 @@
   margin-bottom: 2em;
 }
 
-.set .source-list-container .module {
+/* Source tile */
+
+.source-tile {
   background-color: #f0f3f4;
   border: none;
+  width: 100%;
+  height: 100%;
 }
 
-.set .thumbnail-container  {
+.source-tile .thumbnail-container  {
   height: 160px;
   width: 100%;
-}
-
-.set .thumbnail-container {
   text-align: center;
   margin-bottom: 1.5em;
 }
 
-.set .align-helper {
+.source-tile .align-helper {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
 
-.set .thumbnail-container img {
+.source-tile .thumbnail-container img {
   margin: 0px auto;
   display: inline-block;
   vertical-align: middle;
@@ -226,7 +235,7 @@
   max-width: 160px;
 }
 
-.set .source-name-container {
+.source-tile .source-name-container {
   text-align: left;
 }
 
@@ -299,6 +308,10 @@ audio {
   padding-bottom: 1em;
 }
 
+.related-sources {
+  clear: both;
+}
+
 /* Admin interfaces */
 
 input.form-submit {
@@ -324,6 +337,10 @@ input.form-submit {
 
 .pss-admin-form input.form-submit, #upload-form input.form-submit {
   background-color: #E6A425;
+}
+
+.pss-admin-form input.form-submit {
+  margin-top: 1em;
 }
 
 .pss-admin-form input[type=radio] {
@@ -366,4 +383,82 @@ input.form-submit {
 .imgsize_label {
   display: inline;
   margin-right: .5em;
+}
+
+.pss-admin-form h2 {
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.pss-admin-form label {
+  font-weight: bold;
+}
+
+.pss-admin-form .expansible h2,
+.pss-admin-form .expansible label {
+  font-weight: normal;
+  display: inline;
+}
+
+.pss-admin-form .expansible .expand-control {
+  padding-left: .5em;
+  margin-bottom: 1em;
+  display: none;
+}
+
+.pss-admin-form .expansible .expand-content {
+  margin-bottom: 1em;
+}
+
+/* Carousels */
+
+.carousel-container {
+  padding: 20px;
+  margin: 20px;
+}
+
+.carousel-item {
+  padding: 8px;
+  margin-right: 12px;
+}
+
+.slick-prev:before, .slick-next:before,
+.slick-prev:after, .slick-next:after { 
+    color: #DD4E00 !important;
+}
+
+.carousel-container .source-container {
+  margin: 16px;
+}
+
+/* Mobile layout */
+
+@media only screen and (max-width: 680px) and (min-width: 0px) {
+  .primary-source-sets {
+    margin-left: 2.6455%;
+    margin-right: 2.6455%;
+  }
+
+  body .container h1 {
+    padding-left: 0;
+  }
+
+  .layout article {
+    padding: 0;
+    width: 100%;
+  }
+
+  .layout .set article {
+    margin-bottom: 0;
+  }
+
+  .layout aside {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .all-sets .module {
+    width: 100%;
+  }
 }

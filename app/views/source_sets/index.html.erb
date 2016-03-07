@@ -13,7 +13,7 @@
 <% if admin_signed_in? %>
   <% filters = filters_for_sets(SourceSet.all) %>
 <% else %>
-  <% filters = filters_for_sets(SourceSet.published_sets) %>
+  <% filters = filters_for_sets(@published_sets) %>
 <% end %>
 
 <div class='all-sets'>
@@ -43,6 +43,9 @@
           <%= select_tag('tags[]',
                        options_for_select(tag_filter_options(tags),
                                           selected_slugs_in(tags))) %>
+
+          <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
+
         <% else %>
           <%# render pill tags %>
           <ul class='tag-list inline-block'>
@@ -55,9 +58,6 @@
             <% end %>
           </ul>
         <% end %>
-
-        <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
-
       <% end %>
     <% end %>
 
@@ -91,15 +91,21 @@
   <% if admin_signed_in? %>
 
     <div class='admin-info'>
-
+      
       <h2>Admin Info</h2>
 
-      <p><%= link_to "Create new set", new_source_set_path %></p>
+      <% unless current_admin.reviewer? %>
+        <p><%= link_to "Create new set", new_source_set_path %></p>
+      <% end %>
 
       <h3>Unpublished sets</h3>
 
-      <%= render partial: 'source_sets/set_list',
-                 locals: { sets: @unpublished_sets, filters: filters } %>
+      <% if @unpublished_sets.count > 0 %>
+        <%= render partial: 'source_sets/set_list',
+                   locals: { sets: @unpublished_sets, filters: filters } %>
+      <% else %>
+        <p>There are currently no unpublished sets.</p>
+      <% end %>
     </div>
   <% end %>
 </div>

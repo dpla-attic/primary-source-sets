@@ -225,14 +225,19 @@ To run a jasmine Webrick server on port 3001, from the console do:
 and then go to `http://localhost:3001/` in your browser.  Whenever you reload the page, the tests are run again.
 
 
-Sample data
+Create an initial admin account
 -----------
 
-To create a sample admin account for development and testing:
+To create an initial manager admin account, from the console do:
 
-    rake primary_source_sets:samples:create_admin
+    Admin.new({ email: '[EMAIL]', password: '[PASSWORD]', password_confirmation: '[PASSWORD]', status: 2 }).save
 
-This account will have username: 'sample@dp.la' and password: 'password'.
+Example:
+
+    Admin.new({ email: 'example@email.com', password 'secret', password_confirmation: 'secret', status: 2 }).save
+
+The output in the console will contain a web address to visit in order to activate the account.  Go to `[ROOT]/admins/sign_in` to log in.
+
 
 Copyright & License
 -------------------

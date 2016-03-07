@@ -19,28 +19,44 @@
   </p>
  
   <p>
-    <strong><%= f.label "Label (required)" %></strong><br/>
+    <strong><%= f.label "Label (required)" %></strong>
     <%= f.text_field :label %>
   </p>
 
   <p>
-    <strong><%= f.label :uri %></strong><br/>
+    <strong><%= f.label :uri %></strong>
     <%= f.text_field :uri %>
   </p>
 
-  <p>
-    <strong><%= f.label :vocabularies %></strong><br />
-    <%= f.collection_check_boxes(:vocabulary_ids, Vocabulary.all, :id, :name) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br />
-    <% end %>
-  </p>
+  <div class='expansible'>
+    <h2><%= f.label :vocabularies %></h2>
+    <a class='expand-control'>show</a>
+    <div class='expand-content'>
+      <% vocabularies = Vocabulary.all %>
+      <% if vocabularies.present? %>
+        <%= f.collection_check_boxes(:vocabulary_ids, vocabularies, :id, :name) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br />
+        <% end %>
+      <% else %>
+        <p>There are currently no vocabularies.</p>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    <strong><%= f.label :source_sets %></strong><br />
-    <%= f.collection_check_boxes(:source_set_ids, SourceSet.all, :id, :name) do |b| %>
-      <%= b.label { b.check_box + b.text } %><br />
-    <% end %>
-  </p>
+  <div class='expansible'>
+    <h2><%= f.label :source_sets %></h2>
+    <a class='expand-control'>show</a>
+    <div class='expand-content'>
+      <% source_sets = SourceSet.all %>
+      <% if source_sets.present? %>
+        <%= f.collection_check_boxes(:source_set_ids, source_sets, :id, :name) do |b| %>
+          <%= b.label { b.check_box + b.text } %><br />
+        <% end %>
+      <% else %>
+        <p>There are currently no source sets.</p>
+      <% end %>
+    </div>
+  </div>
   
   <p>
     <%= f.submit 'Submit', class: 'form-submit' %>
