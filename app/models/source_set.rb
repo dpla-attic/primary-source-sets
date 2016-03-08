@@ -33,6 +33,21 @@ class SourceSet < ActiveRecord::Base
   end
 
   ##
+  # Returns sets with at least two matching tags (not including self).
+  # Results are ordered so that sets with the highest number of matching tags
+  # appear first.
+  #
+  # @return [Array<SourceSet>]
+  def related_sets
+    sets = tags.map { |tag| [tag.source_sets] }.flatten - [self]
+    sets_with_count = sets.each_with_object(Hash.new(0)) do |set, count|
+      count[set] += 1
+    end
+    sets_with_count.delete_if { |_set, count| count < 2 }
+    Hash[sets_with_count.sort_by { |set, count| count }.reverse].keys
+  end
+
+  ##
   # Order SourceSets by a given parameter.
   # If a parameter is not included in the sort_params hash, it will be ignored.
   # By default, it will order by 'recently_added'.
