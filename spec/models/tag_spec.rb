@@ -7,9 +7,12 @@ describe Tag, type: :model do
       .to eq :has_and_belongs_to_many
   end
 
-  it 'has and belongs to many vocabularies' do
-    expect(Tag.reflect_on_association(:vocabularies).macro)
-      .to eq :has_and_belongs_to_many
+  it 'has many sequences' do
+    expect(Tag.reflect_on_association(:sequences).macro).to eq :has_many
+  end
+
+  it 'has many vocabularies' do
+    expect(Tag.reflect_on_association(:vocabularies).macro).to eq :has_many
   end
 
   it 'is invalid without label' do

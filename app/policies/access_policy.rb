@@ -22,6 +22,7 @@ class AccessPolicy
       can :manage, Document
       can :manage, Tag
       can :manage, Vocabulary
+      can :manage, Sequence
       can :manage, Author
     end
 
@@ -35,6 +36,7 @@ class AccessPolicy
       can :manage, Document
       can :manage, Tag
       can :manage, Vocabulary
+      can :manage, Sequence
       can :manage, Author
     end
 

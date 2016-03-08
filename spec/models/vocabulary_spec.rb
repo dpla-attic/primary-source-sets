@@ -2,9 +2,12 @@ require 'rails_helper'
 
 describe Vocabulary, type: :model do
 
-  it 'has and belongs to many tags' do
-    expect(Vocabulary.reflect_on_association(:tags).macro)
-      .to eq :has_and_belongs_to_many
+  it 'has many sequences' do
+    expect(Vocabulary.reflect_on_association(:sequences).macro).to eq :has_many
+  end
+
+  it 'has many tags' do
+    expect(Vocabulary.reflect_on_association(:tags).macro).to eq :has_many
   end
 
   it 'is invalid without name' do

@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer',  '~> 0.12.2', platforms: :ruby
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails', '~> 3.1.3'
+gem 'jquery-ui-rails', '~> 5.0'
 gem 'config', '~> 1.0.0'
 gem 'redcarpet', '~> 3.3'
 gem 'friendly_id', '~> 5.1.0'
