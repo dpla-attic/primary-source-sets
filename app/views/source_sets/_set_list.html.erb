@@ -1,41 +1,9 @@
 <div class='set-list'>
   <%= sets.each_slice(3) do |sets_row| %>
     <div class='moduleContainer threeCol'>
-      <% sets_row.each_with_index do |set, i| %>
-        <section class='module'>
-          <% if set.featured_image.present? %>
-            <%= link_to((image_tag base_src + set.featured_image.file_name,
-                                   alt: set.featured_image.alt_text.present? ? 
-                                     set.featured_image.alt_text : set.name),
-                        source_set_path(set)) %>
-          <% end %>
-          <div class='set-name-container'>
-            <%= link_to inline_markdown(set.name), source_set_path(set) %>
-          </div>
-
-          <%# Setting this variable reduces calls to the database %>
-          <% set_tags = set.tags %>
-
-          <ul class='tag-list'>
-
-            <% filters.each do |vocab, tags| %>
-
-              <%# Get tags that are shared between this set and this vocab %>
-              <% display_tags = tags & set_tags %>
-
-              <% if display_tags.present? %>
-
-                  <% display_tags.each do |tag| %>
-                    <li class='tag'>
-                      <% new_params = params.merge(tags: [tag.slug]) %>
-                      <%= link_to tag.label, source_sets_path(new_params) %>
-                    </li>
-                  <% end %>
-              <% end %>
-            <% end %>
-
-          </ul>
-        </section>
+      <% sets_row.each do |set, i| %>
+        <%= render partial: 'source_sets/set_tile',
+                   locals: { set: set, render_tags: true, filters: filters } %>
       <% end %>
     </div>
   <% end %>

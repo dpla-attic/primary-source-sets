@@ -1,4 +1,11 @@
-1.3.1 (7 March 2015)
+1.3.2 (9 March 2016)
+---
+* Add carousel for related sets
+* Order sets by published date by defualt
+* Add posters for sets and guides
+* Pin rake version to less than 11.0
+
+1.3.1 (7 March 2016)
 ---
 * Remove obsolete tag setting
 * Tailor views for reviewers
@@ -10,21 +17,21 @@
 * Hide resort button when filter selected
 * Fix failing helper test
 
-1.3.0 (27 January 2015)
+1.3.0 (27 January 2016)
 ---
 * Add account management
 * Add account permissions
 * Fix CSS for Primary Source Sets header
 
-1.2.7 (20 January 2015)
+1.2.7 (20 January 2016)
 ---
 * Hyperlink Primary Source Sets header
 
-1.2.6 (20 January 2015)
+1.2.6 (20 January 2016)
 ---
 * Tweak CSS for tags
 
-1.2.5 (19 January 2015)
+1.2.5 (19 January 2016)
 ---
 * Add filter feature to public UI
 

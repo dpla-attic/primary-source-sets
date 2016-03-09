@@ -11,7 +11,6 @@ $(function() {
       arrows: true,
       slidesToShow: 3,
       slidesToScroll: 3,
-      lazyLoad: 'ondemand',
       responsive: [{
         breakpoint: 1024,
         settings: {
@@ -19,7 +18,7 @@ $(function() {
           slidesToScroll: 2
         }
       }, {
-        breakpoint: 680,
+        breakpoint: 600, //tailored to fit width of set image
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
@@ -27,6 +26,13 @@ $(function() {
       }]
     });
 
-    $('.slick-slide').outerHeight( $('.slick-track').height() );
+    /*
+     * This executes after everything on the page (including images) have
+     * loaded.
+     */ 
+    $(window).on('load', function() {
+      // Make all items in the carousel the same height.
+      $('.slick-slide').outerHeight( $('.slick-track').height() );
+    });
   });
 });

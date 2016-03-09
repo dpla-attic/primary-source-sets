@@ -112,15 +112,17 @@ describe SourceSet, type: :model do
 
   describe '#order_by' do
 
-    let(:set_a) { create(:source_set_factory, year: 1920) }
-    let(:set_b) { create(:source_set_factory, year: 1930) }
+    let(:set_a) { create(:source_set_factory, year: 1920, published: true,
+                         published_at: Time.new(2015)) }
+    let(:set_b) { create(:source_set_factory, year: 1930, published: true,
+                         published_at: Time.new(2016)) }
 
     before(:each) do
       set_a
       set_b
     end
 
-    it 'orders by most recently created' do
+    it 'orders by most recently published' do
       expect(SourceSet.order_by('recently_added')).to eq([set_b, set_a])
     end
 
@@ -134,12 +136,64 @@ describe SourceSet, type: :model do
         .to eq([set_b, set_a])
     end
 
-    it 'defaults to ordering by most recently created' do
+    it 'defaults to ordering by most recently published' do
       expect(SourceSet.order_by(nil)).to eq([set_b, set_a])
     end
 
     it 'ignores unexpected params' do
       expect(SourceSet.order_by('*****')).to eq([set_b, set_a])
+    end
+  end
+
+  describe '#related_sets' do
+    let(:a_tag) { create(:tag_factory, label: 'a') }
+    let(:b_tag) { create(:tag_factory, label: 'b') }
+    let(:c_tag) { create(:tag_factory, label: 'c') }
+
+    let(:set_1) { create(:source_set_factory) }
+    let(:set_2) { create(:source_set_factory) }
+    let(:set_3) { create(:source_set_factory) }
+    let(:set_4) { create(:source_set_factory) }
+
+    before do
+      set_1.tags << [a_tag, b_tag, c_tag]
+      set_2.tags << [a_tag, b_tag]
+      set_3.tags << [a_tag, b_tag, c_tag]
+      set_4.tags << [a_tag]
+    end
+
+    it 'returns an Array' do
+      expect(set_1.related_sets).to be_a(Array)
+    end
+
+    it 'returns sets with at least two matching tags' do
+      expect(set_1.related_sets).to contain_exactly(set_2, set_3)
+    end
+
+    it 'orders sets by number of matching tags' do
+      expect(set_1.related_sets.first).to eq(set_3)
+    end
+  end
+
+  describe '#check_publish_date' do
+    it 'persists publication time when a set is published' do
+      source_set.published = true
+      source_set.save
+      expect(source_set.reload.published_at).not_to be nil
+    end
+
+    it 'nulls the publication time when a set is unpublished' do
+      published_set.published = false
+      published_set.save
+      expect(published_set.reload.published_at).to be nil
+    end
+
+    it 'does not change the publication time when a published set is edited' do
+      time = Time.new(2015)
+      set = create(:source_set_factory, published: true, published_at: time)
+      set.name = "New name"
+      set.save
+      expect(set.reload.published_at).to eq time
     end
   end
 end

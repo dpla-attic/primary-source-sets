@@ -5,10 +5,15 @@
                                           action: 'show',
                                           id: @source_set.slug,
                                           only_path: false,
-                                          trailing_slash: true) %>' /> 
+                                          trailing_slash: true) %>' />
+  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
+  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
 <% end %>
 
 <% content_for :foot_script do %>
+  <%= javascript_include_tag 'carousel' %>
+  <script type="text/javascript"
+          src="http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
   <%= render partial: 'shared/analytics' %>
 <% end %>
 
@@ -59,9 +64,48 @@
     </div>
   <% end %>
 
-  <div class='contact-outer-container'>
-    <p>Send feedback about this primary source set or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
-  </div>
+  <ul class='tag-list'>
+    <% tags = @source_set.tags %>
+    <% if tags.present? %>
+      <% tags.each do |tag| %>
+        <li class='tag'>
+          <%= link_to tag.label, source_sets_path({ tags: [tag.slug] }) %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <div class='clear'></div>
+</div>
+
+<div class='related-sets'>
+  <% related = @source_set.related_sets %>
+  <% if related.present? %>
+    <h2>Related sets</h2>
+
+    <div class='carousel-container js-off'>
+      <div class='multiple-items slider carousel'>
+        <% related.each do |set| %>
+          <div class='carousel-item'>
+            <%= render partial: 'source_sets/set_tile',
+                       locals: { set: set, render_tags: false } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <noscript>
+      <ul>
+        <% related.each do |set| %>
+          <li><%= link_to inline_markdown(set.name), source_set_path(set) %></li>
+        <% end %>
+      </ul>
+    </noscript>
+  <% end %>
+</div>
+
+<div class='contact-outer-container'>
+  <p>Send feedback about this primary source set or our other educational resources to <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
 </div>
 
 <% if admin_signed_in? %>
