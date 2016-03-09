@@ -46,6 +46,11 @@
   <%= link_to 'Vocabularies', vocabularies_path %>
   <% end %>
 
+  <% if can? :read, SourceSet %>
+  |
+  <%= link_to 'Posters', posters_path %>
+  <% end %>
+
   |
   <%= link_to 'Log out', destroy_admin_session_path, method: :delete %>
   </ul>
