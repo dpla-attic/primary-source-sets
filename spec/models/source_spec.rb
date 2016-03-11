@@ -8,6 +8,10 @@ describe Source, type: :model do
     expect(Source.reflect_on_association(:source_set).macro).to eq :belongs_to
   end
 
+  it 'has many guides' do
+    expect(Source.reflect_on_association(:guides).macro).to eq :has_many
+  end
+
   it 'has many attachments' do
     expect(Source.reflect_on_association(:attachments).macro).to eq :has_many
   end

@@ -315,6 +315,11 @@ audio {
   margin: 2em 0;
 }
 
+.related-guides {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
 /* Admin interfaces */
 
 input.form-submit {
