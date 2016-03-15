@@ -1,3 +1,8 @@
+1.3.3 (15 March 2016)
+---
+* Add back links on source pages
+* Add URI validation and helper text to tag & vocab forms
+
 1.3.2 (9 March 2016)
 ---
 * Add carousel for related sets
