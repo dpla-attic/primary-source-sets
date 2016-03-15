@@ -1,5 +1,10 @@
 <section class='searchRow'>
-  <div class='searchRowLeft'></div>
+  <div class='searchRowLeft'>
+    <% if controller.controller_name == 'sources' &&
+      controller.action_name == 'show' %>
+      <%= render_back_link %>
+    <% end %>
+  </div>
   <div class='searchRowRight'>
     <%= link_to '', class: 'search-btn' do %>
       <span class='icon-man-glass' aria-hidden='true'></span>

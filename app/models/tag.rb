@@ -3,6 +3,7 @@ class Tag < ActiveRecord::Base
   has_and_belongs_to_many :source_sets
   has_and_belongs_to_many :vocabularies
   validates :label, presence: true, uniqueness: true
+  validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place

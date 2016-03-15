@@ -21,6 +21,14 @@ describe Tag, type: :model do
     expect(Tag.new(label: 'non-unique-label')).not_to be_valid
   end
 
+  it 'is invalid without correctly formatted URI' do
+    expect(Tag.new(label: 'label', uri: 'not a uri')).not_to be_valid
+  end
+
+  it 'is valid if URI is nil' do
+    expect(Tag.new(label: 'label', uri: nil)).to be_valid
+  end
+
   it 'has a slug' do
     expect(Tag.create(label: 'Little My').slug).to eq 'little-my'
   end
