@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe SourcesHelper, type: :helper do
 
+  let(:source) { create(:source_factory) }
+
   describe '#render_media_asset' do
-    let(:source) { create(:source_factory) }
 
     it 'renders the correct partial' do
       source.videos << create(:video_factory)
@@ -70,6 +71,42 @@ describe SourcesHelper, type: :helper do
       ref = "http://example.com#{Settings.relative_url_root}/sets"
       allow(controller.request).to receive(:referer).and_return ref
       expect(helper.render_back_link).to eq nil
+    end
+  end
+
+  describe '#render_thumbnail' do
+    it 'renders nothing without main asset' do
+      expect(helper.render_thumbnail(source)). to eq nil
+    end
+
+    context 'with main asset' do
+      before { source.videos << create(:video_factory) }
+
+      it 'renders default image if thumbnail not present' do
+        expect(helper.render_thumbnail(source))
+          .to include "src=\"/assets/video_thumb.jpg\""
+      end
+
+      it 'links to source' do
+        expect(helper.render_thumbnail(source))
+          .to include "a href=\"/sources/#{source.id}\""
+      end
+
+      context 'with thumbnail' do
+        let(:thumbnail) { create(:image_factory, size: 'thumbnail') }
+        before { source.images << thumbnail }
+
+        it 'renders thumbnail' do
+          expect(helper.render_thumbnail(source))
+          .to include "src=\"http://#{Settings.aws.cloudfront_domain}/" \
+                      "#{thumbnail.file_name}\""
+        end
+
+        it 'renders alt text' do
+          expect(helper.render_thumbnail(source))
+            .to include "alt=\"#{thumbnail.alt_text}\""
+        end
+      end
     end
   end
 end
