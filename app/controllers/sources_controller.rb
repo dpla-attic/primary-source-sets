@@ -18,9 +18,10 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find(params[:id])
+    @source_set = @source.source_set
     check_login_and_authorize(:read, Source) \
-      unless @source.source_set.published?
-    add_breadcrumb inline_markdown(@source.source_set.name), source_set_path(@source.source_set)
+      unless @source_set.published?
+    add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
     add_breadcrumb 'Source', source_path(@source)
     ma = @source.main_asset
     @file_base_or_name = nil

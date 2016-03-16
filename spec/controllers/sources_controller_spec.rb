@@ -25,6 +25,11 @@ describe SourcesController, type: :controller do
       :new, :edit, :create, :update, :destroy
 
     describe '#show' do
+      it 'sets @source_set variable' do
+        get :show, id: resource.id
+        expect(assigns(:source_set)).to eq resource.source_set
+      end
+
       it 'calls ApiQueryer#dpla_items with the DPLA ID' do
         expect(subject).to receive(:dpla_items).with(resource.aggregation)
           .and_return([])
@@ -48,5 +53,4 @@ describe SourcesController, type: :controller do
       end
     end
   end
-
 end
