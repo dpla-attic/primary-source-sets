@@ -6,6 +6,7 @@ class SourcesController < ApplicationController
   include VideoPlayerHelper
   include AudioPlayerHelper
   include MarkdownHelper
+  include ApiQueryer
   before_filter :load_source_set, only: [:index, :new, :create]
   before_action :authenticate_admin!,
                 only: [:new, :edit, :create, :update, :destroy]
@@ -23,7 +24,10 @@ class SourcesController < ApplicationController
     add_breadcrumb 'Source', source_path(@source)
     ma = @source.main_asset
     @file_base_or_name = nil
-    
+    dpla_item = dpla_items(@source.aggregation).first  # see ApiQueryer
+    @digital_resource_url = dpla_item.url unless dpla_item.nil?
+    @provider_name = dpla_item.provider.name unless dpla_item.nil?
+
     if ma.present?
       @file_base_or_name =
         ma.respond_to?(:file_base) ? ma.file_base : ma.file_name
