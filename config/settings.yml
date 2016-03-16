@@ -15,6 +15,9 @@ wordpress:
 exhibtions:
   url: http://exmaple.com/
 
+api:
+  key: CHANGEME
+
 app_scheme: 'http://'
 # app_host may include port
 app_host: 'localhost:3000'

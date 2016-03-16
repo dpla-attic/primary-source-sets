@@ -1,3 +1,10 @@
+<% content_for :head_script do %>
+  <script>
+    var pss_sequences_sort_path = '<%= sequences_sort_path %>';
+  </script>
+  <%= javascript_include_tag 'sequence', defer: 'defer' %>
+<% end %>
+
 <h1>Vocabulary: <%= @vocabulary.name %></h1>
 
 <p>
@@ -19,10 +26,18 @@
 </table>
 
 <h2>Tags</h2>
-<ul>
-<% @vocabulary.tags.each do |tag| %>
-  <li><%= link_to tag.label, tag_path(tag) %></li>
+<% if @vocabulary.sequences.present? %>
+  <p>The order below is the order in which tags will appear in a filter menu (if this vocuabulary is filterable). Drag and drop to re-order.</p>
+  <ul id='sequences'>
+  <% for sequence in @vocabulary.sequences %>
+    <%= content_tag_for(:li, sequence, class: 'ui-state-default') do %>
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+      <%= link_to sequence.tag.label, tag_path(sequence.tag) %>
+    <% end %>
+  <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no tags.</p>
 <% end %>
-</ul>
 
 <p><%= link_to "Add new tag", new_tag_path(vocabulary_id: @vocabulary.id) %></p>

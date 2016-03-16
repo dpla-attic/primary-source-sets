@@ -1,7 +1,8 @@
 class Tag < ActiveRecord::Base
   extend FriendlyId
   has_and_belongs_to_many :source_sets
-  has_and_belongs_to_many :vocabularies
+  has_many :sequences, dependent: :destroy
+  has_many :vocabularies, through: :sequences
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
 

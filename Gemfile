@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer',  '~> 0.12.2', platforms: :ruby
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails', '~> 3.1.3'
+gem 'jquery-ui-rails', '~> 5.0'
 gem 'config', '~> 1.0.0'
 gem 'redcarpet', '~> 3.3'
 gem 'friendly_id', '~> 5.1.0'
@@ -28,6 +29,8 @@ gem 'access-granted', '~> 1.0.0'
 # As of jasmine-jquery-rails v2.0.3, jasmine-jquery-rails is not compatible with
 # rake 11.0.0
 gem 'rake', '< 11.0'
+gem 'DPLibrary', git: 'https://github.com/dpla/DPLibrary.git',
+                 branch: 'feature/add-new-prop-and-id-path'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'

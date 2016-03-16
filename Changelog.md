@@ -1,3 +1,10 @@
+1.4.0 (16 March 2016)
+---
+* Add DPLibrary gem and API key setting
+* Add ApiQuerier concern and provider link resource
+* Add default thumbnails
+* Allow admins to order tags within vocaubularie
+
 1.3.3 (15 March 2016)
 ---
 * Add back links on source pages

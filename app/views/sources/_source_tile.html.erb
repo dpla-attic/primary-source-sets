@@ -1,13 +1,8 @@
 <section class='module source-tile'>
   <div class='source-container'>
     <div class='thumbnail-container'>
-      <% if source.thumbnail.present? %>
-        <span class='align-helper'></span>
-        <%= link_to((image_tag base_src + source.thumbnail.file_name,
-                               alt: source.thumbnail.alt_text.present? ? 
-                                 source.thumbnail.alt_text : source.name),
-                     source_path(source)) %>
-      <% end %>
+      <span class='align-helper'></span>
+      <%= render_thumbnail(source) %>
     </div>
     <div class='source-name-container'>
       <%= link_to inline_markdown(source.display_name),

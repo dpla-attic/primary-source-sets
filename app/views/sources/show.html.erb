@@ -35,8 +35,12 @@
         <h2>Credits</h2>
         <%= markdown(@source.credits) %>
         <h2>Need more information?</h2>
-        <%= link_to 'View the description of this item in DPLA',
-                    frontend_path('item/' + @source.aggregation) %>
+        <p><%= link_to 'View the description of this item in DPLA',
+                    frontend_path('item/' + @source.aggregation) %></p>
+        <% if !@provider_name.nil? %>
+        <p><%= link_to "View the item on #{@provider_name}",
+                    @digital_resource_url %></p>
+        <% end %>
       </div>
     </div>
   </aside>

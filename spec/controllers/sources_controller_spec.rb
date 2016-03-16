@@ -25,6 +25,11 @@ describe SourcesController, type: :controller do
       :new, :edit, :create, :update, :destroy
 
     describe '#show' do
+      it 'calls ApiQueryer#dpla_items with the DPLA ID' do
+        expect(subject).to receive(:dpla_items).with(resource.aggregation)
+          .and_return([])
+        get :show, id: resource.id
+      end
 
       context 'with a source belonging to an unpublished set' do
         it 'redirects to the sign-in page' do

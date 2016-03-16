@@ -17,8 +17,6 @@ $(function() {
         height += $(this).height();
       });
 
-      console.log(height);
-
       /*
        * If the height of all the lefthand images isn't enough to fill the
        * space, repeat the the images.
