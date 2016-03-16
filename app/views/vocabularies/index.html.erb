@@ -8,7 +8,7 @@
 <% @vocabularies.each do |vocabulary| %>
   <tr>
     <td><%= vocabulary.name %></td>
-    <td><%= link_to "View", vocabulary_path(vocabulary) %></td>
+    <td><%= link_to "View/Reorder", vocabulary_path(vocabulary) %></td>
     <td><%= link_to "Edit", edit_vocabulary_path(vocabulary) %></td>
     <td><%= link_to "Delete", vocabulary_path(vocabulary),
                               method: :delete,

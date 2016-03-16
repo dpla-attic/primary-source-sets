@@ -33,5 +33,7 @@ Rails.application.routes.draw do
   resources :vocabularies
   resources :posters, only: [:index, :show]
 
+  match 'sequences/sort', controller: :sequences, action: :sort, via: :post
+
   root 'source_sets#index'
 end

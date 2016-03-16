@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304170852) do
+ActiveRecord::Schema.define(version: 20160314132424) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 20160304170852) do
     t.text     "meta"
   end
 
+  create_table "sequences", force: true do |t|
+    t.integer "vocabulary_id"
+    t.integer "tag_id"
+    t.integer "position"
+  end
+
+  add_index "sequences", ["tag_id"], name: "index_sequences_on_tag_id"
+  add_index "sequences", ["vocabulary_id"], name: "index_sequences_on_vocabulary_id"
+
   create_table "source_sets", force: true do |t|
     t.string   "name"
     t.boolean  "published",                  default: false
@@ -162,14 +171,6 @@ ActiveRecord::Schema.define(version: 20160304170852) do
     t.datetime "updated_at", null: false
     t.string   "slug"
   end
-
-  create_table "tags_vocabularies", force: true do |t|
-    t.integer "vocabulary_id"
-    t.integer "tag_id"
-  end
-
-  add_index "tags_vocabularies", ["tag_id"], name: "index_tags_vocabularies_on_tag_id"
-  add_index "tags_vocabularies", ["vocabulary_id"], name: "index_tags_vocabularies_on_vocabulary_id"
 
   create_table "videos", force: true do |t|
     t.string   "file_base"
