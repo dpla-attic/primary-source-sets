@@ -1,7 +1,7 @@
 class Vocabulary < ActiveRecord::Base
   extend FriendlyId
-  has_many :sequences, dependent: :destroy
-  has_many :tags, through: :sequences
+  has_many :tag_sequences, dependent: :destroy
+  has_many :tags, through: :tag_sequences
   validates :name, presence: true, uniqueness: true
 
   ##
