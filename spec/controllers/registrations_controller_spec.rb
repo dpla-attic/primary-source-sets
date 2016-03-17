@@ -44,6 +44,12 @@ describe RegistrationsController, type: :controller do
         expect(resource.status).to eq 'manager'
       end
 
+      it 'updates the username' do
+        patch :update, id: resource.id, admin: { username: 'u' }
+        resource.reload
+        expect(resource.username).to eq 'u'
+      end
+
       context 'with an invalid email address' do
         it 'does not update the record' do
           patch :update, id: resource.id, admin: { email: 'x' }
