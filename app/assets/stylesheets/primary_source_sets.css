@@ -418,29 +418,29 @@ input.form-submit {
   margin-bottom: 1em;
 }
 
-#sequences {
+#tag_sequences {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#sequences li {
+#tag_sequences li {
   margin: 0 3px 3px 3px;
   padding: 0.4em;
   padding-left: 1.5em;
 }
 
-#sequences li span {
+#tag_sequences li span {
   position: absolute;
   margin-left: -1.3em;
   margin-top: 2px;
 }
 
-#sequences li a {
+#tag_sequences li a {
   color: #2795b6;
 }
 
-#sequences li a:hover {
+#tag_sequences li a:hover {
   color: black;
 }
 

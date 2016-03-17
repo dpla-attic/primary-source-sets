@@ -1,8 +1,8 @@
 ##
-# The Sequence model correlates to the sequences table, a join table between
-# tags and vocuabularies. This table includes the sequential position in which
-# tags appear within vocabularies.
-class Sequence < ActiveRecord::Base
+# The TagSequence model correlates to the tag_sequences table, a join table
+# between tags and vocuabularies. This table includes the sequential position in
+# which tags appear within vocabularies.
+class TagSequence < ActiveRecord::Base
   belongs_to :tag
   belongs_to :vocabulary
   before_save :set_position
@@ -21,8 +21,8 @@ class Sequence < ActiveRecord::Base
   # methods such as :amend_positions. There is no way in the current user
   # interface to set an incorrectly incremented position; however this could be
   # done through the command line.  An incorrectly incremented position may
-  # cause the sequence to display in an inconsistent order, but should not cause
-  # any errors.
+  # cause the tag sequence to display in an inconsistent order, but should not
+  # cause any errors.
   def set_position
     if position.nil?
       max_position = self.class.where('vocabulary_id = ?', vocabulary_id)
@@ -32,16 +32,16 @@ class Sequence < ActiveRecord::Base
   end
 
   ##
-  # Get all Sequences from the same vocabulary with a higher position.
-  # Reduce the position of all these Sequences by 1.
+  # Get all TagSequences from the same vocabulary with a higher position.
+  # Reduce the position of all these TagSequences by 1.
   # This will ensure that positions operate correctly as a sequential list, with
   # no gaps.
   def amend_positions
-    sequences = self.class.where('vocabulary_id = ?', vocabulary_id)
+    tag_sequences = self.class.where('vocabulary_id = ?', vocabulary_id)
                     .where('position > ?', position)
-    sequences.each do |sequence|
-      sequence.decrement(:position)
-      sequence.save
+    tag_sequences.each do |tag_sequence|
+      tag_sequence.decrement(:position)
+      tag_sequence.save
     end
   end
 end

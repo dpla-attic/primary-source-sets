@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe Vocabulary, type: :model do
 
-  it 'has many sequences' do
-    expect(Vocabulary.reflect_on_association(:sequences).macro).to eq :has_many
+  it 'has many tag sequences' do
+    expect(Vocabulary.reflect_on_association(:tag_sequences).macro)
+      .to eq :has_many
   end
 
   it 'has many tags' do
