@@ -1,3 +1,8 @@
+1.5.0 (17 March 2016)
+---
+* Rename sequences table
+* Change header text for related sets and sources
+
 1.4.0 (16 March 2016)
 ---
 * Add DPLibrary gem and API key setting
