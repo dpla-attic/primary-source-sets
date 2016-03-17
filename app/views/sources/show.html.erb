@@ -1,6 +1,6 @@
 <% content_for :head_script do %>
   <title><%= plaintext_from_md(@source.name) %></title>
-  <meta name='description' content="This <%= @source.main_asset.class.name.downcase %> is part of '<%= strip_tags(inline_markdown(@source.source_set.name)) %>', a primary source set for educational use." />
+  <meta name='description' content="This <%= @source.main_asset.class.name.downcase %> is part of '<%= strip_tags(inline_markdown(@source_set.name)) %>', a primary source set for educational use." />
   <link rel='canonical' href='<%= url_for(controller: 'sources',
                                           action: 'show',
                                           id: @source.id,
@@ -51,7 +51,7 @@
 </div>
 
 <div class='related-sources'>
-  <h2>More sources from this set:</h1>
+  <h2>More primary sources about <%= link_to(inline_markdown(@source_set.name), source_set_path(@source_set)) %></h2>
   
   <div class='carousel-container js-off'>
     <div class='multiple-items slider carousel'>
@@ -100,7 +100,7 @@
   <table>
     <tr>
       <td><strong>Set: </strong></td>
-      <td><%= link_to inline_markdown(@source.source_set.name), source_set_path(@source.source_set)%></td>
+      <td><%= link_to inline_markdown(@source_set.name), source_set_path(@source_set)%></td>
     </tr>
     <tr>
       <td><strong>DPLA item URI: </strong></td>
