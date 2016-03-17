@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314132424) do
+ActiveRecord::Schema.define(version: 20160316201152) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -120,15 +120,6 @@ ActiveRecord::Schema.define(version: 20160314132424) do
     t.text     "meta"
   end
 
-  create_table "sequences", force: true do |t|
-    t.integer "vocabulary_id"
-    t.integer "tag_id"
-    t.integer "position"
-  end
-
-  add_index "sequences", ["tag_id"], name: "index_sequences_on_tag_id"
-  add_index "sequences", ["vocabulary_id"], name: "index_sequences_on_vocabulary_id"
-
   create_table "source_sets", force: true do |t|
     t.string   "name"
     t.boolean  "published",                  default: false
@@ -163,6 +154,15 @@ ActiveRecord::Schema.define(version: 20160314132424) do
   end
 
   add_index "sources", ["source_set_id"], name: "index_sources_on_source_set_id"
+
+  create_table "tag_sequences", force: true do |t|
+    t.integer "vocabulary_id"
+    t.integer "tag_id"
+    t.integer "position"
+  end
+
+  add_index "tag_sequences", ["tag_id"], name: "index_tag_sequences_on_tag_id"
+  add_index "tag_sequences", ["vocabulary_id"], name: "index_tag_sequences_on_vocabulary_id"
 
   create_table "tags", force: true do |t|
     t.string   "label"
