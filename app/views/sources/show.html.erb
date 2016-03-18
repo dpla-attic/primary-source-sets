@@ -8,13 +8,13 @@
                                           trailing_slash: true) %>' />
   <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
   <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
+  <script type="text/javascript"
+          src="http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"
+          defer></script>
+  <%= javascript_include_tag 'carousel', defer: 'defer' %>
 <% end %>
 
 <% content_for :foot_script do %>
-  <%= javascript_include_tag 'lightbox' %>
-  <%= javascript_include_tag 'carousel' %>
-  <script type="text/javascript"
-          src="http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
   <%= render partial: 'shared/analytics' %>
 <% end %>
 
