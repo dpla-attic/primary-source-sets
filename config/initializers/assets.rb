@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w( style.js )
 Rails.application.config.assets.precompile += %w( openseadragon.js )
 Rails.application.config.assets.precompile += %w( results-bar.js )
 Rails.application.config.assets.precompile += %w( poster.js )
+Rails.application.config.assets.precompile += %w( social.js )
 Rails.application.config.assets.precompile += %w( tag_sequence.js )
 
 # Precompile assets from gems

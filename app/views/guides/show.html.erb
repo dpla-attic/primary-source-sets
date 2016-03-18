@@ -5,12 +5,15 @@
                                           action: 'show',
                                           id: @guide.slug,
                                           only_path: false,
-                                          trailing_slash: true) %>' /> 
+                                          trailing_slash: true) %>' />
+  <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
 <% end %>
+
+<%= render partial: 'shared/share' %>
 
 <div class="breadcrumbs">
   <%= render_breadcrumbs separator: ' / ' %>

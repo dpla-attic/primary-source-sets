@@ -285,6 +285,8 @@
 
 .breadcrumbs {
   padding: 0 0 10px 0;
+  display: inline-block;
+  float: left;
 }
 
 iframe {
@@ -474,6 +476,13 @@ input.form-submit {
   width: 100%;
   height: 100%;
   background-color: #6592A6;
+}
+
+/* Social share */
+
+ul.shareSave {
+  display: inline-block;
+  float: right;
 }
 
 /* Mobile layout */
