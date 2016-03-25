@@ -36,6 +36,14 @@ describe Source, type: :model do
     expect(Source.new(aggregation: nil)).not_to be_valid
   end
 
+  it 'is invalid if aggregation has whitespace characters' do
+    expect(Source.new(aggregation: '123 abc')).not_to be_valid
+  end
+
+  it 'is invalid if aggregation has special characters' do
+    expect(Source.new(aggregation: '123*ABC')).not_to be_valid
+  end
+
   it 'orders by created date' do
     source_1 = source
     source_2 = create(:source_factory, name: 'source 2')
