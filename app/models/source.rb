@@ -34,7 +34,9 @@ class Source < ActiveRecord::Base
                         source: :asset,
                         source_type: 'Image'
 
-  validates :aggregation, presence: true
+  validates :aggregation, presence: true, 
+                          format: { with: /\A[a-zA-Z0-9]+\z/,
+                                    message: 'can only be letters and numbers' }
 
   default_scope { order('created_at ASC') }
 
