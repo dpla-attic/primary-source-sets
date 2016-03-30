@@ -1,5 +1,5 @@
-<% content_for :foot_script do %>
-  <%= javascript_include_tag 'form' %>
+<% content_for :head_script do %>
+  <%= javascript_include_tag 'form', defer: 'defer' %>
 <% end %>
 
 <p><%= link_to "Back to vocabularies", vocabularies_path %></p>

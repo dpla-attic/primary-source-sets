@@ -1,4 +1,4 @@
-<% content_for :foot_script do %>
+<% content_for :head_script do %>
 
   <script>
       var pss_create_asset_path = '<%= documents_path() %>';
@@ -6,7 +6,7 @@
       var source_id = '<%= @source.present? ? @source.id : nil %>';
   </script>
 
-  <%= javascript_include_tag 'docupload' %>
+  <%= javascript_include_tag 'docupload', defer: 'defer' %>
 
 <% end %>
 
