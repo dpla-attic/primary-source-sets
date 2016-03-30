@@ -119,15 +119,30 @@
   <% unless current_admin.reviewer? %>
     <h3>Media assets</h2>
 
-    <p>
-      <%= link_to "Add new image", new_image_path(source_id: @source.id) %>
-      |
-      <%= link_to "Add new document", new_document_path(source_id: @source.id) %>
-      |
-      <%= link_to "Add new audio", new_audio_path(source_id: @source.id) %>
-      |
-      <%= link_to "Add new video", new_video_path(source_id: @source.id) %>
-    </p>
+    <div>
+      <%= link_to 'Add/remove main media asset', edit_source_path(@source, anchor: 'main-media-asset') %>
+    </div>
+    <div>
+      <%= link_to 'Add/remove thumbnail', edit_source_path(@source, anchor: 'thumbnail') %>
+    </div>
+    <div>
+      <%= link_to 'Add/remove small image', edit_source_path(@source, anchor: 'small-image') %>
+    </div>
+    <br/>
+    <div>
+      <%= link_to "Create new image", new_image_path(source_id: @source.id) %>
+    </div>
+    <div>
+      <%= link_to "Create new document", new_document_path(source_id: @source.id) %>
+    </div>
+    <div>
+      <%= link_to "Create new audio", new_audio_path(source_id: @source.id) %>
+    </div>
+    <div>
+      <%= link_to "Create new video", new_video_path(source_id: @source.id) %>
+    </div>
+
+    <br/>
 
     <table>
 
