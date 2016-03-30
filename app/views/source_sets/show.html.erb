@@ -158,6 +158,8 @@
   <% unless current_admin.reviewer? %>
     <p><%= link_to "Add new tag", new_tag_path(source_set_id: @source_set.id) %></p>
 
+    <p><%= link_to "Add new author", new_author_path(source_set_id: @source_set.id) %></p>
+
     <p><%= link_to "Add new source", new_source_set_source_path(@source_set.id) %></p>
 
     <p><%= link_to "Add new teaching guide", new_source_set_guide_path(@source_set.id) %></p>
