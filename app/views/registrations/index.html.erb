@@ -5,6 +5,7 @@
 <table>
 <% @admins.each do |admin| %>
   <tr>
+    <td><%= admin.username %></td>
     <td><%= admin.email %></td>
     <td><%= link_to "Edit", edit_registration_path(admin) %></td>
     <td><%= link_to "Delete", registration_path(admin),

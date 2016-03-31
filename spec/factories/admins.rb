@@ -5,6 +5,7 @@ FactoryGirl.define do
     confirmed_at DateTime.now
     confirmation_sent_at DateTime.now
     status 2
+    username 'Admin user'
   end
 
   factory :brandnew_admin_factory, class: Admin do
@@ -16,6 +17,7 @@ FactoryGirl.define do
   factory :unconfirmed_admin_factory, class: Admin do
     email 'test3@example.org'
     status 0
+    username 'User Name'
   end
 
   factory :reviewer_admin_factory, class: Admin do

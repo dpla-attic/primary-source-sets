@@ -7,10 +7,13 @@
 <%= form_for(resource,
              as: resource_name,
              url: registrations_path(resource),
-             html: { class: 'pss-admin-form' }) do |f| %>
+             html: { class: 'pss-admin-form admin' }) do |f| %>
 
   <%= f.label :email %>
   <%= f.email_field :email, autofocus: true %>
+
+  <%= f.label :username %>
+  <%= f.text_field :username %><br/>
 
   <%= f.submit "Create", class: 'form-submit' %>
 

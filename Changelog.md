@@ -1,3 +1,9 @@
+1.5.1 (31 March 2016)
+---
+* Add admin username
+* Valiate aggregation datatype
+* User defer attribute with JavaScripts
+
 1.5.0 (17 March 2016)
 ---
 * Rename sequences table

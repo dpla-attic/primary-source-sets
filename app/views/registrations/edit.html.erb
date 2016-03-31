@@ -12,11 +12,17 @@
 <%= form_for(resource,
              as: resource_name,
              url: registration_path(resource),
-             html: { class: 'pss-admin-form' }) do |f| %>
+             html: { class: 'pss-admin-form admin' }) do |f| %>
 
   <fieldset>
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.email_field :email, autofocus: true %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :username %>
+    <div><em>(optional)</em></div>
+    <%= f.text_field :username %>
   </fieldset>
 
   <% if current_admin.id == resource.id %>

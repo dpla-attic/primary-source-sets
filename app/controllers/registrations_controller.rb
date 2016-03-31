@@ -62,7 +62,7 @@ class RegistrationsController < Devise::RegistrationsController
     authorize! :destroy, Admin
     @admin = Admin.find(params[:id])
     @admin.destroy
-    redirect_to registrations_path    
+    redirect_to registrations_path
   end
 
   protected
@@ -72,6 +72,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) << :status
+    devise_parameter_sanitizer.for(:account_update) << [:status, :username]
+    devise_parameter_sanitizer.for(:sign_up) << :username
   end
 end
