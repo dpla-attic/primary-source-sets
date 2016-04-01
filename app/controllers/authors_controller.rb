@@ -15,6 +15,8 @@ class AuthorsController < ApplicationController
 
   def new
     @author = Author.new
+    @author.source_set_ids = [params[:source_set_id]]
+    @author.guide_ids = [params[:guide_id]]
   end
 
   def edit
@@ -51,6 +53,9 @@ class AuthorsController < ApplicationController
   private
 
   def author_params
-    params.require(:author).permit(:name, :affiliation)
+    params.require(:author).permit(:name,
+                                   :affiliation,
+                                   source_set_ids: [],
+                                   guide_ids: [])
   end
 end
