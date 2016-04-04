@@ -123,5 +123,9 @@
     </tr>
   </table>
 
-  <p><%= link_to "Add new author", new_author_path(guide_id: @guide.id) %></p>
+  <br/>
+
+  <div>
+    <%= link_to "Add/remove author", edit_guide_path(@guide, anchor: 'author') %> or <%= link_to "create new author", new_author_path(guide_id: @guide.id) %>
+  </div>
 <% end %>

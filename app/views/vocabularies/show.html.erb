@@ -26,6 +26,9 @@
 </table>
 
 <h2>Tags</h2>
+<div>
+  <%= link_to 'Add/remove tags', edit_vocabulary_path(@vocabulary, anchor: 'tags') %> or <%= link_to "create new tag", new_tag_path(vocabulary_id: @vocabulary.id) %>
+</div>
 <% if @vocabulary.tag_sequences.present? %>
   <p>The order below is the order in which tags will appear in a filter menu (if this vocuabulary is filterable). Drag and drop to re-order.</p>
   <ul id='tag_sequences'>
@@ -39,5 +42,3 @@
 <% else %>
   <p>There are currently no tags.</p>
 <% end %>
-
-<p><%= link_to "Add new tag", new_tag_path(vocabulary_id: @vocabulary.id) %></p>

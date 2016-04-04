@@ -19,6 +19,7 @@
 </table>
 
 <h2>Vocabularies</h2>
+<%= link_to 'Add/remove vocabularies', edit_tag_path(@tag, anchor: 'vocabularies') %>
 <ul>
   <% @tag.vocabularies.each do |vocabulary| %>
     <li><%= link_to vocabulary.name, vocabulary_path(vocabulary) %></li>
@@ -26,8 +27,9 @@
 </ul>
 
 <h2>Sets</h2>
+<%= link_to 'Add/remove sets', edit_tag_path(@tag, anchor: 'sets') %>
 <ul>
-<% @tag.source_sets.each do |source_set| %>
-  <li><%= link_to inline_markdown(source_set.name), source_set_path(source_set) %></li>
-<% end %>
+  <% @tag.source_sets.each do |source_set| %>
+    <li><%= link_to inline_markdown(source_set.name), source_set_path(source_set) %></li>
+  <% end %>
 </ul>
