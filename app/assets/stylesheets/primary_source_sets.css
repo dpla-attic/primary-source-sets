@@ -262,6 +262,10 @@ table td {
 
 /* Source */
 
+.source h1 {
+  clear: both;
+}
+
 .source .media-outer-container {
   padding: 34%;
   width: 100%;
