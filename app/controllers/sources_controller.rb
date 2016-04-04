@@ -26,8 +26,7 @@ class SourcesController < ApplicationController
     ma = @source.main_asset
     @file_base_or_name = nil
     dpla_item = dpla_items(@source.aggregation).first  # see ApiQueryer
-    @digital_resource_url = dpla_item.url unless dpla_item.nil?
-    @provider_name = dpla_item.provider.name unless dpla_item.nil?
+    parse_dpla_item(dpla_item)
 
     if ma.present?
       @file_base_or_name =
@@ -93,5 +92,16 @@ class SourcesController < ApplicationController
 
   def load_source_set
     @source_set = SourceSet.friendly.find(params[:source_set_id])
+  end
+
+  def parse_dpla_item(dpla_item)
+    return unless dpla_item.present?
+    @digital_resource_url = dpla_item.try(:url)
+    @provider_name = dpla_item.try(:provider).try(:name)
+    data_provider = dpla_item.try(:source)
+    intermediate_provider = dpla_item.try(:intermediate_provider)
+    @contributing_institution = 
+      [data_provider, intermediate_provider].compact.join('; ')
+    @title = Array(dpla_item.try(:title)).flatten.first
   end
 end
