@@ -20,7 +20,19 @@
 
   <h1><%= link_to 'Primary Source Sets', source_sets_path %></h1>
 
-  <p>DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources. Each set includes an overview, ten to fifteen primary sources, links to related resources, and a teaching guide. These sets were created and reviewed by the teachers on the DPLA's <%= link_to 'Education Advisory Committee', wordpress_path('education/education-advisory-committee') %>. We will be adding new sets and features through Spring 2016. Read about our <%= link_to 'education projects', wordpress_path('education') %> and contact us with feedback at <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
+  <p>Digital Public Library of America (DPLA) Primary Source Sets are designed 
+    to help students develop critical thinking skills by exploring topics in 
+    history, literature, and culture through primary sources. Drawing online 
+    materials from libraries, archives, and museums across the United States, 
+    the sets use letters, photographs, posters, oral histories, video clips, 
+    sheet music, and more. Each set includes a topic overview, ten to fifteen 
+    primary sources, links to related resources, and a teaching guide. These 
+    sets were created and reviewed by the teachers on the DPLA's 
+    <%= link_to 'Education Advisory Committee', wordpress_path('education/education-advisory-committee') %>. 
+    Read about our 
+    <%= link_to 'education projects', wordpress_path('education') %> 
+    and contact us with feedback at 
+    <%= mail_to Settings.contact_email, Settings.contact_email %>.</p>
 
   <div class='resultsBar'>
     <% filters.each do |vocab, tags| %>
