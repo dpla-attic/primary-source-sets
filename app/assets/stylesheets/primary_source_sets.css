@@ -286,6 +286,12 @@ table td {
   right: 0;
 }
 
+.source aside h2 {
+  font-size: 1.17em;
+  margin: 1.5em 0 1em 0;
+  font-weight: bold;
+}
+
 .source .textual-content {
   clear: left;
   padding-top: 2em;

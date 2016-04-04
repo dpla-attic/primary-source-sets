@@ -33,11 +33,16 @@
   <aside>
     <div class='module blue line'>
       <div class='moduleSection wrap'>
+        <h2>For this source, consider:</h2>
+        <ul>
+          <li>the author's point of view</li>
+          <li>the author's purpose</li>
+          <li>historical context</li>
+          <li>audience</li> 
+        </ul>
         <h2>Citation information</h2>
         <%= markdown(@source.citation) %>
-        <h2>Credits</h2>
         <%= markdown(@source.credits) %>
-        <h2>Need more information?</h2>
         <p><%= link_to 'View the description of this item in DPLA',
                     frontend_path('item/' + @source.aggregation) %></p>
         <% if !@provider_name.nil? %>
