@@ -1,3 +1,13 @@
+1.5.2 (7 April 2016)
+---
+* Add social media share buttons
+* Change descriptive text on sets index view
+* Add analysis tools text on source show view
+* Only show published sets in releated sets carousel
+* Add checkboxes to add/remove guides and sets on author form
+* Add spacing to tables in "Admin Info" sections of views
+* New links for managing relationship between objects
+
 1.5.1 (31 March 2016)
 ---
 * Add admin username

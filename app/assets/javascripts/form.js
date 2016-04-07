@@ -29,6 +29,8 @@
     $('.expand-control').html('show').show();
     $('.expand-content').hide();
 
+    showExpansibleAnchors();
+
     /* 
      * Show/hide function for expansible content.
      * .expand-control is a DOM element that users can click to show or hide
@@ -45,4 +47,25 @@
       }
     });
   });
+
+  /*
+   * Show expansible content if content block is indicated in URL jump anchor.
+   * For example, if the URL is:
+   *   http://example.com/sets/my-set/edit#author
+   * then the expansible block with the 'author' jump anchor tag will be shown.
+   */
+  function showExpansibleAnchors() {
+    var anchors = expansibleAnchors();
+    for (a in anchors) {
+      var block = $('a[name=' + anchors[a] + ']').closest('.expansible');
+      block.find('.expand-control').html('hide');
+      block.find('.expand-content').show();
+    }
+  }
+
+  function expansibleAnchors() {
+    var anchors = document.location.toString().split('#');
+    anchors.shift();
+    return anchors;
+  }
 })();

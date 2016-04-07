@@ -30,6 +30,7 @@
   </p>
 
   <div class='expansible'>
+    <a name='vocabularies'></a>
     <h2><%= f.label :vocabularies %></h2>
     <a class='expand-control'>show</a>
     <div class='expand-content'>
@@ -45,7 +46,8 @@
   </div>
 
   <div class='expansible'>
-    <h2><%= f.label :source_sets %></h2>
+    <a name='sets'></a>
+    <h2><%= f.label :sets %></h2>
     <a class='expand-control'>show</a>
     <div class='expand-content'>
       <% source_sets = SourceSet.all %>

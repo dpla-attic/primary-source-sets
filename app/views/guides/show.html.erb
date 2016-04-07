@@ -5,12 +5,15 @@
                                           action: 'show',
                                           id: @guide.slug,
                                           only_path: false,
-                                          trailing_slash: true) %>' /> 
+                                          trailing_slash: true) %>' />
+  <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
 <% end %>
+
+<%= render partial: 'shared/share' %>
 
 <div class="breadcrumbs">
   <%= render_breadcrumbs separator: ' / ' %>
@@ -119,4 +122,10 @@
       <td><%= link_to inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set)%></td>
     </tr>
   </table>
+
+  <br/>
+
+  <div>
+    <%= link_to "Add/remove author", edit_guide_path(@guide, anchor: 'author') %> or <%= link_to "create new author", new_author_path(guide_id: @guide.id) %>
+  </div>
 <% end %>

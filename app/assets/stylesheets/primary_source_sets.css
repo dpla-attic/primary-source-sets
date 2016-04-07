@@ -13,6 +13,11 @@
   clear: both;
 }
 
+table td {
+  padding-right: 0.6em;
+  padding-bottom: 0.2em;
+}
+
 /*
  * Use js-off to hide elements if javascript is disabled.
  * @see assets/javascripts/style.js
@@ -257,6 +262,10 @@
 
 /* Source */
 
+.source h1 {
+  clear: both;
+}
+
 .source .media-outer-container {
   padding: 34%;
   width: 100%;
@@ -277,6 +286,12 @@
   right: 0;
 }
 
+.source aside h2 {
+  font-size: 1.17em;
+  margin: 1.5em 0 1em 0;
+  font-weight: bold;
+}
+
 .source .textual-content {
   clear: left;
   padding-top: 2em;
@@ -285,6 +300,8 @@
 
 .breadcrumbs {
   padding: 0 0 10px 0;
+  display: inline-block;
+  float: left;
 }
 
 iframe {
@@ -474,6 +491,13 @@ input.form-submit {
   width: 100%;
   height: 100%;
   background-color: #6592A6;
+}
+
+/* Social share */
+
+ul.shareSave {
+  display: inline-block;
+  float: right;
 }
 
 /* Mobile layout */

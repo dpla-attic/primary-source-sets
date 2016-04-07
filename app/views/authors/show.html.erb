@@ -19,6 +19,9 @@
 </table>
 
 <h2>Sets</h2>
+<% unless current_admin.present? && current_admin.reviewer? %>
+  <%= link_to 'Add/remove sets', edit_author_path(@author, anchor: 'sets') %>
+<% end %>
 <ul>
 <% @author.source_sets.each do |source_set| %>
   <li><%= link_to inline_markdown(source_set.name), source_set_path(source_set) %></li>
@@ -26,6 +29,9 @@
 </ul>
 
 <h2>Teaching guides</h2>
+<% unless current_admin.present? && current_admin.reviewer? %>
+  <%= link_to 'Add/remove guides', edit_author_path(@author, anchor: 'guides') %>
+<% end %>
 <ul>
   <% @author.guides.each do |guide| %>
     <li><%= link_to inline_markdown(guide.name), guide_path(guide) %></li>
