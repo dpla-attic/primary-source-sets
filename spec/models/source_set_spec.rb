@@ -150,10 +150,10 @@ describe SourceSet, type: :model do
     let(:b_tag) { create(:tag_factory, label: 'b') }
     let(:c_tag) { create(:tag_factory, label: 'c') }
 
-    let(:set_1) { create(:source_set_factory) }
-    let(:set_2) { create(:source_set_factory) }
-    let(:set_3) { create(:source_set_factory) }
-    let(:set_4) { create(:source_set_factory) }
+    let(:set_1) { create(:source_set_factory, published: true) }
+    let(:set_2) { create(:source_set_factory, published: true) }
+    let(:set_3) { create(:source_set_factory, published: true) }
+    let(:set_4) { create(:source_set_factory, published: true) }
 
     before do
       set_1.tags << [a_tag, b_tag, c_tag]
@@ -166,12 +166,19 @@ describe SourceSet, type: :model do
       expect(set_1.related_sets).to be_a(Array)
     end
 
-    it 'returns sets with at least two matching tags' do
+    it 'returns published sets with at least two matching tags' do
       expect(set_1.related_sets).to contain_exactly(set_2, set_3)
     end
 
     it 'orders sets by number of matching tags' do
       expect(set_1.related_sets.first).to eq(set_3)
+    end
+
+    it 'does not return unpublished sets' do
+      set_2.published = false
+      set_2.save
+      set_2.reload
+      expect(set_1.related_sets).not_to include(set_2)
     end
   end
 
