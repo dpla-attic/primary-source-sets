@@ -34,13 +34,13 @@ class SourceSet < ActiveRecord::Base
   end
 
   ##
-  # Returns sets with at least two matching tags (not including self).
+  # Returns published sets with at least two matching tags (not including self).
   # Results are ordered so that sets with the highest number of matching tags
   # appear first.
   #
   # @return [Array<SourceSet>]
   def related_sets
-    sets = tags.map { |tag| [tag.source_sets] }.flatten - [self]
+    sets = tags.map { |tag| [tag.source_sets.published] }.flatten - [self]
     sets_with_count = sets.each_with_object(Hash.new(0)) do |set, count|
       count[set] += 1
     end
