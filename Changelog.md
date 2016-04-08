@@ -1,3 +1,8 @@
+1.5.3 (8 April 2016)
+---
+* Track use of hubs' materials in Google Analytics
+* Add social media button to sets index view
+
 1.5.2 (7 April 2016)
 ---
 * Add social media share buttons
@@ -7,6 +12,7 @@
 * Add checkboxes to add/remove guides and sets on author form
 * Add spacing to tables in "Admin Info" sections of views
 * New links for managing relationship between objects
+* Update nav bar
 
 1.5.1 (31 March 2016)
 ---
