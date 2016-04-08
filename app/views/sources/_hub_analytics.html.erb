@@ -1,0 +1,10 @@
+<% if Settings.googleanalytics.tracker && @provider_name.present? %>
+  <script>
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'View Primary Source : <%= @provider_name %>',
+      eventAction: '<%= @contributing_institution %>',
+      eventLabel: '<%= "#{@source.aggregation} : #{@title}" %>'
+    });
+  </script>
+<% end %>
