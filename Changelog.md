@@ -1,3 +1,7 @@
+1.5.4 (8 April 2016)
+---
+* Add missing javascript file on sets index view
+
 1.5.3 (8 April 2016)
 ---
 * Track use of hubs' materials in Google Analytics
