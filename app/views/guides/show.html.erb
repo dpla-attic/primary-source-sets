@@ -108,6 +108,8 @@
 
   <% unless current_admin.reviewer? %>
     <p>
+      <%= link_to "New", new_source_set_guide_path(@guide.source_set.id) %>
+      |
       <%= link_to "Edit", edit_guide_path(@guide) %>
       |
       <%= link_to "Delete", 

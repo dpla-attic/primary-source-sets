@@ -98,6 +98,8 @@
 
   <% unless current_admin.reviewer? %>
     <p>
+      <%= link_to "New", new_source_set_source_path(@source.source_set.id) %>
+      |
       <%= link_to "Edit", edit_source_path(@source) %>
       |
       <%= link_to "Delete", 
