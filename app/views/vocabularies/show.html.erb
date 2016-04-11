@@ -8,6 +8,8 @@
 <h1>Vocabulary: <%= @vocabulary.name %></h1>
 
 <p>
+  <%= link_to "New", new_vocabulary_path %>
+  |
   <%= link_to "Edit", edit_vocabulary_path(@vocabulary) %>
   |
   <%= link_to "Delete", vocabulary_path(@vocabulary), method: :delete,

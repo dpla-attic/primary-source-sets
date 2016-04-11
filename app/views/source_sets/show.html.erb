@@ -117,6 +117,8 @@
 
   <% unless current_admin.reviewer? %>
     <p>
+      <%= link_to "New", new_source_set_path %>
+      |
       <%= link_to "Edit", edit_source_set_path(@source_set) %>
       |
       <%= link_to "Delete", source_set_path(@source_set), method: :delete,

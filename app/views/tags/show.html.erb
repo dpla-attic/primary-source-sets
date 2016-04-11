@@ -1,6 +1,8 @@
 <h1>Tag: <%= @tag.label %></h1>
 
 <p>
+  <%= link_to "New", new_tag_path %>
+  |
   <%= link_to "Edit", edit_tag_path(@tag) %>
   |
   <%= link_to "Delete", tag_path(@tag), method: :delete,
