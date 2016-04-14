@@ -1,0 +1,81 @@
+{
+  <%= render partial: 'shared/context.json' %>,
+  "@id": "<%= source_url(@source) %>",
+  "@type": "CreativeWork",
+  <% thumbnail = @source.thumbnail %>
+  <% if thumbnail.present? %>
+    "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
+  <% end %>
+  <% if @source.name.present? %>
+    "name": <%= @source.name.to_json.html_safe %>,
+  <% end %>
+  "dateCreated": "<%= @source.created_at.strftime("%Y-%m-%d") %>",
+  "dct:created": "<%= @source.created_at.strftime("%Y-%m-%d") %>",
+  "dateModified": "<%= @source.updated_at.strftime("%Y-%m-%d") %>",
+  "dct:modified": "<%= @source.updated_at.strftime("%Y-%m-%d") %>",
+  "mainEntity": [
+    {
+      "@type": "CreativeWork",
+      <% if @main_asset.present? %>
+        "associatedMedia": [
+          <% if @main_asset.is_a?(Document) || @main_asset.is_a?(Image) %>
+            {
+              "fileFormat": "<%= @main_asset.file_name.split('.').last %>",
+              "contentUrl": "<%= @main_asset.file_name %>"
+            }
+          <% elsif @main_asset.is_a? Video %>
+            <% outs = JSON.parse(@main_asset.meta)['output_settings'] %>
+            <% for out in outs %>
+              {
+                "fileFormat": "<%= out['extension'] %>",
+                "contentUrl": "<%= video_file_path(@main_asset.file_base,
+                                                   out['extension']) %>"
+              }<%= ',' unless out.equal?(outs.last) %>
+            <% end %>
+          <% elsif @main_asset.is_a? Audio %>
+            <% outs = JSON.parse(@main_asset.meta)['output_settings'] %>
+            <% for out in outs %>
+              {
+                "fileFormat": "<%= out['extension'] %>",
+                "contentUrl": "<%= audio_file_path(@main_asset.file_base,
+                                                   out.fetch('suffix', ''),
+                                                   out['extension']) %>"
+              }<%= ',' unless out.equal?(outs.last) %>
+            <% end %>
+          <% end %>
+        ],
+        "dct:references": [
+          <% if !@provider_name.nil? %>
+            {
+              "@id": "<%= @digital_resource_url %>",
+              "@type": "WebPage"
+            },
+          <% end %>
+          {
+            "@id": "<%= "http:#{frontend_path('item/' + @source.aggregation)}" %>",
+            "@type": "ore:Aggregation",
+            "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
+          }
+        ],
+      <% end %>
+      <% if @source.citation.present? %>
+        "dct:citation": <%= @source.citation.to_json.html_safe %>,
+      <% end %>
+      <% if @source.credits.present? %>
+        "dct:provenance": {
+          "@type": "dct:ProvenanceStatement",
+          "name": <%= @source.credits.to_json.html_safe %>
+        },
+      <% end %>
+      "@type": "MediaObject"
+    }
+  ],
+  <% if @source.textual_content.present? %>
+    "text": <%= @source.textual_content.to_json.html_safe %>,
+  <% end %>
+  "isPartOf": {
+    "@id": "<%= source_set_url(@source_set) %>",
+    "@type": "CreativeWork",
+    "name": <%= @source_set.name.to_json.html_safe %>
+  }
+}

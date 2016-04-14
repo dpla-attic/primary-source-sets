@@ -20,8 +20,11 @@ module MarkdownHelper
     strip_p_tags(markdown(text))
   end
 
+  ##
+  # @return String a plain text representation of the markdown string given in
+  # 'text'.  Removes trailing newline.
   def plaintext_from_md(text)
-    Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(text)
+    Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(text).chomp
   end
 
   private

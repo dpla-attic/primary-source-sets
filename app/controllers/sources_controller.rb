@@ -23,14 +23,24 @@ class SourcesController < ApplicationController
       unless @source_set.published?
     add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
     add_breadcrumb 'Source', source_path(@source)
-    ma = @source.main_asset
+    @main_asset = @source.main_asset
     @file_base_or_name = nil
     dpla_item = dpla_items(@source.aggregation).first  # see ApiQueryer
     parse_dpla_item(dpla_item)
 
-    if ma.present?
-      @file_base_or_name =
-        ma.respond_to?(:file_base) ? ma.file_base : ma.file_name
+    if @main_asset.present?
+      @file_base_or_name = @main_asset.respond_to?(:file_base) ?
+        @main_asset.file_base : @main_asset.file_name
+    end
+
+    ##
+    # Render HTML or JSON formats unless controller has already redirected or
+    # rendered (ie. in the check_login_and_authorize method).
+    unless performed?
+      respond_to do |format|
+        format.html
+        format.json { render partial: 'sources/show.json.erb' }
+      end
     end
   end
 
@@ -100,7 +110,7 @@ class SourcesController < ApplicationController
     @provider_name = dpla_item.try(:provider).try(:name)
     data_provider = dpla_item.try(:source)
     intermediate_provider = dpla_item.try(:intermediate_provider)
-    @contributing_institution = 
+    @contributing_institution =
       [data_provider, intermediate_provider].compact.join('; ')
     @title = Array(dpla_item.try(:title)).flatten.first
   end
