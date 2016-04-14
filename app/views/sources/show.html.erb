@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
   <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
   <script type="text/javascript"
-          src="http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"
+          src="https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"
           defer></script>
   <%= javascript_include_tag 'carousel', defer: 'defer' %>
   <%= javascript_include_tag 'social', defer: 'defer' %>
@@ -98,6 +98,8 @@
 
   <% unless current_admin.reviewer? %>
     <p>
+      <%= link_to "New", new_source_set_source_path(@source.source_set.id) %>
+      |
       <%= link_to "Edit", edit_source_path(@source) %>
       |
       <%= link_to "Delete", 

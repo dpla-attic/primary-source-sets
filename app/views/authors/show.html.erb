@@ -1,6 +1,8 @@
 <h1>Author: <%= @author.name %></h1>
 
 <p>
+  <%= link_to "New", new_author_path %>
+  |
   <%= link_to "Edit", edit_author_path(@author) %>
   |
   <%= link_to "Delete", author_path(@author), method: :delete,

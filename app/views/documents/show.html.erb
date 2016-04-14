@@ -1,6 +1,8 @@
 <h1>Document: <%= @document.file_name %></h1>
 
 <p>
+  <%= link_to "New", new_document_path %>
+  |
   <%= link_to "Delete", 
                document_path(@document), method: :delete,
                data: { confirm: "Are you sure you want to delete #{@document.file_name}?" } %>
