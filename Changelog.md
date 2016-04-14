@@ -1,3 +1,8 @@
+1.5.5 (14 April 2016)
+---
+* Access external JavaScript files with https
+* Add links to new objects in admin show views
+
 1.5.4 (8 April 2016)
 ---
 * Add missing javascript file on sets index view
