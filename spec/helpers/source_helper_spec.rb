@@ -98,7 +98,7 @@ describe SourcesHelper, type: :helper do
 
         it 'renders thumbnail' do
           expect(helper.render_thumbnail(source))
-          .to include "src=\"http://#{Settings.aws.cloudfront_domain}/" \
+          .to include "src=\"#{Settings.app_scheme}#{Settings.aws.cloudfront_domain}/" \
                       "#{thumbnail.file_name}\""
         end
 
