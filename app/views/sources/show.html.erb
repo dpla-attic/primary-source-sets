@@ -6,8 +6,8 @@
                                           id: @source.id,
                                           only_path: false,
                                           trailing_slash: true) %>' />
-  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
-  <link rel="stylesheet" type="text/css" href= 'http://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
+  <link rel="stylesheet" type="text/css" href= 'https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css' />
+  <link rel="stylesheet" type="text/css" href= 'https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick-theme.css' />
   <script type="text/javascript"
           src="https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"
           defer></script>
@@ -89,7 +89,7 @@
   <h2>Teaching Guide<%= 's' if guides.count > 1 %></h2>
   <p>
     This source appears in 
-    <%= raw guides.collect { |guide| link_to guide.name, guide }.to_sentence %>.
+    <%= raw guides.collect { |guide| link_to inline_markdown(guide.name), guide }.to_sentence %>.
   </p>
 </div>
 

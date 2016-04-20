@@ -29,8 +29,8 @@ gem 'access-granted', '~> 1.0.0'
 # As of jasmine-jquery-rails v2.0.3, jasmine-jquery-rails is not compatible with
 # rake 11.0.0
 gem 'rake', '< 11.0'
-gem 'DPLibrary', git: 'https://github.com/dpla/DPLibrary.git',
-                 branch: 'feature/add-new-prop-and-id-path'
+gem 'DPLibrary', git: 'https://github.com/phereford/DPLibrary.git',
+                 branch: 'master'
 
 group :test, :development do
   gem 'rspec-core', '~> 3.3.2'
@@ -45,6 +45,7 @@ group :test, :development do
   gem 'json-ld', '~>1.1.9'
   gem 'jasmine', '~> 2.0'
   gem 'jasmine-jquery-rails', '~> 2.0'
+  gem 'phantomjs', '1.9.8'
 end
 
 group :development do
