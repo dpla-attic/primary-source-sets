@@ -45,6 +45,7 @@ group :test, :development do
   gem 'json-ld', '~>1.1.9'
   gem 'jasmine', '~> 2.0'
   gem 'jasmine-jquery-rails', '~> 2.0'
+  gem 'phantomjs', '1.9.8'
 end
 
 group :development do
