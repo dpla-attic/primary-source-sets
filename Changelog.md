@@ -1,3 +1,10 @@
+1.6.0 (20 Apr 2016)
+---
+* Enable SSL
+* Change location of DPLibrary gem
+* Render guide markdown on source show view
+* Lock phantomjs gem to v1.9.8
+
 1.5.5 (14 April 2016)
 ---
 * Access external JavaScript files with https
