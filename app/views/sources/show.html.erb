@@ -89,7 +89,7 @@
   <h2>Teaching Guide<%= 's' if guides.count > 1 %></h2>
   <p>
     This source appears in 
-    <%= raw guides.collect { |guide| link_to guide.name, guide }.to_sentence %>.
+    <%= raw guides.collect { |guide| link_to inline_markdown(guide.name), guide }.to_sentence %>.
   </p>
 </div>
 
