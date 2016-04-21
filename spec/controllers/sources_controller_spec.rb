@@ -54,10 +54,12 @@ describe SourcesController, type: :controller do
         expect(assigns(:main_asset)).to eq resource.main_asset
       end
 
-      it 'calls ApiQueryer#dpla_items with the DPLA ID' do
-        expect(subject).to receive(:dpla_items).with(resource.aggregation)
-          .and_return([])
-        get :show, id: resource.id
+      it 'sets @dpla_item variable' do
+        # aggregation is not a valid DPLA ID, so expect that DplaItem will
+        # return an empty array
+        source = create(:source_factory, aggregation: 'xyz')
+        get :show, id: source.id
+        expect(assigns(:dpla_item)).to eq []
       end
 
       context 'with a source belonging to an unpublished set' do

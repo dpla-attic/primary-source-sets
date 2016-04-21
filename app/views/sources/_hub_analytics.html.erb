@@ -1,10 +1,10 @@
-<% if Settings.googleanalytics.tracker && @provider_name.present? %>
+<% if Settings.googleanalytics.tracker && @dpla_item.present? %>
   <script>
     ga('send', {
       hitType: 'event',
-      eventCategory: 'View Primary Source : <%= @provider_name %>',
-      eventAction: '<%= @contributing_institution %>',
-      eventLabel: '<%= "#{@source.aggregation} : #{@title}" %>'
+      eventCategory: 'View Primary Source : <%= @dpla_item.provider %>',
+      eventAction: '<%= @dpla_item.contributing_institution %>',
+      eventLabel: '<%= "#{@source.aggregation} : #{@dpla_item.title}" %>'
     });
   </script>
 <% end %>

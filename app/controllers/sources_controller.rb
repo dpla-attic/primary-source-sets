@@ -6,7 +6,6 @@ class SourcesController < ApplicationController
   include VideoPlayerHelper
   include AudioPlayerHelper
   include MarkdownHelper
-  include ApiQueryer
   before_filter :load_source_set, only: [:index, :new, :create]
   before_action :authenticate_admin!,
                 only: [:new, :edit, :create, :update, :destroy]
@@ -19,14 +18,13 @@ class SourcesController < ApplicationController
   def show
     @source = Source.find(params[:id])
     @source_set = @source.source_set
-    check_login_and_authorize(:read, Source) \
-      unless @source_set.published?
-    add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
+    check_login_and_authorize(:read, Source) unless @source_set.published?
+    add_breadcrumb inline_markdown(@source_set.name),
+                   source_set_path(@source_set)
     add_breadcrumb 'Source', source_path(@source)
     @main_asset = @source.main_asset
+    @dpla_item = DplaItem.find(@source.aggregation)
     @file_base_or_name = nil
-    dpla_item = dpla_items(@source.aggregation).first  # see ApiQueryer
-    parse_dpla_item(dpla_item)
 
     if @main_asset.present?
       @file_base_or_name = @main_asset.respond_to?(:file_base) ?
@@ -102,16 +100,5 @@ class SourcesController < ApplicationController
 
   def load_source_set
     @source_set = SourceSet.friendly.find(params[:source_set_id])
-  end
-
-  def parse_dpla_item(dpla_item)
-    return unless dpla_item.present?
-    @digital_resource_url = dpla_item.try(:url)
-    @provider_name = dpla_item.try(:provider).try(:name)
-    data_provider = dpla_item.try(:source)
-    intermediate_provider = dpla_item.try(:intermediate_provider)
-    @contributing_institution =
-      [data_provider, intermediate_provider].compact.join('; ')
-    @title = Array(dpla_item.try(:title)).flatten.first
   end
 end
