@@ -13,6 +13,13 @@
   clear: both;
 }
 
+.flex-container {
+  display: -ms-flexbox; /* IE 10 */
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  clear: both;
+}
+
 table td {
   padding-right: 0.6em;
   padding-bottom: 0.2em;
@@ -22,7 +29,7 @@ table td {
   background-color: #EDEDED;
   border: 2px solid #DD4E00;
   padding: 1em;
-  margin-bottom: 2em;
+  margin: 0 2em 2em 0;
 }
 
 /*
@@ -34,12 +41,7 @@ table td {
 }
 
 .primary-source-sets aside {
-  margin-left: 1em;
-  margin-bottom: 1em;
-}
-
-.primary-source-sets .moduleSection {
-  margin-bottom: 2em;
+  margin-left: auto;
 }
 
 .primary-source-sets .contact-outer-container {
@@ -64,11 +66,6 @@ table td {
 .set .byline, .guide .byline {
   display: block;
   margin-top: 1em;
-}
-
-.set .guide-link .moduleSection,
-.guide  .set-link .moduleSection {
-  margin-bottom: 1em;
 }
 
 /* SourceSets index styles */
@@ -193,8 +190,16 @@ table td {
 
 /* SourceSet styles */
 
-.set .title-outer-container {
+.set article {
   background-color: #6592A6;
+}
+
+.set aside {
+  margin-bottom: 0;
+  background-color: #EDEDED;
+}
+
+.set .title-outer-container {
   margin-bottom: 2em;
 }
 
@@ -262,6 +267,10 @@ table td {
 
 /* Guide styles */
 
+.guide  .set-link .moduleSection {
+  margin-bottom: 1em;
+}
+
 .guide .textual-content {
   margin-top: 1.5em;
 }
@@ -280,16 +289,30 @@ table td {
   clear: both;
 }
 
-.source .media-outer-container {
-  padding: 34%;
-  width: 100%;
-  box-sizing: border-box;
+.source .flex-container {
+  min-height: 500px;
+}
+
+.source article {
   position: relative;
+}
+
+.source aside {
+  background-color: #EDEDED;
+  margin-bottom: 0;
+}
+
+.source .media-outer-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .source article.audio .media-outer-container {
   padding: 3em;
-  background-color: #555;
+  background-color: #333;
 }
 
 .source .media-inner-container {
@@ -307,7 +330,6 @@ table td {
 }
 
 .source .textual-content {
-  clear: left;
   padding-top: 2em;
   margin-bottom: 3em;
 }
@@ -334,11 +356,13 @@ video {
 }
 
 audio {
-  margin: 0px auto;
+  margin: auto;
   display: block;
   width: 90%;
-  padding-top: 2em;
-  padding-bottom: 1em;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  right: 5%;
 }
 
 .related-sources, .related-sets {
@@ -543,6 +567,30 @@ ul.shareSave {
 
   .all-sets .threeCol .module {
     width: 100%;
+  }
+
+  .flex-container {
+    display: initial;
+  }
+
+  .source .media-outer-container {
+    position: relative;
+    padding: 34%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .source aside {
+    margin-bottom: 5%;
+  }
+
+  .set aside {
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  .error {
+    margin: 0 0 2em 0;
   }
 }
 
