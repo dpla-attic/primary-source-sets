@@ -29,7 +29,14 @@
 <div class='source'>
   <h1><%= inline_markdown(@source.display_name) %></h1>
 
-  <%= render_media_asset %>
+  <div class='js-off'>
+    <%= render_media_asset %>
+  </div>
+  <noscript>
+    <div class='error'>
+      Your browser cannot render this media object because it does not support JavaScript.  Please enable JavaScript if you would like to access this media object.
+    </div>
+  </noscript>
 
   <aside>
     <div class='module blue line'>
