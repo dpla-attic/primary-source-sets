@@ -18,6 +18,13 @@ table td {
   padding-bottom: 0.2em;
 }
 
+.error {
+  background-color: #EDEDED;
+  border: 2px solid #DD4E00;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
 /*
  * Use js-off to hide elements if javascript is disabled.
  * @see assets/javascripts/style.js
