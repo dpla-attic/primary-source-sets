@@ -1,5 +1,4 @@
 <% content_for :head_script do %>
-  <title><%= plaintext_from_md(@guide.name) %></title>
   <meta name='description' content="This teaching guide helps instructors use a specific primary source set, '<%= strip_tags(inline_markdown(@guide.source_set.name)) %>', in the classroom." />
   <link rel='canonical' href='<%= url_for(controller: 'guides',
                                           action: 'show',
@@ -8,6 +7,8 @@
                                           trailing_slash: true) %>' />
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
+
+<% content_for :title, plaintext_from_md(@guide.name) %>
 
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
@@ -19,7 +20,7 @@
   <%= render_breadcrumbs separator: ' / ' %>
 </div>
 
-<div class='guide'>
+<div class='guide' id='content'>
 
   <article>
     <div class='title-outer-container'>
