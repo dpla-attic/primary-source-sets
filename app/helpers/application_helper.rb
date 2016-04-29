@@ -54,4 +54,18 @@ module ApplicationHelper
       image_name
     end
   end
+
+  ##
+  # Generate a Twitter web intent link using the URL and title of the current
+  # page.
+  #
+  # @return String
+  # @see https://dev.twitter.com/web/tweet-button/parameters
+  def twitter_web_intent
+    'https://twitter.com/share?' \
+    "url=#{request.original_url}&" \
+    "related=#{Settings.twitter_username}&" \
+    "via=#{Settings.twitter_username}&" \
+    "text=#{content_for :title}"
+  end
 end
