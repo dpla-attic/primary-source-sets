@@ -92,6 +92,14 @@ table td {
 
 /* Source set tile */
 
+.all-sets .threeCol .module {
+  width: 32.5%;
+}
+
+.set-tile .set-container {
+  background-color: #6592A6;
+}
+
 .set-tile.module {
   border-color: #6592A6;
   padding: 0;
@@ -105,7 +113,6 @@ table td {
 
 .set-tile .set-name-container {
   padding: 1em;
-  background-color: #6592A6;
 }
 
 .set-tile .set-name-container a {
@@ -534,7 +541,7 @@ ul.shareSave {
     width: 100%;
   }
 
-  .all-sets .module {
+  .all-sets .threeCol .module {
     width: 100%;
   }
 }
