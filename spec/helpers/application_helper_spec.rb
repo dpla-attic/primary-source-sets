@@ -86,4 +86,15 @@ describe ApplicationHelper, type: :helper do
       expect(helper.base_src).to eq 'something-example.com/'
     end
   end
+
+  describe '#twitter_web_intent' do
+    it 'includes the original url' do
+      expect(helper.twitter_web_intent).to include helper.request.original_url
+    end
+
+    it 'includes the page title' do
+      allow(helper).to receive(:content_for).with(:title).and_return('title')
+      expect(helper.twitter_web_intent).to include 'title'
+    end
+  end
 end

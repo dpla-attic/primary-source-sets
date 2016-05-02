@@ -1,9 +1,10 @@
 <% content_for :head_script do %>
-  <title>Primary Source Sets</title>
   <meta name='description' content="DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources." />
   <%= javascript_include_tag 'results-bar', defer: 'defer' %>
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
+
+<% content_for :title, 'Primary Source Sets' %>
 
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
@@ -19,7 +20,7 @@
 
 <%= render partial: 'shared/share' %>
 
-<div class='all-sets'>
+<div class='all-sets' id='content'>
 
   <h1><%= link_to 'Primary Source Sets', source_sets_path %></h1>
 

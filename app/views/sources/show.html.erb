@@ -1,5 +1,4 @@
 <% content_for :head_script do %>
-  <title><%= plaintext_from_md(@source.name) %></title>
   <meta name='description' content="This <%= @source.main_asset.class.name.downcase %> is part of '<%= strip_tags(inline_markdown(@source_set.name)) %>', a primary source set for educational use." />
   <link rel='canonical' href='<%= url_for(controller: 'sources',
                                           action: 'show',
@@ -15,6 +14,8 @@
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
+<% content_for :title, plaintext_from_md(@source.name) %>
+
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
   <%= render partial: 'sources/hub_analytics' %>
@@ -26,7 +27,7 @@
   <%= render_breadcrumbs separator: ' / ' %>
 </div>
 
-<div class='source'>
+<div class='source' id='content'>
   <h1><%= inline_markdown(@source.display_name) %></h1>
 
   <div class='js-off'>
