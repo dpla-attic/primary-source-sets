@@ -1,3 +1,13 @@
+1.6.1 (3 May 2016)
+---
+* Use CSS for dimensional manaipulations
+* Custom language for auto-generated twitter post
+* Fix set tile size and background color
+* Add content jumplinks
+* Fix link to apps in footer
+* Allow basic controller tests to run
+* Add error message for media if JavaScript is disabled
+
 1.6.0 (20 Apr 2016)
 ---
 * Enable SSL
