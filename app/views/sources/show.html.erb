@@ -1,5 +1,4 @@
 <% content_for :head_script do %>
-  <title><%= plaintext_from_md(@source.name) %></title>
   <meta name='description' content="This <%= @source.main_asset.class.name.downcase %> is part of '<%= strip_tags(inline_markdown(@source_set.name)) %>', a primary source set for educational use." />
   <link rel='canonical' href='<%= url_for(controller: 'sources',
                                           action: 'show',
@@ -15,6 +14,8 @@
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
+<% content_for :title, plaintext_from_md(@source.name) %>
+
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
   <%= render partial: 'sources/hub_analytics' %>
@@ -26,33 +27,40 @@
   <%= render_breadcrumbs separator: ' / ' %>
 </div>
 
-<div class='source'>
+<div class='source' id='content'>
   <h1><%= inline_markdown(@source.display_name) %></h1>
 
-  <%= render_media_asset %>
-
-  <aside>
-    <div class='module blue line'>
-      <div class='moduleSection wrap'>
-        <h2>For this source, consider:</h2>
-        <ul>
-          <li>the author's point of view</li>
-          <li>the author's purpose</li>
-          <li>historical context</li>
-          <li>audience</li> 
-        </ul>
-        <h2>Citation information</h2>
-        <%= markdown(@source.citation) %>
-        <%= markdown(@source.credits) %>
-        <p><%= link_to 'View the description of this item in DPLA',
-                    frontend_path('item/' + @source.aggregation) %></p>
-        <% if !@provider_name.nil? %>
-        <p><%= link_to "View the item on #{@provider_name}",
-                    @digital_resource_url %></p>
-        <% end %>
+  <div class='flex-container'>
+    <%= render_media_asset %>
+    <noscript>
+      <div class='error'>
+        Your browser cannot render this media object because it does not support JavaScript.  Please enable JavaScript if you would like to access this media object.
       </div>
-    </div>
-  </aside>
+    </noscript>
+
+    <aside>
+      <div class='module blue line'>
+        <div class='moduleSection wrap'>
+          <h2>For this source, consider:</h2>
+          <ul>
+            <li>the author's point of view</li>
+            <li>the author's purpose</li>
+            <li>historical context</li>
+            <li>audience</li>
+          </ul>
+          <h2>Citation information</h2>
+          <%= markdown(@source.citation) %>
+          <%= markdown(@source.credits) %>
+          <p><%= link_to 'View the description of this item in DPLA',
+                      frontend_path('item/' + @source.aggregation) %></p>
+          <% if !@provider_name.nil? %>
+          <p><%= link_to "View the item on #{@provider_name}",
+                      @digital_resource_url %></p>
+          <% end %>
+        </div>
+      </div>
+    </aside>
+  </div>
 
   <div class='textual-content'>
     <%= markdown(@source.textual_content) %>

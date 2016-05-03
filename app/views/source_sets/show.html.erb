@@ -1,5 +1,4 @@
 <% content_for :head_script do %>
-  <title><%= plaintext_from_md(@source_set.name) %></title>
   <meta name='description' content="<%= @source_set.description %>" />
   <link rel='canonical' href='<%= url_for(controller: 'source_sets',
                                           action: 'show',
@@ -15,6 +14,8 @@
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
+<% content_for :title, plaintext_from_md(@source_set.name) %>
+
 <% content_for :foot_script do %>
   <%= render partial: 'shared/analytics' %>
 <% end %>
@@ -25,33 +26,35 @@
   <%= render_breadcrumbs separator: ' / ' %>
 </div>
 
-<div class='set'>
+<div class='set' id='content'>
 
-  <article>
-    <div class='title-outer-container'>
-      <div class='title-inner-container'>
-        <h1><%= inline_markdown(@source_set.name) %></h1>
-        <span class='subheading'>Primary Source Set</span>
-        <% if @source_set.authors.present? %>
-          <span class='byline'>By <%= @source_set.author_list.to_sentence %></span>
-        <% end %>
-      </div>
-    </div>
-  </article>
-
-  <aside class='guide-link'>
-    <div class='module yellow line'>
-      <div class='moduleSection'>
-        <h2>Teaching guide</h2>
-        <p>
-          <% if @source_set.guides.present? %>
-            <%= link_to inline_markdown(@source_set.guides.first.name),
-                        guide_path(@source_set.guides.first) %>
+  <div class='flex-container'>
+    <article>
+      <div class='title-outer-container'>
+        <div class='title-inner-container'>
+          <h1><%= inline_markdown(@source_set.name) %></h1>
+          <span class='subheading'>Primary Source Set</span>
+          <% if @source_set.authors.present? %>
+            <span class='byline'>By <%= @source_set.author_list.to_sentence %></span>
           <% end %>
-        </p>
+        </div>
       </div>
-    </div>
-  </aside>
+    </article>
+
+    <aside class='guide-link'>
+      <div class='module yellow line'>
+        <div class='moduleSection'>
+          <h2>Teaching guide</h2>
+          <p>
+            <% if @source_set.guides.present? %>
+              <%= link_to inline_markdown(@source_set.guides.first.name),
+                          guide_path(@source_set.guides.first) %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
 
   <div class='overview'>
     <%= markdown(@source_set.overview) %>
