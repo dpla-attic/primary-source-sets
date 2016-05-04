@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
-  before do
-    # TODO:  Move this to a context and test both with and without the assets
-    # gem. See https://issues.dp.la/issues/8140
-    class DplaFrontendAssets; end
+
+  shared_context 'with frontend assets gem' do
+    before { stub_const('DplaFrontendAssets', double) }
   end
 
   describe '#markdown' do
@@ -59,22 +58,47 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe '#branding_stylesheets' do
-    it 'returns dpla-colors stylesheet' do
-      expect(helper.branding_stylesheets).to match(/dpla-colors.css/)
+    context 'with assets' do
+      include_context 'with frontend assets gem'
+
+      it 'returns dpla-colors stylesheet' do
+        expect(helper.branding_stylesheets).to match(/dpla-colors.css/)
+      end
+
+      it 'returns dpla-fonts stylesheet' do
+        expect(helper.branding_stylesheets).to match(/dpla-fonts.css/)
+      end
     end
 
-    it 'returns dpla-fonts stylesheet' do
-      expect(helper.branding_stylesheets).to match(/dpla-fonts.css/)
+    context 'without assets' do
+      it 'returns nil' do
+        expect(helper.branding_stylesheets).to be nil
+      end
     end
   end
 
   describe '#branding_img' do
-    it 'returns dpla logo' do
-      expect(helper.branding_img('logo.png')).to eq 'dpla-logo.png'
+    context 'with assets' do
+      include_context 'with frontend assets gem'
+
+      it 'returns dpla logo' do
+        expect(helper.branding_img('logo.png')).to eq 'dpla-logo.png'
+      end
+
+      it 'returns dpla footer logo' do
+        expect(helper.branding_img('footer-logo.png'))
+          .to eq 'dpla-footer-logo.png'
+      end
     end
 
-    it 'returns dpla footer logo' do
-      expect(helper.branding_img('footer-logo.png')).to eq 'dpla-footer-logo.png'
+    context 'without assets' do
+      it 'returns logo placeholder' do
+        expect(helper.branding_img('logo.png')).to eq 'logo.png'
+      end
+
+      it 'returns footer placeholder' do
+        expect(helper.branding_img('footer-logo.png')).to eq 'footer-logo.png'
+      end
     end
   end
 
