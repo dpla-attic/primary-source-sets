@@ -10,6 +10,7 @@
     <%= branding_stylesheets %>
     <%= javascript_include_tag 'application' %><%# do not defer %>
     <%= javascript_include_tag 'style', defer: 'defer' %>
+    <script src='https://platform.twitter.com/widgets.js'></script>
     <%= csrf_meta_tags %>
     <title><%= yield :title %></title>
     <%= yield :head_script %>

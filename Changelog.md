@@ -1,3 +1,8 @@
+1.6.2 (4 May 2016)
+---
+* Add Twitter widget JavaScript library
+* Add tests to application helper
+
 1.6.1 (3 May 2016)
 ---
 * Use CSS for dimensional manaipulations
