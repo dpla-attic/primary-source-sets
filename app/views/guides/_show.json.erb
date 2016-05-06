@@ -1,0 +1,35 @@
+{
+  <%= render partial: 'shared/context.json' %>,
+  "@id": "<%= guide_url(@guide) %>",
+  "@type": "CreativeWork",
+  "name": <%= @guide.name.to_json.html_safe %>,
+  "dateCreated": "<%= @guide.created_at.strftime("%Y-%m-%d") %>",
+  "dct:created": "<%= @guide.created_at.strftime("%Y-%m-%d") %>",
+  "dateModified": "<%= @guide.updated_at.strftime("%Y-%m-%d") %>",
+  "dct:modified": "<%= @guide.updated_at.strftime("%Y-%m-%d") %>",
+  <% if @authors.present? %>
+    "author": [
+      <% for author in @authors %>
+        {
+          "@type": "Person",
+          <% if author.affiliation.present? %>
+            "affiliation": {
+              "@type": "Organization",
+              "name": "<%= author.affiliation %>"
+            },
+            <% end %>
+          "name": "<%= author.name %>"
+        }<%= ',' unless author.equal?(@authors.last) %>
+      <% end %>
+    ],
+  <% end %>
+  <% text = [@guide.questions, @guide.activity].compact.join("\r\n\r\n") %>
+  <% if text.present? %>
+    "text": <%= text.to_json.html_safe %>,
+  <% end %>
+  "isPartOf": {
+    "@id": "<%= source_set_url(@source_set) %>",
+    "@type": "CreativeWork",
+    "name": <%= @source_set.name.to_json.html_safe %>
+  }
+}

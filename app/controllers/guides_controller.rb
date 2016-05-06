@@ -15,9 +15,21 @@ class GuidesController < ApplicationController
 
   def show
     @guide = Guide.friendly.find(params[:id])
+    @source_set = @guide.source_set
+    @authors = @guide.authors
     check_login_and_authorize(:read, Guide) unless @guide.source_set.published?
     add_breadcrumb inline_markdown(@guide.source_set.name), source_set_path(@guide.source_set)
     add_breadcrumb 'Guide', guide_path(@guide)
+
+    ##
+    # Render HTML or JSON formats unless controller has already redirected or
+    # rendered (ie. in the check_login_and_authorize method).
+    unless performed?
+      respond_to do |format|
+        format.html
+        format.json { render partial: 'guides/show.json.erb' }
+      end
+    end
   end
 
   def new

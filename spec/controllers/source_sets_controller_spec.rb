@@ -67,6 +67,49 @@ describe SourceSetsController, type: :controller do
         expect(response).to render_template :index
       end
     end
+
+    describe '#show' do
+
+      it 'sets @authors variable' do
+        resource.authors << [create(:author_factory)]
+        get :show, id: resource.id
+        expect(assigns(:authors).first).to eq resource.authors.first
+      end
+
+      it 'sets @sources variable' do
+        create(:source_factory, source_set: resource)
+        get :show, id: resource.id
+        expect(assigns(:sources).first).to eq resource.sources.first
+      end
+
+      it 'sets @guides variable' do
+        create(:guide_factory, source_set: resource)
+        get :show, id: resource.id
+        expect(assigns(:guides).first).to eq resource.guides.first
+      end
+
+      it 'sets @tags variable' do
+        resource.tags << [create(:tag_factory)]
+        get :show, id: resource.id
+        expect(assigns(:tags).first).to eq resource.tags.first
+      end
+
+      describe 'request for json format' do
+        context 'with a published set' do
+          it 'renders the show json partial' do
+            get :show, id: published.id, format: :json
+            expect(response).to render_template(partial: '_show.json.erb')
+          end
+        end
+
+        context 'with an unpublished set' do
+          it 'renders the show json partial' do
+            get :show, id: resource.id, format: :json
+            expect(response).to render_template(partial: '_show.json.erb')
+          end
+        end
+      end
+    end
   end
 
   context 'with the user not logged-in' do
@@ -78,7 +121,7 @@ describe SourceSetsController, type: :controller do
 
       context 'with an unpublished set' do
         it 'redirects to the sign-in page' do
-          get :show, id: resource.id
+          get :show, id: resource.id, format: :html
           expect(response).to redirect_to new_admin_session_path
         end
       end
@@ -92,6 +135,21 @@ describe SourceSetsController, type: :controller do
         end
       end
 
+      describe 'request for json format' do
+        context 'with an unpublished set' do
+          it 'redirects to sign-in login' do
+            get :show, id: resource.id, format: :json
+            expect(response).to redirect_to new_admin_session_path
+          end
+        end
+
+        context 'with a published set' do
+          it 'renders the show json partial' do
+            get :show, id: published.id, format: :json
+            expect(response).to render_template(partial: '_show.json.erb')
+          end
+        end
+      end
     end
   end
 end
