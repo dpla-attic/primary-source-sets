@@ -6,6 +6,9 @@
                                           only_path: false,
                                           trailing_slash: true) %>' />
   <%= javascript_include_tag 'social', defer: 'defer' %>
+  <script type='application/ld+json'>
+    <%= render partial: 'guides/show.json' %>
+  </script>
 <% end %>
 
 <% content_for :title, plaintext_from_md(@guide.name) %>
