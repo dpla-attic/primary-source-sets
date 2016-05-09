@@ -22,6 +22,11 @@ describe SourceSet, type: :model do
       .to eq :has_and_belongs_to_many
   end
 
+  it 'has and belongs to many filter tags' do
+    expect(SourceSet.reflect_on_association(:filter_tags).macro)
+      .to eq :has_and_belongs_to_many
+  end
+
   it 'has one featured source' do
     expect(SourceSet.reflect_on_association(:featured_source).macro)
       .to eq :has_one
@@ -106,6 +111,13 @@ describe SourceSet, type: :model do
 
       it 'returns all SourceSets if no tags specified' do
         expect(SourceSet.with_tags([])).to include(source_set, published_set)
+      end
+    end
+
+    describe '#filter_tags' do
+      it 'returns tags associated with filterable vocabularies' do
+        a_tag.vocabularies << create(:vocabulary_factory, filter: true)
+        expect(published_set.filter_tags).to contain_exactly a_tag
       end
     end
   end

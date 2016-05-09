@@ -15,4 +15,12 @@ class Tag < ActiveRecord::Base
   #   URL:  http://example.com/primary-source-sets/tags/little-my
   #   To find this object: Tag.friendly.find("little-my")
   friendly_id :label, use: :slugged
+
+  ##
+  # Tags that belong to filterable vocabularies.
+  # @see SourceSet.rb
+  scope :filterable, (lambda do
+                        joins(:vocabularies)
+                          .where(vocabularies: { filter: true })
+                      end)
 end

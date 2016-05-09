@@ -11,24 +11,13 @@
     </div>
 
     <% if render_tags %>
-      <%# Setting this variable reduces calls to the database %>
-      <% set_tags = set.tags %>
 
       <ul class='tag-list'>
-        <% filters.each do |vocab, tags| %>
-
-          <%# Get tags that are shared between this set and this vocab %>
-          <% display_tags = tags & set_tags %>
-
-          <% if display_tags.present? %>
-
-              <% display_tags.each do |tag| %>
-                <li class='tag'>
-                  <% new_params = params.merge(tags: [tag.slug]) %>
-                  <%= link_to tag.label, source_sets_path(new_params) %>
-                </li>
-              <% end %>
-          <% end %>
+        <% set.filter_tags.each do |tag| %>
+          <li class='tag'>
+            <% new_params = params.merge(tags: [tag.slug]) %>
+            <%= link_to tag.label, source_sets_path(new_params) %>
+          </li>
         <% end %>
       </ul>
     <% end %>

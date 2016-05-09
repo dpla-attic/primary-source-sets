@@ -75,7 +75,7 @@
   <% end %>
 
   <ul class='tag-list'>
-    <% tags = @source_set.tags %>
+    <% tags = @source_set.filter_tags %>
     <% if tags.present? %>
       <% tags.each do |tag| %>
         <li class='tag'>

@@ -57,8 +57,8 @@
         <% if selected_tags_in(tags).count == 0 %>
           <%# render dropdown menu %>
           <%= select_tag('tags[]',
-                       options_for_select(tag_filter_options(tags),
-                                          selected_slugs_in(tags))) %>
+                         options_for_select(tag_filter_options(tags),
+                                            selected_slugs_in(tags))) %>
 
           <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
 
@@ -93,11 +93,11 @@
     <% end %>
   </div>
 
-  <% if @published_sets.count == 0 %>
+  <% if @published_sets.length == 0 %>
     <%= render partial: 'source_sets/no_results' %>
   <% else %>
     <%= render partial: 'source_sets/set_list',
-               locals: { sets: @published_sets, filters: filters } %>
+               locals: { sets: @published_sets } %>
   <% end %>
 
   <div class='contact-outer-container'>
@@ -116,9 +116,9 @@
 
       <h3>Unpublished sets</h3>
 
-      <% if @unpublished_sets.count > 0 %>
+      <% if @unpublished_sets.length > 0 %>
         <%= render partial: 'source_sets/set_list',
-                   locals: { sets: @unpublished_sets, filters: filters } %>
+                   locals: { sets: @unpublished_sets } %>
       <% else %>
         <p>There are currently no unpublished sets.</p>
       <% end %>
