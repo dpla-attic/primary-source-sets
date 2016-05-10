@@ -54,11 +54,18 @@
           <h2>Citation information</h2>
           <%= markdown(@source.citation) %>
           <%= markdown(@source.credits) %>
-          <p><%= link_to 'View the description of this item in DPLA',
-                      frontend_path('item/' + @source.aggregation) %></p>
-          <% if !@provider_name.nil? %>
-          <p><%= link_to "View the item on #{@provider_name}",
-                      @digital_resource_url %></p>
+          <% if @dpla_item.present? %>
+            <p>
+              <a href='<%= @dpla_item.dpla_frontend_url %>'>
+                View the description of this item in DPLA
+              </a>
+            </p>
+            <% if @dpla_item.provider.present? && @dpla_item.digital_resource_url.present? %>
+              <p><%= link_to "View the item on #{@dpla_item.provider}",
+                      @dpla_item.digital_resource_url %></p>
+            <% end %>
+          <% else %>
+            <p>This item is not currently available in the DPLA library.</p>
           <% end %>
         </div>
       </div>

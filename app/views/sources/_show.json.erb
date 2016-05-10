@@ -44,19 +44,21 @@
             <% end %>
           <% end %>
         ],
-        "dct:references": [
-          <% if !@provider_name.nil? %>
+        <% if @dpla_item.present? %>
+          "dct:references": [
+            <% if @dpla_item.digital_resource_url.present? %>
+              {
+                "@id": "<%= @dpla_item.digital_resource_url %>",
+                "@type": "WebPage"
+              },
+            <% end %>
             {
-              "@id": "<%= @digital_resource_url %>",
-              "@type": "WebPage"
-            },
-          <% end %>
-          {
-            "@id": "<%= "http:#{frontend_path('item/' + @source.aggregation)}" %>",
-            "@type": "ore:Aggregation",
-            "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
-          }
-        ],
+              "@id": "<%= "http:#{frontend_path('item/' + @source.aggregation)}" %>",
+              "@type": "ore:Aggregation",
+              "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
+            }
+          ],
+        <% end %>
       <% end %>
       <% if @source.citation.present? %>
         "dct:citation": <%= @source.citation.to_json.html_safe %>,
