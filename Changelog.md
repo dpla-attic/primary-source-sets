@@ -1,3 +1,10 @@
+1.6.3 (12 May 2016)
+---
+* Add .json views for set, source, and guide
+* Embed JSON-LD in HTML
+* Refactor DPLA item
+* Inform user when item not available in DPLA
+
 1.6.2 (4 May 2016)
 ---
 * Add Twitter widget JavaScript library
