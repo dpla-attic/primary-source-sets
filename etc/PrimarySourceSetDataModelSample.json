@@ -9,6 +9,10 @@
     "text": {
       "@id": "http://schema.org/text",
       "@type": "http://ns.ontowiki.net/SysOnt/Markdown"
+    },
+    "name": {
+      "@id": "http://schema.org/text",
+      "@type": "http://ns.ontowiki.net/SysOnt/Markdown"
     }
   },
   "@id": "http://dp.la/sets/french-and-indian-war",
@@ -17,36 +21,18 @@
   "name": "The French and Indian War",
   "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
   "dateCreated": "2015-08-08",
+  "dct:created": "2015-08-08",
   "dateModified": "2015-08-20",
+  "dct:modified": "2015-08-20",
   "about": [
-    { 
+    {
       "@type": "Thing",
       "name": "History" 
     },
-    { 
+    {
       "@type": "Thing",
-      "name": "Social Studies"
-    },
-    { 
-      "@type": "Thing",
-      "name": "French and Indian War" 
-    },
-    { 
-      "@type": "Thing",
-      "name": "Seven Years' War"
-    },
-    { 
-      "@type": "Thing",
-      "name": "Thirteen Colonies"
-    }
-  ],
-  "dct:temporal": [
-    { 
-      "@id": "ushist:united-states-era-2",
-      "@type": "edm:TimeSpan",
-      "name": "Colonization & Settlement (1585-1763)",
-      "edm:begin": "1585",
-      "edm:end": "1763"
+      "name": "French and Indian War",
+      "sameAs": "http://educational-schema.org/french-and-indian-war"
     }
   ],
   "description": "This collection uses primary sources to explore the French and Indian War.",
@@ -76,10 +62,14 @@
   },
   "text": "The French and Indian War helped set the stage for the American Revolution. Between the years 1754 and 1763, major powers engaged in a global struggle, the Seven Years war. In North America, the conflict between the French and British Empires included indigenous nations. This collection of documents, images, maps, and artifacts help provide the various perspectives on the war, both from the leadership, and the more marginalized groups. By analyzing, exploring, and interpreting these primary sources, inquirers will gain insight into the experience of 18th-century warfare, from the point of view of the \"winners\" and the \"losers.\"",
   "hasPart": [
-    { 
+    {
       "@id": "http://dp.la/sets/french-and-indinan-war/guide/23",
       "@type": "CreativeWork",
       "name": "Teaching Guide: Perspectives of the French and Indian War",
+      "dateCreated": "2015-08-09",
+      "dct:created": "2015-08-09",
+      "dateModified": "2015-08-11",
+      "dct:modified": "2015-08-11",
       "author": [
         {
           "@type": "Person",
@@ -105,25 +95,37 @@
       "@type": "CreativeWork",
       "thumbnailUrl": "http://dp.la/assets/path-to-thumbnail.jpg",
       "name": "Diary of Major George Washington, 1753",
-      "mainEntity": {
-        "@type": "CreativeWork",
-        "associatedMedia": [
-          {
-            "@type": "MediaObject",
-            "fileFormat": "pdf",
-            "contentUrl": "http://path-to-file",
-            "dct:references": {
+      "dateCreated": "2015-08-08",
+      "dct:created": "2015-08-08",
+      "dateModified": "2015-08-08",
+      "dct:modified": "2015-08-08",
+      "mainEntity": [
+        {
+          "@type": "CreativeWork",
+          "associatedMedia": [
+            {
+              "@type": "MediaObject",
+              "fileFormat": "pdf",
+              "contentUrl": "http://path-to-file"
+            }
+          ],
+          "dct:references": [
+            {
               "@id": "http://dp.la/item/87037c8c0dc514bfd19bddbce9ff2ce7",
               "@type": "ore:Aggregation"
             },
-            "dct:citation": "Washington, George. *The journal of Major George Washington.* Chicago: The Newberry Library, 1958. Page 53.",
-            "dct:provenance": {
-              "@type": "dct:ProvenanceStatement",
-              "name": "Courtesy of The Univeristy of Michigan via HathiTrust"
+            {
+              "@id": "http://catalog.hathitrust.org/Record/009923002",
+              "@type": "WebPage"
             }
+          ],
+          "dct:citation": "Washington, George. *The journal of Major George Washington.* Chicago: The Newberry Library, 1958. Page 53.",
+          "dct:provenance": {
+            "@type": "dct:ProvenanceStatement",
+            "name": "Courtesy of The Univeristy of Michigan via HathiTrust"
           }
-        ]
-      },
+        }
+      ],
       "text": "Excerpt from Wednesday, October 31st, 1753:\n\"I was comissioned and appointed by the Honourable Robert Dinwidde, Esq; Governor, etc. of Virginia to visit and deliver a Letter to the Commandant of the French Forces on the Hioin, and set out on the indended Journey the same day ; and proceeded with him to Alexandria, where we provided Necessaries ; from thence we went to Winchester, and got Baggage, Horses, etc., and from thence we pursued the new Road to Wills-Creek, where we arrive the 14th of November.\""
     }
   ],
@@ -138,7 +140,7 @@
   "license": "http://dp.la/info/terms/",
   "typicalAgeRange": "11-18",
   "accessbilityFeature": [
-    "captions", 
+    "captions",
     "structuralNavigation",
     "audioControl",
     "videoControl"

@@ -19,6 +19,20 @@ class SourceSetsController < ApplicationController
     @source_set = SourceSet.friendly.find(params[:id])
     check_login_and_authorize(:read, SourceSet) unless @source_set.published?
     add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
+    @authors = @source_set.authors
+    @sources = @source_set.sources
+    @guides = @source_set.guides
+    @tags = @source_set.tags
+
+    ##
+    # Render HTML or JSON formats unless controller has already redirected or
+    # rendered (ie. in the check_login_and_authorize method).
+    unless performed?
+      respond_to do |format|
+        format.html
+        format.json { render partial: 'source_sets/show.json.erb' }
+      end
+    end
   end
 
   def new

@@ -1,0 +1,186 @@
+{
+  <%= render partial: 'shared/context.json' %>,
+  "@id": "<%= source_set_url(@source_set) %>",
+  "@type": "CreativeWork",
+  "dct:type": "dcmitype:InteractiveResource",
+  "name": <%= @source_set.name.to_json.html_safe %>,
+  <% if @source_set.featured_image.present? %>
+    "thumbnailUrl": "<%= base_src + @source_set.featured_image.file_name %>",
+  <% end %>
+  "dateCreated": "<%= @source_set.created_at.strftime("%Y-%m-%d") %>",
+  "dct:created": "<%= @source_set.created_at.strftime("%Y-%m-%d") %>",
+  "dateModified": "<%= @source_set.updated_at.strftime("%Y-%m-%d") %>",
+  "dct:modified": "<%= @source_set.updated_at.strftime("%Y-%m-%d") %>",
+  <% if @tags.present? %>
+    "about": [
+      <% for tag in @tags %>
+        {
+          "@type": "Thing",
+          "name": "<%= tag.label %>"<%= ',' if tag.uri.present? %>
+          <% if tag.uri.present? %>
+            "sameAs": "<%= tag.uri %>"
+          <% end %>
+        }<%= ',' unless tag.equal?(@tags.last) %>
+      <% end %>
+    ],
+  <% end %>
+  <% if @source_set.description.present? %>
+    "description": "<%= @source_set.description %>",
+  <% end %>
+  <% if @authors.present? %>
+    "author": [
+      <% for author in @authors %>
+        {
+          "@type": "Person",
+          <% if author.affiliation.present? %>
+            "affiliation": {
+              "@type": "Organization",
+              "name": "<%= author.affiliation %>"
+            },
+            <% end %>
+          "name": "<%= author.name %>"
+        }<%= ',' unless author.equal?(@authors.last) %>
+      <% end %>
+    ],
+  <% end %>
+  "publisher": {
+    "@id": "<%= frontend_path %>",
+    "@type": "Organization",
+    "name": "Digital Public Library of America",
+    "email": "info@dp.la"
+  },
+  <% text = [@source_set.overview, @source_set.resources].compact
+                                                         .join("\r\n\r\n") %>
+  <% if text.present? %>
+    "text": <%= text.to_json.html_safe %>,
+  <% end %>
+  <% if @guides.present? || @sources.present? %>
+    "hasPart": [
+      <% if @guides.present? %>
+        <% for guide in @guides %>
+          {
+            "@id": "<%= guide_url(guide) %>",
+            "@type": "CreativeWork",
+            "name": <%= guide.name.to_json.html_safe %>
+          }<%= ',' if not (guide.equal?(@guides.last) && @sources.blank?) %>
+        <% end %>
+      <% end %>
+      <% if @sources.present? %>
+        <% for source in @sources %>
+          {
+            "@id": "<%= source_url(source) %>",
+            "@type": "CreativeWork",
+            <% thumbnail = source.thumbnail %>
+            <% if thumbnail.present? %>
+              "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
+            <% end %>
+            "name": <%= source.name.to_json.html_safe %>
+          }<%= ',' unless source.equal?(@sources.last) %>
+        <% end %>
+      <% end %>
+    ],
+  <% end %>
+  "inLanguage": [
+    {
+      "@id": "http://lexvo.org/id/term/eng/English",
+      "@type": "Language",
+      "name": "English"
+    }
+  ],
+  "learningResourceType": "Source Set",
+  "license": "http://dp.la/info/terms/",
+  "typicalAgeRange": "11-18",
+  "accessbilityFeature": [
+    "captions",
+    "structuralNavigation",
+    "audioControl",
+    "videoControl"
+  ],
+  "accessibilityHazard": [
+    "noFlashingHazard",
+    "motionSimulation",
+    "noSoundHazard"
+  ],
+  "accessibilityControl": [
+    "fullMouseControl"
+  ],
+  "educationalAlignment": [
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.6-8.7",
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.6-8.7",
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/7/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.6-8.9",
+      "targetUrl": "ccss:ELA-Literacy/RH/6-8/9/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.9-10.9",
+      "targetUrl": "ccss:ELA-Literacy/RH/9-10/9/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.11-12.7",
+      "targetUrl": "ccss:ELA-Literacy/RH/11-12/7/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.RH.11-12.9",
+      "targetUrl": "ccss:ELA-Literacy/RH/11-12/9/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.CCRA.R.7",
+      "targetUrl": "ccss:ELA-Literacy/CCRA/R/7/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.CCRA.W.8",
+      "targetUrl": "ccss:ELA-Literacy/CCRA/W/8/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.WHST.6-8.8",
+      "targetUrl": "ccss:ELA-Literacy/WHST/6-8/8/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.WHST.9-10.8",
+      "targetUrl": "ccss:ELA-Literacy/WHST/9-10/8/"
+    },
+    {
+      "@type": "AlignmentObject",
+      "alignmentType": "requires",
+      "educationalFramework": "Common Core State Standards",
+      "targetName": "CCSS.ELA-Literacy.WHST.11-12.8",
+      "targetUrl": "ccss:ELA-Literacy/WHST/11-12/8/"
+    }
+  ]
+}

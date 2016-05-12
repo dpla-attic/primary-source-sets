@@ -13,15 +13,21 @@ describe 'sources/show.html.erb', type: :view do
 
   it 'renders the source' do
     render
-    expect(rendered).to include(source.aggregation)
+    expect(rendered).to include(source.name)
   end
 
   context 'with a successful API request' do
-    let (:url) { 'http://example.org/' }
-    let (:provider) { 'X' }
+    let(:dpla_item) { double }
+    let(:url) { 'http://example.org/' }
+    let(:provider) { 'X' }
+
     before do
-      assign(:digital_resource_url, url)
-      assign(:provider_name, provider)
+      allow(dpla_item).to receive(:digital_resource_url).and_return(url)
+      allow(dpla_item).to receive(:provider).and_return(provider)
+      allow(dpla_item).to receive(:contributing_institution)
+      allow(dpla_item).to receive(:title)
+      allow(dpla_item).to receive(:dpla_frontend_url)
+      assign(:dpla_item, dpla_item)
     end
 
     it 'renders the provider link' do
@@ -33,8 +39,7 @@ describe 'sources/show.html.erb', type: :view do
 
   context 'with a failed API request' do
     before do
-      assign(:digital_resource_url, nil)
-      assign(:provider_name, nil)
+      assign(:dpla_item, [])
     end
 
     it 'does not render any provider link' do

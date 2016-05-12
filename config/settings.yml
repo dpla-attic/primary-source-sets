@@ -7,15 +7,16 @@ devise:
   mailer_sender: email@example.org
 
 frontend:
-  url: http://example.com/
+  url: //example.com/
 
 wordpress:
- url: http://example.com/
+ url: //example.com/
 
 exhibtions:
-  url: http://exmaple.com/
+  url: //exmaple.com/
 
 api:
+  url: //example.com/
   key: CHANGEME
 
 app_scheme: 'http://'

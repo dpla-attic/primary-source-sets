@@ -8,7 +8,7 @@ module MarkdownHelper
   def markdown(text)
     options = { autolink: true, footnotes: true }
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, options).render(text)
-      .html_safe
+                       .html_safe
   end
 
   ##
@@ -20,8 +20,11 @@ module MarkdownHelper
     strip_p_tags(markdown(text))
   end
 
+  ##
+  # @return String a plain text representation of the markdown string given in
+  # 'text'.  Removes trailing newline.
   def plaintext_from_md(text)
-    Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(text)
+    Redcarpet::Markdown.new(Redcarpet::Render::StripDown).render(text).chomp
   end
 
   private
@@ -41,7 +44,7 @@ module MarkdownHelper
   def strip_p_tags(html)
     match = Regexp.new('^<p>(.*)<\/p>$').match(html)
     return html unless match.present?
-    return html if match[1].include?("<p>") || match[1].include?("</p>")
+    return html if match[1].include?('<p>') || match[1].include?('</p>')
     match[1].html_safe
   end
 end

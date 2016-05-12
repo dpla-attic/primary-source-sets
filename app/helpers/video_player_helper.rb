@@ -12,13 +12,16 @@ module VideoPlayerHelper
     rv = "<video preload=\"none\" controls>\n"
     outputs.each do |out|
       extension = out['extension']
-      suffix = out.fetch('suffix', '')
-      src = Settings.app_scheme + Settings.aws.cloudfront_domain + '/' \
-        + video.file_base + ".#{extension}"
+      src = video_file_path(video.file_base, extension)
       rv << "<source src=\"#{src}\" type=\"#{mimetype[extension]}\"/>\n"
     end
     rv << "Your browser does not support HTML5 video.\n"
     rv << "</video>\n"
     rv
+  end
+
+  def video_file_path(file_base, extension)
+    Settings.app_scheme + Settings.aws.cloudfront_domain + '/' \
+      + file_base + ".#{extension}"
   end
 end

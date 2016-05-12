@@ -13,12 +13,16 @@ module AudioPlayerHelper
     outputs.each do |out|
       extension = out['extension']
       suffix = out.fetch('suffix', '')
-      src = Settings.app_scheme + Settings.aws.cloudfront_domain + '/' \
-        + audio.file_base + suffix + ".#{extension}"
+      src = audio_file_path(audio.file_base, suffix, extension)
       rv << "<source src=\"#{src}\" type=\"#{mimetype[extension]}\"/>\n"
     end
     rv << "Your browser does not support HTML5 audio.\n"
     rv << "</audio>\n"
     rv
+  end
+
+  def audio_file_path(file_base, suffix, extension)
+    Settings.app_scheme + Settings.aws.cloudfront_domain + '/' \
+      + file_base + suffix + ".#{extension}"
   end
 end
