@@ -47,4 +47,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Configure cache store.
+  # YAML Hash values (see memory_store example in settings.yml) get turned into
+  # Config::Options objects, but we need them as hashes.
+  cache_settings = Settings.cache.to_hash
+  config.cache_store = cache_settings[:store].to_sym, *cache_settings[:opts]
 end
