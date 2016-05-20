@@ -63,7 +63,7 @@
     <%= markdown(@source_set.overview) %>
   </div>
 
-  <%= render 'source_list' %>
+  <%= render partial: 'source_sets/source_list' %>
 
   <% if @source_set.resources.present? %>
     <div class='resources-outer-container'>
