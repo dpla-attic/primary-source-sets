@@ -19,6 +19,7 @@
         - libpq-dev
         - build-essential
         - libfontconfig1-dev
+        - memcached
 
 - hosts: all
   # do as "vagrant" user

@@ -88,3 +88,28 @@ action_mailer:
     # `sendmail' executable.  (I.e. the :smtp option for ActionMailer's
     # `delivery_method'.)
     port: 1025
+
+# Override `cache` with options that suit the particular cache store.
+#
+# Example 1:
+# cache:
+#   store: mem_cache_store
+#   opts:
+#     - host1
+#     - host2
+#     - { namespace: 'pss' }
+#
+# Example 2:
+# cache:
+#   store: file_store
+#   opts: "/path/to/cache/dir"
+#
+# Example 3:
+# cache:
+#   store: memory_store
+#   opts:
+#     size: 67108864
+#
+cache:
+  store: null_store
+  opts:
