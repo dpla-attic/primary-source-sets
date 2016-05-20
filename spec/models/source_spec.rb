@@ -175,4 +175,59 @@ describe Source, type: :model do
       expect(source_2.related_sources).to eq [source_3, source_1]
     end
   end
+
+  describe 'cache dependencies' do
+    let(:set) { source.source_set }
+    let(:small_image) { create(:image_factory, size: 'small') }
+
+    it 'changes cache key of associated set when updated' do
+      expect{ source.update_attribute(:featured, true) }
+        .to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated set when created' do
+      expect{ create(:source_factory, name: 'source 2', source_set: set) }
+        .to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated set when deleted' do
+      expect{ source.destroy }.to change{ set.reload.cache_key }
+    end
+
+    context 'when small image association created' do
+      it 'changes cache key with image' do
+        expect{ source.images.delete(small_image) }
+          .to change{ source.reload.cache_key }
+      end
+
+      it 'changes cache key with small image' do
+        expect{ source.images.delete(small_image) }
+          .to change{ source.reload.cache_key }
+      end
+
+      it 'changes cache key of associated set' do
+        expect{ source.small_images.delete(small_image) }
+          .to change{ set.reload.cache_key }
+      end
+    end
+
+    context 'when image association deleted' do
+      before(:each) { source.images << small_image }
+
+      it 'changes cache key with image' do
+        expect{ source.images.delete(small_image) }
+          .to change{ source.reload.cache_key }
+      end
+
+      it 'changes cache key with small image' do
+        expect{ source.small_images.delete(small_image) }
+          .to change{ source.reload.cache_key }
+      end
+
+      it 'changes cache key of associated set' do
+        expect{ source.images.delete(small_image) }
+          .to change{ set.reload.cache_key }
+      end
+    end
+  end
 end
