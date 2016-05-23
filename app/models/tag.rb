@@ -5,6 +5,7 @@ class Tag < ActiveRecord::Base
   has_many :vocabularies, through: :tag_sequences
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
+  before_save :touch_source_sets
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -23,4 +24,10 @@ class Tag < ActiveRecord::Base
                         joins(:vocabularies)
                           .where(vocabularies: { filter: true })
                       end)
+
+  private
+
+  def touch_source_sets
+    SourceSet.touch_sets_with_tag(self)
+  end
 end
