@@ -38,15 +38,15 @@ describe Tag, type: :model do
 
   describe '#touch_source_sets' do
     let(:tag) { create(:tag_factory) }
-    let(:set1) { create(:source_set_factory) }
+    let(:set) { create(:source_set_factory) }
 
     before(:each) do
-      set1.tags << tag
+      set.tags << tag
     end
 
-    it 'updates timestamps of associated sets after save' do
+    it 'updates cache keys of associated sets before save' do
       expect{ tag.update_attribute(:label, 'new label') }
-        .to change{ set1.reload.updated_at }
+        .to change{ set.reload.cache_key }
     end
   end
 end

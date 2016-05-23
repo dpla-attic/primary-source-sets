@@ -83,7 +83,7 @@ class SourceSet < ActiveRecord::Base
 
   ##
   # Update the timestamp of all source sets with a given tag.
-  # The updated timestamp will cancel any existing caches for the source set.
+  # This will in turn update the cache key.
   def self.touch_sets_with_tag(tag)
     joins(:tags).where(tags: { id: tag.id }).update_all(updated_at: Time.now)
   end
