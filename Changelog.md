@@ -1,3 +1,8 @@
+1.7.0 (23 May 2016)
+---
+* Configure Rails cache_store
+* Add support for cache_store sessions
+
 1.6.3 (12 May 2016)
 ---
 * Add .json views for set, source, and guide
