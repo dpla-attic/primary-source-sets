@@ -25,9 +25,27 @@ class Tag < ActiveRecord::Base
                           .where(vocabularies: { filter: true })
                       end)
 
+  ##
+  # @param Vocabulary
+  def self.with_vocabulary(vocab)
+    joins(:vocabularies).where(vocabularies: { id: vocab.id })
+  end
+
+  ##
+  # Update the timestamp of all tags associated with a given vocabulary.
+  # This will in turn update the tags' cache keys.
+  # Update the timestamp of all source sets associated with the tags.
+  # This will in turn update the source sets' cache keys.
+  # @param Vocabulary
+  def self.touch_tags_with_vocab(vocab)
+    # Note that update_all does not trigger ActiveRecord callbacks.
+    with_vocabulary(vocab).update_all(updated_at: Time.now)
+    SourceSet.touch_sets_with_tags(with_vocabulary(vocab))
+  end
+
   private
 
   def touch_source_sets
-    SourceSet.touch_sets_with_tag(self)
+    SourceSet.touch_sets_with_tags(self)
   end
 end

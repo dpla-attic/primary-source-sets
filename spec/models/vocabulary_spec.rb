@@ -46,4 +46,25 @@ describe Vocabulary, type: :model do
       end
     end
   end
+
+  describe '#touch_tags' do
+    let(:vocab) { create(:vocabulary_factory) }
+    let(:tag) { create(:tag_factory) }
+    let(:source_set) { create(:source_set_factory) }
+
+    before(:each) do
+      vocab.tags << tag
+      source_set.tags << tag
+    end
+
+    it 'updates cache keys of associated tags before save' do
+      expect{ vocab.update_attribute(:name, 'new name') }
+        .to change{ tag.reload.cache_key }
+    end
+
+    it 'updates the cache keys of source sets of associated tags' do
+      expect{ vocab.update_attribute(:name, 'another new name') }
+        .to change{ source_set.reload.cache_key }
+    end
+  end
 end

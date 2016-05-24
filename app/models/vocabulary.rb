@@ -3,6 +3,7 @@ class Vocabulary < ActiveRecord::Base
   has_many :tag_sequences, dependent: :destroy
   has_many :tags, through: :tag_sequences
   validates :name, presence: true, uniqueness: true
+  before_save :touch_tags
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -16,5 +17,11 @@ class Vocabulary < ActiveRecord::Base
 
   def self.filterable
     where(filter: true)
+  end
+
+  private
+
+  def touch_tags
+    Tag.touch_tags_with_vocab(self)
   end
 end
