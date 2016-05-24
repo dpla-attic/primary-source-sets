@@ -6,6 +6,7 @@ class SourceSet < ActiveRecord::Base
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
   has_and_belongs_to_many :tags
+  has_and_belongs_to_many :filter_tags, -> { filterable }, class_name: 'Tag'
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
                                    less_than_or_equal_to: Date.today.year
@@ -40,7 +41,12 @@ class SourceSet < ActiveRecord::Base
   #
   # @return [Array<SourceSet>]
   def related_sets
-    sets = tags.map { |tag| [tag.source_sets.published] }.flatten - [self]
+    sets = SourceSet.published
+                    .joins(:tags)
+                    .where(tags: { id: tags.ids })
+                    .where.not(id: self.id)
+                    .includes(:small_images)
+
     sets_with_count = sets.each_with_object(Hash.new(0)) do |set, count|
       count[set] += 1
     end
@@ -66,22 +72,14 @@ class SourceSet < ActiveRecord::Base
   # EACH returned SourceSet will have ALL of the tags.
   # If no tags are specified, return all SourceSets.
   # @param tags [Array<Tag>] or nil.
-  # @return [Array<SourceSet>]
+  # @return [ActiveRecord::Relation<SourceSet>]
   def self.with_tags(tags)
     return all unless tags.present?
-    tags.map { |tag| with_tag(tag) }.inject(:&).to_a
+    tag_ids = tags.map { |tag| tag.id }
+    joins(:tags).where(tags: { id: tag_ids })
+                .having('count(tags.id) = ?', tag_ids.count)
+                .group('source_sets.id')
   end
-
-  ##
-  # Get SourceSets associated with the specified tag.
-  # @param tag [Tag]
-  # @return [ActiveRecord::Relation<SourceSet>]
-  def self.with_tag(tag)
-    joins(:tags).where('tags.id = ?', tag.id)
-  end
-  private_class_method :with_tag
-
-  private
 
   ##
   # If the set is being published, save the current timestamp.

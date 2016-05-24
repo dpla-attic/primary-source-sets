@@ -24,11 +24,14 @@ module SourceSetsHelper
     return {} unless source_sets.present?
 
     Vocabulary.filterable.each_with_object({}) do |vocab, hash|
+      ss_ids = source_sets.map { |set| set.id }
+
       # Get all tags associated with the vocab.
       # Ignore tags that aren't associated with any of the source_sets.
-      tag_list  = vocab.tags.reject do |tag|
-        tags_for_sets(source_sets).exclude?(tag)
-      end
+      tag_list = Tag.joins(:source_sets, :vocabularies)
+                    .where(source_sets: { id: ss_ids })
+                    .where(vocabularies: { id: vocab.id })
+                    .uniq
 
       # Return the vocab and associated tag list.
       # Note that a tag list may be empty.
@@ -65,15 +68,5 @@ module SourceSetsHelper
   def selected_slugs_not_in(tags)
     [@tags].flatten.compact.reject { |tag| tags.include?(tag) }
                            .map { |tag| tag.slug }
-  end
-
-  private
-
-  ##
-  # Get all unique tags associated with @source_sets.
-  # @return [Array<Tag>]
-  def tags_for_sets(source_sets)
-    return [] unless source_sets.present?
-    source_sets.map { |set| set.tags }.flatten.uniq
   end
 end
