@@ -36,7 +36,7 @@ describe Tag, type: :model do
     expect(Tag.create(label: 'Little My').slug).to eq 'little-my'
   end
 
-  describe '#touch_source_sets' do
+  describe 'cache dependencies' do
     let(:tag) { create(:tag_factory) }
     let(:set) { create(:source_set_factory) }
 
@@ -47,6 +47,19 @@ describe Tag, type: :model do
     it 'updates cache keys of associated sets before save' do
       expect{ tag.update_attribute(:label, 'new label') }
         .to change{ set.reload.cache_key }
+    end
+
+    it 'updates cache key of associated set when new association saved' do
+      tag2 = create(:tag_factory, label: '2nd label')
+      expect{ tag2.source_sets << set }.to change{ set.reload.cache_key }
+    end
+
+    it 'updates cache key of associated set when association deleted' do
+      expect{ tag.source_sets.delete(set) }.to change{ set.reload.cache_key }
+    end
+
+    it 'updates cache keys of associated sets when tag deleted' do
+      expect{ tag.destroy }.to change{ set.reload.cache_key }
     end
   end
 end

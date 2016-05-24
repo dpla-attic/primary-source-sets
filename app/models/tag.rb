@@ -1,11 +1,13 @@
 class Tag < ActiveRecord::Base
   extend FriendlyId
-  has_and_belongs_to_many :source_sets
+  has_and_belongs_to_many :source_sets, after_add: :touch_source_set,
+                                        before_remove: :touch_source_set
   has_many :tag_sequences, dependent: :destroy
   has_many :vocabularies, through: :tag_sequences
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
   before_save :touch_source_sets
+  before_destroy :touch_source_sets
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -44,6 +46,10 @@ class Tag < ActiveRecord::Base
   end
 
   private
+
+  def touch_source_set(set)
+    set.touch
+  end
 
   def touch_source_sets
     SourceSet.touch_sets_with_tags(self)

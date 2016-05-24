@@ -47,7 +47,7 @@ describe Vocabulary, type: :model do
     end
   end
 
-  describe '#touch_tags' do
+  describe 'cache dependencies' do
     let(:vocab) { create(:vocabulary_factory) }
     let(:tag) { create(:tag_factory) }
     let(:source_set) { create(:source_set_factory) }
@@ -62,7 +62,7 @@ describe Vocabulary, type: :model do
         .to change{ tag.reload.cache_key }
     end
 
-    it 'updates the cache keys of source sets of associated tags' do
+    it 'updates cache keys of source sets of associated tags' do
       expect{ vocab.update_attribute(:name, 'another new name') }
         .to change{ source_set.reload.cache_key }
     end

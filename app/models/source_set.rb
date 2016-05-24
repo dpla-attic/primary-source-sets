@@ -5,7 +5,8 @@ class SourceSet < ActiveRecord::Base
   has_many :guides, dependent: :destroy
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, after_add: :touch_self,
+                                 before_remove: :touch_self
   has_and_belongs_to_many :filter_tags, -> { filterable }, class_name: 'Tag'
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
@@ -102,5 +103,11 @@ class SourceSet < ActiveRecord::Base
     elsif self.published == false
       self.published_at = nil
     end
+  end
+
+  private
+
+  def touch_self(tag)
+    self.touch
   end
 end
