@@ -95,10 +95,9 @@ class Source < ActiveRecord::Base
   ##
   # Update timestamps of self and all associated source sets only if the
   # associated object is a small image.
-  # @param ActiveRecord
+  # @param Image
   def touch_self(associated_object)
     return if self.new_record? # cannot update timestamp of unsaved record
-    return unless associated_object.is_a? Image
     return unless associated_object.size == 'small'
     self.touch # .touch does not trigger callback methods
     touch_associated_source_set
