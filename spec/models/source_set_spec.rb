@@ -220,11 +220,11 @@ describe SourceSet, type: :model do
     let(:tag) { create(:tag_factory) }
     let(:set) { create(:source_set_factory) }
 
-    it 'updates cache key when new tag association saved' do
+    it 'changes cache key when new tag association saved' do
       expect{ set.tags << tag }.to change{ set.reload.cache_key }
     end
 
-    it 'updates cache key when tag association deleted' do
+    it 'changes cache key when tag association deleted' do
       set.tags << tag
       expect{ set.tags.delete(tag) }.to change{ set.reload.cache_key }
     end

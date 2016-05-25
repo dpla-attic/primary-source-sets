@@ -56,34 +56,57 @@ describe Vocabulary, type: :model do
   describe 'cache dependencies' do
     let(:vocab) { create(:vocabulary_factory) }
     let(:tag) { create(:tag_factory) }
-    let(:source_set) { create(:source_set_factory) }
+    let(:set) { create(:source_set_factory) }
 
     before(:each) do
       vocab.tags << tag
-      source_set.tags << tag
+      set.tags << tag
     end
 
-    it 'updates cache keys of associated tags when updated' do
-      expect{ vocab.update_attribute(:name, 'new name') }
-        .to change{ tag.reload.cache_key }
+    context 'when updated' do
+      it 'changes cache keys of associated tags' do
+        expect{ vocab.update_attribute(:name, 'new name') }
+          .to change{ tag.reload.cache_key }
+      end
+
+      it 'changes cache keys of source sets of associated tags' do
+        expect{ vocab.update_attribute(:filter, true) }
+          .to change{ set.reload.cache_key }
+      end
     end
 
-    it 'updates cache keys of source sets of associated tags when updated' do
-      expect{ vocab.update_attribute(:filter, true) }
-        .to change{ source_set.reload.cache_key }
+    context 'when new tag association saved' do
+      let(:vocab2) { create(:vocabulary_factory, name: '2nd name') }
+
+      it 'changes cache key of associated tag' do
+        expect{ tag.vocabularies << vocab2 }.to change{ tag.reload.cache_key }
+      end
+
+      it 'changes cache keys of source sets of associated tag' do
+        expect{ tag.vocabularies << vocab2 }.to change{ set.reload.cache_key }
+      end
     end
 
-    it 'updates cache key of associated tag when new association saved' do
-      vocab2 = create(:vocabulary_factory, name: '2nd name')
-      expect{ tag.vocabularies << vocab2 }.to change{ tag.reload.cache_key }
+    context 'when tag association deleted' do
+      it 'changes cache key of associated tag' do
+        expect{ tag.vocabularies.delete(vocab) }
+          .to change{ tag.reload.cache_key }
+      end
+
+      it 'changes cache keys of source sets of associated tag' do
+        expect{ tag.vocabularies.delete(vocab) }
+          .to change{ set.reload.cache_key }
+      end
     end
 
-    it 'updates cache key of associated tag when association deleted' do
-      expect{ tag.vocabularies.delete(vocab) }.to change{ tag.reload.cache_key }
-    end
+    context 'when vocab deleted' do
+      it 'changes cache keys of associated tags' do
+        expect{ vocab.destroy }.to change{ tag.reload.cache_key }
+      end
 
-    it 'updates cache keys of associated tags when vocab deleted' do
-      expect{ vocab.destroy }.to change{ tag.reload.cache_key }
+      it 'changes cache keys of source sets of associated tags' do
+        expect{ vocab.destroy }.to change{ set.reload.cache_key }
+      end
     end
   end
 end

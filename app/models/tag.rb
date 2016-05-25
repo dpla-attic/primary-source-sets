@@ -50,7 +50,9 @@ class Tag < ActiveRecord::Base
   private
 
   def touch_self(associated_object)
-    self.touch
+    return if self.new_record?
+    self.touch # .touch does not trigger callback methods
+    touch_source_sets
   end
 
   def touch_source_set(set)

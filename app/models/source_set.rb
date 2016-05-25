@@ -5,8 +5,8 @@ class SourceSet < ActiveRecord::Base
   has_many :guides, dependent: :destroy
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
-  has_and_belongs_to_many :tags, after_add: :when_i_think_about,
-                                 before_remove: :when_i_think_about
+  has_and_belongs_to_many :tags, after_add: :touch_self,
+                                 before_remove: :touch_self
   has_and_belongs_to_many :filter_tags, -> { filterable }, class_name: 'Tag'
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
@@ -107,7 +107,8 @@ class SourceSet < ActiveRecord::Base
 
   private
 
-  def when_i_think_about(you)
+  def touch_self(associated_object)
+    return if self.new_record?
     self.touch
   end
 end
