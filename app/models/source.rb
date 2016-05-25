@@ -32,7 +32,9 @@ class Source < ActiveRecord::Base
   has_many :small_images, -> { where size: 'small' },
                           through: :attachments,
                           source: :asset,
-                          source_type: 'Image'
+                          source_type: 'Image',
+                          after_add: :touch_self,
+                          before_remove: :touch_self
 
   has_many :thumbnails, -> { where size: 'thumbnail' },
                         through: :attachments,
@@ -91,9 +93,13 @@ class Source < ActiveRecord::Base
   private
 
   ##
-  # Update timestamps of self and all associated source sets.
+  # Update timestamps of self and all associated source sets only if the
+  # associated object is a small image.
+  # @param ActiveRecord
   def touch_self(associated_object)
     return if self.new_record? # cannot update timestamp of unsaved record
+    return unless associated_object.is_a? Image
+    return unless associated_object.size == 'small'
     self.touch # .touch does not trigger callback methods
     touch_associated_source_set
   end
