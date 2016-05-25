@@ -39,12 +39,13 @@ describe Tag, type: :model do
   describe 'cache dependencies' do
     let(:tag) { create(:tag_factory) }
     let(:set) { create(:source_set_factory) }
+    let(:vocab) { create(:vocabulary_factory) }
 
     before(:each) do
       set.tags << tag
     end
 
-    it 'updates cache keys of associated sets before save' do
+    it 'updates cache keys of associated sets when updated' do
       expect{ tag.update_attribute(:label, 'new label') }
         .to change{ set.reload.cache_key }
     end
@@ -60,6 +61,15 @@ describe Tag, type: :model do
 
     it 'updates cache keys of associated sets when tag deleted' do
       expect{ tag.destroy }.to change{ set.reload.cache_key }
+    end
+
+    it 'updates cache key when new vocab association saved' do
+      expect{ tag.vocabularies << vocab }.to change{ tag.reload.cache_key }
+    end
+
+    it 'updates cache key when vocab association deleted' do
+      tag.vocabularies << vocab
+      expect{ tag.vocabularies.delete(vocab) }.to change{ tag.reload.cache_key }
     end
   end
 end

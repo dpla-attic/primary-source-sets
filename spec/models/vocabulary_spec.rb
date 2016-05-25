@@ -24,6 +24,12 @@ describe Vocabulary, type: :model do
     expect(Vocabulary.create(name: 'Little My').slug).to eq 'little-my'
   end
 
+  it 'dependent destroys tag sequences' do
+    vocab = create(:vocabulary_factory)
+    vocab.tags << create(:tag_factory)
+    expect{ vocab.destroy }.to change{ TagSequence.count }.by -1
+  end
+
   context 'with filterable vocabs' do
     let(:filterable) { create(:vocabulary_factory, filter: true) }
 
@@ -57,14 +63,27 @@ describe Vocabulary, type: :model do
       source_set.tags << tag
     end
 
-    it 'updates cache keys of associated tags before save' do
+    it 'updates cache keys of associated tags when updated' do
       expect{ vocab.update_attribute(:name, 'new name') }
         .to change{ tag.reload.cache_key }
     end
 
-    it 'updates cache keys of source sets of associated tags' do
-      expect{ vocab.update_attribute(:name, 'another new name') }
+    it 'updates cache keys of source sets of associated tags when updated' do
+      expect{ vocab.update_attribute(:filter, true) }
         .to change{ source_set.reload.cache_key }
+    end
+
+    it 'updates cache key of associated tag when new association saved' do
+      vocab2 = create(:vocabulary_factory, name: '2nd name')
+      expect{ tag.vocabularies << vocab2 }.to change{ tag.reload.cache_key }
+    end
+
+    it 'updates cache key of associated tag when association deleted' do
+      expect{ tag.vocabularies.delete(vocab) }.to change{ tag.reload.cache_key }
+    end
+
+    it 'updates cache keys of associated tags when vocab deleted' do
+      expect{ vocab.destroy }.to change{ tag.reload.cache_key }
     end
   end
 end
