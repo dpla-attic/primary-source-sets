@@ -3,7 +3,9 @@ class Vocabulary < ActiveRecord::Base
   before_save :touch_tags
   before_destroy :touch_tags # This must be declared before dependent: :destroy
                              # statements b/c dependent: :destroy is also
-                             # implemented as a before_destroy callback.
+                             # implemented as a before_destroy callback, and
+                             # they are executed in the order in which they are
+                             # defined.
   has_many :tag_sequences, dependent: :destroy
   has_many :tags, through: :tag_sequences,
                   after_add: :touch_tag,
