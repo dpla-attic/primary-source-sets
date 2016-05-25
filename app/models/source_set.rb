@@ -107,8 +107,10 @@ class SourceSet < ActiveRecord::Base
 
   private
 
+  ##
+  # Update timestemp of self.
   def touch_self(associated_object)
-    return if self.new_record?
+    return if self.new_record? # cannot update timestamp of unsaved record
     self.touch
   end
 end

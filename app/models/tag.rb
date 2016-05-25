@@ -8,8 +8,8 @@ class Tag < ActiveRecord::Base
                           before_remove: :touch_self
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
-  before_save :touch_source_sets
-  before_destroy :touch_source_sets
+  before_save :touch_associated_source_sets
+  before_destroy :touch_associated_source_sets
 
   ##
   # FriendlyId generates a human-readable slug to be used in the URL, in place
@@ -31,6 +31,7 @@ class Tag < ActiveRecord::Base
 
   ##
   # @param Vocabulary
+  # @return [ActiveRecord::Association<Tag>]
   def self.with_vocabulary(vocab)
     joins(:vocabularies).where(vocabularies: { id: vocab.id })
   end
@@ -49,17 +50,23 @@ class Tag < ActiveRecord::Base
 
   private
 
+  ##
+  # Update timestamps of self and all associated source sets.
   def touch_self(associated_object)
-    return if self.new_record?
+    return if self.new_record? # cannot update timestamp of unsaved record
     self.touch # .touch does not trigger callback methods
-    touch_source_sets
+    touch_associated_source_sets
   end
 
+  ##
+  # Update timestamp of a given source set.
   def touch_source_set(set)
     set.touch
   end
 
-  def touch_source_sets
+  ##
+  # Update timestamps of all source sets associated with self.
+  def touch_associated_source_sets
     SourceSet.touch_sets_with_tags(self)
   end
 end

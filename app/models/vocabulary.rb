@@ -1,15 +1,15 @@
 class Vocabulary < ActiveRecord::Base
   extend FriendlyId
-  before_save :touch_tags
-  before_destroy :touch_tags # This must be declared before dependent: :destroy
-                             # statements b/c dependent: :destroy is also
-                             # implemented as a before_destroy callback, and
-                             # they are executed in the order in which they are
-                             # defined.
+  
+  ##
+  # The following before_destroy statement must be declared before
+  # dependent: :destroy of tag_sequences b/c dependent: :destroy is also
+  # implemented as a before_destroy callback, and they are executed in the order
+  # in which they are defined.
+  before_destroy :touch_associated_tags
+  before_save :touch_associated_tags
   has_many :tag_sequences, dependent: :destroy
-  has_many :tags, through: :tag_sequences,
-                  after_add: :touch_tag,
-                  before_remove: :touch_tag
+  has_many :tags, through: :tag_sequences
   validates :name, presence: true, uniqueness: true
 
   ##
@@ -28,11 +28,9 @@ class Vocabulary < ActiveRecord::Base
 
   private
 
-  def touch_tag(tag)
-    tag.touch
-  end
-
-  def touch_tags
+  ##
+  # Update timestamps of all associated tags.
+  def touch_associated_tags
     Tag.touch_tags_with_vocab(self)
   end
 end
