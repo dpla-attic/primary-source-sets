@@ -175,4 +175,22 @@ describe Source, type: :model do
       expect(source_2.related_sources).to eq [source_3, source_1]
     end
   end
+
+  describe 'cache dependencies' do
+    let(:set) { source.source_set }
+
+    it 'changes cache key of associated set when updated' do
+      expect{ source.update_attribute(:featured, true) }
+        .to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated set when created' do
+      expect{ create(:source_factory, name: 'source 2', source_set: set) }
+        .to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated set when deleted' do
+      expect{ source.destroy }.to change{ set.reload.cache_key }
+    end
+  end
 end

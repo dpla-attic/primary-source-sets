@@ -1,7 +1,9 @@
 class Source < ActiveRecord::Base
-  belongs_to :source_set
+  belongs_to :source_set, touch: true
   has_many :guides, through: :source_set
   has_many :attachments, dependent: :destroy
+  before_save :touch_associated_source_set
+  before_destroy :touch_associated_source_set
 
   has_many :videos, through: :attachments,
                     source: :asset,
@@ -81,5 +83,11 @@ class Source < ActiveRecord::Base
   # @return [Array<Source>]
   def related_sources
     source_set.sources.includes(:thumbnails).split { |s| s.id == id }.reverse.flatten
+  end
+
+  private
+
+  def touch_associated_source_set
+    source_set.touch
   end
 end
