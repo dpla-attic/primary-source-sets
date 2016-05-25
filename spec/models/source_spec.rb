@@ -178,6 +178,7 @@ describe Source, type: :model do
 
   describe 'cache dependencies' do
     let(:set) { source.source_set }
+    let(:small_image) { create(:image_factory, size: 'small') }
 
     it 'changes cache key of associated set when updated' do
       expect{ source.update_attribute(:featured, true) }
@@ -191,6 +192,39 @@ describe Source, type: :model do
 
     it 'changes cache key of associated set when deleted' do
       expect{ source.destroy }.to change{ set.reload.cache_key }
+    end
+
+    xcontext 'when associated small image updated' do
+      before(:each) { source.images << small_image }
+
+      it 'changes cache key' do
+        expect{ small_image.update_attribute(:alt_text, 'new text') }
+          .to change{ source.reload.cache_key }
+      end
+
+      it 'changes cache key of associated set' do
+        expect{ small_image.update_attribute(:alt_text, 'new text') }
+          .to change{ set.reload.cache_key }
+      end
+    end
+
+    context 'when small image association created' do
+      it 'changes cache key'
+      it 'changes cache key of associated set'
+    end
+
+    context 'when small image association deleted' do
+      before(:each) { source.images << small_image }
+
+      it 'changes cache key' do
+        expect{ source.images.delete(small_image) }
+          .to change{ source.reload.cache_key }
+      end
+
+      xit 'changes cache key of associated set' do
+        expect{ source.images.delete(small_image) }
+          .to change{ set.reload.cache_key }
+      end
     end
   end
 end

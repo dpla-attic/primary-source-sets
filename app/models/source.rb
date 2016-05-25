@@ -1,9 +1,10 @@
 class Source < ActiveRecord::Base
   belongs_to :source_set, touch: true
-  has_many :guides, through: :source_set
-  has_many :attachments, dependent: :destroy
   before_save :touch_associated_source_set
   before_destroy :touch_associated_source_set
+  has_many :guides, through: :source_set
+
+  has_many :attachments, dependent: :destroy
 
   has_many :videos, through: :attachments,
                     source: :asset,
@@ -19,7 +20,9 @@ class Source < ActiveRecord::Base
 
   has_many :images, through: :attachments,
                     source: :asset,
-                    source_type: 'Image'
+                    source_type: 'Image',
+                    after_add: :touch_self,
+                    before_remove: :touch_self
 
   has_many :large_images, -> { where size: 'large' },
                           through: :attachments,
@@ -87,6 +90,16 @@ class Source < ActiveRecord::Base
 
   private
 
+  ##
+  # Update timestamps of self and all associated source sets.
+  def touch_self(associated_object)
+    return if self.new_record? # cannot update timestamp of unsaved record
+    self.touch # .touch does not trigger callback methods
+    touch_associated_source_set
+  end
+
+  ##
+  # Update timestamps of all associated source sets.
   def touch_associated_source_set
     source_set.touch
   end
