@@ -5,7 +5,8 @@ class SourceSet < ActiveRecord::Base
   has_many :guides, dependent: :destroy
   has_one :featured_source, -> { where featured: true }, class_name: 'Source'
   has_many :small_images, through: :featured_source
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, after_add: :touch_self,
+                                 before_remove: :touch_self
   has_and_belongs_to_many :filter_tags, -> { filterable }, class_name: 'Tag'
   validates :name, presence: true
   validates_numericality_of :year, only_integer: true, allow_nil: true,
@@ -82,6 +83,28 @@ class SourceSet < ActiveRecord::Base
   end
 
   ##
+  # Update the timestamp of all source sets associated with any of a given tag
+  # or group of tags. If a source set is associated with at least one on the
+  # given tags, it will be updated.
+  # This will in turn update the source set's cache key.
+  # @param tags Tag OR [ActiveRecord::Relation<Tag>]
+  def self.touch_sets_with_tags(tags)
+    ids = tags.class.name == 'Tag' ? tags.id : tags.ids
+    joins(:tags).where(tags: { id: ids }).update_all(updated_at: Time.now)
+  end
+
+  ##
+  # Update the timestamp of all source sets associated with any of a given
+  # source or group of sources. If a source set is associated with at least 
+  # one on the given sources, it will be updated.
+  # This will in turn update the source set's cache key.
+  # @param sources Source OR [ActiveRecord::Relation<Source>]
+  def self.touch_sets_with_sources(sources)
+    ids = sources.class.name == 'Source' ? sources.id : sources.ids
+    joins(:sources).where(sources: { id: ids }).update_all(updated_at: Time.now)
+  end
+
+  ##
   # If the set is being published, save the current timestamp.
   # If the set was already published, do not save the current timestamp.
   # If the set is unpublished, clear the timestamp.
@@ -91,5 +114,15 @@ class SourceSet < ActiveRecord::Base
     elsif self.published == false
       self.published_at = nil
     end
+  end
+
+  private
+
+  ##
+  # Update timestemp of self.
+  # @param ActiveRecord
+  def touch_self(associated_object)
+    return if self.new_record? # cannot update timestamp of unsaved record
+    self.touch
   end
 end

@@ -35,4 +35,54 @@ describe Tag, type: :model do
   it 'has a slug' do
     expect(Tag.create(label: 'Little My').slug).to eq 'little-my'
   end
+
+  describe 'cache dependencies' do
+    let(:tag) { create(:tag_factory) }
+    let(:set) { create(:source_set_factory) }
+    let(:vocab) { create(:vocabulary_factory) }
+
+    before(:each) do
+      set.tags << tag
+    end
+
+    it 'changes cache keys of associated sets when updated' do
+      expect{ tag.update_attribute(:label, 'new label') }
+        .to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated sets when new association saved' do
+      tag2 = create(:tag_factory, label: '2nd label')
+      expect{ tag2.source_sets << set }.to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key of associated sets when association deleted' do
+      expect{ tag.source_sets.delete(set) }.to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache keys of associated sets when tag deleted' do
+      expect{ tag.destroy }.to change{ set.reload.cache_key }
+    end
+
+    context 'when new vocab assocation saved' do
+      it 'changes cache key' do
+        expect{ tag.vocabularies << vocab }.to change{ tag.reload.cache_key }
+      end
+
+      it 'changes cache key of associated sets' do
+        expect{ tag.vocabularies << vocab }.to change{ set.reload.cache_key }
+      end
+    end
+
+    context 'when vocab association deleted' do
+      before(:each) { tag.vocabularies << vocab }  
+
+      it 'changes cache key' do
+        expect{ tag.vocabularies.delete(vocab) }.to change{ tag.reload.cache_key }
+      end
+
+      it 'changes cache keys of associated sets' do
+        expect{ tag.vocabularies.delete(vocab) }.to change{ set.reload.cache_key }
+      end
+    end
+  end
 end
