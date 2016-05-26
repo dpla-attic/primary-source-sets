@@ -79,22 +79,22 @@ describe Vocabulary, type: :model do
       let(:vocab2) { create(:vocabulary_factory, name: '2nd name') }
 
       it 'changes cache key of associated tag' do
-        expect{ tag.vocabularies << vocab2 }.to change{ tag.reload.cache_key }
+        expect{ vocab2.tags << tag }.to change{ tag.reload.cache_key }
       end
 
       it 'changes cache keys of source sets of associated tag' do
-        expect{ tag.vocabularies << vocab2 }.to change{ set.reload.cache_key }
+        expect{ vocab2.tags << tag }.to change{ set.reload.cache_key }
       end
     end
 
     context 'when tag association deleted' do
       it 'changes cache key of associated tag' do
-        expect{ tag.vocabularies.delete(vocab) }
+        expect{ vocab.tags.delete(tag) }
           .to change{ tag.reload.cache_key }
       end
 
       it 'changes cache keys of source sets of associated tag' do
-        expect{ tag.vocabularies.delete(vocab) }
+        expect{ vocab.tags.delete(tag) }
           .to change{ set.reload.cache_key }
       end
     end

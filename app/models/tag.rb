@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
                           before_remove: :touch_self
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
-  before_save :touch_associated_source_sets
+  before_update :touch_associated_source_sets
   before_destroy :touch_associated_source_sets
 
   ##
@@ -48,16 +48,16 @@ class Tag < ActiveRecord::Base
     SourceSet.touch_sets_with_tags(with_vocabulary(vocab))
   end
 
-  private
-
   ##
   # Update timestamps of self and all associated source sets.
   # @param ActiveRecord
-  def touch_self(associated_object)
+  def touch_self(associated_object = nil)
     return if self.new_record? # cannot update timestamp of unsaved record
     self.touch # .touch does not trigger callback methods
     touch_associated_source_sets
   end
+
+  private
 
   ##
   # Update timestamp of a given source set.

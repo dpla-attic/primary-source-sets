@@ -26,7 +26,9 @@ class Source < ActiveRecord::Base
   has_many :large_images, -> { where size: 'large' },
                           through: :attachments,
                           source: :asset,
-                          source_type: 'Image'
+                          source_type: 'Image',
+                          after_add: :touch_self,
+                          before_remove: :touch_self
 
   has_many :small_images, -> { where size: 'small' },
                           through: :attachments,
@@ -38,7 +40,9 @@ class Source < ActiveRecord::Base
   has_many :thumbnails, -> { where size: 'thumbnail' },
                         through: :attachments,
                         source: :asset,
-                        source_type: 'Image'
+                        source_type: 'Image',
+                        after_add: :touch_self,
+                        before_remove: :touch_self
 
   validates :aggregation, presence: true, 
                           format: { with: /\A[a-zA-Z0-9]+\z/,
@@ -110,12 +114,10 @@ class Source < ActiveRecord::Base
   end
 
   ##
-  # Update timestamps of self and all associated source sets only if the
-  # associated object is a small image.
-  # @param Image
+  # Update timestamps of self and all associated source.
+  # @param ActiveRecord
   def touch_self(associated_object = nil)
     return if self.new_record? # cannot update timestamp of unsaved record
-    # return unless associated_object.size == 'small'
     self.touch # .touch does not trigger callback methods
     touch_associated_source_set
   end
