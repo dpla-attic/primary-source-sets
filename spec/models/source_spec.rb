@@ -194,22 +194,7 @@ describe Source, type: :model do
       expect{ source.destroy }.to change{ set.reload.cache_key }
     end
 
-    xcontext 'when associated small image updated' do
-      before(:each) { source.images << small_image }
-
-      it 'changes cache key' do
-        expect{ small_image.update_attribute(:alt_text, 'new text') }
-          .to change{ source.reload.cache_key }
-      end
-
-      it 'changes cache key of associated set' do
-        expect{ small_image.update_attribute(:alt_text, 'new text') }
-          .to change{ set.reload.cache_key }
-      end
-    end
-
     context 'when small image association created' do
-
       it 'changes cache key with image' do
         expect{ source.images.delete(small_image) }
           .to change{ source.reload.cache_key }
@@ -245,7 +230,7 @@ describe Source, type: :model do
       end
     end
 
-    context 'when non-small image association deleted' do
+    xcontext 'when non-small image association deleted' do
       let(:large_image) { create(:image_factory, size: 'large') }
       before(:each) { source.images << large_image }
 

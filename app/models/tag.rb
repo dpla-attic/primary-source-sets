@@ -52,6 +52,7 @@ class Tag < ActiveRecord::Base
 
   ##
   # Update timestamps of self and all associated source sets.
+  # @param ActiveRecord
   def touch_self(associated_object)
     return if self.new_record? # cannot update timestamp of unsaved record
     self.touch # .touch does not trigger callback methods

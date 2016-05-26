@@ -94,6 +94,17 @@ class SourceSet < ActiveRecord::Base
   end
 
   ##
+  # Update the timestamp of all source sets associated with any of a given
+  # source or group of sources. If a source set is associated with at least 
+  # one on the given sources, it will be updated.
+  # This will in turn update the source set's cache key.
+  # @param sources Source OR [ActiveRecord::Relation<Source>]
+  def self.touch_sets_with_sources(sources)
+    ids = sources.class.name == 'Source' ? sources.id : sources.ids
+    joins(:sources).where(sources: { id: ids }).update_all(updated_at: Time.now)
+  end
+
+  ##
   # If the set is being published, save the current timestamp.
   # If the set was already published, do not save the current timestamp.
   # If the set is unpublished, clear the timestamp.
@@ -109,6 +120,7 @@ class SourceSet < ActiveRecord::Base
 
   ##
   # Update timestemp of self.
+  # @param ActiveRecord
   def touch_self(associated_object)
     return if self.new_record? # cannot update timestamp of unsaved record
     self.touch
