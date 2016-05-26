@@ -1,25 +1,26 @@
-<section class='module set-tile'>
-  <div class='set-container'>
-    <% if set.featured_image.present? %>
-      <%= link_to((image_tag base_src + set.featured_image.file_name,
-                             alt: set.featured_image.alt_text.present? ? 
-                               set.featured_image.alt_text : set.name),
-                  source_set_path(set)) %>
-    <% end %>
-    <div class='set-name-container'>
-      <%= link_to inline_markdown(set.name), source_set_path(set) %>
+<% cache set do %>
+  <section class='module set-tile'>
+    <div class='set-container'>
+      <% if set.featured_image.present? %>
+        <%= link_to((image_tag base_src + set.featured_image.file_name,
+                               alt: set.featured_image.alt_text.present? ? 
+                                 set.featured_image.alt_text : set.name),
+                    source_set_path(set)) %>
+      <% end %>
+      <div class='set-name-container'>
+        <%= link_to inline_markdown(set.name), source_set_path(set) %>
+      </div>
+
+      <% if render_tags %>
+        <ul class='tag-list'>
+          <% set.filter_tags.each do |tag| %>
+            <li class='tag'>
+              <% new_params = params.merge(tags: [tag.slug]) %>
+              <%= link_to tag.label, source_sets_path(new_params) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
-
-    <% if render_tags %>
-
-      <ul class='tag-list'>
-        <% set.filter_tags.each do |tag| %>
-          <li class='tag'>
-            <% new_params = params.merge(tags: [tag.slug]) %>
-            <%= link_to tag.label, source_sets_path(new_params) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
-</section>
+  </section>
+<% end %>
