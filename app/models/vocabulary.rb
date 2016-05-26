@@ -6,12 +6,12 @@ class Vocabulary < ActiveRecord::Base
   # dependent: :destroy of tag_sequences b/c dependent: :destroy is also
   # implemented as a before_destroy callback, and they are executed in the order
   # in which they are defined.
-  before_destroy :touch_associated_tags
-  before_update :touch_associated_tags
+  before_destroy :chain_touch_associated_tags
+  before_update :chain_touch_associated_tags
   has_many :tag_sequences, dependent: :destroy
   has_many :tags, through: :tag_sequences,
-                  after_add: :touch_tag,
-                  before_remove: :touch_tag
+                  after_add: :chain_touch_tag,
+                  before_remove: :chain_touch_tag
   validates :name, presence: true, uniqueness: true
 
   ##
@@ -32,13 +32,13 @@ class Vocabulary < ActiveRecord::Base
 
   ##
   # Update timestamps of all associated tags.
-  def touch_associated_tags
-    Tag.touch_tags_with_vocab(self)
+  def chain_touch_associated_tags
+    Tag.chain_touch_tags_with_vocab(self)
   end
 
   ##
   # Update timestamp of a given tag.
-  def touch_tag(tag)
-    tag.touch_self
+  def chain_touch_tag(tag)
+    tag.chain_touch_self
   end
 end

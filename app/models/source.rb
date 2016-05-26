@@ -20,29 +20,29 @@ class Source < ActiveRecord::Base
   has_many :images, through: :attachments,
                     source: :asset,
                     source_type: 'Image',
-                    after_add: :touch_self,
-                    before_remove: :touch_self
+                    after_add: :chain_touch_self,
+                    before_remove: :chain_touch_self
 
   has_many :large_images, -> { where size: 'large' },
                           through: :attachments,
                           source: :asset,
                           source_type: 'Image',
-                          after_add: :touch_self,
-                          before_remove: :touch_self
+                          after_add: :chain_touch_self,
+                          before_remove: :chain_touch_self
 
   has_many :small_images, -> { where size: 'small' },
                           through: :attachments,
                           source: :asset,
                           source_type: 'Image',
-                          after_add: :touch_self,
-                          before_remove: :touch_self
+                          after_add: :chain_touch_self,
+                          before_remove: :chain_touch_self
 
   has_many :thumbnails, -> { where size: 'thumbnail' },
                         through: :attachments,
                         source: :asset,
                         source_type: 'Image',
-                        after_add: :touch_self,
-                        before_remove: :touch_self
+                        after_add: :chain_touch_self,
+                        before_remove: :chain_touch_self
 
   validates :aggregation, presence: true, 
                           format: { with: /\A[a-zA-Z0-9]+\z/,
@@ -107,19 +107,19 @@ class Source < ActiveRecord::Base
   # Update the timestamp of all source sets associated with the sources.
   # This will in turn update the source sets' cache keys.
   # @param Image
-  def self.touch_sources_with_image(image)
+  def self.chain_touch_sources_with_image(image)
     # Note that update_all does not trigger ActiveRecord callbacks.
     with_image(image).update_all(updated_at: Time.now)
     SourceSet.touch_sets_with_sources(with_image(image))
   end
 
   ##
-  # Update timestamps of self and all associated source.
+  # Update timestamps of self and all associated source sets.
+  # Triggers ActiveRecord callbacks.
   # @param ActiveRecord
-  def touch_self(associated_object = nil)
+  def chain_touch_self(associated_object = nil)
     return if self.new_record? # cannot update timestamp of unsaved record
-    self.touch # .touch does not trigger callback methods
-    touch_associated_source_set
+    self.update_attribute(:updated_at, Time.now)
   end
 
   private

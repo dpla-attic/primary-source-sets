@@ -4,8 +4,8 @@ class Tag < ActiveRecord::Base
                                         before_remove: :touch_source_set
   has_many :tag_sequences, dependent: :destroy
   has_many :vocabularies, through: :tag_sequences,
-                          after_add: :touch_self,
-                          before_remove: :touch_self
+                          after_add: :chain_touch_self,
+                          before_remove: :chain_touch_self
   validates :label, presence: true, uniqueness: true
   validates :uri, format: { with: URI.regexp }, if: proc { |a| a.uri.present? }
   before_update :touch_associated_source_sets
@@ -42,7 +42,7 @@ class Tag < ActiveRecord::Base
   # Update the timestamp of all source sets associated with the tags.
   # This will in turn update the source sets' cache keys.
   # @param Vocabulary
-  def self.touch_tags_with_vocab(vocab)
+  def self.chain_touch_tags_with_vocab(vocab)
     # Note that update_all does not trigger ActiveRecord callbacks.
     with_vocabulary(vocab).update_all(updated_at: Time.now)
     SourceSet.touch_sets_with_tags(with_vocabulary(vocab))
@@ -50,11 +50,11 @@ class Tag < ActiveRecord::Base
 
   ##
   # Update timestamps of self and all associated source sets.
+  # Triggers ActiveRecord callbacks.
   # @param ActiveRecord
-  def touch_self(associated_object = nil)
+  def chain_touch_self(associated_object = nil)
     return if self.new_record? # cannot update timestamp of unsaved record
-    self.touch # .touch does not trigger callback methods
-    touch_associated_source_sets
+    self.update_attribute(:updated_at, Time.now)
   end
 
   private
