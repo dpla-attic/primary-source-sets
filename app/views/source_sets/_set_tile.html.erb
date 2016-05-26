@@ -11,16 +11,14 @@
         <%= link_to inline_markdown(set.name), source_set_path(set) %>
       </div>
 
-      <% if render_tags %>
-        <ul class='tag-list'>
-          <% set.filter_tags.each do |tag| %>
-            <li class='tag'>
-              <% new_params = params.merge(tags: [tag.slug]) %>
-              <%= link_to tag.label, source_sets_path(new_params) %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+      <ul class='tag-list'>
+        <% set.filter_tags.each do |tag| %>
+          <li class='tag'>
+            <% new_params = params.merge(tags: [tag.slug]) %>
+            <%= link_to tag.label, source_sets_path(new_params) %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </section>
 <% end %>
