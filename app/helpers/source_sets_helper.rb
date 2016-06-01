@@ -31,6 +31,7 @@ module SourceSetsHelper
       tag_list = Tag.joins(:source_sets, :vocabularies)
                     .where(source_sets: { id: ss_ids })
                     .where(vocabularies: { id: vocab.id })
+                    .order('tag_sequences.position asc')
                     .uniq
 
       # Return the vocab and associated tag list.

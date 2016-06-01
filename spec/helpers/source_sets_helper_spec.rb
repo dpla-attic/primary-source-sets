@@ -50,6 +50,19 @@ describe SourceSetsHelper, type: :helper do
         expect(helper.filters_for_sets(source_sets).values.flatten)
           .to contain_exactly tag_a
       end
+
+      it 'returns tags ordered by tag sequence position' do
+        vocab_a.tags << tag_c
+        # reverse tag sequence position of vocab_a tags
+        tsa = tag_a.tag_sequences.where(vocabulary_id: vocab_a.id)
+                   .where(tag_id: tag_a.id).first
+        tsa.update_attribute(:position, 1)
+        tsc = tag_c.tag_sequences.where(vocabulary_id: vocab_a.id)
+                   .where(tag_id: tag_c.id).first
+        tsc.update_attribute(:position, 0)
+        expect(helper.filters_for_sets(source_sets)[vocab_a])
+          .to match [tag_c, tag_a]
+      end
     end
   end
 
