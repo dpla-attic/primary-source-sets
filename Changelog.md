@@ -1,3 +1,7 @@
+1.7.1 (1 Jun 2016)
+---
+* SQL optimization & caching
+
 1.7.0 (23 May 2016)
 ---
 * Configure Rails cache_store
