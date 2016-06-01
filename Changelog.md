@@ -1,3 +1,7 @@
+1.7.2 (1 Jun 2016)
+---
+* Fix tag order in dropdown menu
+
 1.7.1 (1 Jun 2016)
 ---
 * SQL optimization & caching
