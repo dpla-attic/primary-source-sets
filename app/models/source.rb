@@ -80,6 +80,6 @@ class Source < ActiveRecord::Base
   #
   # @return [Array<Source>]
   def related_sources
-    source_set.sources.split { |s| s.id == id }.reverse.flatten
+    source_set.sources.includes(:thumbnails).split { |s| s.id == id }.reverse.flatten
   end
 end
