@@ -28,7 +28,8 @@ module SourceSetsHelper
 
       # Get all tags associated with the vocab.
       # Ignore tags that aren't associated with any of the source_sets.
-      tag_list = Tag.joins(:source_sets, :vocabularies)
+      tag_list = Tag.select('tags.*, tag_sequences.position')
+                    .joins(:source_sets, :vocabularies)
                     .where(source_sets: { id: ss_ids })
                     .where(vocabularies: { id: vocab.id })
                     .order('tag_sequences.position asc')
