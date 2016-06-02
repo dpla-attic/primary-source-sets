@@ -1,3 +1,7 @@
+1.7.3 (2 Jun 2016)
+---
+* Fix order by db call for postgresql
+
 1.7.2 (1 Jun 2016)
 ---
 * Fix tag order in dropdown menu
