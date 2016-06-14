@@ -34,10 +34,14 @@
   <h1><%= inline_markdown(@source.display_name) %></h1>
 
   <div class='flex-container'>
+    <%# Template Dependency: sources/audio %>
+    <%# Template Dependency: sources/document %>
+    <%# Template Dependency: sources/image %>
+    <%# Template Dependency: sources/video %>
     <%= render_media_asset %>
     <noscript>
       <div class='error'>
-        Your browser cannot render this media object because it does not support JavaScript.  Please enable JavaScript if you would like to access this media object.
+        Your browser cannot show this media object because it does not support JavaScript.  Please enable JavaScript if you would like to access this media object.
       </div>
     </noscript>
 

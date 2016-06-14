@@ -11,10 +11,8 @@ class SourceSetsController < ApplicationController
   def index
     @tags = get_tags_from_params
     @order = params[:order]
-    @published_sets = SourceSet.includes(:small_images).published
-                               .order_by(@order).with_tags(@tags)
-    @unpublished_sets = SourceSet.includes(:small_images).unpublished
-                                 .order_by(@order).with_tags(@tags)
+    @published_sets = SourceSet.published.order_by(@order).with_tags(@tags)
+    @unpublished_sets = SourceSet.unpublished.order_by(@order).with_tags(@tags)
   end
 
   def show

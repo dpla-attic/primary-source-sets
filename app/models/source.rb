@@ -1,5 +1,5 @@
 class Source < ActiveRecord::Base
-  belongs_to :source_set
+  belongs_to :source_set, touch: true
   has_many :guides, through: :source_set
   has_many :attachments, dependent: :destroy
 
@@ -17,22 +17,30 @@ class Source < ActiveRecord::Base
 
   has_many :images, through: :attachments,
                     source: :asset,
-                    source_type: 'Image'
+                    source_type: 'Image',
+                    after_add: :touch_self,
+                    before_remove: :touch_self
 
   has_many :large_images, -> { where size: 'large' },
                           through: :attachments,
                           source: :asset,
-                          source_type: 'Image'
+                          source_type: 'Image',
+                          after_add: :touch_self,
+                          before_remove: :touch_self
 
   has_many :small_images, -> { where size: 'small' },
                           through: :attachments,
                           source: :asset,
-                          source_type: 'Image'
+                          source_type: 'Image',
+                          after_add: :touch_self,
+                          before_remove: :touch_self
 
   has_many :thumbnails, -> { where size: 'thumbnail' },
                         through: :attachments,
                         source: :asset,
-                        source_type: 'Image'
+                        source_type: 'Image',
+                        after_add: :touch_self,
+                        before_remove: :touch_self
 
   validates :aggregation, presence: true, 
                           format: { with: /\A[a-zA-Z0-9]+\z/,
@@ -81,5 +89,33 @@ class Source < ActiveRecord::Base
   # @return [Array<Source>]
   def related_sources
     source_set.sources.includes(:thumbnails).split { |s| s.id == id }.reverse.flatten
+  end
+
+  ##
+  # @param Vocabulary
+  # @return [ActiveRecord::Association<Tag>]
+  def self.with_image(image)
+    joins(:attachments).where(attachments: { asset_type: 'Image' })
+                       .where(attachments: { asset_id: image.id })
+  end
+
+  ##
+  # Update the cache key of all sources associated with a given image.
+  # Update the cache key of all source sets associated with the sources.
+  # @param Image
+  def self.touch_sources_with_image(image)
+    # Note that update_all does not trigger ActiveRecord callbacks.
+    with_image(image).update_all(updated_at: Time.now)
+    SourceSet.touch_sets_with_sources(with_image(image))
+  end
+
+  private
+
+  ##
+  # Update cache keys of self and all associated source sets.
+  # @param ActiveRecord
+  def touch_self(record)
+    return if self.new_record? # cannot touch unsaved record
+    self.touch
   end
 end
