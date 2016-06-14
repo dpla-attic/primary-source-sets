@@ -1,3 +1,7 @@
+1.7.4 (14 Jun 2016)
+---
+* Add view fragment caching
+
 1.7.3 (2 Jun 2016)
 ---
 * Fix order by db call for postgresql
