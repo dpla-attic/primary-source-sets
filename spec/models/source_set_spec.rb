@@ -215,4 +215,18 @@ describe SourceSet, type: :model do
       expect(set.reload.published_at).to eq time
     end
   end
+
+  describe 'cache dependencies' do
+    let(:tag) { create(:tag_factory) }
+    let(:set) { create(:source_set_factory) }
+
+    it 'changes cache key when new tag association saved' do
+      expect{ set.tags << tag }.to change{ set.reload.cache_key }
+    end
+
+    it 'changes cache key when tag association deleted' do
+      set.tags << tag
+      expect{ set.tags.delete(tag) }.to change{ set.reload.cache_key }
+    end
+  end
 end

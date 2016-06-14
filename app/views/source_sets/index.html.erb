@@ -55,7 +55,7 @@
         <%= label_tag('tags[]', "#{vocab.name}:") %>
 
         <% if selected_tags_in(tags).count == 0 %>
-          <%# render dropdown menu %>
+          <%# dropdown menu %>
           <%= select_tag('tags[]',
                          options_for_select(tag_filter_options(tags),
                                             selected_slugs_in(tags))) %>
@@ -63,7 +63,7 @@
           <noscript><%= submit_tag 'Re-sort', name: nil %></noscript>
 
         <% else %>
-          <%# render pill tags %>
+          <%# pill tags %>
           <ul class='tag-list inline-block'>
             <% selected_tags_in(tags).each do |tag| %>
               <li class='tag'>
