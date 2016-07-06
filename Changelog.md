@@ -1,3 +1,7 @@
+1.7.5 (6 Jul 2016)
+---
+* Remove nav links to bookshelf
+
 1.7.4 (14 Jun 2016)
 ---
 * Add view fragment caching
