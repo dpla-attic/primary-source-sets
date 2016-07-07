@@ -1,3 +1,7 @@
+1.7.6 (7 Jul 2016)
+---
+* Add link to tech wiki in main nav
+
 1.7.5 (6 Jul 2016)
 ---
 * Remove nav links to bookshelf
