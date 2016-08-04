@@ -53,4 +53,8 @@ Rails.application.configure do
   # Config::Options objects, but we need them as hashes.
   cache_settings = Settings.cache.to_hash
   config.cache_store = cache_settings[:store].to_sym, *cache_settings[:opts]
+
+  # Initialize the Google Analytics tracker
+  # GoogleAnaltyics is defined in the google-analtyics-rails gem
+  GoogleAnalytics.tracker = Settings.googleanalytics.tracker
 end

@@ -5,6 +5,8 @@
                                           id: @guide.slug,
                                           only_path: false,
                                           trailing_slash: true) %>' />
+  <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+  <%= javascript_include_tag 'google-analytics-events', defer: 'defer'%>
   <%= javascript_include_tag 'social', defer: 'defer' %>
   <script type='application/ld+json'>
     <%= render partial: 'guides/show.json' %>
@@ -12,10 +14,6 @@
 <% end %>
 
 <% content_for :title, plaintext_from_md(@guide.name) %>
-
-<% content_for :foot_script do %>
-  <%= render partial: 'shared/analytics' %>
-<% end %>
 
 <%= render partial: 'shared/share' %>
 

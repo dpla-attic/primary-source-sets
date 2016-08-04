@@ -1,14 +1,12 @@
 <% content_for :head_script do %>
   <meta name='description' content="DPLA Primary Source Sets are designed to help students develop their critical thinking skills by exploring topics in history, literature, and culture through primary sources." />
+  <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+  <%= javascript_include_tag 'google-analytics-events', defer: 'defer'%>
   <%= javascript_include_tag 'results-bar', defer: 'defer' %>
   <%= javascript_include_tag 'social', defer: 'defer' %>
 <% end %>
 
 <% content_for :title, 'Primary Source Sets' %>
-
-<% content_for :foot_script do %>
-  <%= render partial: 'shared/analytics' %>
-<% end %>
 
 <%# Get filterable vocabs and their associated tags for relevant sets. %>
 <%# Setting this variable for the view helps reduce calls to the database. %>

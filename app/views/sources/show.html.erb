@@ -10,6 +10,8 @@
   <script type="text/javascript"
           src="https://cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"
           defer></script>
+  <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+  <%= javascript_include_tag 'google-analytics-events', defer: 'defer' %>
   <%= javascript_include_tag 'carousel', defer: 'defer' %>
   <%= javascript_include_tag 'social', defer: 'defer' %>
   <script type='application/ld+json'>
@@ -19,18 +21,19 @@
 
 <% content_for :title, plaintext_from_md(@source.name) %>
 
-<% content_for :foot_script do %>
-  <%= render partial: 'shared/analytics' %>
-  <%= render partial: 'sources/hub_analytics' %>
-<% end %>
-
 <%= render partial: 'shared/share' %>
 
 <div class="breadcrumbs">
   <%= render_breadcrumbs separator: ' / ' %>
 </div>
 
-<div class='source' id='content'>
+<div class='source' id='content'
+  <% if @dpla_item.present? && GoogleAnalytics.valid_tracker? %>
+     data-item-id='<%= @source.aggregation %>'
+     data-provider='<%= @dpla_item.provider %>'
+     data-data-provider='<%= @dpla_item.contributing_institution  %>'
+     data-title='<%= @dpla_item.title %>'
+  <% end %>>
   <h1><%= inline_markdown(@source.display_name) %></h1>
 
   <div class='flex-container'>
@@ -65,8 +68,12 @@
               </a>
             </p>
             <% if @dpla_item.provider.present? && @dpla_item.digital_resource_url.present? %>
-              <p><%= link_to "View the item on #{@dpla_item.provider}",
-                      @dpla_item.digital_resource_url %></p>
+              <p>
+                <%= link_to "View this item on #{@dpla_item.provider}",
+                             @dpla_item.digital_resource_url,
+                             target: '_blank',
+                             class: 'ViewObject' %>
+              </p>
             <% end %>
           <% else %>
             <p>This item is not currently available in the DPLA library.</p>
