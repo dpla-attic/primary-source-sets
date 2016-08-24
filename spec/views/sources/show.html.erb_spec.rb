@@ -33,7 +33,13 @@ describe 'sources/show.html.erb', type: :view do
     it 'renders the provider link' do
       render
       expect(rendered)
-        .to include("<a href=\"#{url}\">View the item on #{provider}")
+        .to include("href=\"#{url}\"")
+    end
+
+    it 'embeds data attributes with valid google analytics tracker' do
+      allow(GoogleAnalytics).to receive(:valid_tracker?).and_return(true)
+      render
+      expect(rendered).to include("data-provider='#{provider}'")
     end
   end
 
