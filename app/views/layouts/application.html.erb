@@ -15,7 +15,8 @@
     <title><%= yield :title %></title>
     <%= yield :head_script %>
   </head>
-  <body>
+  <%# body class names make each page identifiable by controller and action %>
+  <body class='<%= "#{controller_name}-controller #{action_name}-action" %>'>
     <%= render partial: 'shared/jump_links' %>
     <div class='container'>
       <%= render partial: 'shared/header' %>

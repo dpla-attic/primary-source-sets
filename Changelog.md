@@ -1,3 +1,9 @@
+1.7.8 (24 Aug 2016)
+---
+* Pin DPLibary gem to v0.1
+* Change gif it up link in main menu
+* Track click through events with Google Analtyics
+
 1.7.7 (29 Jul 2016)
 ---
 * Add link to Searching DPLA in main nav
