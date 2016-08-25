@@ -1,3 +1,7 @@
+1.7.9 (25 Aug 2016)
+---
+Pin gems to tiny versions
+
 1.7.8 (24 Aug 2016)
 ---
 * Pin DPLibary gem to v0.1
