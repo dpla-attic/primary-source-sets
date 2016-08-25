@@ -8,9 +8,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer',  '~> 0.12.2', platforms: :ruby
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails', '~> 3.1.3'
-gem 'jquery-ui-rails', '~> 5.0'
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'config', '~> 1.0.0'
-gem 'redcarpet', '~> 3.3'
+gem 'redcarpet', '~> 3.3.4'
 gem 'friendly_id', '~> 5.1.0'
 gem 'devise', '3.4.1'
 gem 'breadcrumbs_on_rails', '~> 2.3.0'
@@ -22,9 +22,9 @@ gem 'rubocop', '~> 0.32.1', require: false
 # came out in December, 2013, and I'm cautious about a change after this long
 # a time being disruptive. --MB
 gem 's3_browser_uploads', '0.1.2'
-gem 'zencoder', '~>2.5'
-gem 'navigasmic', '~>1.0'
-gem 'turnout', '~>2.0'
+gem 'zencoder', '~> 2.5.1'
+gem 'navigasmic', '~> 1.1.0'
+gem 'turnout', '~> 2.3.1'
 gem 'access-granted', '~> 1.0.0'
 # As of jasmine-jquery-rails v2.0.3, jasmine-jquery-rails is not compatible with
 # rake 11.0.0
@@ -43,13 +43,13 @@ group :test, :development do
   gem 'awesome_print', '~> 1.2.0'
   gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
   gem 'database_cleaner', '~> 1.3.0', require: false
-  gem 'json-ld', '~>1.1.9'
-  gem 'jasmine', '~> 2.0'
-  gem 'jasmine-jquery-rails', '~> 2.0'
+  gem 'json-ld', '~> 1.1.9'
+  gem 'jasmine', '~> 2.4.0'
+  gem 'jasmine-jquery-rails', '~> 2.0.3'
   gem 'phantomjs', '1.9.8'
 end
 
 group :development do
-  gem 'zencoder-fetcher'
+  gem 'zencoder-fetcher', '~> 0.2.8'
 end
 
