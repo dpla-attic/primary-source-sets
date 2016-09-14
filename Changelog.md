@@ -1,6 +1,10 @@
+1.7.10 (14 Sep 2016)
+---
+* Change dplafest main menu link
+
 1.7.9 (25 Aug 2016)
 ---
-Pin gems to tiny versions
+* Pin gems to tiny versions
 
 1.7.8 (24 Aug 2016)
 ---
