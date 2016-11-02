@@ -1,3 +1,7 @@
+1.7.11 (2 Nov 2016)
+---
+* Configure x-frame-options
+
 1.7.10 (14 Sep 2016)
 ---
 * Change dplafest main menu link
