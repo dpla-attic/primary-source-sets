@@ -23,5 +23,10 @@ module PrimarySourceSets
 
     # Autoload contents of lib
     config.autoload_paths += %W(#{config.root}/lib/primary-source-sets)
+
+    # Allow X-Frame access from known requesters
+    config.action_dispatch.default_headers = {
+        'X-Frame-Options' => Settings.http_headers.x_frame_options
+    }
   end
 end

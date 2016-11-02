@@ -113,3 +113,7 @@ action_mailer:
 cache:
   store: null_store
   opts:
+
+# default http response headers
+http_headers:
+  x_frame_options: 'SAMEORIGIN'
