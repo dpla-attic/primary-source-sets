@@ -1,3 +1,7 @@
+1.7.12 (9 Dec 2016)
+---
+* Reintroduce Gemfile.lock
+
 1.7.11 (2 Nov 2016)
 ---
 * Configure x-frame-options
