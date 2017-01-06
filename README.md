@@ -242,5 +242,5 @@ The output in the console will contain a web address to visit in order to activa
 Copyright & License
 -------------------
 
-* Copyright Digital Public Library of America, 2015
+* Copyright Digital Public Library of America, 2015 -- 2017
 * License: MIT
