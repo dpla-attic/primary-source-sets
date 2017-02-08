@@ -20,5 +20,6 @@
  *= require primary_source_sets.css
  *= require poster.css
  *= require jquery-ui/sortable
+ *= require av_download.css
  *= require_self
  */
