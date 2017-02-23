@@ -1,3 +1,7 @@
+1.7.14 (23 Feb 2017)
+---
+* Edit intro text
+
 1.7.13 (8 Feb 2017)
 * Update copyright years
 * Hide AV download button on Chrome
