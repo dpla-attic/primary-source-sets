@@ -1,3 +1,8 @@
+1.7.15 (15 Mar 2017)
+---
+* Add meta referrer tag
+* Remove Events from Get Involved menu
+
 1.7.14 (23 Feb 2017)
 ---
 * Edit intro text
