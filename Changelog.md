@@ -1,3 +1,7 @@
+1.7.16 (31 May 2017)
+---
+* Add family research link to main menu
+
 1.7.15 (15 Mar 2017)
 ---
 * Add meta referrer tag
