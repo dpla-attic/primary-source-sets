@@ -1,3 +1,7 @@
+1.7.17 (16 Jun 2017)
+---
+* Add JSON view for sets
+
 1.7.16 (31 May 2017)
 ---
 * Add family research link to main menu

@@ -66,6 +66,11 @@ describe SourceSetsController, type: :controller do
         get :index
         expect(response).to render_template :index
       end
+
+      it 'renders the index json partial' do
+        get :index, format: :json
+        expect(response).to render_template(partial: '_index.json.erb')
+      end
     end
 
     describe '#show' do
