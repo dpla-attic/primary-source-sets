@@ -13,6 +13,16 @@ class SourceSetsController < ApplicationController
     @order = params[:order]
     @published_sets = SourceSet.published.order_by(@order).with_tags(@tags)
     @unpublished_sets = SourceSet.unpublished.order_by(@order).with_tags(@tags)
+
+    ##
+    # Render HTML or JSON formats unless controller has already redirected or
+    # rendered (ie. in the check_login_and_authorize method).
+    unless performed?
+      respond_to do |format|
+        format.html
+        format.json { render partial: 'source_sets/index.json.erb' }
+      end
+    end
   end
 
   def show

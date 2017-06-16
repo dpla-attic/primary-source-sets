@@ -1,0 +1,17 @@
+{
+  <%= render partial: 'shared/context.json' %>,
+  "url": "<%= request.original_url %>",
+  "@type": "ItemList",
+  <% if @published_sets.present? %>
+    "numberOfItems": "<%= @published_sets.count %>",
+    "itemListElement": [
+      <% for set in @published_sets %>
+        {
+          "@id": "<%= source_set_url(set) %>",
+          "@type": "CreativeWork",
+          "name": <%= set.name.to_json.html_safe %>
+        }<%= ',' unless set.equal?(@published_sets.last) %>
+      <% end %>
+    ]
+  <% end %>
+}
