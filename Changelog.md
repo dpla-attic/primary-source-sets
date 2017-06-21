@@ -1,3 +1,7 @@
+1.7.18 (21 Jun 2017)
+---
+* Add SSL config for Devise
+
 1.7.17 (16 Jun 2017)
 ---
 * Add JSON view for sets
