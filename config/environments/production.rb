@@ -62,7 +62,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {
     host: Settings.app_host,
     script_name: Settings.relative_url_root,
-    protocol: Settings.app_scheme.tr(':/', '')
+    protocol: 'https'
   }
   config.action_mailer.delivery_method =
     Settings.action_mailer.delivery_method.to_sym
@@ -91,4 +91,9 @@ Rails.application.configure do
   # Initialize the Google Analytics tracker
   # GoogleAnaltyics is defined in the google-analtyics-rails gem
   GoogleAnalytics.tracker = Settings.googleanalytics.tracker
+
+  # Devise SSL
+  config.to_prepare { Devise::SessionsController.force_ssl }
+  config.to_prepare { Devise::RegistrationsController.force_ssl }
+  config.to_prepare { Devise::PasswordsController.force_ssl }
 end
