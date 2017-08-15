@@ -16,6 +16,9 @@
       <% for tag in @tags %>
         {
           "@type": "Thing",
+          <% tag.vocabularies.filterable.each do |vocab| %>
+            "disambiguatingDescription": <%= vocab.name.to_json.html_safe %>,
+          <% end %>
           "name": "<%= tag.label %>"<%= ',' if tag.uri.present? %>
           <% if tag.uri.present? %>
             "sameAs": "<%= tag.uri %>"
@@ -49,34 +52,69 @@
     "name": "Digital Public Library of America",
     "email": "info@dp.la"
   },
-  <% text = [@source_set.overview, @source_set.resources].compact
-                                                         .join("\r\n\r\n") %>
-  <% if text.present? %>
-    "text": <%= text.to_json.html_safe %>,
-  <% end %>
-  <% if @guides.present? || @sources.present? %>
-    "hasPart": [
-      <% if @guides.present? %>
-        <% for guide in @guides %>
-          {
-            "@id": "<%= guide_url(guide) %>",
-            "@type": "CreativeWork",
-            "name": <%= guide.name.to_json.html_safe %>
-          }<%= ',' if not (guide.equal?(@guides.last) && @sources.blank?) %>
-        <% end %>
+  "hasPart": [
+    <% if @guides.present? %>
+      <% for guide in @guides %>
+        {
+          "@id": "<%= guide_url(guide) %>",
+          "@type": "CreativeWork",
+          "name": <%= guide.name.to_json.html_safe %>,
+          "disambiguatingDescription": "guide"
+        }<%= ',' if not (guide.equal?(@guides.last) && @sources.blank? && @source_set.resources.blank? && @source_set.resources.blank?) %>
       <% end %>
-      <% if @sources.present? %>
-        <% for source in @sources %>
-          {
-            "@id": "<%= source_url(source) %>",
-            "@type": "CreativeWork",
-            <% thumbnail = source.thumbnail %>
-            <% if thumbnail.present? %>
-              "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
-            <% end %>
-            "name": <%= source.name.to_json.html_safe %>
-          }<%= ',' unless source.equal?(@sources.last) %>
-        <% end %>
+    <% end %>
+    <% if @sources.present? %>
+      <% for source in @sources %>
+        {
+          "@id": "<%= source_url(source) %>",
+          "@type": "CreativeWork",
+          <% thumbnail = source.thumbnail %>
+          <% if thumbnail.present? %>
+            "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
+          <% end %>
+          "name": <%= source.name.to_json.html_safe %>,
+          "mainEntity": [
+            {
+              <% if source.main_asset.present? %>
+                <% if source.main_asset.is_a?(Document) %>
+                  "@type": "MediaObject"
+                <% elsif source.main_asset.is_a?(Image) %>
+                  "@type": "ImageObject"
+                <% elsif source.main_asset.is_a? Video %>
+                  "@type": "VideoObject"
+                <% elsif source.main_asset.is_a? Audio %>
+                  "@type": "AudioObject"
+                <% end %>
+              <% end %>
+            }
+          ],
+          "disambiguatingDescription": "source"
+        }<%= ',' if not (source.equal?(@sources.last) && @source_set.resources.blank? && @source_set.resources.blank?) %>
+      <% end %>
+    <% end %>
+    <% if @source_set.resources.present? %>
+      {
+        "name": "Resources",
+        "text": <%= @source_set.resources.to_json.html_safe %>
+      }<%= ',' unless @source_set.overview.blank? %>
+    <% end %>
+    <% if @source_set.overview.present? %>
+      {
+        "name": "Overview",
+        "text": <%= @source_set.overview.to_json.html_safe %>
+      }
+    <% end %>
+  ],
+  <% if @related.present? %>
+    "isRelatedTo": [
+      <% @related.each do |rs| %>
+        {
+          "@id": "<%= source_set_url(rs) %>",
+          <% if rs.featured_image.present? %>
+            "thumbnailUrl": "<%= base_src + rs.featured_image.file_name %>",
+          <% end %>
+          "name": <%= rs.name.to_json.html_safe %>
+        }<%= ',' unless rs.equal?(@related.last) %>
       <% end %>
     ],
   <% end %>

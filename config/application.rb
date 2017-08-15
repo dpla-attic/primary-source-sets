@@ -26,7 +26,9 @@ module PrimarySourceSets
 
     # Allow X-Frame access from known requesters
     config.action_dispatch.default_headers = {
-        'X-Frame-Options' => Settings.http_headers.x_frame_options
+        'X-Frame-Options' => Settings.http_headers.x_frame_options,
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Request-Method' => 'GET',
     }
   end
 end

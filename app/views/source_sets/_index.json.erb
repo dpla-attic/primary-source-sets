@@ -9,6 +9,22 @@
         {
           "@id": "<%= source_set_url(set) %>",
           "@type": "CreativeWork",
+          <% if set.featured_image.present? %>
+            "thumbnailUrl": "<%= base_src + set.featured_image.file_name %>",
+          <% end %>
+          "numberOfItems": "<%= set.sources.count %>",
+          <% tags = set.tags.filterable %>
+          "about": [
+            <% for tag in tags %>
+              {
+                "@type": "Thing",
+                <% tag.vocabularies.each do |vocab| %>
+                  "disambiguatingDescription": <%= vocab.name.to_json.html_safe %>,
+                <% end %>
+                "name": "<%= tag.label %>"
+              }<%= ',' unless tag.equal?(tags.last) %>
+            <% end %>
+          ],
           "name": <%= set.name.to_json.html_safe %>
         }<%= ',' unless set.equal?(@published_sets.last) %>
       <% end %>
