@@ -99,6 +99,12 @@ describe SourceSetsController, type: :controller do
         expect(assigns(:tags).first).to eq resource.tags.first
       end
 
+      it 'sets @related variable' do
+        resource.related_sets << [create(:source_set_factory, published: true)]
+        get :show, id: resource.id
+        expect(assigns(:related).first).to eq resource.related_sets.first
+      end
+
       describe 'request for json format' do
         context 'with a published set' do
           it 'renders the show json partial' do

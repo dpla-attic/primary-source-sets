@@ -25,6 +25,7 @@ class SourcesController < ApplicationController
     @main_asset = @source.main_asset
     @dpla_item = DplaItem.find(@source.aggregation)
     @file_base_or_name = nil
+    @related = @source.related_sources
 
     if @main_asset.present?
       @file_base_or_name = @main_asset.respond_to?(:file_base) ?

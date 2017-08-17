@@ -33,6 +33,7 @@ class SourceSetsController < ApplicationController
     @sources = @source_set.sources
     @guides = @source_set.guides
     @tags = @source_set.tags
+    @related = @source_set.related_sets
 
     ##
     # Render HTML or JSON formats unless controller has already redirected or

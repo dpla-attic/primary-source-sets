@@ -1,3 +1,7 @@
+1.7.19 (17 Aug 2017)
+---
+* Postlight API config
+
 1.7.18 (21 Jun 2017)
 ---
 * Add SSL config for Devise
