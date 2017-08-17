@@ -88,30 +88,32 @@
   </div>
 </div>
 
-<div class='related-sources'>
-  <h2>More primary sources about <%= link_to(inline_markdown(@source_set.name), source_set_path(@source_set)) %></h2>
-  
-  <div class='carousel-container js-off'>
-    <div class='multiple-items slider carousel'>
-      <% @source.related_sources.each do |source| %>
-        <div class='carousel-item'>
-          <%= render partial: 'sources/source_tile',
-                     locals: { source: source } %>
-        </div>
-      <% end %>
+<% if @related.present? %>
+  <div class='related-sources'>
+    <h2>More primary sources about <%= link_to(inline_markdown(@source_set.name), source_set_path(@source_set)) %></h2>
+    
+    <div class='carousel-container js-off'>
+      <div class='multiple-items slider carousel'>
+        <% @related.each do |source| %>
+          <div class='carousel-item'>
+            <%= render partial: 'sources/source_tile',
+                       locals: { source: source } %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <noscript>
-    <ul>
-      <% @source.related_sources.each do |source| %>
-        <li> 
-          <%= link_to inline_markdown(source.display_name), source_path(source) %>
-        </li>
-      <% end %>
-    </ul>
-  </noscript>
-</div>
+    <noscript>
+      <ul>
+        <% @related.each do |source| %>
+          <li> 
+            <%= link_to inline_markdown(source.display_name), source_path(source) %>
+          </li>
+        <% end %>
+      </ul>
+    </noscript>
+  </div>
+<% end %>
 
 <div class='related-guides'>
   <% guides = @source.guides %>

@@ -87,13 +87,12 @@
 </div>
 
 <div class='related-sets'>
-  <% related = @source_set.related_sets %>
-  <% if related.present? %>
+  <% if @related.present? %>
     <h2>Related primary source sets</h2>
 
     <div class='carousel-container js-off'>
       <div class='multiple-items slider carousel'>
-        <% related.each do |set| %>
+        <% @related.each do |set| %>
           <div class='carousel-item'>
             <%= render partial: 'source_sets/set_tile',
                        locals: { set: set, render_tags: false } %>
@@ -104,7 +103,7 @@
 
     <noscript>
       <ul>
-        <% related.each do |set| %>
+        <% @related.each do |set| %>
           <li><%= link_to inline_markdown(set.name), source_set_path(set) %></li>
         <% end %>
       </ul>

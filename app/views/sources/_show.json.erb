@@ -15,15 +15,26 @@
   "dct:modified": "<%= @source.updated_at.strftime("%Y-%m-%d") %>",
   "mainEntity": [
     {
-      "@type": "CreativeWork",
       <% if @main_asset.present? %>
-        "associatedMedia": [
-          <% if @main_asset.is_a?(Document) || @main_asset.is_a?(Image) %>
+        <% if @main_asset.is_a?(Document) %>
+          "@type": "MediaObject",
+          "associatedMedia": [
             {
               "fileFormat": "<%= @main_asset.file_name.split('.').last %>",
               "contentUrl": "<%= @main_asset.file_name %>"
             }
-          <% elsif @main_asset.is_a? Video %>
+          ]<%= ',' if @dpla_item.present? %>
+        <% elsif @main_asset.is_a?(Image) %>
+          "@type": "ImageObject",
+          "associatedMedia": [
+            {
+              "fileFormat": "<%= @main_asset.file_name.split('.').last %>",
+              "contentUrl": "<%= @main_asset.file_name %>"
+            }
+          ]<%= ',' if @dpla_item.present? %>
+        <% elsif @main_asset.is_a? Video %>
+          "@type": "VideoObject",
+          "associatedMedia": [
             <% outs = JSON.parse(@main_asset.meta)['output_settings'] %>
             <% for out in outs %>
               {
@@ -32,7 +43,10 @@
                                                    out['extension']) %>"
               }<%= ',' unless out.equal?(outs.last) %>
             <% end %>
-          <% elsif @main_asset.is_a? Audio %>
+          ]<%= ',' if @dpla_item.present? %>
+        <% elsif @main_asset.is_a? Audio %>
+          "@type": "AudioObject",
+          "associatedMedia": [
             <% outs = JSON.parse(@main_asset.meta)['output_settings'] %>
             <% for out in outs %>
               {
@@ -42,8 +56,8 @@
                                                    out['extension']) %>"
               }<%= ',' unless out.equal?(outs.last) %>
             <% end %>
-          <% end %>
-        ],
+          ]<%= ',' if @dpla_item.present? %>
+        <% end %>
         <% if @dpla_item.present? %>
           "dct:references": [
             <% if @dpla_item.digital_resource_url.present? %>
@@ -57,23 +71,29 @@
               "@type": "ore:Aggregation",
               "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
             }
-          ],
+          ]
         <% end %>
       <% end %>
-      <% if @source.citation.present? %>
-        "dct:citation": <%= @source.citation.to_json.html_safe %>,
-      <% end %>
-      <% if @source.credits.present? %>
-        "dct:provenance": {
-          "@type": "dct:ProvenanceStatement",
-          "name": <%= @source.credits.to_json.html_safe %>
-        },
-      <% end %>
-      "@type": "MediaObject"
     }
   ],
   <% if @source.textual_content.present? %>
     "text": <%= @source.textual_content.to_json.html_safe %>,
+  <% end %>
+  <% if @related.present? %>
+    "isRelatedTo": [
+      <% @related.each do |rs| %>
+        {
+          <% thumbnail = rs.thumbnail %>
+          <% if thumbnail.present? %>
+            "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
+          <% end %>
+          <% if rs.name.present? %>
+            "name": <%= rs.name.to_json.html_safe %>,
+          <% end %>
+          "@id": "<%= source_url(rs) %>"
+        }<%= ',' unless rs.equal?(@related.last) %>
+      <% end %>
+    ],
   <% end %>
   "isPartOf": {
     "@id": "<%= source_set_url(@source_set) %>",

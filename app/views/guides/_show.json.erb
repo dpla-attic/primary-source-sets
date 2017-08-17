@@ -23,10 +23,20 @@
       <% end %>
     ],
   <% end %>
-  <% text = [@guide.questions, @guide.activity].compact.join("\r\n\r\n") %>
-  <% if text.present? %>
-    "text": <%= text.to_json.html_safe %>,
-  <% end %>
+  "hasPart": [
+    <% if @guide.questions.present? %>
+      {
+        "name": "Questions",
+        "text": <%= @guide.questions.to_json.html_safe %>
+      }<%= ',' if @guide.activity.present? %>
+    <% end %>
+    <% if @guide.activity.present? %>
+      {
+        "name": "Activity",
+        "text": <%= @guide.activity.to_json.html_safe %>
+      }
+    <% end %>
+  ],
   "isPartOf": {
     "@id": "<%= source_set_url(@source_set) %>",
     "@type": "CreativeWork",
