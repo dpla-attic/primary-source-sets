@@ -3,6 +3,24 @@
   "url": "<%= request.original_url %>",
   "@type": "ItemList",
   <% if @published_sets.present? %>
+    <% filters = filters_for_sets(@published_sets) %>
+    <% if filters.present? %>
+      "hasPart": [
+        <% filters.each do |vocab, tags| %>
+          {
+            "name": <%= vocab.name.to_json.html_safe %>,
+            "disambiguatingDescription": "tagList",
+            "itemListElement": [
+              <% for tag in tags %>
+                {
+                  "name": <%= tag.label.to_json.html_safe %>
+                }<%= ',' unless tag.equal?(tags.last) %>
+              <% end %>
+            ]
+          }<%= ',' unless vocab.equal?(filters.keys.last) %>
+        <% end %>
+      ],
+    <% end %>
     "numberOfItems": "<%= @published_sets.count %>",
     "itemListElement": [
       <% for set in @published_sets %>
