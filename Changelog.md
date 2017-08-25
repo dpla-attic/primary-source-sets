@@ -1,3 +1,7 @@
+1.7.20 (25 Aug 2017)
+---
+* Add tag lists to postlight API
+
 1.7.19 (17 Aug 2017)
 ---
 * Postlight API config
