@@ -1,3 +1,7 @@
+1.7.22 (20 Sep 2017)
+---
+* Fix Google Docs viewer URL generation
+
 1.7.21 (20 Sep 2017)
 ---
 * Handle multiple provider URLs from DPLA API
