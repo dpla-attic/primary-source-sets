@@ -1,3 +1,7 @@
+1.7.21 (20 Sep 2017)
+---
+* Handle multiple provider URLs from DPLA API
+
 1.7.20 (25 Aug 2017)
 ---
 * Add tag lists to postlight API

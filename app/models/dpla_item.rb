@@ -34,7 +34,7 @@ class DplaItem < ActiveModelBase
   end
 
   def digital_resource_url
-    item.try(:url)
+    Array(item.try(:url)).first
   end
 
   def title

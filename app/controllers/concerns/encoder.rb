@@ -19,7 +19,7 @@ module Encoder
         create_transcoding_job(params[type.to_s][:key], model[:file_base],
                                Settings["#{type}_outputs"])
     rescue RuntimeError => e
-      msg = "Could not create #{model.capitalize} transcoding job: " \
+      msg = "Could not create #{type.to_s.capitalize} transcoding job: " \
             "#{e.message}"
       logger.error msg
       render json: { message: msg }, status: :internal_server_error
