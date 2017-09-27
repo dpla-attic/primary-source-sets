@@ -6,6 +6,7 @@
   "name": <%= @source_set.name.to_json.html_safe %>,
   <% if @source_set.featured_image.present? %>
     "thumbnailUrl": "<%= base_src + @source_set.featured_image.file_name %>",
+    "repImageUrl": "<%= base_src + rep_file_name(@source_set.featured_image.file_name) %>",
   <% end %>
   "dateCreated": "<%= @source_set.created_at.strftime("%Y-%m-%d") %>",
   "dct:created": "<%= @source_set.created_at.strftime("%Y-%m-%d") %>",
@@ -71,6 +72,7 @@
           <% thumbnail = source.thumbnail %>
           <% if thumbnail.present? %>
             "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
+            "repImageUrl": "<%= base_src + rep_file_name(thumbnail.file_name) %>",
           <% end %>
           "name": <%= source.name.to_json.html_safe %>,
           "mainEntity": [
@@ -112,6 +114,7 @@
           "@id": "<%= source_set_url(rs) %>",
           <% if rs.featured_image.present? %>
             "thumbnailUrl": "<%= base_src + rs.featured_image.file_name %>",
+            "repImageUrl": "<%= base_src + rep_file_name(rs.featured_image.file_name) %>",
           <% end %>
           "name": <%= rs.name.to_json.html_safe %>
         }<%= ',' unless rs.equal?(@related.last) %>

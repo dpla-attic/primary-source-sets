@@ -76,4 +76,9 @@ module ApplicationHelper
     "via=#{Settings.twitter_username}&" \
     "text=#{content_for :title}"
   end
+
+  def rep_file_name(filename)
+    filename.sub(/(?:_sm|_thumb)?(\.[a-z]*)$/, '_rep\1')
+  end
+
 end

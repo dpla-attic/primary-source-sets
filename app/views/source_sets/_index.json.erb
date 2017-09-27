@@ -28,7 +28,10 @@
           "@id": "<%= source_set_url(set) %>",
           "@type": "CreativeWork",
           <% if set.featured_image.present? %>
+
             "thumbnailUrl": "<%= base_src + set.featured_image.file_name %>",
+            "repImageUrl": "<%= base_src + rep_file_name(set.featured_image.file_name) %>",
+
           <% end %>
           "numberOfItems": "<%= set.sources.count %>",
           <% tags = set.tags.filterable %>
