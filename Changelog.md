@@ -1,3 +1,7 @@
+1.8.0 (28 Sep 2017)
+---
+* Kludge in "rep" thumbnail images for Postlight frontend
+
 1.7.22 (20 Sep 2017)
 ---
 * Fix Google Docs viewer URL generation
