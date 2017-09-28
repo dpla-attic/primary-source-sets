@@ -5,7 +5,7 @@
   <% thumbnail = @source.thumbnail %>
   <% if thumbnail.present? %>
     "thumbnailUrl": "<%= base_src + thumbnail.file_name %>",
-    "repImageUrl": "%= base_src + rep_file_name(thumbnail.file_name) %>",
+    "repImageUrl": "<%= base_src + rep_file_name(thumbnail.file_name) %>",
   <% end %>
   <% if @source.name.present? %>
     "name": <%= @source.name.to_json.html_safe %>,
