@@ -60,6 +60,28 @@
           ]<%= ',' if @dpla_item.present? %>
         <% end %>
         <% if @dpla_item.present? %>
+          <% if @dpla_item.provider.present? %>
+            "provider": {
+              "@type": "Organization",
+              "name": "<%= @dpla_item.provider %>"
+            },
+          <% end %>
+          "citation": [
+            <% if @source.credits.present? %>
+              {
+                "@type": "CreativeWork",
+                "text": "<%= @source.credits %>",
+                "disabmiguationDescription": "credits"
+              }<%= "," if @source.citation.present? %>
+            <% end %>
+            <% if @source.citation.present? %>
+              {
+                "@type": "CreativeWork",
+                "text": "<%= @source.citation %>",
+                "disabmiguationDescription": "citation"
+              }
+            <% end %>
+          ],
           "dct:references": [
             <% if @dpla_item.digital_resource_url.present? %>
               {
