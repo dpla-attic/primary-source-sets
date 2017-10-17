@@ -1,3 +1,7 @@
+1.8.1 (17 Oct 2017)
+---
+* Add citiation and provider to source json
+
 1.8.0 (28 Sep 2017)
 ---
 * Kludge in "rep" thumbnail images for Postlight frontend
