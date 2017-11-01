@@ -63,21 +63,21 @@
           <% if @dpla_item.provider.present? %>
             "provider": {
               "@type": "Organization",
-              "name": "<%= @dpla_item.provider %>"
+              "name": <%= @dpla_item.provider.to_json.html_safe %>
             },
           <% end %>
           "citation": [
             <% if @source.credits.present? %>
               {
                 "@type": "CreativeWork",
-                "text": "<%= @source.credits %>",
+                "text": <%= @source.credits.to_json.html_safe %>,
                 "disabmiguationDescription": "credits"
               }<%= "," if @source.citation.present? %>
             <% end %>
             <% if @source.citation.present? %>
               {
                 "@type": "CreativeWork",
-                "text": "<%= @source.citation %>",
+                "text": <%= @source.citation.to_json.html_safe %>,
                 "disabmiguationDescription": "citation"
               }
             <% end %>
