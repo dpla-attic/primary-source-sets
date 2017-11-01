@@ -42,7 +42,7 @@
                 <% tag.vocabularies.each do |vocab| %>
                   "disambiguatingDescription": <%= vocab.name.to_json.html_safe %>,
                 <% end %>
-                "name": "<%= tag.label %>"
+                "name": <%= tag.label.to_json.html_safe %>
               }<%= ',' unless tag.equal?(tags.last) %>
             <% end %>
           ],
