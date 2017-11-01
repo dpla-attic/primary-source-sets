@@ -1,3 +1,7 @@
+1.8.2 (1 Nov 2017)
+---
+* Add more HTML-safe fields to JSON API
+
 1.8.1 (17 Oct 2017)
 ---
 * Add citiation and provider to source json

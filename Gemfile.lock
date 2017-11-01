@@ -284,6 +284,3 @@ DEPENDENCIES
   unicorn (= 4.8.3)
   zencoder (~> 2.5.1)
   zencoder-fetcher (~> 0.2.8)
-
-BUNDLED WITH
-   1.13.2

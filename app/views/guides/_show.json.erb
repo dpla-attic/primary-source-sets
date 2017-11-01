@@ -15,10 +15,10 @@
           <% if author.affiliation.present? %>
             "affiliation": {
               "@type": "Organization",
-              "name": "<%= author.affiliation %>"
+              "name": <%= author.affiliation.to_json.html_safe %>
             },
             <% end %>
-          "name": "<%= author.name %>"
+          "name": <%= author.name.to_json.html_safe %>
         }<%= ',' unless author.equal?(@authors.last) %>
       <% end %>
     ],
