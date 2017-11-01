@@ -1,3 +1,7 @@
+1.8.3 (1 Nov 2017)
+---
+* Fix bunder version
+
 1.8.2 (1 Nov 2017)
 ---
 * Add more HTML-safe fields to JSON API
