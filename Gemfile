@@ -44,7 +44,7 @@ group :test, :development do
   gem 'codeclimate-test-reporter', '~> 0.4.7', require: false
   gem 'database_cleaner', '~> 1.3.0', require: false
   gem 'json-ld', '~> 1.1.9'
-  gem 'jasmine', '~> 2.4.0'
+  gem 'jasmine', '2.4.0'
   gem 'jasmine-jquery-rails', '~> 2.0.3'
   gem 'phantomjs', '1.9.8'
 end
