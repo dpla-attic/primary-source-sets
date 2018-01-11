@@ -60,11 +60,24 @@
           ]<%= ',' if @dpla_item.present? %>
         <% end %>
         <% if @dpla_item.present? %>
-          <% if @dpla_item.provider.present? %>
-            "provider": {
-              "@type": "Organization",
-              "name": <%= @dpla_item.provider.to_json.html_safe %>
-            },
+          "provider": [
+            <% if @dpla_item.provider.present? %>
+              {
+                "@type": "Organization",
+                "name": <%= @dpla_item.provider.to_json.html_safe %>,
+                "disambiguationDescription": "partner"
+              }<%= "," if @dpla_item.contributing_institution.present? %>
+            <% end %>
+            <% if @dpla_item.contributing_institution.present? %>
+              {
+                "@type": "Organization",
+                "name": <%= @dpla_item.contributing_institution.to_json.html_safe %>,
+                "disambiguationDescription": "contributing institution"
+              }
+            <% end %>
+          ],
+          <% if @dpla_item.title.present? %>
+            "name": <%= @dpla_item.title.to_json.html_safe %>,
           <% end %>
           "citation": [
             <% if @source.credits.present? %>
