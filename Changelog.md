@@ -1,3 +1,8 @@
+1.8.5 (22 Jan 2017)
+---
+* Add contributor and item name to JSON feed
+* Turn off jasmine in travis test
+
 1.8.4 (2 Nov 2017)
 ---
 * Fix bundler syntax
