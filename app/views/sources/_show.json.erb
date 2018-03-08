@@ -24,7 +24,7 @@
               "fileFormat": "<%= @main_asset.file_name.split('.').last %>",
               "contentUrl": "<%= @main_asset.file_name %>"
             }
-          ]<%= ',' if @dpla_item.present? %>
+          ],
         <% elsif @main_asset.is_a?(Image) %>
           "@type": "ImageObject",
           "associatedMedia": [
@@ -32,7 +32,7 @@
               "fileFormat": "<%= @main_asset.file_name.split('.').last %>",
               "contentUrl": "<%= @main_asset.file_name %>"
             }
-          ]<%= ',' if @dpla_item.present? %>
+          ],
         <% elsif @main_asset.is_a? Video %>
           "@type": "VideoObject",
           "associatedMedia": [
@@ -44,7 +44,7 @@
                                                    out['extension']) %>"
               }<%= ',' unless out.equal?(outs.last) %>
             <% end %>
-          ]<%= ',' if @dpla_item.present? %>
+          ],
         <% elsif @main_asset.is_a? Audio %>
           "@type": "AudioObject",
           "associatedMedia": [
@@ -57,7 +57,7 @@
                                                    out['extension']) %>"
               }<%= ',' unless out.equal?(outs.last) %>
             <% end %>
-          ]<%= ',' if @dpla_item.present? %>
+          ],
         <% end %>
         <% if @dpla_item.present? %>
           "provider": [
@@ -79,7 +79,21 @@
           <% if @dpla_item.title.present? %>
             "name": <%= @dpla_item.title.to_json.html_safe %>,
           <% end %>
-          "citation": [
+          "dct:references": [
+            <% if @dpla_item.digital_resource_url.present? %>
+              {
+                "@id": "<%= @dpla_item.digital_resource_url %>",
+                "@type": "WebPage"
+              },
+            <% end %>
+            {
+              "@id": "<%= "http:#{frontend_path('item/' + @source.aggregation)}" %>",
+              "@type": "ore:Aggregation",
+              "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
+            }
+          ],
+        <% end %>
+        "citation": [
             <% if @source.credits.present? %>
               {
                 "@type": "CreativeWork",
@@ -94,21 +108,7 @@
                 "disabmiguationDescription": "citation"
               }
             <% end %>
-          ],
-          "dct:references": [
-            <% if @dpla_item.digital_resource_url.present? %>
-              {
-                "@id": "<%= @dpla_item.digital_resource_url %>",
-                "@type": "WebPage"
-              },
-            <% end %>
-            {
-              "@id": "<%= "http:#{frontend_path('item/' + @source.aggregation)}" %>",
-              "@type": "ore:Aggregation",
-              "sameAs": "<%= "http:#{api_path('items/' + @source.aggregation)}" %>"
-            }
           ]
-        <% end %>
       <% end %>
     }
   ],

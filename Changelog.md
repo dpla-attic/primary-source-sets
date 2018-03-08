@@ -1,4 +1,8 @@
-1.8.5 (22 Jan 2017)
+1.8.6 (8 Mar 2018)
+---
+* Fix log flow in source JSON feed
+
+1.8.5 (22 Jan 2018)
 ---
 * Add contributor and item name to JSON feed
 * Turn off jasmine in travis test
