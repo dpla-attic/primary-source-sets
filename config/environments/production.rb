@@ -91,9 +91,4 @@ Rails.application.configure do
   # Initialize the Google Analytics tracker
   # GoogleAnaltyics is defined in the google-analtyics-rails gem
   GoogleAnalytics.tracker = Settings.googleanalytics.tracker
-
-  # Devise SSL
-  config.to_prepare { Devise::SessionsController.force_ssl }
-  config.to_prepare { Devise::RegistrationsController.force_ssl }
-  config.to_prepare { Devise::PasswordsController.force_ssl }
 end
