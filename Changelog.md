@@ -1,3 +1,7 @@
+1.8.7 (20 Mar 2018)
+---
+* Adjust Devise settings for production
+
 1.8.6 (8 Mar 2018)
 ---
 * Fix log flow in source JSON feed
