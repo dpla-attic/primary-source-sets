@@ -26,6 +26,10 @@ class DplaItem < ActiveModelBase
       # bad API key or item ID. Until that's addressed, handle NoMethodError.
       logger.error "Bad API key #{Settings.api.key} or item IDs #{Array(ids)}"
       return []
+    rescue StandardError => e
+      logger.error "Error occurred when attempting to fetch items from DPLA API:"
+      logger.error(e)
+      return []
     end
   end
 
