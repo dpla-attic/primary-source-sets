@@ -1,3 +1,7 @@
+1.8.8 (25 Oct 2018)
+---
+* Catch StandardError when fetching items from DPLA API
+
 1.8.7 (20 Mar 2018)
 ---
 * Adjust Devise settings for production
