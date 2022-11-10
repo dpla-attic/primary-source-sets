@@ -19,19 +19,7 @@ Rails.application.configure do
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
-
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
-
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
-  # Generate digests for assets URLs.
-  config.assets.digest = true
-
+ 
   # Use the relative URL to build the paths for assets, too, please...
   config.action_controller.relative_url_root = Settings.relative_url_root
 
@@ -58,16 +46,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = {
-    host: Settings.app_host,
-    script_name: Settings.relative_url_root,
-    protocol: 'https'
-  }
-  config.action_mailer.delivery_method =
-    Settings.action_mailer.delivery_method.to_sym
-  config.action_mailer.smtp_settings =
-    Settings.action_mailer.smtp_settings.to_h
+  
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -85,10 +64,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  cache_settings = Settings.cache.to_hash
-  config.cache_store = cache_settings[:store].to_sym, *cache_settings[:opts]
-
-  # Initialize the Google Analytics tracker
-  # GoogleAnaltyics is defined in the google-analtyics-rails gem
-  GoogleAnalytics.tracker = Settings.googleanalytics.tracker
 end

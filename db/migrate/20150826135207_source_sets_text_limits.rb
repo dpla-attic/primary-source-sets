@@ -1,4 +1,4 @@
-class SourceSetsTextLimits < ActiveRecord::Migration
+class SourceSetsTextLimits < ActiveRecord::Migration[4.2]
   def change
     # Limit text size to TEXT type equivalent
     change_column :source_sets, :description, :text, limit: 65535

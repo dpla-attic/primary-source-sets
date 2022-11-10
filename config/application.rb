@@ -1,11 +1,24 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+#require "active_job/railtie"
+require "active_record/railtie"
+#require "active_storage/engine"
+require "action_controller/railtie"
+#require "action_mailer/railtie"
+#require "action_mailbox/engine"
+#require "action_text/engine"
+require "action_view/railtie"
+#require "action_cable/engine"
+# require "sprockets/railtie"
+require "rails/test_unit/railtie"
+
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-Bundler.require(:dpla_branding) if Bundler.settings[:without].exclude? :dpla_branding
 
 module PrimarySourceSets
   class Application < Rails::Application
@@ -21,14 +34,5 @@ module PrimarySourceSets
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Autoload contents of lib
-    config.autoload_paths += %W(#{config.root}/lib/primary-source-sets)
-
-    # Allow X-Frame access from known requesters
-    config.action_dispatch.default_headers = {
-        'X-Frame-Options' => Settings.http_headers.x_frame_options,
-        'Access-Control-Allow-Origin' => '*',
-        'Access-Control-Request-Method' => 'GET',
-    }
   end
 end

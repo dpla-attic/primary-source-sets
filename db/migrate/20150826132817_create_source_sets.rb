@@ -1,4 +1,4 @@
-class CreateSourceSets < ActiveRecord::Migration
+class CreateSourceSets < ActiveRecord::Migration[4.2]
   def change
     create_table :source_sets do |t|
       t.string :name

@@ -1,4 +1,4 @@
-class SetPositionValues < ActiveRecord::Migration
+class SetPositionValues < ActiveRecord::Migration[4.2]
   def self.up
     ##
     # Set initial position values for TagVocabulary.

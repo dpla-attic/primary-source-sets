@@ -1,4 +1,4 @@
-class RenameSequencesTable < ActiveRecord::Migration
+class RenameSequencesTable < ActiveRecord::Migration[4.2]
   def self.up
     rename_table :sequences, :tag_sequences
   end
