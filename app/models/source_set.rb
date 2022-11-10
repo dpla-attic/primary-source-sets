@@ -46,7 +46,6 @@ class SourceSet < ActiveRecord::Base
                     .joins(:tags)
                     .where(tags: { id: tags.ids })
                     .where.not(id: self.id)
-                    .includes(:small_images)
 
     sets_with_count = sets.each_with_object(Hash.new(0)) do |set, count|
       count[set] += 1
