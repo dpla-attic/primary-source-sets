@@ -3,10 +3,6 @@
 #
 # @see SourceSet
 class SourceSetsController < ApplicationController
-  include MarkdownHelper
-  add_breadcrumb 'Primary Source Sets', :root_path
-  before_action :authenticate_admin!,
-                only: [:new, :edit, :create, :update, :destroy]
 
   def index
     @tags = get_tags_from_params
@@ -14,91 +10,26 @@ class SourceSetsController < ApplicationController
     @published_sets = SourceSet.published.order_by(@order).with_tags(@tags)
     @unpublished_sets = SourceSet.unpublished.order_by(@order).with_tags(@tags)
 
-    ##
-    # Render HTML or JSON formats unless controller has already redirected or
-    # rendered (ie. in the check_login_and_authorize method).
-    unless performed?
-      respond_to do |format|
-        format.html
-        format.json { render partial: 'source_sets/index.json.erb' }
-      end
+    respond_to do |format|
+      format.json { render partial: 'source_sets/index.json.erb' }
     end
   end
 
   def show
     @source_set = SourceSet.friendly.find(params[:id])
-    check_login_and_authorize(:read, SourceSet) unless @source_set.published?
-    add_breadcrumb inline_markdown(@source_set.name), source_set_path(@source_set)
     @authors = @source_set.authors
     @sources = @source_set.sources
     @guides = @source_set.guides
     @tags = @source_set.tags
     @related = @source_set.related_sets
 
-    ##
-    # Render HTML or JSON formats unless controller has already redirected or
-    # rendered (ie. in the check_login_and_authorize method).
-    unless performed?
-      respond_to do |format|
-        format.html
-        format.json { render partial: 'source_sets/show.json.erb' }
-      end
+    respond_to do |format|
+      format.json { render partial: 'source_sets/show.json.erb' }
     end
   end
 
-  def new
-    @source_set = SourceSet.new
-    authorize! :create, SourceSet
-  end
-
-  def edit
-    @source_set = SourceSet.friendly.find(params[:id])
-    authorize! :update, SourceSet
-  end
-
-  def create
-    @source_set = SourceSet.new(source_set_params)
-    authorize! :create, SourceSet
-
-    if @source_set.save
-      redirect_to @source_set
-    else
-      render 'new'
-    end
-  end
-
-  def update
-    @source_set = SourceSet.friendly.find(params[:id])
-    authorize! :update, SourceSet
-
-    if @source_set.update(source_set_params)
-      redirect_to @source_set
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @source_set = SourceSet.friendly.find(params[:id])
-    authorize! :destroy, SourceSet
-    @source_set.destroy
-
-    redirect_to source_sets_path
-  end
 
   private
-
-  def source_set_params
-    params.require(:source_set).permit(:name,
-                                       :description,
-                                       :overview,
-                                       :resources,
-                                       :published,
-                                       :year,
-                                       author_ids: [],
-                                       tag_ids: [])
-  end
-
   ##
   # @return [Array<Tag>]
   def get_tags_from_params

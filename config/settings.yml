@@ -3,9 +3,6 @@
 # Information in this file will be PUBLIC (this file is tracked in git)
 # Declarations in config/settings.local.yml override declarations in this file
 
-devise: 
-  mailer_sender: email@example.org
-
 frontend:
   url: //example.com/
 
@@ -23,7 +20,7 @@ app_scheme: 'http://'
 # app_host may include port
 app_host: 'localhost:3000'
 
-relative_url_root: /primary-source-sets
+relative_url_root: /
 
 aws:
   region: 'CHANGEME'
@@ -33,38 +30,6 @@ aws:
   s3_destination_bucket: 'CHANGEME'
   cloudfront_domain: 'CHANGEME'
 
-zencoder:
-  api_key: CHANGEME
-  notification_pass: CHANGEME
-  notification_user: CHANGEME
-  # `false` for s3_credentials_name means to use the Zencoder account's default
-  # credentials, as opposed to specifying a saved set of credentials by name.
-  # Named credentials are useful for having different S3 policies for different
-  # development, staging, and production buckets.
-  s3_credentials_name: false
-
-video_outputs:
-  - {extension: "mp4"}
-  - {extension: "webm"}
-  - {extension: "ogg"}
-  # If we can figure out a good way to have multiple <source> elements for the
-  # same mime type, then it would be nice to serve a smaller mobile version and
-  # a high-quality mp4 version, too.
-  # - {extension: "mp4", h264_profile: "high"}
-  # - {extension: "mp4", suffix: "-mobile", size: "640x480"}
-audio_outputs:
-  - {extension: "mp3"}
-  - {extension: "m4a"}
-  - {extension: "ogg"}
-
-# When RAILS_ENV is 'development' or 'test', this determines whether to request
-# Zencoder to send notifications to an HTTP endpoint
-# (VideoNotificationsController or AudioNotificationsController) or to save it
-# so that we can use the zencoder_fetcher utility to pull the notifications from
-# their API and post them locally.  This is relevant if you're behind a
-# NAT firewall, the assumed situation in development.  The default is false,
-# meaning not to make "real" HTTP requests.
-dev_real_zc_notification: false
 
 widgets:
   # Urls for social icons
@@ -74,45 +39,8 @@ widgets:
     tumblr: http://example.tumblr.com/
     rss: http://example.org/info/feed
 
-googleanalytics:
-  tracker: false
 
 contact_email: email@example.com
-
-action_mailer:
-  delivery_method: smtp
-  smtp_settings:
-    host: localhost
-    # Port 1025 is for mailcatcher, in development.  This should probably be
-    # overridden in production if you use a SMTP daemon rather than the
-    # `sendmail' executable.  (I.e. the :smtp option for ActionMailer's
-    # `delivery_method'.)
-    port: 1025
-
-# Override `cache` with options that suit the particular cache store.
-#
-# Example 1:
-# cache:
-#   store: mem_cache_store
-#   opts:
-#     - host1
-#     - host2
-#     - { namespace: 'pss' }
-#
-# Example 2:
-# cache:
-#   store: file_store
-#   opts: "/path/to/cache/dir"
-#
-# Example 3:
-# cache:
-#   store: memory_store
-#   opts:
-#     size: 67108864
-#
-cache:
-  store: null_store
-  opts:
 
 # default http response headers
 http_headers:

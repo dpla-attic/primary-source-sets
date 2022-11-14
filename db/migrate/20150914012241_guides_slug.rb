@@ -1,4 +1,4 @@
-class GuidesSlug < ActiveRecord::Migration
+class GuidesSlug < ActiveRecord::Migration[4.2]
   def change
     change_table :guides do |t|
       t.string :slug, unique: true

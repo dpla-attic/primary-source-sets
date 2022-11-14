@@ -1,4 +1,4 @@
-class CreateTagsVocabularies < ActiveRecord::Migration
+class CreateTagsVocabularies < ActiveRecord::Migration[4.2]
   def change
     create_table :tags_vocabularies do |t|
       t.belongs_to :vocabulary, index: true
