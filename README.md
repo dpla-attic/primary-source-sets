@@ -1,5 +1,19 @@
 # primary-source-sets
 
+Reindexing PSS documents to Elasticsearch
+
+Run the `pss-json-export.py` script against all sets (contents of s3://dpla-pss-json/)
+
+```
+# Create new index
+curl -XPUT http://172.30.2.130:9200/[INDEX]\?pretty
+
+#  Add documents from the ./sets/ directory
+find . -name "*updated_*.json" -type f | xargs -I{} sh -c 'echo "$1" "./$(basename ${1%.*}).${1##*.}"' -- {} | xargs -n 2 -P 8 sh -c 'curl -XPOST http://ES_NODE:9200/[INDEX]/doc -H "Content-Type: application/json" -d @"$0"'
+
+# Update alias
+curl -XPOST http://[ES_NODE]:9200/_aliases -H 'Content-Type: application/json' -d '{"actions":[{"remove" : {"index" : "*", "alias" : "dpla_pss"}},{"add" : { "index" : "[INDEX]", "alias" : "dpla_pss" }}]}'
+```
 
 Using Vagrant for development
 -----------------------------
