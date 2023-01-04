@@ -95,6 +95,31 @@ curl -XGET http://[NODE]:9200/dpla_pss/_search\?pretty -H "Content-Type: applica
 }'
 ```
 
+Test sorting by dateCreated chronologically
+```
+curl -XGET http://[NODE]:9200/dpla_pss/_search\?pretty -H "Content-Type: application/json" \
+-d '{
+    "size": "500",
+    "_source":
+    {
+        "includes":
+        [
+            "dateCreated", "name"
+        ],
+        "excludes":
+        []
+    },
+    "query":
+    {
+        "match_all":
+        {}
+    },
+    "sort" : [
+        { "dateCreated" : {"order" : "desc"}}
+    ]
+}'
+```
+
 
 Using Vagrant for development
 -----------------------------
